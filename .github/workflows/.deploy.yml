@@ -3,7 +3,7 @@ name: Deploy GitHub Pages
 on:
   push:
     branches:
-      - main  # This triggers the action when changes are pushed to the 'main' branch
+      - main  # Trigger the workflow on push to the main branch
 
 jobs:
   deploy:
@@ -13,8 +13,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./Undervisningsdokumenter/E24/slides  # Specify your subfolder with HTML files
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token here
+        publish_dir: ./Undervisningsdokumenter/E24/slides  # Directory with HTML files
+        force_orphan: true  # Force creation of the gh-pages branch
