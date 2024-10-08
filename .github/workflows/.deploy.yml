@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3  # Updated to v3 to avoid Node.js 12 deprecation
 
     - name: Set up Git
       run: |
@@ -21,6 +21,6 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token here
-        publish_dir: ./Undervisningsdokumenter/E24/slides  # Directory with HTML files
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Ensure the GitHub token is used here
+        publish_dir: ./Undervisningsdokumenter/E24/slides  # Your folder with HTML files
         force_orphan: true  # Force creation of the gh-pages branch
