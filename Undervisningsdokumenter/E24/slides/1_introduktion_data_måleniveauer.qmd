@@ -1,0 +1,316 @@
+---
+format: 
+  revealjs:
+    theme: css_etc/custom-theme-ilisimatusarfik.css
+    slide-level: 0  # Disable automatic slide creation from headings
+    incremental: false 
+    logo: css_etc/ilisimatusarfik.png
+editor: visual
+---
+
+::: center
+# Introduktion
+
+### Statistik for erhvervsøkonomi E24 (7,5 ECTS)
+
+### ved Mikkeline Munk Nielsen
+:::
+
+------------------------------------------------------------------------
+
+## Indhold
+
+<br>
+
+-   Introduktion til kursus og læringsmål
+-   Hvad er statistik og kvantitativ data?
+-   Kort om forskningsdesign og data i kvantitative undersøgelser
+-   Måleniveauer i kvantitativ data
+
+------------------------------------------------------------------------
+
+## Introduktion
+
+### Formål
+
+Formålet med modulet i statistik er at opøve de studerendes kompetencer til statistiske analyser af kvantitative data.
+
+<br>
+
+### Læringsmål
+
+Den studerende skal:
+
+-   opnå viden om forskellige statistiske metoder, deres begrænsninger, muligheder og anvendelse,
+
+-   kunne anvende forskellige statistiske metoder til at drage konklusioner om kvantitative data og
+
+-   kunne anvende IT-værktøjer i arbejdet med statistiske metoder (mere specifikt R)
+
+::: aside
+Kilde: Studieordning, Bachelor i erhvervsøkonomi, https://da.uni.gl/media/bqonvtdm/erhvervsoekonomi-studieordning.pdf
+:::
+
+------------------------------------------------------------------------
+
+## Undervisningsplan
+
+Kurset strækker sig over 3. og 4. semester, tilsammen **15 ECTS** point. Helt kort:
+
+-   Efterår: grundlæggende statistik, uni- og (lidt) bivariat analyse
+
+-   Forår: bivariat analyse, multivariat analyse (lineær regression)
+
+<br>
+
+#### Eksamen forår 2025
+
+-   Individuel 4 timers skriftlig eksamen med hjælpemidler. Karakter efter GGS-skalaen. Ekstern censur.
+
+-   For at blive indstillet til eksamen skal man aflevere **tre opgaver** i efterårssemester og **tre opgaver** i forårssemester (i alt seks), der skal godkendes af underviseren.
+
+-   Vi arbejder på opgaverne i undervisningen, men de færdiggøres evt. hjemme.
+
+------------------------------------------------------------------------
+
+## Undervisningsplan
+
+<br>
+
+**Uge 42**: mandag, torsdag
+
+**Uge 43**: mandag, onsdag
+
+<br>
+
+**Uge 44, 45**: pause
+
+<br>
+
+**Uge 46**: onsdag (online)
+
+<br>
+
+**Uge 47**: mandag, onsdag (hele mandag)
+
+**Uge 48**: mandag, onsdag (hele mandag)
+
+------------------------------------------------------------------------
+
+## Undervisning og læsning
+
+-   Forelæsningsrække
+
+-   Diskussioner og øvelser i undervisningen
+
+-   Lærings- og læsestrategier:
+
+    -   De forskellige bøger/tekster/materialer tilbyder forskellige måder at læse på
+
+    -   Læs når/som det passer dig bedst
+
+    -   Prioritér at deltage i undervisningen - det her er et praksisfag!
+
+------------------------------------------------------------------------
+
+## Hvad er statistik?
+
+<br> *"Statistik er at bruge tal til at forstå verden. Man samler data, analyserer dem og bruger resultaterne til at træffe beslutninger eller forudsige fremtiden. Det hjælper med at se mønstre og tendenser i alt fra økonomi til samfundsforhold."*
+
+<linebreak> - ChatGPT 4o Oktober 2024.
+
+------------------------------------------------------------------------
+
+## Hvad skal vi bruge statistik til?
+
+-   Skabe overblik over tendenser
+
+-   Finde mønstre
+
+-   Undersøge sammenhænge og forskellighed
+
+-   Teste teorier
+
+-   Udvikle forklaringer og forudsigelser
+
+![](images/business_economy.png){.right-align-image}
+
+------------------------------------------------------------------------
+
+## Hvad skal vi IKKE bruge statistik til?
+
+-   Dybdegående undersøgelser der undersøger narrativer, ræssonemeneter, logikker
+
+------------------------------------------------------------------------
+
+## Konkrete eksempler i erhvervsøkonomi:
+
+-   Evaluere performance gennem f.eks. salgstal eller kundetilfredshedsundersøgelser
+
+-   Udføre markedsanalyser for at forstå kundegrundlag og præferencer
+
+-   Forudsige trends på baggrund af data
+
+-   Samarbejde med andre firmaer og organisationer, der præsenterer relevante nøgletal i form af statistisk analyse
+
+------------------------------------------------------------------------
+
+## Case
+
+Markedsundersøglese
+
+:   *En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat strategiafdelingen til at analysere mulighederne. De har brug for at kende efterspørslen efter den type af tøj, som de producerer, for at kunne vurdere, om det vil være rentabelt at starte salg og markedsføring.*
+
+------------------------------------------------------------------------
+
+## Forskningshjulet
+
+::: center
+<img src="images/forskningshjulet.png" height="500px"/>
+:::
+
+::: aside
+Andersen, Hansen & Klemmensen (2012:67)
+:::
+
+------------------------------------------------------------------------
+
+## Forskningsspørgsmål
+
+Videnskabelig undersøgelse tager altid udgangspunkt i et forskningsspørgsmål: ***hvad vil du gerne vide?***
+
+<br>
+
+[**Beskrivende spørgsmål:**]{.underline}
+
+-   **Hvad** karakteriserer køberne på et givent produkt?
+
+-   **Hvordan** ser kapitaludviklingen det seneste årti ud for grøndlandske virksomheder?
+
+-   **Hvornår** overstiger ... ?
+
+[**Forklarende spørgsmål:**]{.underline}
+
+-   **Hvorfor** tjener mænd gennemsnitligt mere end kvinder?
+-   **Påvirker** afgifter forbrug?
+-   **Øges chancerne** for lønforhøjelse ved fagforeningsmedlemsskab?
+
+------------------------------------------------------------------------
+
+## Case
+
+Markedsundersøglese
+
+:   *En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.*
+
+<br>
+
+**Summeøvelse**: Hvilken type(r) spørgsmål er relevant for den canadiske tøjproducent?
+
+------------------------------------------------------------------------
+
+## Forsknings- og undersøgelsesdesign
+
+Når vi kender vores forskningsgenstand, forskningsspørgsmål og hypoteser er de næste spørgsmål:
+
+-   Hvilken type undersøgelse har du brug for? (Design)
+
+-   Hvilken type data, har du brug for? (Metode)
+
+------------------------------------------------------------------------
+
+## Forskningsdesign
+
+Når vi kender vores spørgsmål kan vi beslutte, hvilken type af undersøgelse, der svarer bedst på vores spørgsmål.
+
+-   Beskrivende: én variabel (hvad, hvordan, hvornår?)
+
+-   Sammenhængsundersøgelser: hænger x sammen med y?
+
+-   Kausalstudier: påvirker x –\> y? Hvad er effekten af x på y?
+
+------------------------------------------------------------------------
+
+## Data
+
+-   Mange enheder/observationer
+
+-   Tendenser
+
+-   Udtaler os minder om mere
+
+-   Generalisering
+
+------------------------------------------------------------------------
+
+## Begrebsdannelse
+
+Før vi kan starte undersøgelse er vi nødt til at gøre det klart for os selv, hvordan vi definerer de centrale begreber i vores forskningsspørgsmål. Det hjælper os til at:
+
+-   Gøre det klar, hvad vi gerne vil måle
+
+-   Gøre begreber målbare (udvælge indikatorer)
+
+-   Sikre målevaliditet (at vi måler det rigtige)
+
+-   Begrunde vores valg undervejs i processen samt overfor arbejdsgiver/kunde
+
+------------------------------------------------------------------------
+
+## Begrebsdannelse
+
+*:En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.*
+
+-   Hvad menes f.eks. med kundegrundlag?
+
+-   
+
+------------------------------------------------------------------------
+
+## Begrebsdannelse
+
+Ofte arbejder vi med abstrakte begreber, der ikke lige umiddelbart lader sig måle. I begrebsdannelse skelnes mellem
+
+-   **Intension**: et begrebs indre betydning (hvilke egenskaber knytter sig til det)
+
+-   **Ekstension**: hvad begrebet referer til (hvilke enheder i verden har disse egenskaber)
+
+Et begrebs ekstension afhænger af to ting, som er en funktion af dets intension: abstraktionsniveau og antallet af egenskaber, man tillægger det. Meget konkret = færre enheder, meget abstrakt = mange enheder.
+
+------------------------------------------------------------------------
+
+## Indikatorer
+
+Efter at have defineret et begreb teoretisk er næste skridt at finde ud af, hvordan vi måler det i praksis. Dette kaldes ***operationalisering***.
+
+-   Operationalisering: udvælge indikatorer for om et fænomen er tilstede eller ej
+
+-   Indikator: empirisk mål for et teoretisk begreb
+
+Vi kan ikke gå ud og finde et "kundegrundlag" og rapportere tilbage til virksomheden, om det er der eller ej. Men vi kan godt måle, om det er folk i den rette **alder**, i de rette **køn**, med **interesse for** f.eks. **sportstøj**, og **præferencer for bæredygtighed**
+
+------------------------------------------------------------------------
+
+## Indikatorer
+
+Når man har konkretiseret sine teoretiske begreber til målbare indikatorer, er det næste skridt at anvende indikatorerne til at **tilskrive værdier til de cases**, som vi inddrager i analysen. Med andre ord:
+
+-   Hvilke skala skal vi måle vores indikatorer på?
+
+------------------------------------------------------------------------
+
+Øvelse: lav følgende for den canadiske tøjproducent
+
+-   Problemformulering
+
+-   Beskriv forskningsgenstand
+
+-   Hypoteser
+
+Overvejelser:
+
+-   Hvor mange skal udspørges?
+
+-   Hvem skal udspørges?
+
+-   Hvordan skal de udvælges - omkostninger vs. validitet?

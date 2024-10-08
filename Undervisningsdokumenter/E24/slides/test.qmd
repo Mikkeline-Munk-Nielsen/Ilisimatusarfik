@@ -1,0 +1,36 @@
+---
+format: 
+  revealjs:
+    theme: css_etc/custom-theme-ilisimatusarfik.css
+    slide-level: 0  # Disable automatic slide creation from headings
+    incremental: false 
+    logo: css_etc/ilisimatusarfik.png
+editor: visual
+---
+
+:::{.center}
+
+# Skabelon
+
+### Statistik for erhvervsøkonomi, modul 1 (7,5 ECTS)
+
+### ved Mikkeline Munk Nielsen
+
+:::
+
+---
+
+## Tema nummer 1
+
+* Først det ene...
+* Så det andet...
+
+---
+
+## Kode
+
+Og kode skal vi også bruge
+
+```{r, echo=TRUE}
+1 + 1
+```
