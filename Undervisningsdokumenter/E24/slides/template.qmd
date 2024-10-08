@@ -8,24 +8,22 @@ format:
 editor: visual
 ---
 
-:::{.center}
-
+::: center
 # Skabelon
 
-### Statistik for erhvervsøkonomi, modul 1 (7,5 ECTS)
+### Statistik for erhvervsøkonomi, E24 (7,5 ECTS)
 
 ### ved Mikkeline Munk Nielsen
-
 :::
 
----
+------------------------------------------------------------------------
 
 ## Tema nummer 1
 
-* Først det ene...
-* Så det andet...
+-   Først det ene...
+-   Så det andet...
 
----
+------------------------------------------------------------------------
 
 ## Kode
 
