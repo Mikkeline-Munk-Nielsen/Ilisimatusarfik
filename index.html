@@ -9,7 +9,7 @@
       --primary-color: #003366;
       --font-size: 26px;
       --font-family: "Helvetica", sans-serif; /* Updated to Helvetica */
-      --light-grey: #777; /* Lighter grey for subtitle and author */
+      --lighter-grey: #aaa; /* Lighter grey for subtitle and author */
     }
 
     body {
@@ -21,8 +21,7 @@
       color: #333;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh; /* Center content vertically */
+      padding-top: 60px; /* Adds space above the title */
     }
 
     h1 {
@@ -33,16 +32,16 @@
     }
 
     h2 {
-      font-size: 28px;
-      color: var(--light-grey); /* Lighter grey for subtitle */
+      font-size: 24px; /* Slightly smaller subtitle */
+      color: var(--lighter-grey); /* Lighter grey for subtitle */
       margin-bottom: 10px;
       text-align: center; /* Subtitle centered */
     }
 
     h3 {
-      font-size: 22px;
-      color: var(--light-grey); /* Lighter grey for author */
-      margin-bottom: 80px; /* Space between author and content */
+      font-size: 20px; /* Slightly smaller author text */
+      color: var(--lighter-grey); /* Lighter grey for author */
+      margin-bottom: 60px; /* Reduced space below author */
       text-align: center; /* Author centered */
     }
 
@@ -86,7 +85,7 @@
       font-size: 18px;
       font-family: var(--font-family);
       color: #333;
-      text-align: left;
+      text-align: center; /* Centered the footer */
       margin-top: 50px;
     }
 
