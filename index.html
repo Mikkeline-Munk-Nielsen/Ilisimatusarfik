@@ -8,21 +8,25 @@
     :root {
       --primary-color: #003366;
       --font-size: 26px;
-      --font-family: "Times New Roman", Times, serif;
+      --font-family: "Helvetica", sans-serif; /* Updated to Helvetica */
     }
 
     body {
-      font-family: var(--font-family);
+      font-family: var(--font-family); /* Use Helvetica for the body font */
       font-size: var(--font-size);
-      margin: 20px;
+      margin: 0;
       padding: 0;
       background-color: white;
       color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Center content vertically */
+      text-align: center; /* Center content horizontally */
     }
 
     h1 {
       color: var(--primary-color);
-      text-align: center;
       font-size: 48px;
       margin-bottom: 40px;
     }
@@ -58,26 +62,9 @@
       text-decoration: underline;
     }
 
-    /* Two-column layout for future sections if needed */
-    .two-column-layout {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .two-column-layout .left-column {
-      width: 50%;
-      padding-right: 20px;
-    }
-
-    .two-column-layout .right-column {
-      width: 50%;
-      text-align: right;
-    }
-
     footer {
       font-size: 18px;
-      font-family: "Helvetica", sans-serif;
+      font-family: var(--font-family);
       color: #333;
       text-align: center;
       margin-top: 50px;
@@ -87,18 +74,20 @@
 </head>
 <body>
 
-  <h1>Course Materials</h1>
+  <div>
+    <h1>Course Materials</h1>
 
-  <div class="section">
-    <h2>Slides</h2>
-    <ul>
-      <li><a href="Undervisningsdokumenter/E24/slides/template.html">Introduction to Topic 1</a></li>
-    </ul>
+    <div class="section">
+      <h2>Slides</h2>
+      <ul>
+        <li><a href="Undervisningsdokumenter/E24/slides/template.html">Introduction to Topic 1</a></li>
+      </ul>
+    </div>
+
+    <footer>
+      © 2024 Course Repository
+    </footer>
   </div>
-
-  <footer>
-    © 2024 Course Repository
-  </footer>
 
 </body>
 </html>

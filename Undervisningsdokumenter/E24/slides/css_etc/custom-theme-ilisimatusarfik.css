@@ -4,8 +4,8 @@ $primary-color: #003366; /* Dark blue resembling Beamer */
 
 :root {
   --primary-color: #003366;
-  --font-size: 26px; /* Increase base font size for body text */
-  --font-family: "Times New Roman", Times, serif;
+  --font-size: 26px; /* Body text size */
+  --font-family-body: "Open Sans", sans-serif; /* Body font */
 }
 
 .reveal .slide-logo {
@@ -23,8 +23,8 @@ $primary-color: #003366; /* Dark blue resembling Beamer */
 }
 
 .reveal .slides {
-  font-family: var(--font-family);
-  font-size: var(--font-size);
+  font-family: "Calibri", sans-serif; /* Change only the body font to Calibri */
+  font-size: var(--font-size); /* Keep the existing font size */
 }
 
 .reveal h1 {
