@@ -1,0 +1,427 @@
+---
+format: 
+  revealjs:
+    theme: css_etc/custom-theme-ilisimatusarfik.css
+    slide-level: 0  # Disable automatic slide creation from headings
+    incremental: false 
+    logo: css_etc/ilisimatusarfik.png
+editor: visual
+---
+
+::: center
+# Introduktion til R
+
+### Statistik for erhvervsøkonomi, E24 (7,5 ECTS)
+
+### ved Mikkeline Munk Nielsen
+:::
+
+------------------------------------------------------------------------
+
+# Indhold
+
+<br>
+
+-   Hvad er R?
+-   Installation
+-   Rundvisning
+-   Objekter og funktioner
+-   Åbne data
+-   Variable i R
+
+------------------------------------------------------------------------
+
+# Hvad er R?
+
+::::: two-column-layout
+::: left-column
+-   R er et kodesprog designet til statistik og datavisualisering
+
+-   Det er sammenlignligt med anden software som python, stata, SAS, eller SPSS
+
+-   I skal bruge R til at åbne arbejde med data og lave analyser
+:::
+
+::: right-column
+![](images/Rlogo.png)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+# What´s so special about R?
+
+-   **Kodebaseret (vs. klikbaseret)**: Du skriver kode i stedet for at klikke rundt i menuer
+
+-   **Automatisering**: koden automatiserer gentagne opgaver
+
+-   **Reproducerbarhed**: koden sikrer, at analyser kan genskabes præcist.
+
+-   **Bedre til store datamængder** end f.eks. Excel.
+
+-   **Open source** - mulighederne er uendelige!
+
+------------------------------------------------------------------------
+
+# Installér R
+
+<br>
+
+For at bruge R skal I installere to programmer
+
+-   R (software til at køre R programmeringssprog)
+
+-   R Studio (Integrated Development Environment "IDE")
+
+<br>
+
+Vi kommer til at åbne og arbejde i R Studio!
+
+... men begge skal installeres
+
+![](images/Rlogo.png){.right-align-image}
+
+------------------------------------------------------------------------
+
+# Download
+
+-   Gå til: <https://posit.co/download/rstudio-desktop/>
+
+-   Klik ‘Download and install R’.
+
+-   Klik ‘Download R for \[macOS/Windows\]’ afhængig af dit styresystem.
+
+    <br>
+
+-   Åbn igen <https://posit.co/download/rstudio-desktop/>.
+
+-   Klik ‘Download RStudio Desktop for …’ og følg vejledningen.
+
+Når du er færdig, skal du have et program på din computer der hedder ‘RStudio’.
+
+------------------------------------------------------------------------
+
+# Indstillinger
+
+::::: two-column-layout
+::: left-column
+For den bedste oplevelse med R Studio skal der ændres nogle indstillinger.
+
+<br>
+
+Gå ind i ‘Tools’ → ‘Global Options…’ og skift indstillinger så det ser ud som markeret med gult.
+
+<br>
+
+Vælg evt. tema/farver under "appearance".
+:::
+
+::: right-column
+![](images/Rindstilinger.png)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+# Rundvisning i R Studio
+
+![---](images/Rinterface.png)
+
+------------------------------------------------------------------------
+
+# Rundvisning i R Studio
+
+1.  **Scripts** - der hvor vi skriver vores kode.
+
+2.  **R konsol** - der hvor koden fra vores scripts bliver kørt.
+
+3.  **Objekter** - de ting vi har defineret i vores scripts.
+
+4.  **Filer, plots, og hjælp** - stifinder, figurer og hjælpemenu.
+
+<br>
+
+| **Beskrivelse** | **Genvej** |
+|-----------------------------------|-------------------------------------|
+| RStudio vinduer: Åbn alle 4 | [Ctrl+Shift+Alt+0]{.genvej-key} |
+| RStudio vinduer: Forstør 1/2/3/4 | [Ctrl+Shift+1/2/3/4]{.genvej-key} |
+| RStudio vinduer: Skift fokus til 1/2/3/4 | [Ctrl+1/2/3/4]{.genvej-key} |
+
+------------------------------------------------------------------------
+
+# R-projects
+
+Når man går igang med analyser i R starter man typisk med at lave en mappe på sin computer til alle de relevante filer. I den mappe opretter man det, som kaldes et ***R-project***.
+
+![](images/project.png)
+
+------------------------------------------------------------------------
+
+# R-projects
+
+Fordelene ved R projects R
+
+-   Et R-project er en projektfil, der hjælper dig med at navigere mellem scripts, datasæt, billeder, output etc...
+
+-   R Studio kan som udgangspunkt ikke finde filer på din computer, som ikke ligger i samme mappe, som den fil du arbejder på (f.eks. datasæt, som du skal bruge til analyse).
+
+-   Hvis du opretter en mappe med et R project i og opbevarer alle relevante filer i samme mappe, så kan man nemt tilgå alle filerne i mappen direkte fra R Studio (vindue 4) og skifte imellem dem
+
+-   Hvis man åbner projektet i stedet for enkelfiler i mappen på computeren, bliver alt tilgængeligt inde i R Studio.
+
+Tænk på dit R projekt som "THE BIG BROTHER FILE" der holder øje med alle de andre filer i din projektmappe.
+
+------------------------------------------------------------------------
+
+# Objekter
+
+I R er alt, hvad du arbejder med, et objekt. Det kan være tal, tekst, lister eller datasæt. Du opretter objekter, giver dem et navn og kan bruge dem senere.
+
+<br>
+
+F.eks. kan vi gemme et objekt, der hedder "mit_foerste_objekt" der indholder teksten "Hello world!". Vi definerer objektet og dets indhold med en pil
+
+```{r echo=T}
+mit_foerste_objekt <- "Hello world!"
+```
+
+Vi kan printe/vise indholdet at objektet ved at køre det i R konsollen eller scriptet:
+
+```{r echo=T}
+mit_foerste_objekt
+```
+
+------------------------------------------------------------------------
+
+# Objekter
+
+Du kan naturligvis også gemme tal som objekter...
+
+```{r echo=T}
+mit_tal <- 2
+```
+
+lave beregninger med dine objekter...
+
+```{r echo=T}
+mit_tal + 2
+```
+
+og gemme dine resultater i objekter...
+
+```{r echo=T}
+resultat <- mit_tal + 2
+resultat
+```
+
+------------------------------------------------------------------------
+
+# Objekter
+
+Du kan se dine objekter i vindue 4 under "Environment"
+
+![](images/objekter.png)
+
+------------------------------------------------------------------------
+
+# Objekter
+
+<br>
+
+-   En vigtig ting som man opbevarer i objekter er **datasæt**, som i R kaldes ***dataframes***
+
+-   Man kan indlæse mange typer af datasæt i R, f.eks.
+
+    -   Excel filer (.xlxs)
+
+    -   Csv (.csv)
+
+    -   R datasæt (.rds)
+
+    -   SPSS, STATA, SAS og mange andre filtyper...
+
+For nu er de vigtigste filtyper, som I skal kende, [**Excel**]{.underline} og [**R**]{.underline} datasæt.
+
+------------------------------------------------------------------------
+
+# Funktioner
+
+Når vi skal bearbejde objekter bruger vi ***funktioner***. Funktioner er små programmer, der kan udføre forskellige operationer for os.
+
+<br>
+
+F.eks. kan funktionen `max` finde den største værdi i en række af tal:
+
+```{r echo=T}
+max(c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+```
+
+<br>
+
+...mens andre funktioner kan indlæse datasæt!
+
+------------------------------------------------------------------------
+
+# Pakker
+
+R har indbygget mange funktioner, mens andre skal downloades. Derfor downloader man ofte ekstra "pakker", der indeholder smarte funktioner og analysemoduler.
+
+<br>
+
+Pakker installeres direkte i konsollen eller scriptet. Her indlæses f.eks. pakken tidyverse, der indeholder en masse gode data-funktioner:
+
+```{r echo=T, eval=F}
+install.packages('tidyverse')
+```
+
+man kan også indlæse flere pakker samtidig, f.eks. tidyverse OG janitor, som er god til bl.a. tabeller:
+
+```{r echo=T, eval=F}
+install.packages(c('tidyverse', 'janitor')) 
+```
+
+---
+
+# Pakker
+
+Pakker skal dog indlæses hver gang, at vi skal bruge dem. Det gør vi ved at indlæse dem til vores `library` .
+
+```{r echo=T, eval=F}
+library('tidyverse') 
+```
+
+Man kan kun indlæse en enkelt pakke af gangen, med mindre man anskaffer sig en package-manager såsom pacmann. Pacman er selv en pakke, der f.eks. indeholder en funktion `p_load` til at indlæse flere andre pakker på en gang:
+
+```{r echo=T, eval=F}
+pacman::p_load(tidyverse, janitor)
+```
+
+------------------------------------------------------------------------
+
+# Indlæse datasæt
+
+For at indlæse datasæt skal I bruge specifikke funktioner, alt efter hvilket filformat datasættet er.
+
+<br>
+
+Til excel-filer:
+
+```{r echo=T, eval=F}
+library(readxl)
+df_excelfil <- read_xlsx("sti/til/din//excel_fil.xlsx")
+```
+
+Til R-filer:
+
+```{r echo=T, eval=F}
+df_Rfil <- readRDS("sti/til/din/r_fil.rds")
+```
+
+------------------------------------------------------------------------
+
+# Indlæse datasæt
+
+```{r include=FALSE}
+# Create the mock dataset
+set.seed(123)
+
+# Create a list of industry categories
+industries <- c("Teknologi", "Sundhed", "Finans", "Detail", "Produktion")
+
+# Create the mock dataset with the industry column
+firma_data <- data.frame(
+  navn = paste("Firm", 1:10),  # Firm names as "Firm 1", "Firm 2", etc.
+  industri = sample(industries, 10, replace = TRUE),  # Randomly assign an industry to each firm  
+  ansatte = sample(50:500, 10, replace = TRUE),  # Random number of employees between 50 and 500
+  omsaetning = round(runif(10, 100000, 1000000), 2),  # Random sales between 100,000 and 1,000,000
+  tilfredshed = sample(1:5, 10, replace = TRUE)  # Random satisfaction on a 5-point Likert scale
+)
+
+firma_data$tilfredshed <- factor(firma_data$tilfredshed,
+                                 levels = 1:5,
+                                 labels = c("Meget utilfreds", "Utilfreds", "Neutral", "Tilfreds", "Meget tilfreds"), ordered = T)
+
+firma_data$industri <- factor(firma_data$industri, ordered = FALSE)
+
+saveRDS(firma_data, file = "firma_data.rds")
+```
+
+Lad os f.eks. prøve at indlæse et R-datasæt, som jeg har bygget og gemt i mappen med mit R-projekt. Det indeholder følgende informationer for 100 firmaer:
+
+-   industri
+
+-   antal ansatte
+
+-   omsætning
+
+-   et mål for, hvor tilfredse de er med deres salg på en skala fra 1(meget utilfreds) til 5 (meget tilfreds), hvor
+
+------------------------------------------------------------------------
+
+# Indlæse datasæt
+
+Indlæs datasættet med funktionen `readRDS` og gem datasættet i et objekt, der hedder `df` (for dataframe):
+
+```{r echo=T}
+df <- readRDS("firma_data.rds")
+```
+
+Skriv datasættes navn for at printe de første 10 rækker:
+
+```{r echo=T}
+df
+```
+
+------------------------------------------------------------------------
+
+# Indlæse datasæt
+
+-   Brug `View()` til at åbne datasættet som en tabel
+
+-   Brug `names()` til at printe navnene på variablene i datasættet
+
+```{r echo=T}
+names(df)
+```
+
+------------------------------------------------------------------------
+
+# Variable i R
+
+Variablene i R har en *type*, vist i skrå parenteser `<>` efter variabelnavnet. Typerne påvirker hvad funktionerne gør med variablen - og det hænger faktisk sammen med variablens måleniveau!
+
+```{r echo=T}
+df
+```
+
+------------------------------------------------------------------------
+
+# Variable i R
+
+Variablene i R har en *type*, vist i skrå parenteser `<>` efter variabelnavnet. Typerne påvirker hvad funktionerne gør med variablen - og det hænger faktisk sammen med variablens måleniveau!
+
+<br>
+
+::::: two-column-layout
+::: left-column
+Kategoriske variable
+
+-   `<chr>` *character* - Nominal
+
+-   `<fct>` *factor* - Nominal
+
+-   `<ord>` *ordered* *factor* - Ordinal
+:::
+
+::: right-column{.left-aligned}
+Numeriske variable
+
+-   `<dbl>` *double* - Interval
+
+-   `<int>` *integer* - Heltal
+:::
+:::::
+
+------------------------------------------------------------------------
+
+# Omkodning af variable i R
