@@ -84,14 +84,14 @@ $primary-color: #003366; /* Dark blue resembling Beamer */
     border: 1px solid #ddd; /* Optional: Add a border for visual distinction */
     background-color: #f9f9f9; /* Optional: Light background for contrast */
 }
+
 .right-align-image {
   position: absolute;
   top: 50%;  /* Vertically center the image */
   right: 0;  /* Align to the right */
   transform: translateY(-50%);  /* Adjust for proper vertical centering */
-  width: 30%;  /* Adjust this size as needed */
- /* opacity: 0.15;  /* Optional: make the image semi-transparent */
-  z-index: 1;  /* Ensure it stays behind the text */
+  /* Remove this: width: 30%; */
+  z-index: -1;  /* Ensure it stays behind the text */
 }
 
 /* To ensure the container around the text can accommodate the background image */
@@ -197,3 +197,63 @@ $primary-color: #003366; /* Dark blue resembling Beamer */
 .reveal .code-toolbar button:hover {
   color: #cccccc !important;              /* Light grey on hover */
 }
+
+  .text-over-image {
+    position: relative;
+    z-index: 1; /* Text in front of image */
+  }
+  
+  
+.table-slide {
+    font-size: 0.8em; /* Adjust the font size as needed */
+    border-collapse: collapse; /* Ensure the borders are properly collapsed */
+    width: 100%; /* Make the table take up the full slide width */
+  }
+
+  .table-slide th, .table-slide td {
+    border-bottom: 1px solid #ddd; /* Adds a horizontal line between rows */
+    padding: 8px; /* Adds some padding inside the cells */
+    text-align: left; /* Ensures the text is left-aligned */
+  }
+
+  .table-slide th {
+    border-top: 2px solid #ddd; /* Optional: thicker line on top of the header */
+  }
+  
+  
+  
+   .two-column-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .left-column {
+    width: 60%;
+    padding-right: 20px;
+  }
+
+  .right-column {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info-box {
+    background-color: #f7931e;
+    color: white;
+    text-align: center;
+    font-size: 2em;
+    padding: 10px;
+    margin: 5px 0;
+    width: 80%; /* Adjust the width to fit your needs */
+  }
+
+  .arrow-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 1.5em;
+    color: #f7931e;
+  }

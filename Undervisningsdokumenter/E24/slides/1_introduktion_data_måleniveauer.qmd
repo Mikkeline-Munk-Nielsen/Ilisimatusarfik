@@ -137,12 +137,6 @@ Kurset strækker sig over 3. og 4. semester, tilsammen **15 ECTS** point. Helt k
 
 ------------------------------------------------------------------------
 
-## Hvad skal vi IKKE bruge statistik til?
-
--   Dybdegående undersøgelser der undersøger narrativer, ræssonemeneter, logikker
-
-------------------------------------------------------------------------
-
 ## Summeøvelse
 
 <br>
@@ -229,39 +223,185 @@ Når vi kender vores spørgsmål kan vi beslutte, hvilken type af undersøgelse,
 
 -   **Kausalstudier**: påvirker $X \rightarrow Y$? Hvad er *effekten* af $X$ på $Y$?
 
----
+------------------------------------------------------------------------
 
 ## Slutningsformer
 
+En anden vigtig distinktion mellem undersøgelser kan drages mellem den slutningsform, som benyttes til at drage konklusioner. Her skelnes mellem ***induktion*** og ***deduktion***
+
+[**Induktion**]{.underline}
+
+-   Åben eksplorativ tilgang
+
+-   Tager udgangspunkt i empiri (data) med henblik på at udvikle teori
+
+-   Overvejende beskrivende/eksplorative studier
+
+[**Deduktion**]{.underline}
+
+-   Tager udgangspunkt i hypoteser baseret på teori
+
+-   Hypotesetests
+
+-   Kausalstudier (forklarende)
+
+------------------------------------------------------------------------
+
+## Forskningskriterier
+
+Kvalitetsstandarder for videnskabelige undersøgelser (kritisk rationalistisk videnskabsteoretisk udgangspunkt):
+
+-   Gentagelighed (eksplicitere procedure/fremgangsmåde for andre mennesker)
+
+-   Validitet
+
+-   Reliabilitet
+
+-   Generalisérbarhed
+
+------------------------------------------------------------------------
+
+## Forskningskriterier: gentagelighed
+
+Formålet med en videnskabelig tilgang er systematisk frembringelse af viden. Derfor er det vigtigt at sikre ***gentagelighed*** ved at:
+
+-   anvende videnskabeligt anerkendte og velbegrundende procedurer
+
+-   eksplicitere de skridt vi tager til en grad, hvor andre kan replicére vores undersøgelse for at efterprøve vores konklusioner og bygge videre på vores fund
+
+**Hvordan?**
+
+-   Beskrive valg (og fravalg)
+
+-   Lave præcise definitioner
+
+-   Udførlige beskrivelser af spørgsmål, begreber, hypoteser, datagrundlag, analysestrategi
+
+------------------------------------------------------------------------
+
+## Forskningskriterier: validitet
+
+Validitet referer gyldigheden af undersøgelsens konklusioner:
+
+-   **Målevaliditet**: måler vi faktisk det, som vi gerne vil måle? Er der overensstemmelse mellem den teoretiske og empiriske definition af et begreb (operationalisering)?
+
+-   **Intern validitet**: gyldigheden af kausale slutninger. Har vores analyse ført til gyldige resultater? Er vores analysemodeller og antagelserne bag dem tilstrækkelige?
+
+-   **Ekstern validitet**: er vores fund gyldige i andre kontekster uden for dette specifikke studie? Kan vi generalisere på baggrund af vores analyse?
+
+------------------------------------------------------------------------
+
+## Forskningskriterier: reliabilitet
+
+Reliabilitet betyder ***pålidelighed*** eller ***konsistens***, og henviser til målingens nøjagtighed.
+
+-   Stabilitet: kan vi gentage målingen og få samme resultat?
+
+-   Er målingen af et begreb pålidelig? Rammer vi ca. det samme, hver gang vi måler?
+
+-   Reliabilitetsproblemer giver tilfældige fejl mens validitetsproblemer giver systematiske fejl...
+
+------------------------------------------------------------------------
+
+## Forskningskriterier
+
+::: center
+<img src="images/validitet_reliabilitet.png" height="500px"/>
+:::
+
+::: aside
+Andersen, Hansen & Klemmensen (2012:103)
+:::
+
+------------------------------------------------------------------------
+
+## Forskningskriterier: generalisérbarhed
+
+Formålet med generalisérbarhed er at kunne drage slutninger fra noget undersøgt til noget ikke-undersøgt. Vi vil gerne kunne generalisere vores fund til en bredere kontekst!
+
 <br>
 
--   Induktion
+-   Statistisk generalisérbarhed: kan vi sige noget gyldigt om en population (f.eks. den grønlandske population) på baggrund af en stikprøve?
 
--   Deduktion
+    -   Udvælgelsesmekanisme $\rightarrow$ tilfældighed (sandsynlighedsbaseret teknik)
 
----
+    -   Repræsentativitet
 
-## Validitet og reliabilitet
+-   Statistisk inferens: at regne på, hvorvidt ens resultater (under antagelser) kan generaliseres til en større population
 
-Validitet / gyldighed af argumentation / konklusion Intern validitet Typer af målingsvaliditet Content (dækkes alle dimensioner af et begreb) Construct (overensstemmelse med teoretiske forventninger) Statistisk validitet
+------------------------------------------------------------------------
 
-Ekstern validitet / Generaliserbarhed
+## Datagrundlag
 
-Reliabilitet / pålidelighed Samme type af argumentation skal helst lede til samme type konklusion Gentagelighed
+Vores forskningsdesign er afgørende for, hvilke typer af data, vi har brug for at besvare vores forskningsspørgsmål. Statistiske analyser baseres på kvantitative data, der er kendetegnet ved:
+
+::: text-over-image
+-   De kan tælles eller måles og opsummeres i fx procenter, andele eller gennemsnit
+
+-   Mange enheder/observationer
+
+-   Generalisering
+:::
+
+![](images/udtraek.png){.right-align-image width="500px"}
+
+------------------------------------------------------------------------
+
+## Enheder og cases
+
+En central del af overvejelserne ift at definere en undersøgelses datagrundlag består i at beslutte, ***hvem*** og ***hvordan*** vi gerne vil måle:
+
+-   Hvem/hvad vil vi gerne måle på?
+
+-   Hvilket niveau skal vi måle på?
+
+-   Hvordan skal vi udvælge?
+
+------------------------------------------------------------------------
+
+## Enheder og cases
+
+Udgangspunktet for at udvælge enheder cases er, at vi gerne vil maksimere casenes informationsindhold ift. teorien
+
+-   Populationsundersøgelse: alle enheder i en population (f.eks. alle borgere i Grønland over 18 år)
+
+-   Stikprøveundersøgelse: et mindre antal enheder der udgør et udsnit af en større population
 
 ------------------------------------------------------------------------
 
 ## Data
 
-Vores forskningsdesign er afgørende for, hvilke typer af data, vi har brug for at besvare vores forskningsspørgsmål. I statistiske analyser er datagrundlaget kendetegnet ved:
+Man sondrer typisk mellem primær og sekundær data:
 
 <br>
 
--   Mange enheder/observationer
+[Primær data]{.underline}
 
--   Generalisering
+-   Indsamlet af forskeren (jer) selv til formålet
 
-![---](images/udtraek.png){.right-align-image}
+-   Kontrol med dataindsamling - hvornår, hvordan, hvem skal spørges?
+
+-   Kontrol over validitet og reliabilitet
+
+-   Ressourcekrævende
+
+------------------------------------------------------------------------
+
+## Data
+
+Man sondrer typisk mellem primær og sekundær data:
+
+<br>
+
+[Sekundær data]{.underline}
+
+-   Indsamlet til andre formål
+
+-   Ingen kontrol over dataindsamling
+
+-   Typisk mindre ressourcekrævende
+
+------------------------------------------------------------------------
 
 ## Data
 
@@ -269,21 +409,27 @@ Typiske typer af kvantitativ data:
 
 <br>
 
--   Registerdata: hele populationen, typisk oplysninger fra offentlige administrative registre
+-   **Registerdata**: hele populationen, typisk oplysninger fra offentlige administrative registre
 
--   Spørgeskemadata: mindre udsnit af populationen, baseret på spørgeskema eller struktureret interview klassise spørgeskemaer, vignetbaseret, spørgeskema-eksperimenter
+-   **Spørgeskemadata**: mindre udsnit af populationen, baseret på spørgeskema eller struktureret interview klassise spørgeskemaer, vignetbaseret, spørgeskema-eksperimenter
 
--   Big data/flow data: forbrugsbaseret, inhouse, webscraping
+-   **Big data/flow data**: forbrugsbaseret, inhouse, webscraping
 
----
+------------------------------------------------------------------------
 
 ## Data: registerdata
 
 Fuld population: mulighed for totalundersøgelse (at undgå bortfald)
 
--   Mulighed for tidsserier/paneler: sammenligninger over tid – dog ændrer lategoriseringer/definitioner sig bl.a. med socialpolitiske ændringer Mulighed for totalundersøgelse (at undgå bortfald)
+-   Mulighed for tidsserier/paneler: sammenligninger over tid – dog ændrer kategoriseringer/definitioner sig bl.a. med socialpolitiske ændringer
+
+-   Mulighed for totalundersøgelse (at undgå bortfald)
 
 -   Afspejler organisationens prioriteringer og registreringspraksis
+
+------------------------------------------------------------------------
+
+## Data: registerdata
 
 -   Centrale problemer:
 
@@ -291,11 +437,15 @@ Fuld population: mulighed for totalundersøgelse (at undgå bortfald)
 
     -   Validitetsproblemer (manglende variable ifht problemstillingen)
 
+<br>
+
 -   Centrale spørgsmål:
 
-    -   Dækning: Hvilke år er tilgængelige? Hvilken kategorisering er anvendt? Hvordan er data i registrene produceret? (hvilken registreringspraksis afspejler de og i hvilket omfang er de et validt udtryk for det fænomen som registreres)
+    -   Dækning: Hvilke år er tilgængelige?
+    -   Hvilken kategorisering er anvendt?
+    -   Hvordan er data i registrene produceret? (hvilken registreringspraksis afspejler de og i hvilket omfang er de et validt udtryk for det fænomen som registreres)
 
----
+------------------------------------------------------------------------
 
 ## Data: registerdata
 
@@ -317,7 +467,7 @@ Fuld population: mulighed for totalundersøgelse (at undgå bortfald)
 
 -   Andet (fx dødsårsager, boligoplysninger)
 
----
+------------------------------------------------------------------------
 
 ## Data: registerdata
 
@@ -327,7 +477,7 @@ Fuld population: mulighed for totalundersøgelse (at undgå bortfald)
 
 -   Aggregeret data offentligt tilgængeligt hos Grønlands Statistik: <https://bank.stat.gl/>
 
----
+------------------------------------------------------------------------
 
 ## Data: spørgeskema/survey
 
@@ -339,15 +489,7 @@ Fuld population: mulighed for totalundersøgelse (at undgå bortfald)
 
 -   Mulighed for høj validitet
 
--   Centrale problemer:
-
-    -   Bortfald: for få deltager/bortfaldet er systematisk
-
-    -   Udtræk og sammensætning af stikprøven: stikprøven er ikke repræsentativ
-
-    -   Svarene er ikke valide (operationalisering af teoretiske begreber, forståelighed af spørgsmål)
-
----
+------------------------------------------------------------------------
 
 ## Data: spørgeskema/survey
 
@@ -363,13 +505,27 @@ Surveys er rigtig gode til:
 
 -   Vignet / valghandlingseksperimenter
 
----
+------------------------------------------------------------------------
+
+## Data: spørgeskema/survey
+
+Surveys kan have problemer med:
+
+<br>
+
+-   Bortfald: for få deltager/bortfaldet er systematisk
+
+-   Udtræk og sammensætning af stikprøven: stikprøven er ikke repræsentativ
+
+-   Svarene er ikke valide (operationalisering af teoretiske begreber, forståelighed af spørgsmål)
+
+------------------------------------------------------------------------
 
 ## Data: big data/flowdata
 
 Big data eller *flow data* kendetegnes ved:
 
--   biprodukt af forbrug
+-   Biprodukt af forbrug
 
 -   F.eks. facebookdata, streaming data, online forbrug etc.
 
@@ -377,7 +533,7 @@ Big data eller *flow data* kendetegnes ved:
 
 -   Ofte eget af private firmaer og derfor utilgængeligt for udefrakommende
 
----
+------------------------------------------------------------------------
 
 ## Case
 
@@ -388,16 +544,6 @@ Markedsundersøglese
 <br>
 
 **Summeøvelse**: Hvilken typer af data kunne man bruge til markedsundersøgelsen?
-
----
-
-## Enheder og cases
-
--   Hvem/hvad vil vi gerne måle på?
-
--   Hvilket niveau skal vi måle på?
-
--   Hvordan skal vi udvælge?
 
 ------------------------------------------------------------------------
 
@@ -417,7 +563,9 @@ Før vi kan starte undersøgelse er vi nødt til at gøre det klart for os selv,
 
 ## Begrebsdannelse
 
-*: En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.*
+Markedsundersøglese
+
+:   *En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.*
 
 -   Hvad menes f.eks. med kundegrundlag?
 
@@ -429,9 +577,11 @@ Ofte arbejder vi med abstrakte begreber, der ikke lige umiddelbart lader sig må
 
 -   **Intension**: et begrebs indre betydning (hvilke egenskaber knytter sig til det)
 
--   **Ekstension**: hvad begrebet referer til (hvilke enheder i verden har disse egenskaber)
+-   **Ekstension**: hvad begrebet referer til (hvilke enheder i verden har disse egenskaber? Meget konkret = færre egenskaber, meget abstrakt = mange egenskaber).
 
-Et begrebs ekstension afhænger af to ting, som er en funktion af dets intension: abstraktionsniveau og antallet af egenskaber, man tillægger det. Meget konkret = færre enheder, meget abstrakt = mange enheder.
+<br>
+
+Den centrale pointe ift. at definere klare begreber er, at begreber skal være forskellige fra alt andet end netop det, som de måler.
 
 ------------------------------------------------------------------------
 
@@ -452,26 +602,97 @@ Vi kan ikke gå ud og finde et "kundegrundlag" og rapportere tilbage til virksom
 Når man har konkretiseret sine teoretiske begreber til målbare indikatorer, er det næste skridt at anvende indikatorerne til at **tilskrive værdier til de cases**, som vi inddrager i analysen. Med andre ord:
 
 -   Hvilke skala skal vi måle vores indikatorer på?
--   Hvilke variable skal indgå i vores analyse?
+-   Hvilke **variable** skal indgå i vores analyse?
+
+Variable er byggestenene i statistiske analyser - det er dem, I kommer til at arbejde med som kollonner i jeres datasæt!
+
+------------------------------------------------------------------------
+
+## Kontinuerte og diskrete variable
+
+Variable inddeles først i to typer baseret på deres skala:
+
+-   **Diskrete variable**: kan antage et endeligt antal værdier, f.eks. antal varer solgt i en butik. (tællevariable)
+
+-   **Kontinuerte variable**: kan antage uendeligt mange værdier inden for en given range, f.eks. pris
 
 ---
 
 ## Måleniveauer
 
+Dernæst kategoriseres variable i ***måleniveauer***, afhængigt af hvilken skala vi måler variablen på. Måleniveauer beskriver, hvordan data kan klassificeres og behandles i statistiske analyser. De angiver:
+
+<br>
+
+-   Hvilken type information en variabel indeholder
+
+-   Hvilke matematiske operationer og statistiske tests der kan anvendes på den
+
 ------------------------------------------------------------------------
 
-Øvelse: lav følgende for den canadiske tøjproducent
+## Måleniveauer
 
--   Problemformulering
+![](images/tabel_måleniveau.png)
 
--   Beskriv forskningsgenstand
 
--   Hypoteser
+---
 
-Overvejelser:
+::: table-slide
+| **Type** | **Variabel** | **Enhed** | **Værdi** | **Informationsniveau** |
+|---------------|---------------|---------------|---------------|---------------|
+| Nominal | Kommune | Borger | Kommune Kujalleq, Kommuneqarfik Sermersooq, Qeqqata Kommunia, Kommune Qeqertalik, Avannaata Kommunia. | Gensidigt udelukkende. Vi kan kun udtale os om, hvorvidt værdier er = eller ≠ hinanden. |
+| Ordinal | Alderskategorier | Person | “Unge” (0-35 år), “middelaldrende” (36-54 år) eller ”ældre” (55+) | Kan rangordnes! Vi kan nu også se, om værdier er mindre \< eller større \> end andre. |
+| Intervalskaleret | Temperatur | Lokation | -uendelig til +uendelig | Meningsfuld afstand mellem værdierne! Nu kan vi også addere (+) og subtrahere (-). Vi kan også måle tid, så længe, at 20 år er halvt så gammel som 40 år. Derfor kan vi multiplicere og dividere. |
+:::
 
--   Hvor mange skal udspørges?
+------------------------------------------------------------------------
 
--   Hvem skal udspørges?
+## Måleniveauer
 
--   Hvordan skal de udvælges - omkostninger vs. validitet?
+::::: two-column-layout
+::: left-column
+-   Vi får mere information og flere muligheder, når vi går op i måleniveau.
+-   Man kan altid gå ned, ved at omkode sine variable (f.eks. alder til alderskategorier eller indkomst til indkomstkvartiler), men man kan ikke gå op.
+-   Binære/dikotome variable, der enten kan tage værdien 0 eller 1 er særlige og kan behandles som alle måleniveauer.
+:::
+
+::: right-column
+![](images/måleniveauer.png)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Måleniveauer
+
+Summeøvelse: hvilke måleniveauer har følgende variable?
+
+::::: two-column-layout
+::: left-column
+-   Køn
+
+-   Alder
+
+-   Netto-overskud i virksomhed
+
+-   Uddannelsesniveau
+
+-   Produkttype
+
+-   Pris
+
+-   Lagerbeholdning
+
+-   Markedsandel
+
+-   Jobtitel
+:::
+
+::: right-column
+![](images/måleniveauer.png)
+:::
+:::::
+
+---
+
+## Opsamling
