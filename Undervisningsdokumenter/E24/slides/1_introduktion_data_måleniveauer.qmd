@@ -143,6 +143,14 @@ Kurset strækker sig over 3. og 4. semester, tilsammen **15 ECTS** point. Helt k
 
 ------------------------------------------------------------------------
 
+## Summeøvelse
+
+<br>
+
+:   *Hvornår møder I statistik i jeres studier/arbejde/hverdagsliv?*
+
+------------------------------------------------------------------------
+
 ## Konkrete eksempler i erhvervsøkonomi:
 
 -   Evaluere performance gennem f.eks. salgstal eller kundetilfredshedsundersøgelser
@@ -159,7 +167,7 @@ Kurset strækker sig over 3. og 4. semester, tilsammen **15 ECTS** point. Helt k
 
 Markedsundersøglese
 
-:   *En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat strategiafdelingen til at analysere mulighederne. De har brug for at kende efterspørslen efter den type af tøj, som de producerer, for at kunne vurdere, om det vil være rentabelt at starte salg og markedsføring.*
+:   *En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter* *til at analysere mulighederne. De har brug for at kende efterspørslen efter den type af tøj, som de producerer, for at kunne vurdere, om det vil være rentabelt at starte salg og markedsføring.*
 
 ------------------------------------------------------------------------
 
@@ -187,7 +195,7 @@ Videnskabelig undersøgelse tager altid udgangspunkt i et forskningsspørgsmål:
 
 -   **Hvordan** ser kapitaludviklingen det seneste årti ud for grøndlandske virksomheder?
 
--   **Hvornår** overstiger ... ?
+-   **Hvornår** overstiger udgifter indtæger?
 
 [**Forklarende spørgsmål:**]{.underline}
 
@@ -211,35 +219,185 @@ Markedsundersøglese
 
 ## Forsknings- og undersøgelsesdesign
 
-Når vi kender vores forskningsgenstand, forskningsspørgsmål og hypoteser er de næste spørgsmål:
-
--   Hvilken type undersøgelse har du brug for? (Design)
-
--   Hvilken type data, har du brug for? (Metode)
-
-------------------------------------------------------------------------
-
-## Forskningsdesign
-
 Når vi kender vores spørgsmål kan vi beslutte, hvilken type af undersøgelse, der svarer bedst på vores spørgsmål.
 
--   Beskrivende: én variabel (hvad, hvordan, hvornår?)
+<br>
 
--   Sammenhængsundersøgelser: hænger x sammen med y?
+-   **Beskrivende**: én variabel (hvad, hvordan, hvornår?)
 
--   Kausalstudier: påvirker x –\> y? Hvad er effekten af x på y?
+-   **Sammenhængsundersøgelser**: hænger $X$ sammen med $Y$?
+
+-   **Kausalstudier**: påvirker $X \rightarrow Y$? Hvad er *effekten* af $X$ på $Y$?
+
+---
+
+## Slutningsformer
+
+<br>
+
+-   Induktion
+
+-   Deduktion
+
+---
+
+## Validitet og reliabilitet
+
+Validitet / gyldighed af argumentation / konklusion Intern validitet Typer af målingsvaliditet Content (dækkes alle dimensioner af et begreb) Construct (overensstemmelse med teoretiske forventninger) Statistisk validitet
+
+Ekstern validitet / Generaliserbarhed
+
+Reliabilitet / pålidelighed Samme type af argumentation skal helst lede til samme type konklusion Gentagelighed
 
 ------------------------------------------------------------------------
 
 ## Data
 
+Vores forskningsdesign er afgørende for, hvilke typer af data, vi har brug for at besvare vores forskningsspørgsmål. I statistiske analyser er datagrundlaget kendetegnet ved:
+
+<br>
+
 -   Mange enheder/observationer
 
--   Tendenser
-
--   Udtaler os minder om mere
-
 -   Generalisering
+
+![---](images/udtraek.png){.right-align-image}
+
+## Data
+
+Typiske typer af kvantitativ data:
+
+<br>
+
+-   Registerdata: hele populationen, typisk oplysninger fra offentlige administrative registre
+
+-   Spørgeskemadata: mindre udsnit af populationen, baseret på spørgeskema eller struktureret interview klassise spørgeskemaer, vignetbaseret, spørgeskema-eksperimenter
+
+-   Big data/flow data: forbrugsbaseret, inhouse, webscraping
+
+---
+
+## Data: registerdata
+
+Fuld population: mulighed for totalundersøgelse (at undgå bortfald)
+
+-   Mulighed for tidsserier/paneler: sammenligninger over tid – dog ændrer lategoriseringer/definitioner sig bl.a. med socialpolitiske ændringer Mulighed for totalundersøgelse (at undgå bortfald)
+
+-   Afspejler organisationens prioriteringer og registreringspraksis
+
+-   Centrale problemer:
+
+    -   Man kan mangle indsigt i datatilvirkningen
+
+    -   Validitetsproblemer (manglende variable ifht problemstillingen)
+
+-   Centrale spørgsmål:
+
+    -   Dækning: Hvilke år er tilgængelige? Hvilken kategorisering er anvendt? Hvordan er data i registrene produceret? (hvilken registreringspraksis afspejler de og i hvilket omfang er de et validt udtryk for det fænomen som registreres)
+
+---
+
+## Data: registerdata
+
+-   Sociale indsatser (fx anbringelser, støtte til udsatte børn og unge)
+
+-   Kriminalitet (fx sigtelser, strafferetlige afgørelser, straftyper)
+
+-   Demografi (fx familietype, børn, civilstatus)
+
+-   Arbejdsmarked (fx indkomst, overførselsindkomst, stilling, branche)
+
+-   Uddannelse (fx uddannelse, folkeskolekarakter)
+
+-   Sundhed (fx diagnoser, behandlinger, køb af receptpligtig medicin)
+
+-   Virksomheder (fx regnskabsstatistik)
+
+-   Gældsoplysninger
+
+-   Andet (fx dødsårsager, boligoplysninger)
+
+---
+
+## Data: registerdata
+
+<br>
+
+-   Mikrodata (personniveau) er ikke tilgængeligt for offentligheden (personfølsomhed, anonymitet)
+
+-   Aggregeret data offentligt tilgængeligt hos Grønlands Statistik: <https://bank.stat.gl/>
+
+---
+
+## Data: spørgeskema/survey
+
+-   Mindre (typisk tilfældigt) udtræk fra en population $\rightarrow$ repræsentativitet og generalisérbarhed
+
+-   Standardiseret dataindsamling: samme information fra alle informanter/analyseenheder
+
+-   Selvrapport (reducerer mørketal f.eks. ift. registerdata om kriminalitet)
+
+-   Mulighed for høj validitet
+
+-   Centrale problemer:
+
+    -   Bortfald: for få deltager/bortfaldet er systematisk
+
+    -   Udtræk og sammensætning af stikprøven: stikprøven er ikke repræsentativ
+
+    -   Svarene er ikke valide (operationalisering af teoretiske begreber, forståelighed af spørgsmål)
+
+---
+
+## Data: spørgeskema/survey
+
+Surveys er rigtig gode til:
+
+<br>
+
+-   Måle holdninger og værdier (fx rundspørger, meningsmålinger, værdiundersøgelsen, tryghedsmålinger)
+
+-   Måle adfærd (fx selvrapporteret kriminalitet, offerundersøgelser og personlighed)
+
+-   Inkludere præcise mål, som ikke er tilgængelige i registre
+
+-   Vignet / valghandlingseksperimenter
+
+---
+
+## Data: big data/flowdata
+
+Big data eller *flow data* kendetegnes ved:
+
+-   biprodukt af forbrug
+
+-   F.eks. facebookdata, streaming data, online forbrug etc.
+
+-   Produceres når forbrugere efterlader "aftryk"
+
+-   Ofte eget af private firmaer og derfor utilgængeligt for udefrakommende
+
+---
+
+## Case
+
+Markedsundersøglese
+
+:   *En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.*
+
+<br>
+
+**Summeøvelse**: Hvilken typer af data kunne man bruge til markedsundersøgelsen?
+
+---
+
+## Enheder og cases
+
+-   Hvem/hvad vil vi gerne måle på?
+
+-   Hvilket niveau skal vi måle på?
+
+-   Hvordan skal vi udvælge?
 
 ------------------------------------------------------------------------
 
@@ -259,11 +417,9 @@ Før vi kan starte undersøgelse er vi nødt til at gøre det klart for os selv,
 
 ## Begrebsdannelse
 
-*:En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.*
+*: En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.*
 
 -   Hvad menes f.eks. med kundegrundlag?
-
--   
 
 ------------------------------------------------------------------------
 
@@ -296,6 +452,11 @@ Vi kan ikke gå ud og finde et "kundegrundlag" og rapportere tilbage til virksom
 Når man har konkretiseret sine teoretiske begreber til målbare indikatorer, er det næste skridt at anvende indikatorerne til at **tilskrive værdier til de cases**, som vi inddrager i analysen. Med andre ord:
 
 -   Hvilke skala skal vi måle vores indikatorer på?
+-   Hvilke variable skal indgå i vores analyse?
+
+---
+
+## Måleniveauer
 
 ------------------------------------------------------------------------
 
