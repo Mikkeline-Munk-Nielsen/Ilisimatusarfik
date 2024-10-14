@@ -5,6 +5,7 @@ format:
     slide-level: 0  # Disable automatic slide creation from headings
     incremental: false 
     logo: css_etc/ilisimatusarfik.png
+    mathjax: true
 editor: visual
 ---
 
@@ -132,7 +133,7 @@ Kurset strækker sig over 3. og 4. semester, tilsammen **15 ECTS** point. Helt k
 -   Teste teorier
 
 -   Udvikle forklaringer og forudsigelser
-![](images/business_economy.png){.right-align-image}
+![](images/business_economy.png){.right-align-image width=600px}
 
 ------------------------------------------------------------------------
 
