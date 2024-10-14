@@ -132,7 +132,6 @@ Kurset strækker sig over 3. og 4. semester, tilsammen **15 ECTS** point. Helt k
 -   Teste teorier
 
 -   Udvikle forklaringer og forudsigelser
-
 ![](images/business_economy.png){.right-align-image}
 
 ------------------------------------------------------------------------
@@ -168,8 +167,7 @@ Markedsundersøglese
 ## Forskningshjulet
 
 ::: center
-![](images/forskningshjulet.png)
-
+<img src="images/forskningshjulet.png" height="500px"/>
 :::
 
 ::: aside
@@ -307,8 +305,7 @@ Reliabilitet betyder ***pålidelighed*** eller ***konsistens***, og henviser til
 ## Forskningskriterier
 
 ::: center
-![](images/validitet_reliabilitet.png)
-
+<img src="images/validitet_reliabilitet.png" height="500px"/>
 :::
 
 ::: aside
@@ -347,7 +344,6 @@ Vores forskningsdesign er afgørende for, hvilke typer af data, vi har brug for 
 <br>
 
 ![](images/udtraek.png){.right-align-image width="20px"}
-
 
 ------------------------------------------------------------------------
 
