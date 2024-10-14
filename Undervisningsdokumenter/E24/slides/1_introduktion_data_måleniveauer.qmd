@@ -42,15 +42,11 @@ Formålet med modulet i statistik er at opøve de studerendes kompetencer til st
 
 Den studerende skal:
 
--   opnå viden om forskellige statistiske metoder, deres begrænsninger, muligheder og anvendelse,
+-   opnå viden om forskellige statistiske metoder, deres begrænsninger, muligheder og anvendelse
 
 -   kunne anvende forskellige statistiske metoder til at drage konklusioner om kvantitative data og
 
 -   kunne anvende IT-værktøjer i arbejdet med statistiske metoder (mere specifikt R)
-
-::: aside
-Kilde: Studieordning, Bachelor i erhvervsøkonomi, https://da.uni.gl/media/bqonvtdm/erhvervsoekonomi-studieordning.pdf
-:::
 
 ------------------------------------------------------------------------
 
@@ -132,8 +128,7 @@ Kurset strækker sig over 3. og 4. semester, tilsammen **15 ECTS** point. Helt k
 
 -   Teste teorier
 
--   Udvikle forklaringer og forudsigelser
-![](images/business_economy.png){.right-align-image width=600px}
+-   Udvikle forklaringer og forudsigelser ![](images/business_economy.png){.right-align-image width="600px"}
 
 ------------------------------------------------------------------------
 
@@ -342,6 +337,7 @@ Vores forskningsdesign er afgørende for, hvilke typer af data, vi har brug for 
 
 -   Generalisering
 :::
+
 <br>
 
 ![](images/udtraek.png){.right-align-image width="20px"}
@@ -598,7 +594,7 @@ Efter at have defineret et begreb teoretisk er næste skridt at finde ud af, hvo
 
 Vi kan ikke gå ud og finde et "kundegrundlag" og rapportere tilbage til virksomheden, om det er der eller ej. Men vi kan godt måle, om det er folk i den rette **alder**, i de rette **køn**, med **interesse for** f.eks. **sportstøj**, og **præferencer for bæredygtighed**
 
----
+------------------------------------------------------------------------
 
 ## Case
 
@@ -608,7 +604,7 @@ Markedsundersøglese
 
 Hvordan kan vi operationalisere begrebet "kundegrundlag" således, at vi kan måle det med data?
 
----
+------------------------------------------------------------------------
 
 ## Indikatorer
 
@@ -699,6 +695,8 @@ Summeøvelse: hvilke måleniveauer har følgende variable?
 
 ## Opsamling
 
+<br>
+
 -   Statistiske analyser kan skabe overblik over tendenser,, finde mønstre, undersøge sammenhænge og forskellighed, teste teorier, udvikle forklaringer og lave forudsigelser
 
 -   Undersøgelser bør altid tage udgangspunkt i et ***forskningsspørgsmål***
@@ -707,8 +705,33 @@ Summeøvelse: hvilke måleniveauer har følgende variable?
 
 -   Statistiske undersøgelser skal (såvel som andre) leve op til en række ***kvalitetskriterier*** for videnskabelig praksis: gentagelighed, validitet, reliabilitet og generalisérbarhed
 
+------------------------------------------------------------------------
+
+## Opsamling
+
+<br>
+
 -   **Data** udvælges (ideelt set) på baggrund af forskningsningsspørgsmål, f.eks. registerdata, surveydata, flowdata eller andet. Vores datagrundlag og udvælgelsesmekanisme er afgørende for, hvorvidt undersøgelsen lever op til kvalitetskriterierne!
 
 -   Toeretiske begreber skal defineres og ***operationaliseres*** således at vi faktisk kan måle dem med tal
 
--   Når vi uvikler indikatorer skal vi tage højde for deres ***måleniveauer***, da det er afgørende for, hvilke analyser vi kan lave på vores data
+-   Når vi udvikler indikatorer skal vi tage højde for deres ***måleniveauer***, da det er afgørende for, hvilke analyser vi kan lave på vores data
+
+---
+## Næste gang...
+
+
+::::: two-column-layout
+::: left-column
+-   Husk computer
+
+-   Vigtigt med deltagelse
+:::
+
+::: right-column
+![](images/Rlogo.png)
+:::
+:::::
+
+
+
