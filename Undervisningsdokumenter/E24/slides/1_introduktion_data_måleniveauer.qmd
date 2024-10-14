@@ -342,8 +342,9 @@ Vores forskningsdesign er afgørende for, hvilke typer af data, vi har brug for 
 
 -   Generalisering
 :::
+<br>
 
-![](images/udtraek.png){.right-align-image width="500px"}
+![](images/udtraek.png){.right-align-image width="20px"}
 
 ------------------------------------------------------------------------
 
@@ -485,7 +486,7 @@ Fuld population: mulighed for totalundersøgelse (at undgå bortfald)
 
 -   Standardiseret dataindsamling: samme information fra alle informanter/analyseenheder
 
--   Selvrapport (reducerer mørketal f.eks. ift. registerdata om kriminalitet)
+-   Selvrapport (reducerer mørketal f.eks. ift. registerdata om sort arbejde)
 
 -   Mulighed for høj validitet
 
@@ -549,7 +550,7 @@ Markedsundersøglese
 
 ## Begrebsdannelse
 
-Før vi kan starte undersøgelse er vi nødt til at gøre det klart for os selv, hvordan vi definerer de centrale begreber i vores forskningsspørgsmål. Det hjælper os til at:
+Før man kan starte en undersøgelse er man nødt til at gøre det klart for sig selv, hvordan man definerer de centrale begreber i sit forskningsspørgsmål. Det hjælper os til at:
 
 -   Gøre det klar, hvad vi gerne vil måle
 
@@ -568,6 +569,8 @@ Markedsundersøglese
 :   *En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.*
 
 -   Hvad menes f.eks. med kundegrundlag?
+-   Hvordan definerer vi det grønlandske marked?
+-   Hvad er et tilstrækkeligt kundegrundlag?
 
 ------------------------------------------------------------------------
 
@@ -595,16 +598,26 @@ Efter at have defineret et begreb teoretisk er næste skridt at finde ud af, hvo
 
 Vi kan ikke gå ud og finde et "kundegrundlag" og rapportere tilbage til virksomheden, om det er der eller ej. Men vi kan godt måle, om det er folk i den rette **alder**, i de rette **køn**, med **interesse for** f.eks. **sportstøj**, og **præferencer for bæredygtighed**
 
-------------------------------------------------------------------------
+---
+
+## Case
+
+Markedsundersøglese
+
+:   *En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.*
+
+Hvordan kan vi operationalisere begrebet "kundegrundlag" således, at vi kan måle det med data?
+
+---
 
 ## Indikatorer
 
 Når man har konkretiseret sine teoretiske begreber til målbare indikatorer, er det næste skridt at anvende indikatorerne til at **tilskrive værdier til de cases**, som vi inddrager i analysen. Med andre ord:
 
--   Hvilke skala skal vi måle vores indikatorer på?
 -   Hvilke **variable** skal indgå i vores analyse?
+-   Hvilke **skala** skal vi måle vores indikatorer på?
 
-Variable er byggestenene i statistiske analyser - det er dem, I kommer til at arbejde med som kollonner i jeres datasæt!
+Variable er byggestenene i statistiske analyser - det er dem, I kommer til at arbejde med som kolonner i jeres datasæt!
 
 ------------------------------------------------------------------------
 
@@ -616,7 +629,7 @@ Variable inddeles først i to typer baseret på deres skala:
 
 -   **Kontinuerte variable**: kan antage uendeligt mange værdier inden for en given range, f.eks. pris
 
----
+------------------------------------------------------------------------
 
 ## Måleniveauer
 
@@ -633,17 +646,6 @@ Dernæst kategoriseres variable i ***måleniveauer***, afhængigt af hvilken ska
 ## Måleniveauer
 
 ![](images/tabel_måleniveau.png)
-
-
----
-
-::: table-slide
-| **Type** | **Variabel** | **Enhed** | **Værdi** | **Informationsniveau** |
-|---------------|---------------|---------------|---------------|---------------|
-| Nominal | Kommune | Borger | Kommune Kujalleq, Kommuneqarfik Sermersooq, Qeqqata Kommunia, Kommune Qeqertalik, Avannaata Kommunia. | Gensidigt udelukkende. Vi kan kun udtale os om, hvorvidt værdier er = eller ≠ hinanden. |
-| Ordinal | Alderskategorier | Person | “Unge” (0-35 år), “middelaldrende” (36-54 år) eller ”ældre” (55+) | Kan rangordnes! Vi kan nu også se, om værdier er mindre \< eller større \> end andre. |
-| Intervalskaleret | Temperatur | Lokation | -uendelig til +uendelig | Meningsfuld afstand mellem værdierne! Nu kan vi også addere (+) og subtrahere (-). Vi kan også måle tid, så længe, at 20 år er halvt så gammel som 40 år. Derfor kan vi multiplicere og dividere. |
-:::
 
 ------------------------------------------------------------------------
 
@@ -693,6 +695,20 @@ Summeøvelse: hvilke måleniveauer har følgende variable?
 :::
 :::::
 
----
+------------------------------------------------------------------------
 
 ## Opsamling
+
+-   Statistiske analyser kan skabe overblik over tendenser,, finde mønstre, undersøge sammenhænge og forskellighed, teste teorier, udvikle forklaringer og lave forudsigelser
+
+-   Undersøgelser bør altid tage udgangspunkt i et ***forskningsspørgsmål***
+
+-   Forskningsspørgsmålet afgør, hvilket ***forskningsdesign*** vi skal bruge (beskrivende vs. forklarende)
+
+-   Statistiske undersøgelser skal (såvel som andre) leve op til en række ***kvalitetskriterier*** for videnskabelig praksis: gentagelighed, validitet, reliabilitet og generalisérbarhed
+
+-   **Data** udvælges (ideelt set) på baggrund af forskningsningsspørgsmål, f.eks. registerdata, surveydata, flowdata eller andet. Vores datagrundlag og udvælgelsesmekanisme er afgørende for, hvorvidt undersøgelsen lever op til kvalitetskriterierne!
+
+-   Toeretiske begreber skal defineres og ***operationaliseres*** således at vi faktisk kan måle dem med tal
+
+-   Når vi uvikler indikatorer skal vi tage højde for deres ***måleniveauer***, da det er afgørende for, hvilke analyser vi kan lave på vores data
