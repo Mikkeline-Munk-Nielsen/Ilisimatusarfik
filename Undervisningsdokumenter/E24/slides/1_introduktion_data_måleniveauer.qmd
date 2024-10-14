@@ -693,6 +693,16 @@ Summeøvelse: hvilke måleniveauer har følgende variable?
 
 ------------------------------------------------------------------------
 
+## Datasæt
+
+Resten af kurset skal vi bruge variable i vores statistiske analyser. De vil indgå i jeres datasæt som kolonner, for eksempel:
+
+```{r echo=F}
+(df <- readRDS("firma_data.rds"))
+```
+
+---
+
 ## Opsamling
 
 <br>
@@ -717,9 +727,9 @@ Summeøvelse: hvilke måleniveauer har følgende variable?
 
 -   Når vi udvikler indikatorer skal vi tage højde for deres ***måleniveauer***, da det er afgørende for, hvilke analyser vi kan lave på vores data
 
----
-## Næste gang...
+------------------------------------------------------------------------
 
+## Næste gang...
 
 ::::: two-column-layout
 ::: left-column
@@ -732,6 +742,3 @@ Summeøvelse: hvilke måleniveauer har følgende variable?
 ![](images/Rlogo.png)
 :::
 :::::
-
-
-

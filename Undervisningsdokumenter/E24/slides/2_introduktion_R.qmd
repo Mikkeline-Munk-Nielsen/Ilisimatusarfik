@@ -142,7 +142,7 @@ Vælg evt. tema/farver under "appearance".
 <br>
 
 | **Beskrivelse** | **Genvej** |
-|-----------------------------------|-------------------------------------|
+|----|----|
 | RStudio vinduer: Åbn alle 4 | [Ctrl+Shift+Alt+0]{.genvej-key} |
 | RStudio vinduer: Forstør 1/2/3/4 | [Ctrl+Shift+1/2/3/4]{.genvej-key} |
 | RStudio vinduer: Skift fokus til 1/2/3/4 | [Ctrl+1/2/3/4]{.genvej-key} |
@@ -280,7 +280,7 @@ man kan også indlæse flere pakker samtidig, f.eks. tidyverse OG janitor, som e
 install.packages(c('tidyverse', 'janitor')) 
 ```
 
----
+------------------------------------------------------------------------
 
 # Pakker
 
