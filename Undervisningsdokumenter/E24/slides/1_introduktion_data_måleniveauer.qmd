@@ -307,7 +307,8 @@ Reliabilitet betyder ***pålidelighed*** eller ***konsistens***, og henviser til
 ## Forskningskriterier
 
 ::: center
-<img src="images/validitet_reliabilitet.png" height="500px"/>
+![](images/validitet_reliabilitet.png)
+
 :::
 
 ::: aside
@@ -346,6 +347,7 @@ Vores forskningsdesign er afgørende for, hvilke typer af data, vi har brug for 
 <br>
 
 ![](images/udtraek.png){.right-align-image width="20px"}
+
 
 ------------------------------------------------------------------------
 
