@@ -168,7 +168,8 @@ Markedsundersøglese
 ## Forskningshjulet
 
 ::: center
-<img src="images/forskningshjulet.png" height="500px"/>
+![](images/forskningshjulet.png)
+
 :::
 
 ::: aside
