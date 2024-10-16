@@ -25,7 +25,7 @@ editor: visual
 -   Hvad er R?
 -   Installation
 -   Rundvisning
--   Objekter og funktioner
+-   Objekter, pakker og funktioner
 -   Åbne data
 -   Variable i R
 
@@ -51,7 +51,7 @@ editor: visual
 
 # What´s so special about R?
 
--   **Kodebaseret (vs. klikbaseret)**: Du skriver kode i stedet for at klikke rundt i menuer
+-   **Kodebaseret (vs. klikbaseret)**: Du skriver kode i stedet for at klikke rundt i menuer.
 
 -   **Automatisering**: koden automatiserer gentagne opgaver
 
@@ -60,6 +60,21 @@ editor: visual
 -   **Bedre til store datamængder** end f.eks. Excel.
 
 -   **Open source** - mulighederne er uendelige!
+
+------------------------------------------------------------------------
+
+# Hvad er kode?
+
+::::: two-column-layout
+::: left-column
+-   Kode er tekstfiler, hvor vi skriver med tekst, hvad programmet skal gøre for os i stedet for at klikke. Tænk på det, som en form for opskrift I skriver til computeren!
+-   Opskrifter er smarte, fordi vi kan gemme dem og bruge dem igen
+:::
+
+::: right-column
+![](images/opskrift.png)
+:::
+:::::
 
 ------------------------------------------------------------------------
 
@@ -142,7 +157,7 @@ Vælg evt. tema/farver under "appearance".
 <br>
 
 | **Beskrivelse** | **Genvej** |
-|----|----|
+|------------------------------------|------------------------------------|
 | RStudio vinduer: Åbn alle 4 | [Ctrl+Shift+Alt+0]{.genvej-key} |
 | RStudio vinduer: Forstør 1/2/3/4 | [Ctrl+Shift+1/2/3/4]{.genvej-key} |
 | RStudio vinduer: Skift fokus til 1/2/3/4 | [Ctrl+1/2/3/4]{.genvej-key} |
@@ -155,23 +170,29 @@ Når man går igang med analyser i R starter man typisk med at lave en mappe på
 
 ![](images/project.png)
 
-------------------------------------------------------------------------
+---
 
 # R-projects
 
-Fordelene ved R projects R
-
 -   Et R-project er en projektfil, der hjælper dig med at navigere mellem scripts, datasæt, billeder, output etc...
 
--   R Studio kan som udgangspunkt ikke finde filer på din computer, som ikke ligger i samme mappe, som den fil du arbejder på (f.eks. datasæt, som du skal bruge til analyse).
+-   R-Studio kan som udgangspunkt ikke finde filer på din computer, som ikke ligger i samme mappe, som den fil du arbejder på (f.eks. datasæt, som du skal bruge til analyse).
 
 -   Hvis du opretter en mappe med et R project i og opbevarer alle relevante filer i samme mappe, så kan man nemt tilgå alle filerne i mappen direkte fra R Studio (vindue 4) og skifte imellem dem
 
--   Hvis man åbner projektet i stedet for enkelfiler i mappen på computeren, bliver alt tilgængeligt inde i R Studio.
+Tænk på dit R projekt som "THE BIG BROTHER FILE", der holder øje med alle de andre filer i din projektmappe.
 
-Tænk på dit R projekt som "THE BIG BROTHER FILE" der holder øje med alle de andre filer i din projektmappe.
+---
 
-------------------------------------------------------------------------
+# Øvelse
+
+-   Opret en mappe på din computer med et R project, hvor du kan gemme alle de filer, som vi skal bruge
+
+-   Klik på dit R project for at åbne projektmappen
+
+-   Tjek at du er i den rigtige mappe på computeren ved at skrive `getwd()` i konsollen eller et script. Funktionen står for "get work directory" eller "fortæl mig hvilken mappe på computeren, som jeg arbejder i lige nu".
+
+---
 
 # Objekter
 
@@ -223,6 +244,18 @@ Du kan se dine objekter i vindue 4 under "Environment"
 ![](images/objekter.png)
 
 ------------------------------------------------------------------------
+
+# Øvelse
+
+Åben et script i R og lav følgende objekter:
+
+-   Et objekt, der hedder "navn" som indeholder dit navn
+
+-   Et objekt der hedder "alder" og indeholder din alder"
+
+Gem dit script i samme mappe som dit R-project.
+
+---
 
 # Objekter
 
@@ -363,13 +396,13 @@ Lad os f.eks. prøve at indlæse et R-datasæt, som jeg har bygget og gemt i map
 Indlæs datasættet med funktionen `readRDS` og gem datasættet i et objekt, der hedder `df` (for dataframe):
 
 ```{r echo=T}
-df <- readRDS("firma_data.rds")
+df_firma <- readRDS("firma_data.rds")
 ```
 
 Skriv datasættes navn for at printe de første 10 rækker:
 
 ```{r echo=T}
-df
+df_firma
 ```
 
 ------------------------------------------------------------------------
@@ -381,8 +414,20 @@ df
 -   Brug `names()` til at printe navnene på variablene i datasættet
 
 ```{r echo=T}
-names(df)
+names(df_firma)
 ```
+
+---
+
+# Øvelse
+
+-   Gå ind på lectio under Dokumenter $\rightarrow$ Data og download datasættet `firma_data.rds`
+
+-   Gem datasættet i mappen med dit R-project
+
+-   Indlæs datasættet i det skript, som du arbejdede i før
+
+-   Undersøg datasættet og dets variable
 
 ------------------------------------------------------------------------
 
@@ -391,7 +436,7 @@ names(df)
 Variablene i R har en *type*, vist i skrå parenteser `<>` efter variabelnavnet. Typerne påvirker hvad funktionerne gør med variablen - og det hænger faktisk sammen med variablens måleniveau!
 
 ```{r echo=T}
-df
+df_firma
 ```
 
 ------------------------------------------------------------------------
@@ -424,4 +469,289 @@ Numeriske variable
 
 ------------------------------------------------------------------------
 
-# Omkodning af variable i R
+# Data wrangling
+
+En vigtig fordel i kodebaseret data software er, at vi kan skrive kode, der transformerer vores data til at se ud, præcis som vi vil have det. Det kaldes i folkemunde *data wrangling!*
+
+-   Ændre navne på variable
+
+-   Omkode variable, dvs. gruppere indholdet i variable på nye måder
+
+-   Danne nye variable
+
+-   Optimere datastruktur, f.eks. gruppere vores datasæt fra individ niveau til gruppeniveau
+
+Alle disse ting gør det muligt at tilpasse vores data til præcis den type af analyse, som vi gerne vil lave!
+
+------------------------------------------------------------------------
+
+# Data wrangling
+
+::::: two-column-layout
+::: left-column
+-   ***tidyverse*** er en samling af R-pakker, som er designet til at gøre dataanalyse enklere og mere konsistent.
+
+-   Pakker deler et fælles sæt af principper og gør det muligt at skrive enkel og effektiv kode
+
+-   De mest kendte pakker inkluderer bl.a. ggplot2, dplyr, tidyr, readr og purrr.
+:::
+
+::: right-column
+![](images/tidyverse.png)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+# Data wrangling
+
+En funktion som I kommer til at bruge meget er pipe operatoren: `%>%`
+
+-   Pipe operatoren `%>%` gør det muligt at "sende" resultatet af én funktion direkte videre til den næste.
+
+-   I stedet for at indlejre flere funktioner, kan du skrive dem i rækkefølge, hvilket gør koden mere læsbar.
+
+-   Genvej: `Shift` + `Ctrl`+`M` (mac: `Cmd` + `Shift` + `M)`
+
+---
+
+# Data wrangling
+
+Uden pipe operatoren:
+
+```{r echo=T, eval=F}
+summarize(group_by(mutate(df, nye_var = var1 + var2), gruppe_var), mean_værdi = mean(nye_var))
+%>% 
+```
+
+Med pipe operatoren:
+
+```{r echo=T, eval=FALSE}
+df %>%
+  mutate(nye_var = var1 + var2) %>%
+  group_by(gruppe_var) %>%
+  summarize(mean_værdi = mean(nye_var))
+```
+
+------------------------------------------------------------------------
+
+# Variabel navne
+
+Når vi indlæser et datasæt kan det ofte være smart at sørge for, at variablenes navne er ensartede, så programmet kan læse dem. F.eks. er computere sjældent glade for mellemrum og æ,ø,å...
+
+```{r include=F}
+df <- data.frame(
+  køn = c("Mand", "Kvinde", "Mand", "Kvinde"),
+  tid = c(2020, 2020, 2021, 2021),
+  "Befolkningen 1. januar" = c(2750000, 2850000, 2780000, 2870000)
+)
+```
+
+```{r echo=T}
+names(df)
+```
+
+Brug `clean_names()` fra pakken `library(janitor)` til at ensarte variablenes navne, når du loader et nyt datasæt:
+
+```{r echo=T, warning=F}
+library(janitor)
+df <- clean_names(df) # rengør navnene og gem dataframen påny
+names(df)
+```
+
+------------------------------------------------------------------------
+
+# Variabel navne
+
+I andre tilfælde vil vi gerne omdøbe variable manuelt...
+
+```{r echo=T, warning=F}
+library(tidyverse)
+names(df)
+```
+
+Brug `rename()` fra pakken `library(tidyverse)` til manuelt at omdøbe variable.
+
+```{r echo=T}
+df <- df %>% rename(koen = kon)
+names(df)
+```
+
+------------------------------------------------------------------------
+
+# Omkodning af variable
+
+Man har ofte behov for at omkode/recode sine variable til færre/andre kategorier eller typer. Ofte vil vi gerne omkode mange variable på én gang. Derfor har pakken *dplyr (under tidyverse)* introduceret funktionen `mutate()`.
+
+<br>
+
+Logikken er: `mutate(df, ny_variabel = gammel_variabel)`
+
+---
+
+# Omkodning af variable
+
+Lad os prøve at se på nogle eksempler på et befolkningsdatasæt fra European Social Survey...
+
+```{r include=F}
+library(tidyverse)
+df_ESS <- readRDS("Data/ESS.rds") # Her hentes datasættet  # Her hentes datasættet fra en undermappe i min projektmappe, der hedder Data. 
+
+df_ESS <- df_ESS %>% select(koen, land, alder, udd, net_indkomst)
+```
+
+```{r echo=F}
+df_ESS
+```
+
+---
+
+# Omkodning af variable
+
+Her kan vi f.eks. tilføje en variabel til vores datasæt, der måler alder kvardreret:
+
+```{r echo=T}
+(df_ESS <- df_ESS %>% mutate(alder2 = alder^2))
+```
+
+---
+
+# Omkodning af variable
+
+Udover at omkode variable med matematiske operationer, er det nyttigt at kunne omkode sine variable til nye kategorier på baggrund af forskellige kriterier. I kommer til at stifte bekendtskab med følgende funktione, der skal hjælpe os med at omkode:
+
+-   `mutate()` : hovedfunktionen til at omkode variable\
+-   `if_else()` : funktion til at implementere én betingelse\
+-   `case_when()` : funktion til at implementere flere betingelser\
+-   `fct_recode()` : funktion til specifikt at omkode `factor` variable
+
+---
+
+# Omkodning af variable
+
+Man bruger `mutate` til at omkode sine variable i kombination med `if_else`, hvis de kun skal omkodes på baggrund af én betingelse.
+
+Den kan f.eks. bruges hvis man vil lave en dikotom variabel, der måler, om man er over 18 år gammel og dermed myndig:
+
+```{r echo=T}
+(df_ESS <- df_ESS %>%
+  mutate(myndig = if_else(alder > 18,
+                          "Myndig", # Kategori vis den binære betingelse er sand.
+                          "Ikke myndig"))) # Kategori hvis den binære betingelse ikke er sand.
+```
+
+---
+
+# Omkodning af variable
+
+Hvis man skal opsætte mange betingelser i sin omkodning bruger man funktionen `case_when`. `case_when` bruges også sammen med logiske operatorer, men kan også bruges med funktioner, som i eksemplet nedenfor, hvor funktionen `between()`er anvendt til at lave en variabel med alderskategorier:
+
+```{r echo=T}
+(df_ESS <- df_ESS %>%
+  mutate(alder_kategori = case_when(
+    between(alder, 15, 35) ~ "15-35 år", 
+    between(alder, 36, 55) ~ "36-55år ",
+    between(alder, 56, 75) ~ "56-75 år",
+    alder > 75 ~ "75 +"
+  )))
+
+```
+
+---
+
+# Omkodning af variable
+
+Hvis man gerne vil omkode factor variabel kan man bruge funkstionen `fct_recode()`. Denne funktion kan også bruges i kombination med mutate.
+
+Logikken er: `fct_recode(variabel, ny_kategori = gammel_kategori)`
+
+F.eks. kan lave en ny variabel for køn, oversat til engelsk med engelske kategorier:
+
+```{r echo=T}
+(df_ESS <- df_ESS %>% mutate(gender = fct_recode(koen, "Male" = "Mand", "Female" = "Kvinde")))
+
+```
+
+------------------------------------------------------------------------
+
+# Subsetting
+
+-   Nogle gange er vi kun interesserede i at arbejde med særlige dele af vores datasæt. Måske er vi f.eks. kun interesseret i to variable fra vores datasæt, eller kun observationer (her firmaer) med værdien "Finans" på variablen "industri"
+
+-   I de tilfælde kan vi lave "subsets" af vores datasæt, hvor vi udvælger de specifikke informationer, som vi gerne vil beholde
+
+-   Når vi "subsetter" udvælger vi data fra vores datasæt ud for logiske udsagn. To nyttige funktioner i arbejde med datasæt/matricer er `select()` og `filter()`
+
+------------------------------------------------------------------------
+
+# Subsetting
+
+`Select()` funktionen bruges til at udvælge kolonner/variable i datasættet. Hvis man f.eks. kun er interesseret i variablene koen og net_indkomst, kan man pipe sit dataset over i `select()`:
+
+```{r echo=T}
+df_ESS %>% select(koen, net_indkomst) %>% names()
+```
+
+---
+
+# Subsetting
+
+`Select()` funktionen bruges til at udvælge kolonner/variable i datasættet. Hvis man f.eks. kun er interesseret i variablene koen og net_indkomst, kan man pipe sit dataset over i `select()`:
+
+```{r echo=T}
+df_ESS %>% select(koen, net_indkomst) %>% names()
+```
+
+På den måde kan man også gemme et nyt datasæt, der kun indeholder de ønskede variable:
+
+```{r echo=T}
+(ny_df <- df_ESS %>% select(koen, net_indkomst))
+```
+
+---
+
+# Subsetting
+
+-   Mens `select()` uvælger kolonner/variable, kan man bruge `filter()` til at vælge rækker/observationer på baggrund af specifikationer.
+
+-   Hvis man f.eks. kun er interesseret i resultater for kvinder i sit datasæt, kan man pipe sit dataset over i `select()` og dermed kun beholde observationer, der har værdien = "kvinde" på variablen "koen":
+
+```{r echo=T}
+(kvinde_df <- df_ESS %>% filter(koen=="Kvinde"))
+```
+
+---
+
+# Øvelse
+
+I skal nu prøve at lave følgende omkodninger på firma-datasættet:
+
+-   Lav en ny variabel, der måler omsaetning i 1.000 kr
+
+-   Lav en variabel der måler, om firmaerne har erklæret sig "tilfreds" eller "meget tilfreds" med deres omsætning
+
+-   Lav et nyt datasæt kun med virksomheder fra sundhedsindustrien
+
+-   Lav et nyt datasæt kun med firmaer, der har erklæret sig "tilfreds" eller "meget tilfreds" med deres omsætning
+
+---
+
+# Opsamling
+
+-   R kan kun finde filer, som vi har specificeret lokationen på computeren af. Den nemmeste måde at gøre det på er at oprette en R-project mappe og gemme alle relevante filer her.
+
+-   R er et objektbaseret kodesprog
+
+-   Vi skal installere og indlæse pakker for at bruge funktioner
+
+-   R tillader os at wrangle vores data, så vi kan strukturere den efter vores behov
+
+---
+
+# Opsamling
+
+Sidste pointe: tjek regelmæssigt i løbet af kurset, at både R og jeres pakker er opdaterede
+
+-   R update: help menu $\rightarrow$ check for updates
+
+-   Pakker: Tools menu $\rightarrow$ check for package updates

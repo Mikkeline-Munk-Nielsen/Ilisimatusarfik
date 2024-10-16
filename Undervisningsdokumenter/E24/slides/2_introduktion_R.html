@@ -406,7 +406,7 @@
 <li>Hvad er R?</li>
 <li>Installation</li>
 <li>Rundvisning</li>
-<li>Objekter og funktioner</li>
+<li>Objekter, pakker og funktioner</li>
 <li>Åbne data</li>
 <li>Variable i R</li>
 </ul>
@@ -431,12 +431,27 @@
 
 <h1>What´s so special about R?</h1>
 <ul>
-<li><p><strong>Kodebaseret (vs.&nbsp;klikbaseret)</strong>: Du skriver kode i stedet for at klikke rundt i menuer</p></li>
+<li><p><strong>Kodebaseret (vs.&nbsp;klikbaseret)</strong>: Du skriver kode i stedet for at klikke rundt i menuer.</p></li>
 <li><p><strong>Automatisering</strong>: koden automatiserer gentagne opgaver</p></li>
 <li><p><strong>Reproducerbarhed</strong>: koden sikrer, at analyser kan genskabes præcist.</p></li>
 <li><p><strong>Bedre til store datamængder</strong> end f.eks. Excel.</p></li>
 <li><p><strong>Open source</strong> - mulighederne er uendelige!</p></li>
 </ul>
+</section>
+<section class="slide level0">
+
+<h1>Hvad er kode?</h1>
+<div class="two-column-layout">
+<div class="left-column">
+<ul>
+<li>Kode er tekstfiler, hvor vi skriver med tekst, hvad programmet skal gøre for os i stedet for at klikke. Tænk på det, som en form for opskrift I skriver til computeren!</li>
+<li>Opskrifter er smarte, fordi vi kan gemme dem og bruge dem igen</li>
+</ul>
+</div>
+<div class="right-column">
+<p><img data-src="images/opskrift.png"></p>
+</div>
+</div>
 </section>
 <section class="slide level0">
 
@@ -498,8 +513,8 @@
 <p><br></p>
 <table class="caption-top">
 <colgroup>
-<col style="width: 48%">
-<col style="width: 51%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -532,14 +547,21 @@
 <section class="slide level0">
 
 <h1>R-projects</h1>
-<p>Fordelene ved R projects R</p>
 <ul>
 <li><p>Et R-project er en projektfil, der hjælper dig med at navigere mellem scripts, datasæt, billeder, output etc…</p></li>
-<li><p>R Studio kan som udgangspunkt ikke finde filer på din computer, som ikke ligger i samme mappe, som den fil du arbejder på (f.eks. datasæt, som du skal bruge til analyse).</p></li>
+<li><p>R-Studio kan som udgangspunkt ikke finde filer på din computer, som ikke ligger i samme mappe, som den fil du arbejder på (f.eks. datasæt, som du skal bruge til analyse).</p></li>
 <li><p>Hvis du opretter en mappe med et R project i og opbevarer alle relevante filer i samme mappe, så kan man nemt tilgå alle filerne i mappen direkte fra R Studio (vindue 4) og skifte imellem dem</p></li>
-<li><p>Hvis man åbner projektet i stedet for enkelfiler i mappen på computeren, bliver alt tilgængeligt inde i R Studio.</p></li>
 </ul>
-<p>Tænk på dit R projekt som “THE BIG BROTHER FILE” der holder øje med alle de andre filer i din projektmappe.</p>
+<p>Tænk på dit R projekt som “THE BIG BROTHER FILE”, der holder øje med alle de andre filer i din projektmappe.</p>
+</section>
+<section class="slide level0">
+
+<h1>Øvelse</h1>
+<ul>
+<li><p>Opret en mappe på din computer med et R project, hvor du kan gemme alle de filer, som vi skal bruge</p></li>
+<li><p>Klik på dit R project for at åbne projektmappen</p></li>
+<li><p>Tjek at du er i den rigtige mappe på computeren ved at skrive <code>getwd()</code> i konsollen eller et script. Funktionen står for “get work directory” eller “fortæl mig hvilken mappe på computeren, som jeg arbejder i lige nu”.</p></li>
+</ul>
 </section>
 <section class="slide level0">
 
@@ -587,6 +609,16 @@
 <p>Du kan se dine objekter i vindue 4 under “Environment”</p>
 
 <img data-src="images/objekter.png" class="r-stretch"></section>
+<section class="slide level0">
+
+<h1>Øvelse</h1>
+<p>Åben et script i R og lav følgende objekter:</p>
+<ul>
+<li><p>Et objekt, der hedder “navn” som indeholder dit navn</p></li>
+<li><p>Et objekt der hedder “alder” og indeholder din alder”</p></li>
+</ul>
+<p>Gem dit script i samme mappe som dit R-project.</p>
+</section>
 <section class="slide level0">
 
 <h1>Objekter</h1>
@@ -675,11 +707,11 @@
 <h1>Indlæse datasæt</h1>
 <p>Indlæs datasættet med funktionen <code>readRDS</code> og gem datasættet i et objekt, der hedder <code>df</code> (for dataframe):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"firma_data.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>df_firma <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"firma_data.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Skriv datasættes navn for at printe de første 10 rækker:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>df_firma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      navn   industri ansatte omsaetning     tilfredshed
 1   Firm 1     Finans     305   232402.3        Tilfreds
@@ -703,7 +735,7 @@
 <li><p>Brug <code>names()</code> til at printe navnene på variablene i datasættet</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">names</span>(df_firma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "navn"        "industri"    "ansatte"     "omsaetning"  "tilfredshed"</code></pre>
 </div>
@@ -711,10 +743,20 @@
 </section>
 <section class="slide level0">
 
+<h1>Øvelse</h1>
+<ul>
+<li><p>Gå ind på lectio under Dokumenter <span class="math inline">\(\rightarrow\)</span> Data og download datasættet <code>firma_data.rds</code></p></li>
+<li><p>Gem datasættet i mappen med dit R-project</p></li>
+<li><p>Indlæs datasættet i det skript, som du arbejdede i før</p></li>
+<li><p>Undersøg datasættet og dets variable</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
 <h1>Variable i R</h1>
 <p>Variablene i R har en <em>type</em>, vist i skrå parenteser <code>&lt;&gt;</code> efter variabelnavnet. Typerne påvirker hvad funktionerne gør med variablen - og det hænger faktisk sammen med variablens måleniveau!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>df_firma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      navn   industri ansatte omsaetning     tilfredshed
 1   Firm 1     Finans     305   232402.3        Tilfreds
@@ -755,6 +797,357 @@
 </section>
 <section class="slide level0">
 
+<h1>Data wrangling</h1>
+<p>En vigtig fordel i kodebaseret data software er, at vi kan skrive kode, der transformerer vores data til at se ud, præcis som vi vil have det. Det kaldes i folkemunde <em>data wrangling!</em></p>
+<ul>
+<li><p>Ændre navne på variable</p></li>
+<li><p>Omkode variable, dvs. gruppere indholdet i variable på nye måder</p></li>
+<li><p>Danne nye variable</p></li>
+<li><p>Optimere datastruktur, f.eks. gruppere vores datasæt fra individ niveau til gruppeniveau</p></li>
+</ul>
+<p>Alle disse ting gør det muligt at tilpasse vores data til præcis den type af analyse, som vi gerne vil lave!</p>
+</section>
+<section class="slide level0">
+
+<h1>Data wrangling</h1>
+<div class="two-column-layout">
+<div class="left-column">
+<ul>
+<li><p><strong><em>tidyverse</em></strong> er en samling af R-pakker, som er designet til at gøre dataanalyse enklere og mere konsistent.</p></li>
+<li><p>Pakker deler et fælles sæt af principper og gør det muligt at skrive enkel og effektiv kode</p></li>
+<li><p>De mest kendte pakker inkluderer bl.a. ggplot2, dplyr, tidyr, readr og purrr.</p></li>
+</ul>
+</div>
+<div class="right-column">
+<p><img data-src="images/tidyverse.png"></p>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Data wrangling</h1>
+<p>En funktion som I kommer til at bruge meget er pipe operatoren: <code>%&gt;%</code></p>
+<ul>
+<li><p>Pipe operatoren <code>%&gt;%</code> gør det muligt at “sende” resultatet af én funktion direkte videre til den næste.</p></li>
+<li><p>I stedet for at indlejre flere funktioner, kan du skrive dem i rækkefølge, hvilket gør koden mere læsbar.</p></li>
+<li><p>Genvej: <code>Shift</code> + <code>Ctrl</code>+<code>M</code> (mac: <code>Cmd</code> + <code>Shift</code> + <code>M)</code></p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Data wrangling</h1>
+<p>Uden pipe operatoren:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">summarize</span>(<span class="fu">group_by</span>(<span class="fu">mutate</span>(df, <span class="at">nye_var =</span> var1 <span class="sc">+</span> var2), gruppe_var), mean_værdi <span class="ot">=</span> <span class="fu">mean</span>(nye_var))</span>
+<span id="cb24-2"><a href=""></a><span class="sc">%&gt;%</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Med pipe operatoren:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">nye_var =</span> var1 <span class="sc">+</span> var2) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href=""></a>  <span class="fu">group_by</span>(gruppe_var) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href=""></a>  <span class="fu">summarize</span>(mean_værdi <span class="ot">=</span> <span class="fu">mean</span>(nye_var))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Variabel navne</h1>
+<p>Når vi indlæser et datasæt kan det ofte være smart at sørge for, at variablenes navne er ensartede, så programmet kan læse dem. F.eks. er computere sjældent glade for mellemrum og æ,ø,å…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "køn"                    "tid"                    "Befolkningen.1..januar"</code></pre>
+</div>
+</div>
+<p>Brug <code>clean_names()</code> fra pakken <code>library(janitor)</code> til at ensarte variablenes navne, når du loader et nyt datasæt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">library</span>(janitor)</span>
+<span id="cb28-2"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(df) <span class="co"># rengør navnene og gem dataframen påny</span></span>
+<span id="cb28-3"><a href=""></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "kon"                   "tid"                   "befolkningen_1_januar"</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Variabel navne</h1>
+<p>I andre tilfælde vil vi gerne omdøbe variable manuelt…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb30-2"><a href=""></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "kon"                   "tid"                   "befolkningen_1_januar"</code></pre>
+</div>
+</div>
+<p>Brug <code>rename()</code> fra pakken <code>library(tidyverse)</code> til manuelt at omdøbe variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">koen =</span> kon)</span>
+<span id="cb32-2"><a href=""></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "koen"                  "tid"                   "befolkningen_1_januar"</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Omkodning af variable</h1>
+<p>Man har ofte behov for at omkode/recode sine variable til færre/andre kategorier eller typer. Ofte vil vi gerne omkode mange variable på én gang. Derfor har pakken <em>dplyr (under tidyverse)</em> introduceret funktionen <code>mutate()</code>.</p>
+<p><br></p>
+<p>Logikken er: <code>mutate(df, ny_variabel = gammel_variabel)</code></p>
+</section>
+<section class="slide level0">
+
+<h1>Omkodning af variable</h1>
+<p>Lad os prøve at se på nogle eksempler på et befolkningsdatasæt fra European Social Survey…</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13,799 × 5
+   koen   land  alder udd                         net_indkomst
+   &lt;fct&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;ord&gt;                              &lt;dbl&gt;
+ 1 Kvinde DE       26 Ungdoms-/erhvervsuddannelse        20000
+ 2 Kvinde DE       65 Ungdoms-/erhvervsuddannelse          530
+ 3 Kvinde DE       74 Mellemlang videregående              350
+ 4 Mand   DE       64 Ungdoms-/erhvervsuddannelse         2500
+ 5 Kvinde DE       54 &lt;NA&gt;                                4000
+ 6 Kvinde DE       20 Ungdoms-/erhvervsuddannelse          570
+ 7 Kvinde DE       71 Ungdoms-/erhvervsuddannelse         2100
+ 8 Mand   DE       41 Mellemlang videregående             1150
+ 9 Mand   DE       62 Mellemlang videregående              500
+10 Mand   DE       65 Ungdoms-/erhvervsuddannelse         1000
+# ℹ 13,789 more rows</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Omkodning af variable</h1>
+<p>Her kan vi f.eks. tilføje en variabel til vores datasæt, der måler alder kvardreret:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>(df_ESS <span class="ot">&lt;-</span> df_ESS <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">alder2 =</span> alder<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13,799 × 6
+   koen   land  alder udd                         net_indkomst alder2
+   &lt;fct&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;ord&gt;                              &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Kvinde DE       26 Ungdoms-/erhvervsuddannelse        20000    676
+ 2 Kvinde DE       65 Ungdoms-/erhvervsuddannelse          530   4225
+ 3 Kvinde DE       74 Mellemlang videregående              350   5476
+ 4 Mand   DE       64 Ungdoms-/erhvervsuddannelse         2500   4096
+ 5 Kvinde DE       54 &lt;NA&gt;                                4000   2916
+ 6 Kvinde DE       20 Ungdoms-/erhvervsuddannelse          570    400
+ 7 Kvinde DE       71 Ungdoms-/erhvervsuddannelse         2100   5041
+ 8 Mand   DE       41 Mellemlang videregående             1150   1681
+ 9 Mand   DE       62 Mellemlang videregående              500   3844
+10 Mand   DE       65 Ungdoms-/erhvervsuddannelse         1000   4225
+# ℹ 13,789 more rows</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Omkodning af variable</h1>
+<p>Udover at omkode variable med matematiske operationer, er det nyttigt at kunne omkode sine variable til nye kategorier på baggrund af forskellige kriterier. I kommer til at stifte bekendtskab med følgende funktione, der skal hjælpe os med at omkode:</p>
+<ul>
+<li><code>mutate()</code> : hovedfunktionen til at omkode variable<br>
+</li>
+<li><code>if_else()</code> : funktion til at implementere én betingelse<br>
+</li>
+<li><code>case_when()</code> : funktion til at implementere flere betingelser<br>
+</li>
+<li><code>fct_recode()</code> : funktion til specifikt at omkode <code>factor</code> variable</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Omkodning af variable</h1>
+<p>Man bruger <code>mutate</code> til at omkode sine variable i kombination med <code>if_else</code>, hvis de kun skal omkodes på baggrund af én betingelse.</p>
+<p>Den kan f.eks. bruges hvis man vil lave en dikotom variabel, der måler, om man er over 18 år gammel og dermed myndig:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>(df_ESS <span class="ot">&lt;-</span> df_ESS <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">myndig =</span> <span class="fu">if_else</span>(alder <span class="sc">&gt;</span> <span class="dv">18</span>,</span>
+<span id="cb37-3"><a href=""></a>                          <span class="st">"Myndig"</span>, <span class="co"># Kategori vis den binære betingelse er sand.</span></span>
+<span id="cb37-4"><a href=""></a>                          <span class="st">"Ikke myndig"</span>))) <span class="co"># Kategori hvis den binære betingelse ikke er sand.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13,799 × 7
+   koen   land  alder udd                         net_indkomst alder2 myndig
+   &lt;fct&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;ord&gt;                              &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; 
+ 1 Kvinde DE       26 Ungdoms-/erhvervsuddannelse        20000    676 Myndig
+ 2 Kvinde DE       65 Ungdoms-/erhvervsuddannelse          530   4225 Myndig
+ 3 Kvinde DE       74 Mellemlang videregående              350   5476 Myndig
+ 4 Mand   DE       64 Ungdoms-/erhvervsuddannelse         2500   4096 Myndig
+ 5 Kvinde DE       54 &lt;NA&gt;                                4000   2916 Myndig
+ 6 Kvinde DE       20 Ungdoms-/erhvervsuddannelse          570    400 Myndig
+ 7 Kvinde DE       71 Ungdoms-/erhvervsuddannelse         2100   5041 Myndig
+ 8 Mand   DE       41 Mellemlang videregående             1150   1681 Myndig
+ 9 Mand   DE       62 Mellemlang videregående              500   3844 Myndig
+10 Mand   DE       65 Ungdoms-/erhvervsuddannelse         1000   4225 Myndig
+# ℹ 13,789 more rows</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Omkodning af variable</h1>
+<p>Hvis man skal opsætte mange betingelser i sin omkodning bruger man funktionen <code>case_when</code>. <code>case_when</code> bruges også sammen med logiske operatorer, men kan også bruges med funktioner, som i eksemplet nedenfor, hvor funktionen <code>between()</code>er anvendt til at lave en variabel med alderskategorier:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>(df_ESS <span class="ot">&lt;-</span> df_ESS <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">alder_kategori =</span> <span class="fu">case_when</span>(</span>
+<span id="cb39-3"><a href=""></a>    <span class="fu">between</span>(alder, <span class="dv">15</span>, <span class="dv">35</span>) <span class="sc">~</span> <span class="st">"15-35 år"</span>, </span>
+<span id="cb39-4"><a href=""></a>    <span class="fu">between</span>(alder, <span class="dv">36</span>, <span class="dv">55</span>) <span class="sc">~</span> <span class="st">"36-55år "</span>,</span>
+<span id="cb39-5"><a href=""></a>    <span class="fu">between</span>(alder, <span class="dv">56</span>, <span class="dv">75</span>) <span class="sc">~</span> <span class="st">"56-75 år"</span>,</span>
+<span id="cb39-6"><a href=""></a>    alder <span class="sc">&gt;</span> <span class="dv">75</span> <span class="sc">~</span> <span class="st">"75 +"</span></span>
+<span id="cb39-7"><a href=""></a>  )))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13,799 × 8
+   koen   land  alder udd              net_indkomst alder2 myndig alder_kategori
+   &lt;fct&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;ord&gt;                   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;         
+ 1 Kvinde DE       26 Ungdoms-/erhver…        20000    676 Myndig "15-35 år"    
+ 2 Kvinde DE       65 Ungdoms-/erhver…          530   4225 Myndig "56-75 år"    
+ 3 Kvinde DE       74 Mellemlang vide…          350   5476 Myndig "56-75 år"    
+ 4 Mand   DE       64 Ungdoms-/erhver…         2500   4096 Myndig "56-75 år"    
+ 5 Kvinde DE       54 &lt;NA&gt;                     4000   2916 Myndig "36-55år "    
+ 6 Kvinde DE       20 Ungdoms-/erhver…          570    400 Myndig "15-35 år"    
+ 7 Kvinde DE       71 Ungdoms-/erhver…         2100   5041 Myndig "56-75 år"    
+ 8 Mand   DE       41 Mellemlang vide…         1150   1681 Myndig "36-55år "    
+ 9 Mand   DE       62 Mellemlang vide…          500   3844 Myndig "56-75 år"    
+10 Mand   DE       65 Ungdoms-/erhver…         1000   4225 Myndig "56-75 år"    
+# ℹ 13,789 more rows</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Omkodning af variable</h1>
+<p>Hvis man gerne vil omkode factor variabel kan man bruge funkstionen <code>fct_recode()</code>. Denne funktion kan også bruges i kombination med mutate.</p>
+<p>Logikken er: <code>fct_recode(variabel, ny_kategori = gammel_kategori)</code></p>
+<p>F.eks. kan lave en ny variabel for køn, oversat til engelsk med engelske kategorier:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>(df_ESS <span class="ot">&lt;-</span> df_ESS <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">fct_recode</span>(koen, <span class="st">"Male"</span> <span class="ot">=</span> <span class="st">"Mand"</span>, <span class="st">"Female"</span> <span class="ot">=</span> <span class="st">"Kvinde"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13,799 × 9
+   koen   land  alder udd       net_indkomst alder2 myndig alder_kategori gender
+   &lt;fct&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;ord&gt;            &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;          &lt;fct&gt; 
+ 1 Kvinde DE       26 Ungdoms-…        20000    676 Myndig "15-35 år"     Female
+ 2 Kvinde DE       65 Ungdoms-…          530   4225 Myndig "56-75 år"     Female
+ 3 Kvinde DE       74 Mellemla…          350   5476 Myndig "56-75 år"     Female
+ 4 Mand   DE       64 Ungdoms-…         2500   4096 Myndig "56-75 år"     Male  
+ 5 Kvinde DE       54 &lt;NA&gt;              4000   2916 Myndig "36-55år "     Female
+ 6 Kvinde DE       20 Ungdoms-…          570    400 Myndig "15-35 år"     Female
+ 7 Kvinde DE       71 Ungdoms-…         2100   5041 Myndig "56-75 år"     Female
+ 8 Mand   DE       41 Mellemla…         1150   1681 Myndig "36-55år "     Male  
+ 9 Mand   DE       62 Mellemla…          500   3844 Myndig "56-75 år"     Male  
+10 Mand   DE       65 Ungdoms-…         1000   4225 Myndig "56-75 år"     Male  
+# ℹ 13,789 more rows</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Subsetting</h1>
+<ul>
+<li><p>Nogle gange er vi kun interesserede i at arbejde med særlige dele af vores datasæt. Måske er vi f.eks. kun interesseret i to variable fra vores datasæt, eller kun observationer (her firmaer) med værdien “Finans” på variablen “industri”</p></li>
+<li><p>I de tilfælde kan vi lave “subsets” af vores datasæt, hvor vi udvælger de specifikke informationer, som vi gerne vil beholde</p></li>
+<li><p>Når vi “subsetter” udvælger vi data fra vores datasæt ud for logiske udsagn. To nyttige funktioner i arbejde med datasæt/matricer er <code>select()</code> og <code>filter()</code></p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Subsetting</h1>
+<p><code>Select()</code> funktionen bruges til at udvælge kolonner/variable i datasættet. Hvis man f.eks. kun er interesseret i variablene koen og net_indkomst, kan man pipe sit dataset over i <code>select()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>df_ESS <span class="sc">%&gt;%</span> <span class="fu">select</span>(koen, net_indkomst) <span class="sc">%&gt;%</span> <span class="fu">names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "koen"         "net_indkomst"</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Subsetting</h1>
+<p><code>Select()</code> funktionen bruges til at udvælge kolonner/variable i datasættet. Hvis man f.eks. kun er interesseret i variablene koen og net_indkomst, kan man pipe sit dataset over i <code>select()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>df_ESS <span class="sc">%&gt;%</span> <span class="fu">select</span>(koen, net_indkomst) <span class="sc">%&gt;%</span> <span class="fu">names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "koen"         "net_indkomst"</code></pre>
+</div>
+</div>
+<p>På den måde kan man også gemme et nyt datasæt, der kun indeholder de ønskede variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>(ny_df <span class="ot">&lt;-</span> df_ESS <span class="sc">%&gt;%</span> <span class="fu">select</span>(koen, net_indkomst))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13,799 × 2
+   koen   net_indkomst
+   &lt;fct&gt;         &lt;dbl&gt;
+ 1 Kvinde        20000
+ 2 Kvinde          530
+ 3 Kvinde          350
+ 4 Mand           2500
+ 5 Kvinde         4000
+ 6 Kvinde          570
+ 7 Kvinde         2100
+ 8 Mand           1150
+ 9 Mand            500
+10 Mand           1000
+# ℹ 13,789 more rows</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Subsetting</h1>
+<ul>
+<li><p>Mens <code>select()</code> uvælger kolonner/variable, kan man bruge <code>filter()</code> til at vælge rækker/observationer på baggrund af specifikationer.</p></li>
+<li><p>Hvis man f.eks. kun er interesseret i resultater for kvinder i sit datasæt, kan man pipe sit dataset over i <code>select()</code> og dermed kun beholde observationer, der har værdien = “kvinde” på variablen “koen”:</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a>(kvinde_df <span class="ot">&lt;-</span> df_ESS <span class="sc">%&gt;%</span> <span class="fu">filter</span>(koen<span class="sc">==</span><span class="st">"Kvinde"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7,069 × 9
+   koen   land  alder udd       net_indkomst alder2 myndig alder_kategori gender
+   &lt;fct&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;ord&gt;            &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;          &lt;fct&gt; 
+ 1 Kvinde DE       26 Ungdoms-…        20000    676 Myndig "15-35 år"     Female
+ 2 Kvinde DE       65 Ungdoms-…          530   4225 Myndig "56-75 år"     Female
+ 3 Kvinde DE       74 Mellemla…          350   5476 Myndig "56-75 år"     Female
+ 4 Kvinde DE       54 &lt;NA&gt;              4000   2916 Myndig "36-55år "     Female
+ 5 Kvinde DE       20 Ungdoms-…          570    400 Myndig "15-35 år"     Female
+ 6 Kvinde DE       71 Ungdoms-…         2100   5041 Myndig "56-75 år"     Female
+ 7 Kvinde DE       67 &lt;NA&gt;                NA   4489 Myndig "56-75 år"     Female
+ 8 Kvinde DE       47 Ungdoms-…         1500   2209 Myndig "36-55år "     Female
+ 9 Kvinde DE       60 Lang vid…            0   3600 Myndig "56-75 år"     Female
+10 Kvinde DE       64 Mellemla…         1600   4096 Myndig "56-75 år"     Female
+# ℹ 7,059 more rows</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Øvelse</h1>
+<p>I skal nu prøve at lave følgende omkodninger på firma-datasættet:</p>
+<ul>
+<li><p>Lav en ny variabel, der måler omsaetning i 1.000 kr</p></li>
+<li><p>Lav en variabel der måler, om firmaerne har erklæret sig “tilfreds” eller “meget tilfreds” med deres omsætning</p></li>
+<li><p>Lav et nyt datasæt kun med virksomheder fra sundhedsindustrien</p></li>
+<li><p>Lav et nyt datasæt kun med firmaer, der har erklæret sig “tilfreds” eller “meget tilfreds” med deres omsætning</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Opsamling</h1>
+<ul>
+<li><p>R kan kun finde filer, som vi har specificeret lokationen på computeren af. Den nemmeste måde at gøre det på er at oprette en R-project mappe og gemme alle relevante filer her.</p></li>
+<li><p>R er et objektbaseret kodesprog</p></li>
+<li><p>Vi skal installere og indlæse pakker for at bruge funktioner</p></li>
+<li><p>R tillader os at wrangle vores data, så vi kan strukturere den efter vores behov</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Opsamling</h1>
+<p>Sidste pointe: tjek regelmæssigt i løbet af kurset, at både R og jeres pakker er opdaterede</p>
+<ul>
+<li><p>R update: help menu <span class="math inline">\(\rightarrow\)</span> check for updates</p></li>
+<li><p>Pakker: Tools menu <span class="math inline">\(\rightarrow\)</span> check for package updates</p></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <p><img src="css_etc/ilisimatusarfik.png" class="slide-logo"></p>
 <div class="footer footer-default">
