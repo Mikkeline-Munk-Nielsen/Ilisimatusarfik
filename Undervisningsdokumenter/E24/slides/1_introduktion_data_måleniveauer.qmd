@@ -12,7 +12,7 @@ editor: visual
 ::: center
 # Introduktion
 
-### Statistik for erhvervsøkonomi E24 (7,5 ECTS)
+### Statistik E24 (15 ECTS)
 
 ### ved Mikkeline Munk Nielsen
 :::
@@ -701,7 +701,7 @@ Resten af kurset skal vi bruge variable i vores statistiske analyser. De vil ind
 (df <- readRDS("firma_data.rds"))
 ```
 
----
+------------------------------------------------------------------------
 
 ## Opsamling
 

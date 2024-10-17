@@ -11,7 +11,7 @@ editor: visual
 ::: center
 # Skabelon
 
-### Statistik for erhvervsøkonomi, E24 (7,5 ECTS)
+### Statistik E24 (15 ECTS)
 
 ### ved Mikkeline Munk Nielsen
 :::

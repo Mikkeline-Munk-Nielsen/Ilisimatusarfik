@@ -11,7 +11,7 @@ editor: visual
 ::: center
 # Introduktion til R
 
-### Statistik for erhvervsøkonomi, E24 (7,5 ECTS)
+### Statistik E24 (15 ECTS)
 
 ### ved Mikkeline Munk Nielsen
 :::
@@ -170,7 +170,7 @@ Når man går igang med analyser i R starter man typisk med at lave en mappe på
 
 ![](images/project.png)
 
----
+------------------------------------------------------------------------
 
 # R-projects
 
@@ -182,7 +182,7 @@ Når man går igang med analyser i R starter man typisk med at lave en mappe på
 
 Tænk på dit R projekt som "THE BIG BROTHER FILE", der holder øje med alle de andre filer i din projektmappe.
 
----
+------------------------------------------------------------------------
 
 # Øvelse
 
@@ -192,7 +192,7 @@ Tænk på dit R projekt som "THE BIG BROTHER FILE", der holder øje med alle de 
 
 -   Tjek at du er i den rigtige mappe på computeren ved at skrive `getwd()` i konsollen eller et script. Funktionen står for "get work directory" eller "fortæl mig hvilken mappe på computeren, som jeg arbejder i lige nu".
 
----
+------------------------------------------------------------------------
 
 # Objekter
 
@@ -255,7 +255,7 @@ Du kan se dine objekter i vindue 4 under "Environment"
 
 Gem dit script i samme mappe som dit R-project.
 
----
+------------------------------------------------------------------------
 
 # Objekter
 
@@ -417,7 +417,7 @@ df_firma
 names(df_firma)
 ```
 
----
+------------------------------------------------------------------------
 
 # Øvelse
 
@@ -513,7 +513,7 @@ En funktion som I kommer til at bruge meget er pipe operatoren: `%>%`
 
 -   Genvej: `Shift` + `Ctrl`+`M` (mac: `Cmd` + `Shift` + `M)`
 
----
+------------------------------------------------------------------------
 
 # Data wrangling
 
@@ -587,7 +587,7 @@ Man har ofte behov for at omkode/recode sine variable til færre/andre kategorie
 
 Logikken er: `mutate(df, ny_variabel = gammel_variabel)`
 
----
+------------------------------------------------------------------------
 
 # Omkodning af variable
 
@@ -604,7 +604,7 @@ df_ESS <- df_ESS %>% select(koen, land, alder, udd, net_indkomst)
 df_ESS
 ```
 
----
+------------------------------------------------------------------------
 
 # Omkodning af variable
 
@@ -614,7 +614,7 @@ Her kan vi f.eks. tilføje en variabel til vores datasæt, der måler alder kvar
 (df_ESS <- df_ESS %>% mutate(alder2 = alder^2))
 ```
 
----
+------------------------------------------------------------------------
 
 # Omkodning af variable
 
@@ -625,7 +625,7 @@ Udover at omkode variable med matematiske operationer, er det nyttigt at kunne o
 -   `case_when()` : funktion til at implementere flere betingelser\
 -   `fct_recode()` : funktion til specifikt at omkode `factor` variable
 
----
+------------------------------------------------------------------------
 
 # Omkodning af variable
 
@@ -640,7 +640,7 @@ Den kan f.eks. bruges hvis man vil lave en dikotom variabel, der måler, om man 
                           "Ikke myndig"))) # Kategori hvis den binære betingelse ikke er sand.
 ```
 
----
+------------------------------------------------------------------------
 
 # Omkodning af variable
 
@@ -657,7 +657,7 @@ Hvis man skal opsætte mange betingelser i sin omkodning bruger man funktionen `
 
 ```
 
----
+------------------------------------------------------------------------
 
 # Omkodning af variable
 
@@ -692,7 +692,7 @@ F.eks. kan lave en ny variabel for køn, oversat til engelsk med engelske katego
 df_ESS %>% select(koen, net_indkomst) %>% names()
 ```
 
----
+------------------------------------------------------------------------
 
 # Subsetting
 
@@ -708,7 +708,7 @@ På den måde kan man også gemme et nyt datasæt, der kun indeholder de ønsked
 (ny_df <- df_ESS %>% select(koen, net_indkomst))
 ```
 
----
+------------------------------------------------------------------------
 
 # Subsetting
 
@@ -720,7 +720,7 @@ På den måde kan man også gemme et nyt datasæt, der kun indeholder de ønsked
 (kvinde_df <- df_ESS %>% filter(koen=="Kvinde"))
 ```
 
----
+------------------------------------------------------------------------
 
 # Øvelse
 
@@ -734,7 +734,7 @@ I skal nu prøve at lave følgende omkodninger på firma-datasættet:
 
 -   Lav et nyt datasæt kun med firmaer, der har erklæret sig "tilfreds" eller "meget tilfreds" med deres omsætning
 
----
+------------------------------------------------------------------------
 
 # Opsamling
 
@@ -746,7 +746,7 @@ I skal nu prøve at lave følgende omkodninger på firma-datasættet:
 
 -   R tillader os at wrangle vores data, så vi kan strukturere den efter vores behov
 
----
+------------------------------------------------------------------------
 
 # Opsamling
 
