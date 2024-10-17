@@ -39,7 +39,7 @@ editor: visual
 
 -   Det er sammenlignligt med anden software som python, stata, SAS, eller SPSS
 
--   I skal bruge R til at åbne arbejde med data og lave analyser
+-   I skal bruge R til at arbejde med data og lave analyser
 :::
 
 ::: right-column
