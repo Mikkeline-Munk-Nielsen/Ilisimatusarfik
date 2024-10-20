@@ -158,23 +158,57 @@ $primary-color: #003366; /* Dark blue resembling Beamer */
   border-bottom: none !important; /* No border for the last row */
 }
 
-/* Force text color to be white in code blocks */
+/* Base code block settings with Cobalt theme adjustments */
 .reveal pre code {
-  background-color: #002b55 !important;  /* Lighter blue background for contrast */
-  color: #ffffff !important;             /* Force white text */
-  font-family: "Computer Modern", monospace !important;
-  font-size: 1.2em !important;           /* Larger font size */
-  padding: 15px !important;              /* More padding for readability */
+  background-color: #002240 !important;  /* Dark Cobalt blue background */
+  color: #ffffff !important;             /* Brighter white text for general code */
+  font-family: "Ubuntu Mono", monospace !important; /* Use Ubuntu Mono font */
+  font-size: 1.2em !important;           /* Font size adjustment */
+  padding: 15px !important;              /* Padding for readability */
   border-radius: 5px !important;         /* Rounded corners */
-  display: block !important;
   overflow-x: auto !important;           /* Horizontal scrolling for long lines */
-  white-space: pre-wrap !important;      /* Wrap long lines of code */
+  white-space: pre-wrap !important;      /* Ensure lines wrap properly */
 }
 
-/* Ensure white color inside code spans within pre tags */
-.reveal pre code span {
-  color: #ffffff !important;             /* Force white for any spans inside code */
+/* Brighter Cobalt-inspired syntax colors */
+.reveal pre code .hljs-comment,
+.reveal pre code .hljs-quote {
+  color: #5ccfe6 !important;  /* Brighter light blue for comments */
 }
+
+.reveal pre code .hljs-keyword,
+.reveal pre code .hljs-function {
+  color: #ffae57 !important;  /* Brighter orange for keywords and function names */
+}
+
+.reveal pre code .hljs-string {
+  color: #c3e88d !important;  /* Brighter light green for strings */
+}
+
+.reveal pre code .hljs-number {
+  color: #ff75a0 !important;  /* Brighter pink for numbers */
+}
+
+.reveal pre code .hljs-variable {
+  color: #ffd700 !important;  /* Brighter yellow for variables */
+}
+
+.reveal pre code .hljs-attr {
+  color: #c3e88d !important;  /* Brighter light green for attributes */
+}
+
+.reveal pre code .hljs-built_in {
+  color: #ffcb6b !important;  /* Brighter light yellow for built-in functions */
+}
+
+/* Default light text for operators and punctuation */
+.reveal pre code .hljs-operator,
+.reveal pre code .hljs-punctuation {
+  color: #ffffff !important;  /* Bright white text for operators and punctuation */
+}
+
+
+
 
 /* Target the copy to clipboard button in Reveal.js */
 .reveal .copy-to-clipboard-button {

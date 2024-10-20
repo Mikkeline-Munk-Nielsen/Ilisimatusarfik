@@ -1,0 +1,560 @@
+---
+format: 
+  revealjs:
+    theme: css_etc/custom-theme-ilisimatusarfik.css
+    slide-level: 0  # Disable automatic slide creation from headings
+    incremental: false 
+    logo: css_etc/ilisimatusarfik.png
+    highlight: true
+    highlight-style: github-dark
+editor: visual
+---
+
+::: center
+# Grundlæggende univariat analyse
+
+### Statistik E24 (15 ECTS)
+
+### ved Mikkeline Munk Nielsen
+:::
+
+------------------------------------------------------------------------
+
+# Hvad er univariat analyse?
+
+-   Uni er latin for én eller et, dvs. analyser med kun én enkelt variabel
+-   Univariat analyse falder inden for ***deskriptiv*** (beskrivende) statistik i modsætning til ***inferentiel*** (forklarende) statistik
+-   I univariat analyse beskriver vi fordelingen af én variabel.
+-   Vi bruger univariat analyse til at skabe overblik over et karakteristikum i en population, f.eks. at beskrive indkomstfordelingen i en population
+
+------------------------------------------------------------------------
+
+# Hvad er univariat analyse?
+
+Typer af spørgsmål vi kan besvare med univariat analyse:
+
+-   Hvordan ser fordelingen af denne variabel ud? → tabeller eller plots
+
+-   Hvad er den typiske værdi på denne variabel? → centrummål
+
+-   Er der meget stor forskel på, hvilke værdier forskellige observationer har på denne variabel? → spredningsmål
+
+------------------------------------------------------------------------
+
+## Eksempel med datasæt
+
+Greenlandics Perspectives Survey fra Ilisimatusarfik
+
+::: panel-tabset
+### Datasæt
+
+```{r, echo=F}
+(df <- readRDS("data/GL_vaelger_adfaerd_1989.rds"))
+
+```
+
+### Kode
+
+```{r, echo=TRUE}
+getwd()
+df <- readRDS("data/GL_vaelger_adfaerd_1989.rds")
+```
+:::
+
+------------------------------------------------------------------------
+
+# Frekvenser
+
+Spørgsmålet `V8_Samarbejde_Inuit_Norden` er følgende: *Hvilket af følgende synspunkter om samarbejde er du mest enig i?*
+
+::: {style="font-size: 0.8em; border-collapse: collapse; width: 100%;"}
+| Værdi | Svar |
+|----------------------|--------------------------------------------------|
+| 1 | Samarbejde med inuit i Canada, Alaska og Sibrien bør gå forud for samarbejdet med de nordiske lande |
+| 2 | Samarbejde med de nordiske lande bør gå forud for samarbejde med inuit i Canada, Alaska og Sibrien |
+| 3 | Samarbejde med inuit i Canada, Alaska og Sibrien og samarbejde med de nordiske lande er lige vigtigt |
+| 4 | Ved ikke |
+| NA | Ikke oplyst |
+:::
+
+------------------------------------------------------------------------
+
+# Frekvenser
+
+En typisk måde at opsummere frekvenser er via. frekvenstabeller (evt. procenter)
+
+::: panel-tabset
+### Envejstabel
+
+```{r, echo=F}
+library(janitor) 
+tabyl(df, V8_Samarbejde_Inuit_Norden)
+```
+
+### Kode
+
+```{r, echo=TRUE, eval=F}
+library(janitor) 
+tabyl(df, V8_Samarbejde_Inuit_Norden)
+```
+:::
+
+------------------------------------------------------------------------
+
+# Frekvenser
+
+Frekvenser visualeres også ofte via. søjlediagrammer:
+
+::: panel-tabset
+### Søjlediagram / barplot
+
+```{r, echo=F}
+library(ggplot2)
+
+ggplot(df, aes(x = factor(V8_Samarbejde_Inuit_Norden, exclude = NULL))) + 
+  geom_bar(fill = "#003366", na.rm = FALSE) + 
+  labs(
+    x = "Svar",
+    y = "Frekvens"
+  )
+```
+
+### Kode
+
+```{r, echo=TRUE, eval=F}
+library(ggplot2)
+
+ggplot(df, aes(x = factor(V8_Samarbejde_Inuit_Norden, exclude = NULL))) + 
+  geom_bar(fill = "#003366", na.rm = FALSE) + 
+  labs(
+    x = "Svar",
+    y = "Frekvens"
+  )
+```
+:::
+
+------------------------------------------------------------------------
+
+# Andele
+
+-   Andele beskriver relativ frekvens/hyppighed
+
+-   Andelsfunktion: $g(z) = \frac{\text{antal observationer med værdien } z}{\text{Antallet af observationer}}$
+
+<br>
+
+::: panel-tabset
+### Envejstabel
+
+```{r, echo=F}
+library(janitor) 
+tabyl(df, V8_Samarbejde_Inuit_Norden)
+```
+
+### Kode
+
+```{r, echo=TRUE, eval=F}
+library(janitor) 
+tabyl(df, V8_Samarbejde_Inuit_Norden)
+```
+:::
+
+------------------------------------------------------------------------
+
+# Andele
+
+Andele kan f.eks. visualiseres med søjlediagrammer (barplots)...
+
+::: panel-tabset
+### Søjlediagram (procent)
+
+```{r, echo=F}
+library(ggplot2)
+
+ggplot(df, aes(x = factor(V8_Samarbejde_Inuit_Norden, exclude = NULL))) + 
+  geom_bar(aes(y = (..count..) / sum(..count..) * 100), 
+           fill = "#003366", na.rm = FALSE) + 
+  labs(
+    x = "Svar",
+    y = "Procent"
+  )
+```
+
+### Kode
+
+```{r, echo=TRUE, eval=F}
+library(ggplot2)
+
+ggplot(df, aes(x = factor(V8_Samarbejde_Inuit_Norden, exclude = NULL))) + 
+  geom_bar(aes(y = (..count..) / sum(..count..) * 100), 
+           fill = "#003366", na.rm = FALSE) + 
+  labs(
+    x = "Svar",
+    y = "Procent"
+  )
+```
+:::
+
+------------------------------------------------------------------------
+
+# Andele
+
+... eller cirkeldiagrammer
+
+::: panel-tabset
+### Søjlediagram (procent)
+
+```{r echo=F}
+library(dplyr)
+library(ggplot2)
+
+# Beregn procenterne manuelt
+df_pie <- df %>%
+  group_by(V8_Samarbejde_Inuit_Norden) %>%
+  summarise(count = n()) %>%
+  mutate(percentage = count / sum(count) * 100)
+
+# Opret cirkeldiagrammet med procenter og hvid tekst
+ggplot(df_pie, aes(x = "", y = percentage, fill = factor(V8_Samarbejde_Inuit_Norden))) + 
+  geom_bar(stat = "identity", width = 1) + 
+  coord_polar(theta = "y") + 
+  geom_text(aes(label = paste0(round(percentage, 1), "%")), 
+            position = position_stack(vjust = 0.5), 
+            color = "white") +  # Gør teksten hvid
+  labs(x = NULL, y = NULL, fill = "Svar") +
+  theme_void() +  # Fjerner akse-linjer og labels
+  scale_fill_manual(values = c("#003366", "#6699CC", "#336699", "#99CCFF", "#0066CC"))  # Blå farver
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+library(dplyr)
+library(ggplot2)
+
+# Beregn procenterne manuelt
+df_pie <- df %>%
+  group_by(V8_Samarbejde_Inuit_Norden) %>%
+  summarise(count = n()) %>%
+  mutate(percentage = count / sum(count) * 100)
+
+# Opret cirkeldiagrammet med procenter og hvid tekst
+ggplot(df_pie, aes(x = "", y = percentage, fill = factor(V8_Samarbejde_Inuit_Norden))) + 
+  geom_bar(stat = "identity", width = 1) + 
+  coord_polar(theta = "y") + 
+  geom_text(aes(label = paste0(round(percentage, 1), "%")), 
+            position = position_stack(vjust = 0.5), 
+            color = "white") +  # Gør teksten hvid
+  labs(x = NULL, y = NULL, fill = "Svar") +
+  theme_void() +  # Fjerner akse-linjer og labels
+  scale_fill_manual(values = c("#003366", "#6699CC", "#336699", "#99CCFF", "#0066CC"))  # Farver
+```
+:::
+
+------------------------------------------------------------------------
+
+# Andele
+
+-   Kummulativ andelsfunktion: $g(z) = \frac{\text{antal observationer} \leq z}{\text{antallet af observationer}}$
+
+-   Først rigtig meningsfuld, når værdier kan rangordnes (fra ordinalt måleniveau)
+
+-   V42_Alder_Grupperet: *Hvor gammel er du?*
+
+::: {style="font-size: 0.8em; border-collapse: collapse; width: 100%;"}
+| Værdi | Svar       |
+|-------|------------|
+| 1     | 18 - 19 år |
+| 2     | 20 - 29 år |
+| 3     | 30 - 39 år |
+| 4     | 40 - 49 år |
+| 5     | 50 - 59 år |
+| 6     | 60 - 69 år |
+| 7     | Over 70 år |
+| NA    | Uoplyst    |
+:::
+
+------------------------------------------------------------------------
+
+# Andele
+
+::: panel-tabset
+### Søjlediagram
+
+```{r, echo=F}
+# Sørg for, at aldersgruppen er en faktor med de rigtige niveauer (uden NA som niveau)
+df$V42_Alder_Grupperet <- factor(df$V42_Alder_Grupperet, 
+                                  levels = c(1, 2, 3, 4, 5, 6, 7), 
+                                  labels = c("18 - 19 år", "20 - 29 år", "30 - 39 år", "40 - 49 år", 
+                                             "50 - 59 år", "60 - 69 år", "Over 70 år"))
+
+# Opret barplot med de rigtige aldersgrupper på x-aksen
+ggplot(df, aes(x = V42_Alder_Grupperet)) + 
+  geom_bar(aes(y = cumsum(..count..) / sum(..count..) * 100), 
+           stat = "count", fill = "#003366") + 
+  labs(
+    x = "Aldersgruppe",
+    y = "Kumulativ andel"
+  ) +
+  scale_x_discrete(drop = FALSE)  # Sikrer, at alle kategorier inkl. "Uoplyst" vises
+
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+library(ggplot2)
+
+# Sørg for, at aldersgruppen er en faktor med de rigtige niveauer (uden NA som niveau)
+df$V42_Alder_Grupperet <- factor(
+  df$V42_Alder_Grupperet, 
+  levels = c(1, 2, 3, 4, 5, 6, 7), 
+  labels = c("18 - 19 år", "20 - 29 år", 
+             "30 - 39 år", "40 - 49 år", 
+              "50 - 59 år", "60 - 69 år", 
+             "Over 70 år"))
+
+# Opret barplot med de rigtige aldersgrupper på x-aksen
+ggplot(df, aes(x = V42_Alder_Grupperet)) + 
+  geom_bar(aes(y = cumsum(..count..) / sum(..count..) * 100), 
+           stat = "count", fill = "#003366") + 
+  labs(
+    x = "Aldersgruppe",
+    y = "Kumulativ andel") +
+  scale_x_discrete(drop = FALSE)  # Vis alle kategorier
+
+```
+:::
+
+------------------------------------------------------------------------
+
+# Mål for den centrale tendens (centrummål)
+
+Mål for en variabels centrale tendens siger noget om en ”typiske” værdi på variablen. Man taler oftest om tre centrummål:
+
+<br>
+
+-   **Typetal**: den værdi, der optræder flest gange (kaldes også modus eller modalværdi)
+
+-   **Middelværdi/gennemsnit**: $\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i$
+
+-   **Median**: værdien af den midterste observation eller gennemsnittet mellem de to midterste (den værdi, der deler enhederne i to lige store dele).
+
+------------------------------------------------------------------------
+
+# Typetal
+
+Den værdi, der optræder flest gange (kaldes også modus eller modalværdi)
+
+-   Vi kan bruge`Mode()` funktionen fra pakken `DescTools` til at finde typetallet
+
+-   Dog skal vi specificere for funktionen, at den skal ignorere missing værdier (`NA`'s)
+
+```{r echo=T}
+library(DescTools)
+(mode <- Mode(df$V8_Samarbejde_Inuit_Norden, na.rm = TRUE))
+```
+
+-   `Mode()` fortæller os, at typetallet er 3, og at det optræder 617 gange i datasættet
+
+------------------------------------------------------------------------
+
+# Middelværdi
+
+-   Det mest brugte centrummål er middelværdien, bedre kendt som gennemsnittet
+
+-   Gennemsnittet er defineret som $\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i$
+
+-   Det beregnes altså ved at lægge alle værdierne på en variabel sammen og dividere med antallet af værdier/observationer. Det er derfor følsomt over for meget store eller meget små værdier, som kan trække gennemsnittet op eller ned.
+
+```{r echo=T}
+Mean(df$V8_Samarbejde_Inuit_Norden, na.rm = T)
+```
+
+------------------------------------------------------------------------
+
+# Median
+
+-   Medianen er et mål for den "midterste værdi" på en variabel, når værdierne er rangeret i stigende rækkefølge.
+
+-   De enkelte empiriske observationer af en variabel $(Z)$ noteres som $a$ tildeles et nummer svarende til den enhed (f.eks. individ), der er observeret: $a_1, a_2, a_3, ... a_n$. Dernæst rangordnes observationerne efter værdi:
+
+    <br>
+
+    |     |     |     |     |     |     |     |     |     |     |
+    |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+    | 18  | 26  | 32  | 34  | 41  | 48  | 55  | 62  | 74  | 78  |
+
+------------------------------------------------------------------------
+
+# Median
+
+-   Hvis der er et lige antal observationer er medianen gennemsnittet af de to midterste tal.
+
+    $$
+    \text{Median} = \frac{x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2} + 1\right)}}{2}
+    $$
+
+-   Hvis der er et ulige antal observationer er medianen det midterste tal i rækken
+
+    $$
+    \text{Median} = x_{\left(\frac{n+1}{2}\right)}
+    $$
+
+------------------------------------------------------------------------
+
+# Centrummål
+
+<br>
+
+::: {style="width: 100%; font-size: 1em; border-collapse: collapse;"}
+|                | **Nominel** | **Ordinal** | **Interval** |
+|----------------|-------------|-------------|--------------|
+| **Typetal**    | ✓           | ✓           | ✓\*          |
+| **Median**     |             | ✓           | ✓            |
+| **Gennemsnit** |             |             | ✓            |
+:::
+
+<br>
+
+::: aside
+\*Typisk kun meningsfuld for variable med diskrete værdier
+:::
+
+------------------------------------------------------------------------
+
+# Fraktiler
+
+-   Intuitionen bag medianen er, at halvdelen af observationerne vil være større end medianen og halvdelen af observationerne vil være mindre end medianen.
+
+-   Medianen er et tilfælde af typen af statistiske mål, der hedder ***fraktiler***
+
+-   En $p$-fraktil er en værdi, hvor andelen $p$ af elementerne i en population har en værdi mindre end $p$ fraktilen. Medianen er altså 0,5 fraktilen
+
+-   Andre nyttige fraktiler er $0,25$ og $0,75$ fraktiler. Tilsammen kaldes $0,25$, $0,50$, og $0,75$ fraktilerne for ***kvartiler***, da de inddeler enhederne i fire lige store grupper
+
+    ```{r echo=T}
+    Median(df$V41_Alder_Ikke_Grupperet, na.rm=T)
+    ```
+
+    ```{r}
+    quantile(df$V41_Alder_Ikke_Grupperet, probs = c(0.25, 0.75), na.rm = TRUE)
+    ```
+
+------------------------------------------------------------------------
+
+# Boksplot
+
+Fraktiler kan visualiseres ved hjælp af boksplots, der viser: `min`, `p25`, `p50`, `p75`, og `max`
+
+::: panel-tabset
+### Søjlediagram
+
+```{r echo=F}
+library(ggplot2)
+
+ggplot(df, aes(x = V41_Alder_Ikke_Grupperet)) +
+  geom_boxplot() +  # Opretter et boxplot baseret på variablen V41_Alder_Ikke_Grupperet
+  theme_minimal() +  # Anvender et minimalistisk tema uden unødvendige baggrundselementer
+  labs(
+    x = "Alder (ikke grupperet)"  # Tilføjer en brugerdefineret titel til x-aksen
+  ) +
+  scale_x_continuous(breaks = 
+            seq(min(df$V41_Alder_Ikke_Grupperet, na.rm = TRUE), 
+            max(df$V41_Alder_Ikke_Grupperet, na.rm = TRUE), 
+            by = 2)) +  # Indstiller x-aksen til at have ticks for hver 2. værdi fra minimum til maksimum af data
+  theme(
+    axis.text.y = element_blank(),  # Fjerner tekstetiketterne (værdierne) på y-aksen
+    axis.ticks.y = element_blank()  # Fjerner ticks (stregmarkeringer) på y-aksen
+  ) +
+    coord_fixed(ratio = 25)  # Justér på højden af boksplottet
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+library(ggplot2)
+
+ggplot(df, aes(x = V41_Alder_Ikke_Grupperet)) +
+  geom_boxplot() +  # Opretter et boxplot baseret på variablen V41_Alder_Ikke_Grupperet
+  theme_minimal() +  # Anvender et minimalistisk tema uden unødvendige baggrundselementer
+  labs(
+    x = "Alder (ikke grupperet)"  # Tilføjer en brugerdefineret titel til x-aksen
+  ) +
+  scale_x_continuous(breaks = 
+            seq(min(df$V41_Alder_Ikke_Grupperet, na.rm = TRUE), 
+            max(df$V41_Alder_Ikke_Grupperet, na.rm = TRUE), 
+            by = 2)) +  # Indstiller x-aksen til at have ticks for 
+                        # hver 2. værdi fra minimum til maksimum af data
+  theme(
+    axis.text.y = element_blank(),  # Fjerner tekstetiketterne (værdierne) på y-aksen
+    axis.ticks.y = element_blank()  # Fjerner ticks (stregmarkeringer) på y-aksen
+  ) +
+    coord_fixed(ratio = 25)  # Justér på højden af boksplottet
+```
+:::
+
+------------------------------------------------------------------------
+
+# Spredningsmål
+
+-   Udover den ”typiske værdi” er det informativt at undersøge spredningen på en variabel, dvs. hvor langt de forskellige enheders værdier ligger fra hinanden.
+
+-   Spredningsmål siger altså noget om variationen i data, og beskæftiger sig med, hvor meget observationerne afviger fra middelværdien
+
+-   Der er to hovedbegreber i statistik for spredningsmål\*:
+
+    -   Varians: $Var(x)$ eller $\sigma^2{(x)}$
+
+    -   Standardafvigelse: $Sd(x)$ eller $\sigma{(x)}$
+
+------------------------------------------------------------------------
+
+# Varians
+
+-   Variansen siger noget om, hvor stor spredning, der er på en variabel. Med andre ord, ligger observationerne kort eller langt fra middelværdien?
+
+-   Variansen er givet ved gennemsnittet af de kvardrerede afstande mellem hver observation og middelværdien:
+
+$$
+\text{Var}(x) = \sigma^2(x) = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2
+$$
+
+\- $N$ er antallet af observationer
+
+\- $x_i$ er den enkelte observation
+
+\- $\bar{x}$ er gennemsnittet
+
+---
+
+```{r}
+
+# Dataserie
+data <- c(3, 5, 7, 8, 10, 12, 15, 18, 20, 25)
+mean_value <- mean(data)
+y_vals <- seq(1, length(data))  # y-værdierne varierer for at vise forskelle
+
+# Plot af observationer (scatterplot)
+plot(data, y_vals, pch = 19, xlim = c(min(data) - 5, max(data) + 5), ylim = c(0.5, length(data) + 0.5),
+     xlab = "Observationer", ylab = "Y-værdi", main = "Observationer og deres afstand til gennemsnittet",
+     axes = TRUE)
+
+# Tilføj gennemsnittet som en rød linje
+abline(v = mean_value, col = "red", lty = 2, lwd = 2)
+
+# Tilføj pile for hver observation, der peger på gennemsnittet
+arrows(x0 = data, y0 = y_vals, x1 = rep(mean_value, length(data)), y1 = y_vals,
+       col = "blue", length = 0.1, angle = 20)
+
+# Tilføj tekst til gennemsnittet
+text(mean_value, length(data) + 0.5, paste("Gennemsnit =", round(mean_value, 2)), col = "red", pos = 3)
+
+# Tilføj x- og y-akse
+axis(1)
+axis(2)
+
+
+
+
+```
