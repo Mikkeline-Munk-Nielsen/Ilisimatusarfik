@@ -520,6 +520,17 @@ ggplot(df, aes(x = omsaetning)) + # Variabel = omsaetning
 
 ------------------------------------------------------------------------
 
+# Shortcut i R
+
+En god funktion er `summary()` som viser: minimum (`Min.`), første kvartil (`1st Qu.`), median (`Median`), gennemsnit (`Mean`), tredje kvartil (`3rd Qu.`), maximum (`Max.`), og manglende værdier (`NA`):
+
+```{r echo=T}
+summary(df$omsaetning)
+
+```
+
+---
+
 # Spredningsmål
 
 -   Udover den ”typiske værdi” er det informativt at undersøge spredningen på en variabel, dvs. hvor langt de forskellige enheders værdier ligger fra hinanden.
