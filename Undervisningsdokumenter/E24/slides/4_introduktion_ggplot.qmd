@@ -22,7 +22,6 @@ editor: visual
 
 # Hvad er ggplot2?
 
-
 ::::: two-column-layout
 ::: left-column
 -   **ggplot2** er en datavisualiseringspakke i R.
