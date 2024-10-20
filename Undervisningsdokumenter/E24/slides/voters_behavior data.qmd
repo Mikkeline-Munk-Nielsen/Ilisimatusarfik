@@ -43,22 +43,21 @@ Typer af spørgsmål vi kan besvare med univariat analyse:
 
 ## Eksempel med datasæt
 
-Firmadatasættet fra sidst:
-
-<br>
+Greenlandics Perspectives Survey fra Ilisimatusarfik
 
 ::: panel-tabset
 ### Datasæt
 
 ```{r, echo=F}
-(df <- readRDS("firma_data.rds"))
+(df <- readRDS("data/GL_vaelger_adfaerd_1989.rds"))
+
 ```
 
 ### Kode
 
-```{r, echo=TRUE, eval=F}
+```{r, echo=TRUE}
 getwd()
-df <- readRDS("firma_data.rds")
+df <- readRDS("data/GL_vaelger_adfaerd_1989.rds")
 ```
 :::
 
@@ -66,16 +65,16 @@ df <- readRDS("firma_data.rds")
 
 # Frekvenser
 
-Variablen Industri måler, hvilken industri hvert firma tilhører:
+Spørgsmålet `V8_Samarbejde_Inuit_Norden` er følgende: *Hvilket af følgende synspunkter om samarbejde er du mest enig i?*
 
 ::: {style="font-size: 0.8em; border-collapse: collapse; width: 100%;"}
-| Industri   |
-|------------|
-| Detail     |
-| Finans     |
-| Produktion |
-| Sundhed    |
-| Teknologi  |
+| Værdi | Svar |
+|----------------------|--------------------------------------------------|
+| 1 | Samarbejde med inuit i Canada, Alaska og Sibrien bør gå forud for samarbejdet med de nordiske lande |
+| 2 | Samarbejde med de nordiske lande bør gå forud for samarbejde med inuit i Canada, Alaska og Sibrien |
+| 3 | Samarbejde med inuit i Canada, Alaska og Sibrien og samarbejde med de nordiske lande er lige vigtigt |
+| 4 | Ved ikke |
+| NA | Ikke oplyst |
 :::
 
 ------------------------------------------------------------------------
@@ -89,14 +88,14 @@ En typisk måde at opsummere frekvenser er via. frekvenstabeller (evt. procenter
 
 ```{r, echo=F}
 library(janitor) 
-tabyl(df, industri)
+tabyl(df, V8_Samarbejde_Inuit_Norden)
 ```
 
 ### Kode
 
 ```{r, echo=TRUE, eval=F}
 library(janitor) 
-tabyl(df, industri)
+tabyl(df, V8_Samarbejde_Inuit_Norden)
 ```
 :::
 
@@ -107,19 +106,17 @@ tabyl(df, industri)
 Frekvenser visualeres også ofte via. søjlediagrammer:
 
 ::: panel-tabset
-### Barplot
+### Søjlediagram / barplot
 
 ```{r, echo=F}
 library(ggplot2)
 
-ggplot(df, aes(x = industri)) + 
+ggplot(df, aes(x = factor(V8_Samarbejde_Inuit_Norden, exclude = NULL))) + 
   geom_bar(fill = "#003366", na.rm = FALSE) + 
   labs(
-    x = "Industri",
-    y = "Frekvens") +
-  theme(
-    text = element_text(size = 14))  # Gør skriften større
-
+    x = "Svar",
+    y = "Frekvens"
+  )
 ```
 
 ### Kode
@@ -127,13 +124,12 @@ ggplot(df, aes(x = industri)) +
 ```{r, echo=TRUE, eval=F}
 library(ggplot2)
 
-ggplot(df, aes(x = industri)) + 
+ggplot(df, aes(x = factor(V8_Samarbejde_Inuit_Norden, exclude = NULL))) + 
   geom_bar(fill = "#003366", na.rm = FALSE) + 
   labs(
-    x = "Industri",
-    y = "Frekvens") +
-  theme(
-    text = element_text(size = 14))  # Gør skriften større
+    x = "Svar",
+    y = "Frekvens"
+  )
 ```
 :::
 
@@ -152,14 +148,14 @@ ggplot(df, aes(x = industri)) +
 
 ```{r, echo=F}
 library(janitor) 
-tabyl(df, industri)
+tabyl(df, V8_Samarbejde_Inuit_Norden)
 ```
 
 ### Kode
 
 ```{r, echo=TRUE, eval=F}
 library(janitor) 
-tabyl(df, industri)
+tabyl(df, V8_Samarbejde_Inuit_Norden)
 ```
 :::
 
@@ -167,22 +163,21 @@ tabyl(df, industri)
 
 # Andele
 
-Andele kan også visualiseres med søjlediagrammer (barplots)...
+Andele kan f.eks. visualiseres med søjlediagrammer (barplots)...
 
 ::: panel-tabset
-### Barplot (procent)
+### Søjlediagram (procent)
 
 ```{r, echo=F}
 library(ggplot2)
 
-ggplot(df, aes(x = industri)) + 
+ggplot(df, aes(x = factor(V8_Samarbejde_Inuit_Norden, exclude = NULL))) + 
   geom_bar(aes(y = (..count..) / sum(..count..) * 100), 
            fill = "#003366", na.rm = FALSE) + 
   labs(
-    x = "Industri",
-    y = "Procent") +
-  theme(
-    text = element_text(size = 14))  # Gør skriften større
+    x = "Svar",
+    y = "Procent"
+  )
 ```
 
 ### Kode
@@ -190,14 +185,13 @@ ggplot(df, aes(x = industri)) +
 ```{r, echo=TRUE, eval=F}
 library(ggplot2)
 
-ggplot(df, aes(x = industri)) + 
+ggplot(df, aes(x = factor(V8_Samarbejde_Inuit_Norden, exclude = NULL))) + 
   geom_bar(aes(y = (..count..) / sum(..count..) * 100), 
            fill = "#003366", na.rm = FALSE) + 
   labs(
-    x = "Industri",
-    y = "Procent") +
-  theme(
-    text = element_text(size = 14))  # Gør skriften større
+    x = "Svar",
+    y = "Procent"
+  )
 ```
 :::
 
@@ -205,10 +199,10 @@ ggplot(df, aes(x = industri)) +
 
 # Andele
 
-... eller f.eks. cirkeldiagrammer
+... eller cirkeldiagrammer
 
 ::: panel-tabset
-### Pie chart (procent)
+### Søjlediagram (procent)
 
 ```{r echo=F}
 library(dplyr)
@@ -216,18 +210,18 @@ library(ggplot2)
 
 # Beregn procenterne manuelt
 df_pie <- df %>%
-  group_by(industri) %>%
+  group_by(V8_Samarbejde_Inuit_Norden) %>%
   summarise(count = n()) %>%
   mutate(percentage = count / sum(count) * 100)
 
 # Opret cirkeldiagrammet med procenter og hvid tekst
-ggplot(df_pie, aes(x = "", y = percentage, fill = factor(industri))) + 
+ggplot(df_pie, aes(x = "", y = percentage, fill = factor(V8_Samarbejde_Inuit_Norden))) + 
   geom_bar(stat = "identity", width = 1) + 
   coord_polar(theta = "y") + 
   geom_text(aes(label = paste0(round(percentage, 1), "%")), 
             position = position_stack(vjust = 0.5), 
             color = "white") +  # Gør teksten hvid
-  labs(x = NULL, y = NULL, fill = "Industri") +
+  labs(x = NULL, y = NULL, fill = "Svar") +
   theme_void() +  # Fjerner akse-linjer og labels
   scale_fill_manual(values = c("#003366", "#6699CC", "#336699", "#99CCFF", "#0066CC"))  # Blå farver
 ```
@@ -237,22 +231,23 @@ ggplot(df_pie, aes(x = "", y = percentage, fill = factor(industri))) +
 ```{r echo=T, eval=F}
 library(dplyr)
 library(ggplot2)
+
 # Beregn procenterne manuelt
 df_pie <- df %>%
-  group_by(industri) %>%
+  group_by(V8_Samarbejde_Inuit_Norden) %>%
   summarise(count = n()) %>%
   mutate(percentage = count / sum(count) * 100)
 
 # Opret cirkeldiagrammet med procenter og hvid tekst
-ggplot(df_pie, aes(x = "", y = percentage, fill = factor(industri))) + 
+ggplot(df_pie, aes(x = "", y = percentage, fill = factor(V8_Samarbejde_Inuit_Norden))) + 
   geom_bar(stat = "identity", width = 1) + 
   coord_polar(theta = "y") + 
   geom_text(aes(label = paste0(round(percentage, 1), "%")), 
             position = position_stack(vjust = 0.5), 
             color = "white") +  # Gør teksten hvid
-  labs(x = NULL, y = NULL, fill = "Industri") +
+  labs(x = NULL, y = NULL, fill = "Svar") +
   theme_void() +  # Fjerner akse-linjer og labels
-  scale_fill_manual(values = c("#003366", "#6699CC", "#336699", "#99CCFF", "#0066CC"))  # Blå farver
+  scale_fill_manual(values = c("#003366", "#6699CC", "#336699", "#99CCFF", "#0066CC"))  # Farver
 ```
 :::
 
@@ -264,18 +259,19 @@ ggplot(df_pie, aes(x = "", y = percentage, fill = factor(industri))) +
 
 -   Først rigtig meningsfuld, når værdier kan rangordnes (fra ordinalt måleniveau)
 
-Ny variabel: **Antal ansatte** **(grupperet)**:
-
-<br>
+-   V42_Alder_Grupperet: *Hvor gammel er du?*
 
 ::: {style="font-size: 0.8em; border-collapse: collapse; width: 100%;"}
-| Værdi     |
-|-----------|
-| 0-1000    |
-| 1001-2000 |
-| 2001-3000 |
-| 3001-4000 |
-| 4000+     |
+| Værdi | Svar       |
+|-------|------------|
+| 1     | 18 - 19 år |
+| 2     | 20 - 29 år |
+| 3     | 30 - 39 år |
+| 4     | 40 - 49 år |
+| 5     | 50 - 59 år |
+| 6     | 60 - 69 år |
+| 7     | Over 70 år |
+| NA    | Uoplyst    |
 :::
 
 ------------------------------------------------------------------------
@@ -286,56 +282,46 @@ Ny variabel: **Antal ansatte** **(grupperet)**:
 ### Søjlediagram
 
 ```{r, echo=F}
-library(ggplot2)
-library(dplyr)
-
-df <- df %>%
-  mutate(ansatte_gruppe = case_when(
-    ansatte <= 1000 ~ "0 - 1k",
-    ansatte > 1000 & ansatte <= 2000 ~ "1k - 2k",
-    ansatte > 2000 & ansatte <= 3000 ~ "2k - 3k",
-    ansatte > 3000 & ansatte <= 4000 ~ "3k - 4k",
-    ansatte > 4000 ~ "4k+"
-  ))
+# Sørg for, at aldersgruppen er en faktor med de rigtige niveauer (uden NA som niveau)
+df$V42_Alder_Grupperet <- factor(df$V42_Alder_Grupperet, 
+                                  levels = c(1, 2, 3, 4, 5, 6, 7), 
+                                  labels = c("18 - 19 år", "20 - 29 år", "30 - 39 år", "40 - 49 år", 
+                                             "50 - 59 år", "60 - 69 år", "Over 70 år"))
 
 # Opret barplot med de rigtige aldersgrupper på x-aksen
-ggplot(df, aes(x = ansatte_gruppe)) + 
+ggplot(df, aes(x = V42_Alder_Grupperet)) + 
   geom_bar(aes(y = cumsum(..count..) / sum(..count..) * 100), 
            stat = "count", fill = "#003366") + 
   labs(
-    x = "Ansatte",
-    y = "Kumulativ andel") +
-  scale_x_discrete(drop = FALSE) + # Vis alle kategorier
-  theme(
-    text = element_text(size = 14))  # Gør skriften større
+    x = "Aldersgruppe",
+    y = "Kumulativ andel"
+  ) +
+  scale_x_discrete(drop = FALSE)  # Sikrer, at alle kategorier inkl. "Uoplyst" vises
+
 ```
 
 ### Kode
 
 ```{r echo=T, eval=F}
 library(ggplot2)
-library(dplyr)
 
-
-df <- df %>%
-  mutate(ansatte_gruppe = case_when(
-    ansatte <= 1000 ~ "0 - 1k",
-    ansatte > 1000 & ansatte <= 2000 ~ "1k - 2k",
-    ansatte > 2000 & ansatte <= 3000 ~ "2k - 3k",
-    ansatte > 3000 & ansatte <= 4000 ~ "3k - 4k",
-    ansatte > 4000 ~ "4k+"
-  ))
+# Sørg for, at aldersgruppen er en faktor med de rigtige niveauer (uden NA som niveau)
+df$V42_Alder_Grupperet <- factor(
+  df$V42_Alder_Grupperet, 
+  levels = c(1, 2, 3, 4, 5, 6, 7), 
+  labels = c("18 - 19 år", "20 - 29 år", 
+             "30 - 39 år", "40 - 49 år", 
+              "50 - 59 år", "60 - 69 år", 
+             "Over 70 år"))
 
 # Opret barplot med de rigtige aldersgrupper på x-aksen
-ggplot(df, aes(x = ansatte_gruppe)) + 
+ggplot(df, aes(x = V42_Alder_Grupperet)) + 
   geom_bar(aes(y = cumsum(..count..) / sum(..count..) * 100), 
            stat = "count", fill = "#003366") + 
   labs(
-    x = "Ansatte",
+    x = "Aldersgruppe",
     y = "Kumulativ andel") +
-  scale_x_discrete(drop = FALSE) + # Vis alle kategorier
-  theme(
-    text = element_text(size = 14))  # Gør skriften større
+  scale_x_discrete(drop = FALSE)  # Vis alle kategorier
 
 ```
 :::
@@ -358,18 +344,18 @@ Mål for en variabels centrale tendens siger noget om en ”typiske” værdi p�
 
 # Typetal
 
--   Den værdi, der optræder flest gange (kaldes også modus eller modalværdi)
+Den værdi, der optræder flest gange (kaldes også modus eller modalværdi)
 
-<!-- -->
+-   Vi kan bruge`Mode()` funktionen fra pakken `DescTools` til at finde typetallet
 
--   Vi kan bruge `Mode()` funktionen fra pakken `DescTools` til at finde typetallet
+-   Dog skal vi specificere for funktionen, at den skal ignorere missing værdier (`NA`'s)
 
 ```{r echo=T}
 library(DescTools)
-(mode <- Mode(df$industri, na.rm = TRUE))
+(mode <- Mode(df$V8_Samarbejde_Inuit_Norden, na.rm = TRUE))
 ```
 
--   `Mode()` fortæller os, at typetallet/modus er "Finans", og at det optræder 400 gange i datasættet
+-   `Mode()` fortæller os, at typetallet er 3, og at det optræder 617 gange i datasættet
 
 ------------------------------------------------------------------------
 
@@ -382,7 +368,7 @@ library(DescTools)
 -   Det beregnes altså ved at lægge alle værdierne på en variabel sammen og dividere med antallet af værdier/observationer. Det er derfor følsomt over for meget store eller meget små værdier, som kan trække gennemsnittet op eller ned.
 
 ```{r echo=T}
-Mean(df$omsaetning, na.rm = T)
+Mean(df$V8_Samarbejde_Inuit_Norden, na.rm = T)
 ```
 
 ------------------------------------------------------------------------
@@ -395,11 +381,9 @@ Mean(df$omsaetning, na.rm = T)
 
     <br>
 
-    |        |        |        |        |        |        |        |        |        |        |
-    |--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
-    | **18** | **26** | **32** | **34** | **41** | **48** | **55** | **62** | **74** | **78** |
-
--   Intuitionen bag medianen er, at halvdelen af observationerne vil være større end medianen og halvdelen af observationerne vil være mindre end medianen.
+    |     |     |     |     |     |     |     |     |     |     |
+    |-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+    | 18  | 26  | 32  | 34  | 41  | 48  | 55  | 62  | 74  | 78  |
 
 ------------------------------------------------------------------------
 
@@ -419,77 +403,6 @@ Mean(df$omsaetning, na.rm = T)
 
 ------------------------------------------------------------------------
 
-# Fraktiler
-
--   Medianen er et tilfælde af typen af statistiske mål, der hedder ***fraktiler***
-
--   En $p$-fraktil er en værdi, hvor andelen $p$ af elementerne i en population har en værdi mindre end $p$ fraktilen. Medianen er altså 0,5 fraktilen
-
--   Andre nyttige fraktiler er $0,25$ og $0,75$ fraktiler. Tilsammen kaldes $0,25$, $0,50$, og $0,75$ fraktilerne for ***kvartiler***, da de inddeler enhederne i fire lige store grupper
-
-    ```{r echo=T}
-    Median(df$omsaetning, na.rm=T)
-    ```
-
-    ```{r echo=T}
-    quantile(df$omsaetning, probs = c(0.25, 0.5, 0.75), na.rm = TRUE)
-    ```
-
-------------------------------------------------------------------------
-
-# Boksplot
-
-Kvartiler kan visualiseres ved hjælp af boksplots, der viser: `min`, `p25`, `p50`, `p75`, og `max`
-
-::: panel-tabset
-### Boksplot
-
-```{r echo=F}
-library(ggplot2)
-
-ggplot(df, aes(x = omsaetning)) + # Variabel = omsaetning
-  geom_boxplot() +  # Opretter et boxplot 
-  theme_minimal() + # Tema
-      scale_x_continuous(breaks = # Definerer x-aksen
-            seq(min(50000), 
-            max(1000000), 
-            by = 100000)) +
-    labs(
-    x = "Omsætning (DKK)") + # Tilføjer en brugerdefineret titel til x-aksen
-    theme(
-      axis.text.y = element_blank(),  # Fjerner værdierne på y-aksen
-      axis.ticks.y = element_blank(),  # Fjerner stregmarkeringer på y-aksen
-      text = element_text(size = 14)) +  # Gør skriften større
-      coord_fixed(ratio = 300000)  # Justér på højden af boksplottet
-
-
-```
-
-### Kode
-
-```{r echo=T, eval=F}
-library(ggplot2)
-
-ggplot(df, aes(x = omsaetning)) + # Variabel = omsaetning
-  geom_boxplot() +  # Opretter et boxplot 
-  theme_minimal() + # Tema
-      scale_x_continuous(breaks = # Definerer x-aksen
-            seq(min(50000), 
-            max(1000000), 
-            by = 100000)) +
-    labs(
-    x = "Omsætning (DKK)") + # Tilføjer en brugerdefineret titel til x-aksen
-    theme(
-      axis.text.y = element_blank(),  # Fjerner værdierne på y-aksen
-      axis.ticks.y = element_blank(),  # Fjerner stregmarkeringer på y-aksen
-      text = element_text(size = 14)) +  # Gør skriften større
-      coord_fixed(ratio = 300000)  # Justér på højden af boksplottet
-
-```
-:::
-
-------------------------------------------------------------------------
-
 # Centrummål
 
 Øvelse: find eksempler på, hvornår hvert af disse centrummål er interessante at anvende
@@ -502,7 +415,7 @@ ggplot(df, aes(x = omsaetning)) + # Variabel = omsaetning
 
 -   Median
 
-------------------------------------------------------------------------
+---
 
 # Centrummål
 
@@ -524,6 +437,79 @@ ggplot(df, aes(x = omsaetning)) + # Variabel = omsaetning
 
 ------------------------------------------------------------------------
 
+# Fraktiler
+
+-   Intuitionen bag medianen er, at halvdelen af observationerne vil være større end medianen og halvdelen af observationerne vil være mindre end medianen.
+
+-   Medianen er et tilfælde af typen af statistiske mål, der hedder ***fraktiler***
+
+-   En $p$-fraktil er en værdi, hvor andelen $p$ af elementerne i en population har en værdi mindre end $p$ fraktilen. Medianen er altså 0,5 fraktilen
+
+-   Andre nyttige fraktiler er $0,25$ og $0,75$ fraktiler. Tilsammen kaldes $0,25$, $0,50$, og $0,75$ fraktilerne for ***kvartiler***, da de inddeler enhederne i fire lige store grupper
+
+    ```{r echo=T}
+    Median(df$V41_Alder_Ikke_Grupperet, na.rm=T)
+    ```
+
+    ```{r}
+    quantile(df$V41_Alder_Ikke_Grupperet, probs = c(0.25, 0.75), na.rm = TRUE)
+    ```
+
+------------------------------------------------------------------------
+
+# Boksplot
+
+Fraktiler kan visualiseres ved hjælp af boksplots, der viser: `min`, `p25`, `p50`, `p75`, og `max`
+
+::: panel-tabset
+### Søjlediagram
+
+```{r echo=F}
+library(ggplot2)
+
+ggplot(df, aes(x = V41_Alder_Ikke_Grupperet)) +
+  geom_boxplot() +  # Opretter et boxplot baseret på variablen V41_Alder_Ikke_Grupperet
+  theme_minimal() +  # Anvender et minimalistisk tema uden unødvendige baggrundselementer
+  labs(
+    x = "Alder (ikke grupperet)"  # Tilføjer en brugerdefineret titel til x-aksen
+  ) +
+  scale_x_continuous(breaks = 
+            seq(min(df$V41_Alder_Ikke_Grupperet, na.rm = TRUE), 
+            max(df$V41_Alder_Ikke_Grupperet, na.rm = TRUE), 
+            by = 2)) +  # Indstiller x-aksen til at have ticks for hver 2. værdi fra minimum til maksimum af data
+  theme(
+    axis.text.y = element_blank(),  # Fjerner tekstetiketterne (værdierne) på y-aksen
+    axis.ticks.y = element_blank()  # Fjerner ticks (stregmarkeringer) på y-aksen
+  ) +
+    coord_fixed(ratio = 25)  # Justér på højden af boksplottet
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+library(ggplot2)
+
+ggplot(df, aes(x = V41_Alder_Ikke_Grupperet)) +
+  geom_boxplot() +  # Opretter et boxplot baseret på variablen V41_Alder_Ikke_Grupperet
+  theme_minimal() +  # Anvender et minimalistisk tema uden unødvendige baggrundselementer
+  labs(
+    x = "Alder (ikke grupperet)"  # Tilføjer en brugerdefineret titel til x-aksen
+  ) +
+  scale_x_continuous(breaks = 
+            seq(min(df$V41_Alder_Ikke_Grupperet, na.rm = TRUE), 
+            max(df$V41_Alder_Ikke_Grupperet, na.rm = TRUE), 
+            by = 2)) +  # Indstiller x-aksen til at have ticks for 
+                        # hver 2. værdi fra minimum til maksimum af data
+  theme(
+    axis.text.y = element_blank(),  # Fjerner tekstetiketterne (værdierne) på y-aksen
+    axis.ticks.y = element_blank()  # Fjerner ticks (stregmarkeringer) på y-aksen
+  ) +
+    coord_fixed(ratio = 25)  # Justér på højden af boksplottet
+```
+:::
+
+------------------------------------------------------------------------
+
 # Spredningsmål
 
 -   Udover den ”typiske værdi” er det informativt at undersøge spredningen på en variabel, dvs. hvor langt de forskellige enheders værdier ligger fra hinanden.
@@ -535,10 +521,6 @@ ggplot(df, aes(x = omsaetning)) + # Variabel = omsaetning
     -   Varians: $Var(x)$ eller $\sigma^2{(x)}$
 
     -   Standardafvigelse: $sd(x)$ eller $\sigma{(x)}$
-
-::: aside
-\*Grundbogen *Metoder i Statskundskab* nævner flere for andre måleniveauer, kap. 14
-:::
 
 ------------------------------------------------------------------------
 
@@ -558,13 +540,13 @@ $$
 
 \- $\bar{x}$ er gennemsnittet
 
-------------------------------------------------------------------------
+---
 
 # Varians
 
 ```{r echo=T}
 data <- c(3, 5, 7, 8, 10, 12, 15, 18, 20, 25)
-mean(data)
+mean_value <- mean(data)
 ```
 
 ```{r, echo=F}
@@ -592,7 +574,7 @@ axis(1)
 
 ```
 
-------------------------------------------------------------------------
+---
 
 # Standardafvigelse
 
@@ -606,53 +588,18 @@ $$
 \text{sd}(x)= \sigma(x)=\sqrt{\sigma(x)^2}=\sqrt{\sigma^2(x) = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2}
 $$
 
----
-
-# Standardafvigelse
-
 -   Standardafvigelsen udtrykker kvadratroden af den gennemsnitlige kvadrerede afvigelse fra gennemsnittet på en variabel
 
 -   Den er med andre ord tæt på at være et mål for den gennemsnitlige afvigelse fra gennemsnittet på en variabel, på variablens oprindelige skala - derfor bruges den ofte deskriptivt
 
--   Find f.eks. variansen og standardafvigelsen på variablen ***omsaetning*** i firmadatasættet:
-
-```{r echo=T}
-var(df$omsaetning, na.rm=T)
-sd(df$omsaetning, na.rm=T)
-```
-
-------------------------------------------------------------------------
-
-# Opsamling
-
-<br>
-
-|                   |             |             |              |
-|-------------------|-------------|-------------|--------------|
-|                   | **Nominal** | **Ordinal** | **Interval** |
-| Typetal           | ✓           | ✓           | ✓            |
-| Median            |             | ✓           | ✓            |
-| Middelværdi       |             | (✓)         | ✓            |
-| Standardafvigelse |             |             | ✓            |
-
 ---
 
 # Opsamling
 
-Centrale funktioner:
-
--   `tabyl()`
-
--   `ggplot()`
-
--   `Mode()`
-
--   `Mean()`
-
--   `Median()`
-
--   `Quantile()`
-
--   `var()`
-
--   `sd()`
+|                   |         |         |          |
+|-------------------|---------|---------|----------|
+|                   | Nominal | Ordinal | Interval |
+| Typetal           | ✓       | ✓       | ✓        |
+| Median            |         | ✓       | ✓        |
+| Middelværdi       |         | (✓)     | ✓        |
+| Standardafvigelse |         |         | ✓        |

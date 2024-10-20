@@ -363,10 +363,10 @@ industries <- c("Teknologi", "Sundhed", "Finans", "Detail", "Produktion")
 
 # Create the mock dataset with the industry column
 firma_data <- data.frame(
-  navn = paste("Firm", 1:10),  # Firm names as "Firm 1", "Firm 2", etc.
+  navn = paste("Firm", 1:1000),  # Firm names as "Firm 1", "Firm 2", etc.
   industri = sample(industries, 10, replace = TRUE),  # Randomly assign an industry to each firm  
-  ansatte = sample(50:500, 10, replace = TRUE),  # Random number of employees between 50 and 500
-  omsaetning = round(runif(10, 100000, 1000000), 2),  # Random sales between 100,000 and 1,000,000
+  ansatte = sample(10:5000, 10, replace = TRUE),  # Random number of employees between 50 and 500
+  omsaetning = round(runif(10, 30000, 1000000), 2),  # Random sales between 100,000 and 1,000,000
   tilfredshed = sample(1:5, 10, replace = TRUE)  # Random satisfaction on a 5-point Likert scale
 )
 
