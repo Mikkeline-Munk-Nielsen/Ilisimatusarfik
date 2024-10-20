@@ -5,6 +5,7 @@ format:
     slide-level: 0  # Disable automatic slide creation from headings
     incremental: false 
     logo: css_etc/ilisimatusarfik.png
+    highlight-style: github-dark
 editor: visual
 ---
 
@@ -402,7 +403,7 @@ df_firma <- readRDS("firma_data.rds")
 Skriv datasættes navn for at printe de første 10 rækker:
 
 ```{r echo=T}
-df_firma
+(df_firma)
 ```
 
 ------------------------------------------------------------------------
@@ -728,11 +729,11 @@ I skal nu prøve at lave følgende omkodninger på firma-datasættet:
 
 -   Lav en ny variabel, der måler omsaetning i 1.000 kr
 
--   Lav en variabel der måler, om firmaerne har erklæret sig "tilfreds" eller "meget tilfreds" med deres omsætning
+-   Lav en dikotom variabel der tager værdien **1**, hvis firmaerne har erklæret sig "tilfreds" eller "meget tilfreds" med deres omsætning, ellers skal den tage værdien **0**
 
 -   Lav et nyt datasæt kun med virksomheder fra sundhedsindustrien
 
--   Lav et nyt datasæt kun med firmaer, der har erklæret sig "tilfreds" eller "meget tilfreds" med deres omsætning
+-   Lav et nyt datasæt kun med firmaer, der har erklæret sig "tilfreds" eller "meget tilfreds" med deres omsætning (dvs. firmaer med værdien **1** på den variabel I lavede ovenfor)
 
 ------------------------------------------------------------------------
 
