@@ -1,0 +1,21 @@
+#TOC h2 {
+  content: "Indhold";
+  visibility: hidden;
+  position: relative;
+}
+
+#TOC h2:before {
+  content: "Indhold";
+  visibility: visible;
+  position: absolute;
+}
+
+/* Juster placering af logo under indholdsfortegnelsen */
+#toc-logo {
+    text-align: center; /* Centrerer logoet */
+    margin-top: 20px; /* Juster margin for at få lidt afstand fra TOC */
+  }
+  
+  #toc-logo img {
+    width: 150px; /* Juster størrelsen efter behov */
+  }

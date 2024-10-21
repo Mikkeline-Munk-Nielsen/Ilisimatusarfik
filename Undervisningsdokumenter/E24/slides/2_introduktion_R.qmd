@@ -662,7 +662,7 @@ Hvis man skal opsætte mange betingelser i sin omkodning bruger man funktionen `
 
 # Omkodning af variable
 
-Hvis man gerne vil omkode factor variabel kan man bruge funkstionen `fct_recode()`. Denne funktion kan også bruges i kombination med mutate.
+Hvis man gerne vil omkode factor variabel kan man bruge funktionen `fct_recode()`. Denne funktion kan også bruges i kombination med mutate.
 
 Logikken er: `fct_recode(variabel, ny_kategori = gammel_kategori)`
 

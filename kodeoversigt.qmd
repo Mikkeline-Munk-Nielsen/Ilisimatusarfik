@@ -1,0 +1,587 @@
+---
+title: "Kodeoversigt"
+author: "Mikkeline Munk Nielsen"
+subtitle: "Statistik 15 ECTS, Ilisimatusarfik" 
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    css: custom-toc.css
+    include-after-body: logo-after-toc.html
+editor: visual
+---
+
+# Introduktion
+
+Dette dokument giver en oversigt over grundlæggende kode og funktioner i R, som vi skal bruge i kurset. Det er en guide, der hjælper dig med at komme i gang med at oprette objekter, indlæse pakker, arbejde med datasæt og lave grundlæggende datavisualiseringer med **ggplot2**.
+
+Du vil finde eksempler på, hvordan du kan arbejde med datasæt, omkode variable og lave forskellige typer af plots, som du kan tilpasse til dine egne data. Brug dokumentet som en opslagsbog, når du skriver din egen kode eller har brug for at forstå, hvordan specifikke funktioner fungerer.
+
+Husk at du kan kopiere koden direkte fra dokumentet og tilpasse den til dine egne opgaver. Der er også inkluderet eksempler på, hvordan du gemmer dine resultater og visualiseringer.
+
+# Objekter
+
+I R er alt, hvad du arbejder med, et objekt. Det kan være tal, tekst, lister eller datasæt. Du opretter objekter, giver dem et navn og kan bruge dem senere.
+
+Du opretter et objekt ved at give det et navn og skrive en pil til højre for navnet, og dernæst definere indholdet af objektet. F.eks. kan vi gemme et objekt, der hedder “mit_foerste_objekt” der indholder teksten “Hello world!”. Vi definerer objektet og dets indhold med en pil
+
+```{r echo=T}
+mit_foerste_objekt <- "Hello world!"
+```
+
+Vi kan printe/vise indholdet at objektet ved at køre det i R konsollen eller scriptet:
+
+```{r}
+mit_foerste_objekt
+```
+
+Du kan naturligvis også gemme tal som objekter...
+
+```{r echo=T}
+mit_tal <- 2
+```
+
+lave beregninger med dine objekter...
+
+```{r echo=T}
+mit_tal + 2
+```
+
+og gemme dine resultater i objekter...
+
+```{r echo=T}
+resultat <- mit_tal + 2
+resultat
+```
+
+måske vigtigst af alt kan gemme datasæt (dataframes) i objekter:
+
+```{r echo=T, eval=F}
+df <- datasæt
+```
+
+# Pakker
+
+I R indlæser vi pakker, der indeholder forskellige funktioner. Hver pakken skal installeres én gang, og derefter indlæses hver gang vi åbner R-Studio igen.
+
+## Installér pakker
+
+Pakker installeres direkte i konsollen eller scriptet. Her indlæses f.eks. pakken tidyverse, der indeholder en masse gode data-funktioner:
+
+```{r echo=T, eval=F}
+install.packages('tidyverse')
+```
+
+Man kan også indlæse flere pakker samtidig, f.eks. tidyverse OG janitor, som er god til bl.a. tabeller:
+
+```{r echo=T, eval=F}
+install.packages(c('tidyverse', 'janitor')) 
+```
+
+## Indlæs pakker
+
+Pakker indlæses med funktionen library() i dit script.
+
+```{r echo=T, eval=F}
+library('tidyverse') 
+```
+
+Man kan kun indlæse en enkelt pakke af gangen, med mindre man anskaffer
+sig en package-manager såsom pacmann. Pacman er selv en pakke, der
+f.eks. indeholder en funktion `p_load` til at indlæse flere andre pakker på en gang:
+
+```{r echo=T, eval=F}
+pacman::p_load(tidyverse, janitor)
+```
+
+# Datasæt
+
+## Indlæs datasæt
+
+R kan som udgangspunkt kun finde datasæt, der er gemt i samme mappe, som den I arbejder i. Derfor er det smart at gemme sine datasæt og filer i samme mappe, som sit R project.
+
+Hvis du er faret vild kan du bruge funktionen `getwd()` til at printe stien til den mappe, du arbejder i:
+
+```{r echo=T}
+getwd()
+```
+
+For at indlæse datasæt skal I bruge specifikke funktioner, alt efter hvilket filformat datasættet er.
+
+Til excel-filer:
+
+```{r echo=T, eval=F}
+library(readxl) 
+df_excelfil <- read_xlsx("excel_fil.xlsx")
+```
+
+Til R-filer:
+
+```{r echo=T, eval=F}
+df_Rfil <- readRDS("r_fil.rds")
+```
+
+Hvis dit datasæt ligger i en undermappe, der hedder data, skal du specificere det i stien:
+
+```{r echo=T, eval=F}
+df_Rfil <- readRDS("data/r_fil.rds")
+```
+
+### Eksempel
+
+Indlæs f.eks. firmadatasættet med funktionen `readRDS` og gem datasættet i et objekt, der hedder `df` (for dataframe):
+
+```{r echo=T}
+df <- readRDS("firma_data.rds")
+```
+
+## Åben dataset
+
+Brug `View()` til at åbne datasættet som en tabel
+
+```{r echo=T, eval=F}
+View(df)
+```
+
+Brug `names()` til at printe navnene på variablene i datasættet
+
+```{r echo=T}
+names(df)
+```
+
+# Data wrangling
+
+En vigtig fordel i kodebaseret data software er, at vi kan skrive kode, der transformerer vores data til at se ud, præcis som vi vil have det. Det kaldes i folkemunde *data wrangling!*
+
+## Omdøbe variable
+
+Når vi indlæser et datasæt kan det ofte være smart at sørge for, at variablenes navne er ensartede, så programmet kan læse dem. F.eks. er computere sjældent glade for mellemrum og æ,ø,å...
+
+```{r echo=F}
+df <- data.frame(
+  køn = c("Mand", "Kvinde", "Mand", "Kvinde"),
+  tid = c(2020, 2020, 2021, 2021),
+  "Befolkningen 1. januar" = c(2750000, 2850000, 2780000, 2870000)
+)
+```
+
+```{r echo=T}
+names(df)
+```
+
+Brug `clean_names()` fra pakken `library(janitor)` til at ensarte variablenes navne, når du loader et nyt datasæt:
+
+```{r echo=T, warning=F, message=F}
+library(janitor)
+df <- clean_names(df)
+names(df)
+```
+
+I andre tilfælde vil vi gerne omdøbe variable manuelt. Brug `rename()` fra pakken `library(tidyverse)` til manuelt at omdøbe variable:
+
+```{r echo=T, warning=F, message=F}
+library(tidyverse)
+df <- df %>% rename(koen = kon)
+names(df)
+```
+
+## Omkodning af variable
+
+Man har ofte behov for at omkode/recode sine variable til færre/andre kategorier eller typer. Ofte vil vi gerne omkode mange variable på én gang. Derfor har pakken *dplyr (under tidyverse)* introduceret funktionen `mutate()`.
+
+Logikken er: `mutate(df, ny_variabel = gammel_variabel)`
+
+### Eksempler med European Social Survey
+
+Nedenfor indlæses et udsnit af et datasæt fra European Social Survey med køn, alder, uddannelsesniveau og indkomst:
+
+```{r include=F, eval=T}
+df <- readRDS("Undervisningsdokumenter/E24/slides/data/ESS.rds") 
+```
+
+```{r echo=T, eval=F}
+df <- readRDS("ESS.rds") 
+```
+
+```{r echo=F, eval=T}
+library(tidyverse)
+df <- df %>% select(koen, alder, udd, net_indkomst)
+```
+
+```{r echo=T}
+names(df)
+```
+
+Med `mutate()` kan vi f.eks. tilføje en variabel til vores datasæt, der måler alder kvardreret:
+
+```{r echo=T}
+df <- df %>% mutate(alder2 = alder^2)
+```
+
+Udover at omkode variable med matematiske operationer, er det nyttigt at kunne omkode sine variable til nye kategorier på baggrund af forskellige kriterier. I kommer til at stifte bekendtskab med følgende funktione, der skal hjælpe os med at omkode:
+
+-   `mutate()` : hovedfunktionen til at omkode variable
+-   `if_else()` : funktion til at implementere én betingelse
+-   `case_when()` : funktion til at implementere flere betingelser
+-   `fct_recode()` : funktion til specifikt at omkode `factor` variable
+
+`if_else()` kan f.eks. bruges hvis man vil lave en dikotom variabel, der måler, om man er over 18 år gammel og dermed myndig:
+
+```{r echo=T}
+df <- df %>%
+  mutate(myndig = if_else(alder > 18,
+                          "Myndig", # Kategori vis den binære betingelse er sand.
+                          "Ikke myndig")) # Kategori hvis den binære betingelse ikke er sand.
+```
+
+`case_when` bruges også sammen med logiske operatorer, men kan også bruges med funktioner, som i eksemplet nedenfor, hvor funktionen `between()`er anvendt til at lave en variabel med alderskategorier:
+
+```{r echo=T}
+df <- df %>%
+  mutate(alder_kategori = case_when(
+    between(alder, 15, 35) ~ "15-35 år", 
+    between(alder, 36, 55) ~ "36-55år ",
+    between(alder, 56, 75) ~ "56-75 år",
+    alder > 75 ~ "75 +"
+  ))
+```
+
+Hvis man gerne vil omkode factor variabel kan man bruge funktionen `fct_recode()`. Denne funktion kan også bruges i kombination med mutate.
+
+Logikken er: `fct_recode(variabel, ny_kategori = gammel_kategori)`
+
+F.eks. kan lave en ny variabel for køn, oversat til engelsk med engelske kategorier:
+
+```{r echo=T}
+df <- df %>% mutate(gender = fct_recode(koen, "Male" = "Mand", "Female" = "Kvinde"))
+```
+
+## Subsetting
+
+Nogle gange er vi kun interesserede i at arbejde med særlige dele af vores datasæt. Måske er vi f.eks. kun interesseret i to variable fra vores datasæt, eller kun observationer med specifikke værdier på udvalgte variable. I de tilfælde kan vi lave "subsets" af vores datasæt, hvor vi udvælger de specifikke informationer, som vi gerne vil beholde.Når vi "subsetter" udvælger vi data fra vores datasæt ud for logiske udsagn. To nyttige funktioner i arbejde med datasæt/matricer er `select()` og `filter()`
+
+`Select()` funktionen bruges til at udvælge kolonner/variable i datasættet. Hvis man f.eks. kun er interesseret i variablene koen og net_indkomst, kan man pipe sit dataset over i `select()`, vælge variablene og gemme dem i et nyt datasæt:
+
+```{r echo=T}
+ny_df <- df %>% select(koen, net_indkomst)
+```
+
+Mens `select()` uvælger kolonner/variable, kan man bruge `filter()` til at vælge rækker/observationer på baggrund af specifikationer. Hvis man f.eks. kun er interesseret i resultater for kvinder i sit datasæt, kan man pipe sit dataset over i `filter()` og dermed kun beholde observationer, der har værdien = "kvinde" på variablen "koen":
+
+```{r echo=TRUE}
+kvinde_df <- df %>% filter(koen=="Kvinde")
+```
+
+# ggplot
+
+**ggplot2** er en datavisualiseringspakke i R. Den er bygget på *grammar of graphics* og giver fleksibilitet til at skabe avancerede plots. I skal bruge den til at bygge figurer!
+
+### De tre grundelementer i ggplot2
+
+1.  **Data**: Data, du vil plotte
+2.  **Aesthetic mappings (aes)**: Kortlægning af variabler
+3.  **Geometriske objekter (geom)**: plot-type, f.eks. søjlediagram, scatterplot, eller boksplot
+
+ggplot2 er som at bygge med LEGO-klodser: Du tilføjer forskellige lag for at skabe det endelige plot. Hvert lag bygger på det forrige og tilføjer nye visuelle elementer. Basen er data, og du bygger videre med lag som akser, farver og geometriske former
+
+```{r echo=TRUE, eval=F}
+ggplot(data = <DATA>) +
+  aes(x = <X-variabel>, y = <Y-variabel>) +
+  geom_<GEOM>()
+```
+
+### Typer af plots
+
+Der findes mange typer af plots eller ***geoms***, som er gode til forskellige ting. Her er et par grundlæggende:
+
+[Visualisering af én variabel]{.underline}
+
+-   Brug `geom_bar()` til kategoriske variable
+
+-   Brug `geom_histogram()` eller `geom_boxplot` til nummeriske variable
+
+[Visualisering af flere variable]{.underline}
+
+-   Brug `geom_bar()` eller `geom_jitter()` til to kategoriske variable
+
+-   Brug `geom_boxplot` til en nummerisk variabel og en kategoriske variabel.
+
+-   Brug `geom_point()` til to nummeriske variable.
+
+Nedenfor illustreres hver plottype med udgangspunkt i datasættet ***mtcars*** (built in datasæt på biler).
+
+```{r echo=TRUE}
+mtcars
+```
+
+#### Barplot (univariat)
+
+Variablen **cyl** (antal cylindre), som er en kategorisk variabel, kan visualiseres via. et barplot:
+
+```{r echo=TRUE}
+ggplot(mtcars) +
+  aes(x = factor(cyl)) +  # Omform cyl til en kategorisk variabel
+  geom_bar() +
+  labs(
+    title = "Antal biler pr. antal cylindere",
+    x = "Antal cylindre",
+    y = "Antal biler"
+  ) +
+  theme_minimal()
+```
+
+#### Histogram (univariat)
+
+Variablen **mpg** (miles per gallon), som er en numerisk, kan visualiseres via. et histogram:
+
+```{r echo=TRUE}
+ggplot(mtcars) +
+  aes(x = mpg) +
+  geom_histogram() +
+  labs(
+    title = "Histogram af brændstoføkonomi",
+    x = "Miles per gallon (mpg)",
+    y = "Antal biler"
+  ) +
+  theme_minimal()
+```
+
+#### Boksplot (univariat)
+
+Variablen **mpg** (miles per gallon), som er en numerisk, kan også visualiseres via. et boksplot:
+
+```{r echo=TRUE}
+ggplot(mtcars) +
+  aes(x = "", y = mpg) +  # "" for at undgå en x-akse kategori, og y for at angive mpg
+  geom_boxplot(fill = "#003366", color = "black") +  # Ændring af farver
+  labs(
+    title = "Boksplot af brændstoføkonomi",
+    x = "",  # Tomt for at undgå en x-akse etiket
+    y = "Miles per gallon (mpg)"
+  ) +
+  theme_minimal()
+```
+
+#### Barplot (bivariat)
+
+Vi kan visualisere sammenhængen mellem variablene **cyl** (antal cylindre) og **gear** (antal gear), som begge er kategoriske variabler via `barplot()`:
+
+```{r echo=TRUE}
+ggplot(mtcars) +
+  aes(x = factor(cyl), fill = factor(gear)) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Fordeling af biler pr. cylinder og gear",
+    x = "Antal cylindre",
+    y = "Antal biler",
+    fill = "Antal gear"
+  ) +
+  theme_minimal()
+```
+
+#### Scatterplot (bivariat)
+
+Vi kan også visualisere sammenhængen mellem **cyl** (antal cylindre) og **gear** (antal gear) via `geom_jitter()`. Et jitter-plot er en variant af et scatterplot, hvor punkterne bliver "spredt" (jittered) lidt tilfældigt, når de overlapper hinanden:
+
+```{r echo=T}
+ggplot(mtcars) +
+  aes(x = factor(cyl), y = factor(gear)) +
+  geom_jitter(width = 0.2, height = 0.2) +
+  labs(
+    title = "Spredning af biler mellem cylinder og gear",
+    x = "Antal cylindre",
+    y = "Antal gear"
+  ) 
+```
+
+#### Boksplot (bivariat)
+
+Vi kan bruge et boksplot til at se fordelingen af variablene **mpg** (nummerisk) over **cyl** (kategorisk):
+
+```{r echo=TRUE}
+ggplot(mtcars) +
+  aes(x = factor(cyl), y = mpg) +
+  geom_boxplot() +
+  labs(
+    title = "Brændstoføkonomi pr. cylinder",
+    x = "Antal cylindre",
+    y = "Miles per gallon"
+  ) +
+  theme_minimal()
+```
+
+#### Scatterplot (bivariat)
+
+Og vi kan bruge et scatterplot til at se sammenhængen mellem variablene **wt** (vægt) og **mpg** (miles per gallon), som begge er numeriske variabler med `geom_point()`:
+
+```{r echo=TRUE}
+ggplot(mtcars) +
+  aes(x = wt, y = mpg) +
+  geom_point() +
+  labs(
+    title = "Sammenhæng mellem vægt og brændstoføkonomi",
+    x = "Vægt (1000 lbs)",
+    y = "Miles per gallon"
+  ) +
+  theme_minimal()
+```
+
+#### Scatterplot (bivariat) med regressionslinje
+
+Det er også muligt at lægge flere plots ovenpå hinanden med ggplot. F.eks. kan I lægge en regressionslinje indover jeres scatterplot med `geom_smooth()` :
+
+```{r}
+ggplot(mtcars) +
+  aes(x = wt, y = mpg) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "blue", se = FALSE) +  # Tilføjer en lineær regressionslinje
+  labs(
+    title = "Sammenhæng mellem vægt og brændstoføkonomi",
+    x = "Vægt (1000 lbs)",
+    y = "Miles per gallon"
+  ) +
+  theme_minimal()
+```
+
+## Ændring af plot-udseende
+
+ggplots kan nemt ændres ved at tilføje elementer til graferne (ligesom LEGO-klodser). Nedenfor illustreres et par typiske ændringer, med udgangspunkt i et simpelt plot, der kortlægger variablene **wt** (vægt) til x-aksen og **mpg** (miles per gallon) til y-aksen:
+
+```{r echo=TRUE}
+library(ggplot2)
+
+ggplot(data = mtcars) +
+  aes(x = wt, y = mpg) +
+  geom_point()
+```
+
+Man kan bruge funktionen `labs()` til at tilføje titel og asketitler:
+
+```{r echo=TRUE}
+library(ggplot2)
+
+ggplot(data = mtcars) +
+  aes(x = wt, y = mpg) +
+  geom_point() +
+  labs(
+    title = "Relationship between Weight and Fuel Efficiency",
+    x = "Weight (1000 lbs)",
+    y = "Miles per gallon"
+  )
+```
+
+Man kan ændre dine plots visuelle udseende med `themes()`. Man kan f.eks. ændre baggrunde, akser, tekst, grids, osv., ved at bruge forskellige temaer ggplot2 kommer med flere indbyggede temaer, f.eks. `theme_minimal():`
+
+```{r}
+ggplot(data = mtcars) +
+  aes(x = wt, y = mpg) +
+  geom_point() +
+  labs(
+    title = "Relationship between Weight and Fuel Efficiency",
+    x = "Weight (1000 lbs)",
+    y = "Miles per gallon") +
+  theme_minimal()
+```
+
+Det er ofte nødvendigt at skrue på værdierne på akserne. Afhængigt af hvilken akse man vil justere bruger man:
+
+-   `scale_x_discrete()`: Bruges til diskrete (kategoriske) værdier på x-aksen
+
+-   `scale_x_continuous()`: Bruges til kontinuære (numeriske) værdier på x-aksen
+
+-   `scale_y_discrete()`: Bruges til diskrete værdier på y-aksen
+
+-   `scale_y_continuous()`: Bruges til kontinuære værdier på y-aksen.
+
+```{r echo=T}
+ggplot(data = mtcars) +
+  aes(x = wt, y = mpg) +
+  geom_point() +
+  labs(
+    title = "Relationship between Weight and Fuel Efficiency",
+    x = "Weight (1000 lbs)",
+    y = "Miles per gallon") +
+  theme_minimal()+
+  scale_x_continuous(limits = c(1, 6), breaks = seq(1, 6, by = 1)) +
+  scale_y_continuous(limits = c(0, 40), breaks = seq(0, 40, by = 5)) 
+```
+
+Man kan også ændre farver med `color()`
+
+```{r echo=TRUE}
+ggplot(data = mtcars) +
+  aes(x = wt, y = mpg) +
+  geom_point(color="purple") +
+  labs(
+    title = "Relationship between Weight and Fuel Efficiency",
+    x = "Weight (1000 lbs)",
+    y = "Miles per gallon") +
+  theme_minimal()+
+  scale_x_continuous(limits = c(1, 6), breaks = seq(1, 6, by = 1)) +
+  scale_y_continuous(limits = c(0, 40), breaks = seq(0, 40, by = 5)) 
+```
+
+Man kan ændre tekst-størrelsen på plottets elementer med `theme()`:
+
+```{r echo=TRUE}
+library(ggplot2)
+ggplot(data = mtcars) +
+  aes(x = wt, y = mpg) +
+  geom_point(color="purple") +
+  labs(
+    title = "Relationship between Weight and Fuel Efficiency",
+    x = "Weight (1000 lbs)",
+    y = "Miles per gallon"
+  ) +
+  theme_minimal() +
+  scale_x_continuous(limits = c(1, 6), breaks = seq(1, 6, by = 1)) +
+  scale_y_continuous(limits = c(0, 40), breaks = seq(0, 40, by = 5))+
+  theme(
+    plot.title = element_text(size = 18),          # Ændrer titelstørrelsen
+    axis.title.x = element_text(size = 14),        # Ændrer størrelsen på x-aksetitlen
+    axis.title.y = element_text(size = 14),        # Ændrer størrelsen på y-aksetitlen
+    axis.text.x = element_text(size = 12),         # Ændrer størrelsen på x-akse tekst (ticks)
+    axis.text.y = element_text(size = 12))          # Ændrer størrelsen på y-akse tekst (ticks)
+```
+
+Nogle gange kan det også være nyttigt at rotere sit plot med `coord_flip()`:
+
+```{r echo=TRUE}
+library(ggplot2)
+ggplot(data = mtcars) +
+  aes(x = wt, y = mpg) +
+  geom_point(color="purple") +
+  labs(
+    title = "Relationship between Weight and Fuel Efficiency",
+    x = "Weight (1000 lbs)",
+    y = "Miles per gallon"
+  ) +
+  theme_minimal() +
+  scale_x_continuous(limits = c(1, 6), breaks = seq(1, 6, by = 1)) +
+  scale_y_continuous(limits = c(0, 40), breaks = seq(0, 40, by = 5))+
+  theme(
+    plot.title = element_text(size = 18),          # Ændrer titelstørrelsen
+    axis.title.x = element_text(size = 14),        # Ændrer størrelsen på x-aksetitlen
+    axis.title.y = element_text(size = 14),        # Ændrer størrelsen på y-aksetitlen
+    axis.text.x = element_text(size = 12),         # Ændrer størrelsen på x-akse tekst (ticks)
+    axis.text.y = element_text(size = 12)) +  # Ændrer størrelsen på y-akse tekst (ticks) 
+  coord_flip() # Roterer akserne
+```
+
+## Gem dit ggplot
+
+Standardmetoden til at gemme ggplot-grafer er ved hjælp af `ggsave()` funktionen. Først gemmes dit plot som et objekt, dernæst bruges `ggsave()` med følgende syntaks:
+
+```{r echo=T, eval=F}
+ggsave("mit_plot.jpeg", plot = mit_ggplot_objekt, width = 10, height = 8)
+```
+
+-   `mit_ggplot_objekt` er navnet på det objekt, du har gemt dit plot i
+
+-   `ggsave()` kan gemme i forskellige filformater: JPEG, PNG, PDF, TIFF osv.
+
+-   Gem som udgangspunkt i JPEG
+
+-   Juster størrelse med `width` og `height` (i tommer).
+
+Medmindre du specificerer en anden lokation på computeren gemmes plottet i den mappe, som du arbejder i (tjek evt. med `getwd()`)
