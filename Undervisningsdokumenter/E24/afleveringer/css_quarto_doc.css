@@ -1,0 +1,87 @@
+/* General body settings */
+body {
+    font-family: 'Calibri', sans-serif;  /* Match your body font style */
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;  /* Light background similar to slides */
+    margin: 2rem;  /* Add spacing around the document */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Georgia', serif;  /* Ensure headings stand out with a serif font */
+    color: #004d80;  /* Primary theme color */
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Links */
+a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #005bb5;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #004d80;  /* Accent the left border */
+    padding-left: 1rem;
+    font-style: italic;
+    color: #555;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+table th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+/* Code blocks */
+pre, code {
+    font-family: 'Hack', monospace;  /* Match your custom font for code */
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    padding: 0.5rem;
+    color: #d63384;  /* Accent color for code */
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5rem auto;
+}
+
+/* Custom theme for other elements */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+    margin: 2rem 0;
+}
+
+ul, ol {
+    padding-left: 2rem;
+}
+
+ul li, ol li {
+    margin-bottom: 0.75rem;
+}

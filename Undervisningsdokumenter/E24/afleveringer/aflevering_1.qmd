@@ -1,0 +1,136 @@
+---
+title: "Aflevering 1"
+format:
+  html:
+    css: css_etc/custom-theme-ilisimatusarfik-doc.css
+    fontfamily: Calibri
+  pdf:
+    css: css_etc/custom-theme-ilisimatusarfik-doc.css
+    fontfamily: Calibri
+---
+
+Følgende opgavesæt er den første ud af de seks obligatoriske afleveringer i faget. Du skal lave dine udregninger i R, men indsætte dine resultater og skrive dine svar i dette word-dokument. Når du er færdig med opgaven, skal du kopiere din kode fra R ind nederst i dokumentet og aflevere opgaven på Lectio under *afleveringer*.
+
+## 1 Opret et script og åben data
+
+Start med at åbne R-Studio ved at klikke på dit R-project. Opret dernæst et nyt script og gem det i samme mappe, som dit R-project. Du kan f.eks. kalde scriptet *Aflevering_1*.
+
+-   Brug `getwd()` til at sikre dig, at du arbejder i den rigtige mappe på computeren
+
+-   Indlæs datasættet **firma_data.rds** som et objekt i dit script
+
+-   Brug funktionen **names()** til at se, hvilke variable datasættet indeholder
+
+Du er nu klar til at starte analyserne!
+
+```{r include=F}
+getwd()
+df <- readRDS("firma_data.rds")
+names(df)
+```
+
+# 2 Tabeller
+
+Variablen **tilfredshed** måler, hvor tilfredse firmaerne er med deres omsaetning på en likert skala:
+
+1 (Meget utilfreds)
+
+2 (Utilfreds)
+
+3 (Hverken tilfreds eller utilfreds)
+
+4 (Tilfreds)
+
+5 (Meget tilfreds)
+
+Lav en frekvenstabel over variablen. Kommentér på variablens fordeling - hvor mange er hhv. mere eller mindre tilfredse?
+
+```{r}
+library(janitor)
+tabyl(df$tilfredshed)
+```
+
+# Barplot
+
+-   Visualisér fordelingen på variablen **tilfredshed** med et barplot.
+
+-   Prøv om du kan tilføje aksetitler
+
+-   Prøv om du kan ændre farven på søjlerne i plottet
+
+-   Hvis du har lyst, kan du eksperimentere med at gøre plottet endnu flottere med temaer eller ændre værdierne på akserne
+
+-   Gem barplottet på din computer med `ggsave()`
+
+```{r}
+ggplot(df) +
+  aes(x = factor(tilfredshed)) +
+  geom_bar() +
+  labs(
+    title = "Tilfredshed med omsætning",
+    x = "Tilfredshed",
+    y = "Antal firmaer"
+  ) +
+  theme_minimal()
+```
+
+# Centrummål
+
+Du er interesseret i at finde ud af, hvilken industri der er flest firmaer fra i datasættet.
+
+-   Brug `Mode()` til at finde typetallet/modus for variablen industri
+
+```{r}
+library(DescTools)
+(mode <- Mode(df$industri, na.rm = TRUE))
+```
+
+Datasættet indeholder også information på firmaernes omsætning i variablen **omsaetning**. Du er interesseret i at vide noget om, hvad firmaerne i dit datasæt typisk tjener
+
+-   Brug `Mean()` til at udregne den gennemsnitlige omsætning
+
+```{r}
+Mean(df$omsaetning)
+```
+
+-   Brug `Median()` til at udregne medianen for omsætning
+
+```{r}
+Median(df$omsaetning)
+```
+
+-   Sammenlig gennemsnittet/middelværdien og medianen, som du lige har udregnet. Forklar med ord, hvad forskellen er på dem, og hvad fordelen ved dem hver især er
+
+# Spredningsmål
+
+For at få et endnu bedre overblik over fordelingen på variablen omsaetning er du interesseret i, hvor meget firmaernes omsætning ligger spredt omkring den gennemsnitlige omsætning.
+
+-   Brug var() til et udregne variansen af variablen omsaetning
+
+-   Brug sd() til at udregne standardafvigelsen af variablen omsaetning
+
+-   Forklar med ord, hvad varians og standardafvigelse hver især måler, og hvilken information de giver os
+
+# Boksplot
+
+Endelig vil du gerne visualisere, hvor mange ansatte firmaerne i datasættet har
+
+-   Brug et boksplot til at visualisere fordelingen på variablen ansatte
+
+-   Forklar med ord, hvad boksplottet viser (hvilke værdier viser det os)
+
+```{r}
+library(ggplot2)
+
+ggplot(df, aes(x = ansatte)) + # Variabel = omsaetning
+  geom_boxplot() +  # Opretter et boxplot 
+  theme_minimal() 
+```
+
+```{r}
+sd
+```
+
+---
+
+Når du er færdig skal du kopiere koden fra dit script og indsætte det nederst i dit dokument. Aflevér derefter din besvarelse på lectio under "Aflevering 1".

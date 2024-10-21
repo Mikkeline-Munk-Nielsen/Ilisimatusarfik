@@ -416,7 +416,7 @@ Der findes mange typer af plots eller ***geoms***, som er gode til forskellige t
 
 -   Brug `geom_bar()` til kategoriske variable
 
--   Brug `geom_histogram()` til nummeriske variable
+-   Brug `geom_histogram()` eller `geom_boxplot` til nummeriske variable
 
 [Visualisering af flere variable]{.underline}
 
@@ -464,7 +464,7 @@ ggplot(mtcars) +
 
 ------------------------------------------------------------------------
 
-# Barplot (univariat)
+# Histogram (univariat)
 
 Variablen **mpg** (miles per gallon), som er en numerisk, kan visualiseres via. et histogram:
 
@@ -499,6 +499,44 @@ ggplot(mtcars) +
 :::
 
 ------------------------------------------------------------------------
+
+# Boksplot (univariat)
+
+Variablen **mpg** (miles per gallon), som er en numerisk, kan også visualiseres via. et boksplot:
+
+::: panel-tabset
+### Plot
+
+```{r echo=F, fig.width=6, fig.height=3}
+ggplot(mtcars) +
+  aes(x = "", y = mpg) +  # "" for at undgå en x-akse kategori, og y for at angive mpg
+  geom_boxplot(fill = "#003366", color = "black") +  # Ændring af farver
+  labs(
+    title = "Boksplot af brændstoføkonomi",
+    x = "",  # Tomt for at undgå en x-akse etiket
+    y = "Miles per gallon (mpg)"
+  ) +
+  theme_minimal()
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+ggplot(mtcars) +
+  aes(x = "", y = mpg) +  # "" for at undgå en x-akse kategori, og y for at angive mpg
+  geom_boxplot(fill = "#003366", color = "black") +  # Ændring af farver
+  labs(
+    title = "Boksplot af brændstoføkonomi",
+    x = "",  # Tomt for at undgå en x-akse etiket
+    y = "Miles per gallon (mpg)"
+  ) +
+  theme_minimal()
+
+```
+:::
+
+
+---
 
 # Barplot (bivariat)
 
@@ -693,16 +731,18 @@ Standardmetoden til at gemme ggplot-grafer er ved hjælp af `ggsave()` funktione
 -   Dernæst bruges `ggsave()` med følgende syntaks:
 
 ```{r echo=T, eval=F}
-ggsave("mit_plot.png", plot = mit_ggplot_objekt, width = 10, height = 8)
+ggsave("mit_plot.jpeg", plot = mit_ggplot_objekt, width = 10, height = 8)
 ```
 
 -   `mit_ggplot_objekt` er navnet på det objekt, du har gemt dit plot i
 
 -   `ggsave()` kan gemme i forskellige filformater: JPEG, PNG, PDF, TIFF osv.
 
+-   Gem som udgangspunkt i JPEG
+
 -   Juster størrelse med `width` og `height` (i tommer).
 
----
+------------------------------------------------------------------------
 
 # Gem dit ggplot
 
@@ -722,7 +762,7 @@ mit_ggplot_objekt <- ggplot(mtcars) +
 ggsave("mit_plot.jpeg", plot = mit_ggplot_objekt, width = 10, height = 8)
 ```
 
----
+------------------------------------------------------------------------
 
 # Mere om ggplot
 

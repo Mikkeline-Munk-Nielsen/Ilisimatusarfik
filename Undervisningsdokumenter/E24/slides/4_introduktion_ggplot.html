@@ -745,7 +745,7 @@
 <p><u>Visualisering af én variabel</u></p>
 <ul>
 <li><p>Brug <code>geom_bar()</code> til kategoriske variable</p></li>
-<li><p>Brug <code>geom_histogram()</code> til nummeriske variable</p></li>
+<li><p>Brug <code>geom_histogram()</code> eller <code>geom_boxplot</code> til nummeriske variable</p></li>
 </ul>
 <p><u>Visualisering af flere variable</u></p>
 <ul>
@@ -790,7 +790,7 @@
 </section>
 <section class="slide level0">
 
-<h1>Barplot (univariat)</h1>
+<h1>Histogram (univariat)</h1>
 <p>Variablen <strong>mpg</strong> (miles per gallon), som er en numerisk, kan visualiseres via. et histogram:</p>
 <div class="panel-tabset">
 <ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Plot</a></li><li><a href="#tabset-9-2">Kode</a></li></ul>
@@ -824,8 +824,8 @@
 </section>
 <section class="slide level0">
 
-<h1>Barplot (bivariat)</h1>
-<p>Vi kan visualisere sammenhængen mellem variablene <strong>cyl</strong> (antal cylindre) og <strong>gear</strong> (antal gear), som begge er kategoriske variabler via <code>barplot()</code>:</p>
+<h1>Boksplot (univariat)</h1>
+<p>Variablen <strong>mpg</strong> (miles per gallon), som er en numerisk, kan også visualiseres via. et boksplot:</p>
 <div class="panel-tabset">
 <ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Plot</a></li><li><a href="#tabset-10-2">Kode</a></li></ul>
 <div class="tab-content">
@@ -843,15 +843,14 @@
 <div id="tabset-10-2">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">ggplot</span>(mtcars) <span class="sc">+</span></span>
-<span id="cb13-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl), <span class="at">fill =</span> <span class="fu">factor</span>(gear)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb13-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> mpg) <span class="sc">+</span>  <span class="co"># "" for at undgå en x-akse kategori, og y for at angive mpg</span></span>
+<span id="cb13-3"><a href=""></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"#003366"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span>  <span class="co"># Ændring af farver</span></span>
 <span id="cb13-4"><a href=""></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-5"><a href=""></a>    <span class="at">title =</span> <span class="st">"Fordeling af biler pr. cylinder og gear"</span>,</span>
-<span id="cb13-6"><a href=""></a>    <span class="at">x =</span> <span class="st">"Antal cylindre"</span>,</span>
-<span id="cb13-7"><a href=""></a>    <span class="at">y =</span> <span class="st">"Antal biler"</span>,</span>
-<span id="cb13-8"><a href=""></a>    <span class="at">fill =</span> <span class="st">"Antal gear"</span></span>
-<span id="cb13-9"><a href=""></a>  ) <span class="sc">+</span></span>
-<span id="cb13-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href=""></a>    <span class="at">title =</span> <span class="st">"Boksplot af brændstoføkonomi"</span>,</span>
+<span id="cb13-6"><a href=""></a>    <span class="at">x =</span> <span class="st">""</span>,  <span class="co"># Tomt for at undgå en x-akse etiket</span></span>
+<span id="cb13-7"><a href=""></a>    <span class="at">y =</span> <span class="st">"Miles per gallon (mpg)"</span></span>
+<span id="cb13-8"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb13-9"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -859,8 +858,8 @@
 </section>
 <section class="slide level0">
 
-<h1>Scatterplot (bivariat)</h1>
-<p>Vi kan også visualisere sammenhængen mellem <strong>cyl</strong> (antal cylindre) og <strong>gear</strong> (antal gear) via <code>geom_jitter()</code>. Et jitter-plot er en variant af et scatterplot, hvor punkterne bliver “spredt” (jittered) lidt tilfældigt, når de overlapper hinanden:</p>
+<h1>Barplot (bivariat)</h1>
+<p>Vi kan visualisere sammenhængen mellem variablene <strong>cyl</strong> (antal cylindre) og <strong>gear</strong> (antal gear), som begge er kategoriske variabler via <code>barplot()</code>:</p>
 <div class="panel-tabset">
 <ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Plot</a></li><li><a href="#tabset-11-2">Kode</a></li></ul>
 <div class="tab-content">
@@ -894,8 +893,8 @@
 </section>
 <section class="slide level0">
 
-<h1>Boksplot (bivariat)</h1>
-<p>Vi kan bruge et boksplot til at se fordelingen af variablene <strong>mpg</strong> (nummerisk) over <strong>cyl</strong> (kategorisk):</p>
+<h1>Scatterplot (bivariat)</h1>
+<p>Vi kan også visualisere sammenhængen mellem <strong>cyl</strong> (antal cylindre) og <strong>gear</strong> (antal gear) via <code>geom_jitter()</code>. Et jitter-plot er en variant af et scatterplot, hvor punkterne bliver “spredt” (jittered) lidt tilfældigt, når de overlapper hinanden:</p>
 <div class="panel-tabset">
 <ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Plot</a></li><li><a href="#tabset-12-2">Kode</a></li></ul>
 <div class="tab-content">
@@ -913,14 +912,15 @@
 <div id="tabset-12-2">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">ggplot</span>(mtcars) <span class="sc">+</span></span>
-<span id="cb15-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl), <span class="at">y =</span> mpg) <span class="sc">+</span></span>
-<span id="cb15-3"><a href=""></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb15-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl), <span class="at">fill =</span> <span class="fu">factor</span>(gear)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
 <span id="cb15-4"><a href=""></a>  <span class="fu">labs</span>(</span>
-<span id="cb15-5"><a href=""></a>    <span class="at">title =</span> <span class="st">"Brændstoføkonomi pr. cylinder"</span>,</span>
+<span id="cb15-5"><a href=""></a>    <span class="at">title =</span> <span class="st">"Fordeling af biler pr. cylinder og gear"</span>,</span>
 <span id="cb15-6"><a href=""></a>    <span class="at">x =</span> <span class="st">"Antal cylindre"</span>,</span>
-<span id="cb15-7"><a href=""></a>    <span class="at">y =</span> <span class="st">"Miles per gallon"</span></span>
-<span id="cb15-8"><a href=""></a>  ) <span class="sc">+</span></span>
-<span id="cb15-9"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a href=""></a>    <span class="at">y =</span> <span class="st">"Antal biler"</span>,</span>
+<span id="cb15-8"><a href=""></a>    <span class="at">fill =</span> <span class="st">"Antal gear"</span></span>
+<span id="cb15-9"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb15-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -928,8 +928,8 @@
 </section>
 <section class="slide level0">
 
-<h1>Scatterplot (bivariat)</h1>
-<p>Og vi kan bruge et scatterplot til at se sammenhængen mellem variablene <strong>wt</strong> (vægt) og <strong>mpg</strong> (miles per gallon), som begge er numeriske variabler med <code>geom_point()</code>:</p>
+<h1>Boksplot (bivariat)</h1>
+<p>Vi kan bruge et boksplot til at se fordelingen af variablene <strong>mpg</strong> (nummerisk) over <strong>cyl</strong> (kategorisk):</p>
 <div class="panel-tabset">
 <ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">Plot</a></li><li><a href="#tabset-13-2">Kode</a></li></ul>
 <div class="tab-content">
@@ -947,11 +947,11 @@
 <div id="tabset-13-2">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">ggplot</span>(mtcars) <span class="sc">+</span></span>
-<span id="cb16-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg) <span class="sc">+</span></span>
-<span id="cb16-3"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl), <span class="at">y =</span> mpg) <span class="sc">+</span></span>
+<span id="cb16-3"><a href=""></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb16-4"><a href=""></a>  <span class="fu">labs</span>(</span>
-<span id="cb16-5"><a href=""></a>    <span class="at">title =</span> <span class="st">"Sammenhæng mellem vægt og brændstoføkonomi"</span>,</span>
-<span id="cb16-6"><a href=""></a>    <span class="at">x =</span> <span class="st">"Vægt (1000 lbs)"</span>,</span>
+<span id="cb16-5"><a href=""></a>    <span class="at">title =</span> <span class="st">"Brændstoføkonomi pr. cylinder"</span>,</span>
+<span id="cb16-6"><a href=""></a>    <span class="at">x =</span> <span class="st">"Antal cylindre"</span>,</span>
 <span id="cb16-7"><a href=""></a>    <span class="at">y =</span> <span class="st">"Miles per gallon"</span></span>
 <span id="cb16-8"><a href=""></a>  ) <span class="sc">+</span></span>
 <span id="cb16-9"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -962,8 +962,8 @@
 </section>
 <section class="slide level0">
 
-<h1>Scatterplot (bivariat) med regressionslinje</h1>
-<p>Det er også muligt at lægge flere plots ovenpå hinanden med ggplot. F.eks. kan I (senere hen) lægge en regressionslinje indover jeres scatterplot med <code>geom_smooth()</code> :</p>
+<h1>Scatterplot (bivariat)</h1>
+<p>Og vi kan bruge et scatterplot til at se sammenhængen mellem variablene <strong>wt</strong> (vægt) og <strong>mpg</strong> (miles per gallon), som begge er numeriske variabler med <code>geom_point()</code>:</p>
 <div class="panel-tabset">
 <ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">Plot</a></li><li><a href="#tabset-14-2">Kode</a></li></ul>
 <div class="tab-content">
@@ -983,13 +983,47 @@
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">ggplot</span>(mtcars) <span class="sc">+</span></span>
 <span id="cb17-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg) <span class="sc">+</span></span>
 <span id="cb17-3"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb17-4"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Tilføjer en lineær regressionslinje</span></span>
-<span id="cb17-5"><a href=""></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-6"><a href=""></a>    <span class="at">title =</span> <span class="st">"Sammenhæng mellem vægt og brændstoføkonomi"</span>,</span>
-<span id="cb17-7"><a href=""></a>    <span class="at">x =</span> <span class="st">"Vægt (1000 lbs)"</span>,</span>
-<span id="cb17-8"><a href=""></a>    <span class="at">y =</span> <span class="st">"Miles per gallon"</span></span>
-<span id="cb17-9"><a href=""></a>  ) <span class="sc">+</span></span>
-<span id="cb17-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-5"><a href=""></a>    <span class="at">title =</span> <span class="st">"Sammenhæng mellem vægt og brændstoføkonomi"</span>,</span>
+<span id="cb17-6"><a href=""></a>    <span class="at">x =</span> <span class="st">"Vægt (1000 lbs)"</span>,</span>
+<span id="cb17-7"><a href=""></a>    <span class="at">y =</span> <span class="st">"Miles per gallon"</span></span>
+<span id="cb17-8"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb17-9"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Scatterplot (bivariat) med regressionslinje</h1>
+<p>Det er også muligt at lægge flere plots ovenpå hinanden med ggplot. F.eks. kan I (senere hen) lægge en regressionslinje indover jeres scatterplot med <code>geom_smooth()</code> :</p>
+<div class="panel-tabset">
+<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">Plot</a></li><li><a href="#tabset-15-2">Kode</a></li></ul>
+<div class="tab-content">
+<div id="tabset-15-1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="4_introduktion_ggplot_files/figure-revealjs/unnamed-chunk-32-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-15-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">ggplot</span>(mtcars) <span class="sc">+</span></span>
+<span id="cb18-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg) <span class="sc">+</span></span>
+<span id="cb18-3"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Tilføjer en lineær regressionslinje</span></span>
+<span id="cb18-5"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-6"><a href=""></a>    <span class="at">title =</span> <span class="st">"Sammenhæng mellem vægt og brændstoføkonomi"</span>,</span>
+<span id="cb18-7"><a href=""></a>    <span class="at">x =</span> <span class="st">"Vægt (1000 lbs)"</span>,</span>
+<span id="cb18-8"><a href=""></a>    <span class="at">y =</span> <span class="st">"Miles per gallon"</span></span>
+<span id="cb18-9"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb18-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1004,11 +1038,12 @@
 <li><p>Dernæst bruges <code>ggsave()</code> med følgende syntaks:</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">ggsave</span>(<span class="st">"mit_plot.png"</span>, <span class="at">plot =</span> mit_ggplot_objekt, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">ggsave</span>(<span class="st">"mit_plot.jpeg"</span>, <span class="at">plot =</span> mit_ggplot_objekt, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p><code>mit_ggplot_objekt</code> er navnet på det objekt, du har gemt dit plot i</p></li>
 <li><p><code>ggsave()</code> kan gemme i forskellige filformater: JPEG, PNG, PDF, TIFF osv.</p></li>
+<li><p>Gem som udgangspunkt i JPEG</p></li>
 <li><p>Juster størrelse med <code>width</code> og <code>height</code> (i tommer).</p></li>
 </ul>
 </section>
@@ -1016,19 +1051,19 @@
 
 <h1>Gem dit ggplot</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>mit_ggplot_objekt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span></span>
-<span id="cb19-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg) <span class="sc">+</span></span>
-<span id="cb19-3"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb19-4"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Tilføjer en lineær regressionslinje</span></span>
-<span id="cb19-5"><a href=""></a>  <span class="fu">labs</span>(</span>
-<span id="cb19-6"><a href=""></a>    <span class="at">title =</span> <span class="st">"Sammenhæng mellem vægt og brændstoføkonomi"</span>,</span>
-<span id="cb19-7"><a href=""></a>    <span class="at">x =</span> <span class="st">"Vægt (1000 lbs)"</span>,</span>
-<span id="cb19-8"><a href=""></a>    <span class="at">y =</span> <span class="st">"Miles per gallon"</span></span>
-<span id="cb19-9"><a href=""></a>  ) <span class="sc">+</span></span>
-<span id="cb19-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb19-11"><a href=""></a></span>
-<span id="cb19-12"><a href=""></a><span class="co"># Gem mit plot i R-project mappen på computeren</span></span>
-<span id="cb19-13"><a href=""></a><span class="fu">ggsave</span>(<span class="st">"mit_plot.jpeg"</span>, <span class="at">plot =</span> mit_ggplot_objekt, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>mit_ggplot_objekt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span></span>
+<span id="cb20-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg) <span class="sc">+</span></span>
+<span id="cb20-3"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb20-4"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Tilføjer en lineær regressionslinje</span></span>
+<span id="cb20-5"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-6"><a href=""></a>    <span class="at">title =</span> <span class="st">"Sammenhæng mellem vægt og brændstoføkonomi"</span>,</span>
+<span id="cb20-7"><a href=""></a>    <span class="at">x =</span> <span class="st">"Vægt (1000 lbs)"</span>,</span>
+<span id="cb20-8"><a href=""></a>    <span class="at">y =</span> <span class="st">"Miles per gallon"</span></span>
+<span id="cb20-9"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb20-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb20-11"><a href=""></a></span>
+<span id="cb20-12"><a href=""></a><span class="co"># Gem mit plot i R-project mappen på computeren</span></span>
+<span id="cb20-13"><a href=""></a><span class="fu">ggsave</span>(<span class="st">"mit_plot.jpeg"</span>, <span class="at">plot =</span> mit_ggplot_objekt, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level0">
