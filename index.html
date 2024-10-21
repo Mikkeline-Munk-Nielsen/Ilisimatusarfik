@@ -7,59 +7,59 @@
   <style>
     :root {
       --primary-color: #003366;
-      --font-size: 26px;
-      --font-family: "Source Sans Pro", sans-serif; /* Updated to Helvetica */
-      --lighter-grey: #aaa; /* Lighter grey for subtitle and author */
+      --font-size: 20px; /* Reduced base font size */
+      --font-family: "Source Sans Pro", sans-serif;
+      --lighter-grey: #aaa;
     }
 
     body {
-      font-family: var(--font-family); /* Use Helvetica for the body font */
-      font-size: var(--font-size);
+      font-family: var(--font-family);
+      font-size: var(--font-size); /* Use smaller base font size */
       margin: 0;
       padding: 0;
       background-color: white;
       color: #333;
       display: flex;
       justify-content: center;
-      padding-top: 60px; /* Adds space above the title */
+      padding-top: 40px; /* Reduced space above the title */
     }
 
     h1 {
       color: var(--primary-color);
-      font-size: 48px;
-      margin-bottom: 20px; /* Space between title and subtitle */
-      text-align: center; /* Title centered */
+      font-size: 36px; /* Reduced title size */
+      margin-bottom: 10px; /* Reduced space between title and subtitle */
+      text-align: center;
     }
 
     h2 {
-      font-size: 24px; /* Slightly smaller subtitle */
-      color: var(--lighter-grey); /* Lighter grey for subtitle */
-      margin-bottom: 10px;
-      text-align: center; /* Subtitle centered */
+      font-size: 20px; /* Reduced subtitle size */
+      color: var(--lighter-grey);
+      margin-bottom: 5px;
+      text-align: center;
     }
 
     h3 {
-      font-size: 20px; /* Slightly smaller author text */
-      color: var(--lighter-grey); /* Lighter grey for author */
-      margin-bottom: 60px; /* Reduced space below author */
-      text-align: center; /* Author centered */
+      font-size: 16px; /* Smaller author text */
+      color: var(--lighter-grey);
+      margin-bottom: 40px; /* Reduced space below author */
+      text-align: center;
     }
 
     .content {
-      text-align: left; /* Content left-aligned */
-      max-width: 600px; /* Optional: Set a maximum width to control alignment */
+      text-align: left;
+      max-width: 600px; 
     }
 
     .section {
-      margin-bottom: 40px;
+      margin-bottom: 20px; /* Reduced space between sections */
     }
 
     .section h2 {
       color: var(--primary-color);
-      font-size: 40px;
-      margin-bottom: 20px;
+      font-size: 30px; /* Reduced section heading size */
+      margin-bottom: 10px;
       text-align: left;
-      border-bottom: 2px solid var(--primary-color);
+      border-bottom: 1px solid var(--primary-color); /* Thinner border */
     }
 
     ul {
@@ -68,13 +68,13 @@
     }
 
     ul li {
-      margin-bottom: 10px;
+      margin-bottom: 8px; /* Reduced space between list items */
     }
 
     ul li a {
       text-decoration: none;
       color: #0066cc;
-      font-size: 26px;
+      font-size: 20px; /* Reduced link font size */
     }
 
     ul li a:hover {
@@ -82,11 +82,11 @@
     }
 
     footer {
-      font-size: 18px;
+      font-size: 16px; /* Smaller footer text */
       font-family: var(--font-family);
       color: #333;
-      text-align: center; /* Centered the footer */
-      margin-top: 50px;
+      text-align: center;
+      margin-top: 40px; /* Reduced space above footer */
     }
 
   </style>
@@ -109,7 +109,6 @@
         </ul>
       </div>
 
-      <!-- Ny sektion til kodebogsfil -->
       <div class="section">
         <h2>Kodebog</h2>
         <ul>
