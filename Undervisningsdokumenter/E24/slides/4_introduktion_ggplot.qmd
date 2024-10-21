@@ -24,9 +24,9 @@ editor: visual
 
 ::::: two-column-layout
 ::: left-column
--   **ggplot2** er en datavisualiseringspakke i R.
--   Den er bygget på *grammar of graphics* og giver fleksibilitet til at skabe avancerede plots.
--   Det basale i ggplot2: *data*, *aes*, og *geometriske objekter (geoms)*.
+-   **ggplot2** er en datavisualiseringspakke i R
+-   Den er bygget på *grammar of graphics* og giver fleksibilitet til at skabe avancerede plots
+-   Det basale i ggplot2: *data*, *aes*, og *geometriske objekter (geoms)*
 :::
 
 ::: right-column
@@ -38,7 +38,7 @@ editor: visual
 
 # De tre grundelementer i ggplot2
 
-1.  **Data**: Data, du vil plotte.
+1.  **Data**: Data, du vil plotte
 2.  **Aesthetic mappings (aes)**: Kortlægning af variabler
 3.  **Geometriske objekter (geom)**: plot-type, f.eks. søjlediagram, scatterplot, eller boksplot
 
@@ -54,9 +54,9 @@ ggplot(data = <DATA>) +
 
 # Syntaks i ggplot
 
--   ggplot2 er som at bygge med LEGO-klodser: Du tilføjer forskellige lag for at skabe det endelige plot.
--   Hvert lag bygger på det forrige og tilføjer nye visuelle elementer.
--   Basen er data, og du bygger videre med lag som akser, farver og geometriske former.
+-   ggplot2 er som at bygge med LEGO-klodser: Du tilføjer forskellige lag for at skabe det endelige plot
+-   Hvert lag bygger på det forrige og tilføjer nye visuelle elementer
+-   Basen er data, og du bygger videre med lag som akser, farver og geometriske former
 
 ```{r echo=T, eval=F}
 ggplot(data = <DATA>) +
@@ -70,9 +70,9 @@ ggplot(data = <DATA>) +
 
 -   Data fra ***mtcars***-datasættet (built in datasæt på biler)
 
--   Kortlægger variablene **wt** (vægt) til x-aksen og **mpg** (miles per gallon) til y-aksen.
+-   Kortlægger variablene **wt** (vægt) til x-aksen og **mpg** (miles per gallon) til y-aksen
 
--   `geom_point()` tilføjer punkterne til plottet.
+-   `geom_point()` tilføjer punkterne til plottet
 
 ::: panel-tabset
 ### Scatterplot
@@ -144,7 +144,7 @@ ggplot(data = mtcars) +
 
 -   Man kan ændre dine plots visuelle udseende med `themes()`
 
--   Man kan f.eks. ændre baggrunde, akser, tekst, grids, osv., ved at bruge forskellige temaer.
+-   Man kan f.eks. ændre baggrunde, akser, tekst, grids, osv., ved at bruge forskellige temaer
 
 -   ggplot2 kommer med flere indbyggede temaer, f.eks. `theme_minimal()`
 
@@ -186,7 +186,7 @@ ggplot(data = mtcars) +
 
 # Ændring af plot-udseende
 
-Det er ofte nødvendigt at skrue på værdierne på akserne. Afhængigt af, hvilken akse man vil justere bruger man:
+Det er ofte nødvendigt at skrue på værdierne på akserne. Afhængigt af hvilken akse man vil justere bruger man:
 
 -   `scale_x_discrete()`: Bruges til diskrete (kategoriske) værdier på x-aksen
 
@@ -422,15 +422,15 @@ Der findes mange typer af plots eller ***geoms***, som er gode til forskellige t
 
 -   Brug `geom_bar()` eller `geom_jitter()` til to kategoriske variable
 
--   Brug `geom_boxplot` til en interval variabel og en kategoriske variabel.
+-   Brug `geom_boxplot` til en nummerisk variabel og en kategoriske variabel.
 
--   Brug `geom_point()` til to interval variable.
+-   Brug `geom_point()` til to nummeriske variable.
 
 ------------------------------------------------------------------------
 
 # Barplot (univariat)
 
-Variablen ***cyl*** (antal cylindre), som er en diskret variabel, kan visualiseres via. et barplot:
+Variablen **cyl** (antal cylindre), som er en kategorisk variabel, kan visualiseres via. et barplot:
 
 ::: panel-tabset
 ### Plot
@@ -466,7 +466,7 @@ ggplot(mtcars) +
 
 # Barplot (univariat)
 
-Variablen ***mpg*** (miles per gallon), som er en numerisk, kan visualiseres via. et histogram:
+Variablen **mpg** (miles per gallon), som er en numerisk, kan visualiseres via. et histogram:
 
 ::: panel-tabset
 ### Plot
@@ -576,7 +576,7 @@ ggplot(mtcars) +
 
 # Boksplot (bivariat)
 
-Vi kan bruge et boksplot til at se fordelingen af variablene **mpg** (interval) over **cyl** (kategorisk):
+Vi kan bruge et boksplot til at se fordelingen af variablene **mpg** (nummerisk) over **cyl** (kategorisk):
 
 ::: panel-tabset
 ### Plot
@@ -683,6 +683,46 @@ ggplot(mtcars) +
 :::
 
 ------------------------------------------------------------------------
+
+# Gem dit ggplot
+
+Standardmetoden til at gemme ggplot-grafer er ved hjælp af `ggsave()` funktionen.
+
+-   Først gemmes dit plot som et objekt
+
+-   Dernæst bruges `ggsave()` med følgende syntaks:
+
+```{r echo=T, eval=F}
+ggsave("mit_plot.png", plot = mit_ggplot_objekt, width = 10, height = 8)
+```
+
+-   `mit_ggplot_objekt` er navnet på det objekt, du har gemt dit plot i
+
+-   `ggsave()` kan gemme i forskellige filformater: JPEG, PNG, PDF, TIFF osv.
+
+-   Juster størrelse med `width` og `height` (i tommer).
+
+---
+
+# Gem dit ggplot
+
+```{r echo=T}
+mit_ggplot_objekt <- ggplot(mtcars) +
+  aes(x = wt, y = mpg) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "blue", se = FALSE) +  # Tilføjer en lineær regressionslinje
+  labs(
+    title = "Sammenhæng mellem vægt og brændstoføkonomi",
+    x = "Vægt (1000 lbs)",
+    y = "Miles per gallon"
+  ) +
+  theme_minimal()
+
+# Gem mit plot i R-project mappen på computeren
+ggsave("mit_plot.jpeg", plot = mit_ggplot_objekt, width = 10, height = 8)
+```
+
+---
 
 # Mere om ggplot
 

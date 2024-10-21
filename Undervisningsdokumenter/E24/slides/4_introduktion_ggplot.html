@@ -404,9 +404,9 @@
 <div class="two-column-layout">
 <div class="left-column">
 <ul>
-<li><strong>ggplot2</strong> er en datavisualiseringspakke i R.</li>
-<li>Den er bygget på <em>grammar of graphics</em> og giver fleksibilitet til at skabe avancerede plots.</li>
-<li>Det basale i ggplot2: <em>data</em>, <em>aes</em>, og <em>geometriske objekter (geoms)</em>.</li>
+<li><strong>ggplot2</strong> er en datavisualiseringspakke i R</li>
+<li>Den er bygget på <em>grammar of graphics</em> og giver fleksibilitet til at skabe avancerede plots</li>
+<li>Det basale i ggplot2: <em>data</em>, <em>aes</em>, og <em>geometriske objekter (geoms)</em></li>
 </ul>
 </div>
 <div class="right-column">
@@ -418,7 +418,7 @@
 
 <h1>De tre grundelementer i ggplot2</h1>
 <ol type="1">
-<li><strong>Data</strong>: Data, du vil plotte.</li>
+<li><strong>Data</strong>: Data, du vil plotte</li>
 <li><strong>Aesthetic mappings (aes)</strong>: Kortlægning af variabler</li>
 <li><strong>Geometriske objekter (geom)</strong>: plot-type, f.eks. søjlediagram, scatterplot, eller boksplot</li>
 </ol>
@@ -434,9 +434,9 @@
 
 <h1>Syntaks i ggplot</h1>
 <ul>
-<li>ggplot2 er som at bygge med LEGO-klodser: Du tilføjer forskellige lag for at skabe det endelige plot.</li>
-<li>Hvert lag bygger på det forrige og tilføjer nye visuelle elementer.</li>
-<li>Basen er data, og du bygger videre med lag som akser, farver og geometriske former.</li>
+<li>ggplot2 er som at bygge med LEGO-klodser: Du tilføjer forskellige lag for at skabe det endelige plot</li>
+<li>Hvert lag bygger på det forrige og tilføjer nye visuelle elementer</li>
+<li>Basen er data, og du bygger videre med lag som akser, farver og geometriske former</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>) <span class="sc">+</span></span>
@@ -449,8 +449,8 @@
 <h1>Eksempel på et simpelt plot</h1>
 <ul>
 <li><p>Data fra <strong><em>mtcars</em></strong>-datasættet (built in datasæt på biler)</p></li>
-<li><p>Kortlægger variablene <strong>wt</strong> (vægt) til x-aksen og <strong>mpg</strong> (miles per gallon) til y-aksen.</p></li>
-<li><p><code>geom_point()</code> tilføjer punkterne til plottet.</p></li>
+<li><p>Kortlægger variablene <strong>wt</strong> (vægt) til x-aksen og <strong>mpg</strong> (miles per gallon) til y-aksen</p></li>
+<li><p><code>geom_point()</code> tilføjer punkterne til plottet</p></li>
 </ul>
 <div class="panel-tabset">
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Scatterplot</a></li><li><a href="#tabset-1-2">Kode</a></li></ul>
@@ -520,7 +520,7 @@
 <h1>Ændring af plot-udseende</h1>
 <ul>
 <li><p>Man kan ændre dine plots visuelle udseende med <code>themes()</code></p></li>
-<li><p>Man kan f.eks. ændre baggrunde, akser, tekst, grids, osv., ved at bruge forskellige temaer.</p></li>
+<li><p>Man kan f.eks. ændre baggrunde, akser, tekst, grids, osv., ved at bruge forskellige temaer</p></li>
 <li><p>ggplot2 kommer med flere indbyggede temaer, f.eks. <code>theme_minimal()</code></p></li>
 </ul>
 <div class="panel-tabset">
@@ -557,7 +557,7 @@
 <section class="slide level0">
 
 <h1>Ændring af plot-udseende</h1>
-<p>Det er ofte nødvendigt at skrue på værdierne på akserne. Afhængigt af, hvilken akse man vil justere bruger man:</p>
+<p>Det er ofte nødvendigt at skrue på værdierne på akserne. Afhængigt af hvilken akse man vil justere bruger man:</p>
 <ul>
 <li><p><code>scale_x_discrete()</code>: Bruges til diskrete (kategoriske) værdier på x-aksen</p></li>
 <li><p><code>scale_x_continuous()</code>: Bruges til kontinuære (numeriske) værdier på x-aksen</p></li>
@@ -750,14 +750,14 @@
 <p><u>Visualisering af flere variable</u></p>
 <ul>
 <li><p>Brug <code>geom_bar()</code> eller <code>geom_jitter()</code> til to kategoriske variable</p></li>
-<li><p>Brug <code>geom_boxplot</code> til en interval variabel og en kategoriske variabel.</p></li>
-<li><p>Brug <code>geom_point()</code> til to interval variable.</p></li>
+<li><p>Brug <code>geom_boxplot</code> til en nummerisk variabel og en kategoriske variabel.</p></li>
+<li><p>Brug <code>geom_point()</code> til to nummeriske variable.</p></li>
 </ul>
 </section>
 <section class="slide level0">
 
 <h1>Barplot (univariat)</h1>
-<p>Variablen <strong><em>cyl</em></strong> (antal cylindre), som er en diskret variabel, kan visualiseres via. et barplot:</p>
+<p>Variablen <strong>cyl</strong> (antal cylindre), som er en kategorisk variabel, kan visualiseres via. et barplot:</p>
 <div class="panel-tabset">
 <ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Plot</a></li><li><a href="#tabset-8-2">Kode</a></li></ul>
 <div class="tab-content">
@@ -791,7 +791,7 @@
 <section class="slide level0">
 
 <h1>Barplot (univariat)</h1>
-<p>Variablen <strong><em>mpg</em></strong> (miles per gallon), som er en numerisk, kan visualiseres via. et histogram:</p>
+<p>Variablen <strong>mpg</strong> (miles per gallon), som er en numerisk, kan visualiseres via. et histogram:</p>
 <div class="panel-tabset">
 <ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Plot</a></li><li><a href="#tabset-9-2">Kode</a></li></ul>
 <div class="tab-content">
@@ -895,7 +895,7 @@
 <section class="slide level0">
 
 <h1>Boksplot (bivariat)</h1>
-<p>Vi kan bruge et boksplot til at se fordelingen af variablene <strong>mpg</strong> (interval) over <strong>cyl</strong> (kategorisk):</p>
+<p>Vi kan bruge et boksplot til at se fordelingen af variablene <strong>mpg</strong> (nummerisk) over <strong>cyl</strong> (kategorisk):</p>
 <div class="panel-tabset">
 <ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Plot</a></li><li><a href="#tabset-12-2">Kode</a></li></ul>
 <div class="tab-content">
@@ -993,6 +993,42 @@
 </div>
 </div>
 </div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Gem dit ggplot</h1>
+<p>Standardmetoden til at gemme ggplot-grafer er ved hjælp af <code>ggsave()</code> funktionen.</p>
+<ul>
+<li><p>Først gemmes dit plot som et objekt</p></li>
+<li><p>Dernæst bruges <code>ggsave()</code> med følgende syntaks:</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">ggsave</span>(<span class="st">"mit_plot.png"</span>, <span class="at">plot =</span> mit_ggplot_objekt, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p><code>mit_ggplot_objekt</code> er navnet på det objekt, du har gemt dit plot i</p></li>
+<li><p><code>ggsave()</code> kan gemme i forskellige filformater: JPEG, PNG, PDF, TIFF osv.</p></li>
+<li><p>Juster størrelse med <code>width</code> og <code>height</code> (i tommer).</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Gem dit ggplot</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>mit_ggplot_objekt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span></span>
+<span id="cb19-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg) <span class="sc">+</span></span>
+<span id="cb19-3"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-4"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Tilføjer en lineær regressionslinje</span></span>
+<span id="cb19-5"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-6"><a href=""></a>    <span class="at">title =</span> <span class="st">"Sammenhæng mellem vægt og brændstoføkonomi"</span>,</span>
+<span id="cb19-7"><a href=""></a>    <span class="at">x =</span> <span class="st">"Vægt (1000 lbs)"</span>,</span>
+<span id="cb19-8"><a href=""></a>    <span class="at">y =</span> <span class="st">"Miles per gallon"</span></span>
+<span id="cb19-9"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb19-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb19-11"><a href=""></a></span>
+<span id="cb19-12"><a href=""></a><span class="co"># Gem mit plot i R-project mappen på computeren</span></span>
+<span id="cb19-13"><a href=""></a><span class="fu">ggsave</span>(<span class="st">"mit_plot.jpeg"</span>, <span class="at">plot =</span> mit_ggplot_objekt, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section class="slide level0">

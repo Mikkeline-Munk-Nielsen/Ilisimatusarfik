@@ -1945,10 +1945,25 @@ Levels: Detail Finans Produktion Sundhed Teknologi</code></pre>
 </div></aside></section>
 <section class="slide level0">
 
+<h1>Shortcut i R</h1>
+<p>En god funktion er <code>summary()</code> som viser: minimum (<code>Min.</code>), første kvartil (<code>1st Qu.</code>), median (<code>Median</code>), gennemsnit (<code>Mean</code>), tredje kvartil (<code>3rd Qu.</code>), maximum (<code>Max.</code>), og manglende værdier (<code>NA</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">summary</span>(df<span class="sc">$</span>omsaetning)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  53875  239916  384974  397981  493462  801603 </code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
 <h1>Spredningsmål</h1>
 <ul>
 <li><p>Udover den ”typiske værdi” er det informativt at undersøge spredningen på en variabel, dvs. hvor langt de forskellige enheders værdier ligger fra hinanden.</p></li>
 <li><p>Spredningsmål siger altså noget om variationen i data, og beskæftiger sig med, hvor meget observationerne afviger fra middelværdien</p></li>
+</ul>
+<p><br></p>
+<ul>
 <li><p>Der er to hovedbegreber i statistik for spredningsmål*:</p>
 <ul>
 <li><p>Varians: <span class="math inline">\(Var(x)\)</span> eller <span class="math inline">\(\sigma^2{(x)}\)</span></p></li>
@@ -1977,19 +1992,19 @@ Levels: Detail Finans Produktion Sundhed Teknologi</code></pre>
 
 <h1>Varians</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">25</span>)</span>
-<span id="cb20-2"><a href=""></a><span class="fu">mean</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">25</span>)</span>
+<span id="cb22-2"><a href=""></a><span class="fu">mean</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12.3</code></pre>
 </div>
 </div>
 
-<img data-src="3_univariat_analyse_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
+<img data-src="3_univariat_analyse_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch"></section>
 <section class="slide level0">
 
 <h1>Standardafvigelse</h1>
 <ul>
-<li>Tager du kvadratroden af variansen, får du standardafvigelsen (𝑆), som er angivet i samme enhed som variablen (f.eks. år eller kroner)</li>
+<li>Tager du kvadratroden af variansen, får du standardafvigelsen (sd), som er angivet i samme enhed som variablen (f.eks. år eller kroner)</li>
 </ul>
 <p><span class="math display">\[
 \text{Var}(x) = \sigma^2(x) = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2
@@ -2003,15 +2018,15 @@ Levels: Detail Finans Produktion Sundhed Teknologi</code></pre>
 <h1>Standardafvigelse</h1>
 <ul>
 <li><p>Standardafvigelsen udtrykker kvadratroden af den gennemsnitlige kvadrerede afvigelse fra gennemsnittet på en variabel</p></li>
-<li><p>Den er med andre ord tæt på at være et mål for den gennemsnitlige afvigelse fra gennemsnittet på en variabel, på variablens oprindelige skala - derfor bruges den ofte deskriptivt</p></li>
+<li><p>Den er med andre ord tæt på at være et mål for den gennemsnitlige afvigelse fra gennemsnittet, på variablens oprindelige skala - derfor bruges den ofte deskriptivt</p></li>
 <li><p>Find f.eks. variansen og standardafvigelsen på variablen <strong><em>omsaetning</em></strong> i firmadatasættet:</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">var</span>(df<span class="sc">$</span>omsaetning, <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">var</span>(df<span class="sc">$</span>omsaetning, <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 53016059543</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">sd</span>(df<span class="sc">$</span>omsaetning, <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">sd</span>(df<span class="sc">$</span>omsaetning, <span class="at">na.rm=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 230252.2</code></pre>
 </div>

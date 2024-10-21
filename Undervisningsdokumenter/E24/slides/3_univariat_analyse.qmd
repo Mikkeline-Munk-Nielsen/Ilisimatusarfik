@@ -529,13 +529,15 @@ summary(df$omsaetning)
 
 ```
 
----
+------------------------------------------------------------------------
 
 # Spredningsmål
 
 -   Udover den ”typiske værdi” er det informativt at undersøge spredningen på en variabel, dvs. hvor langt de forskellige enheders værdier ligger fra hinanden.
 
 -   Spredningsmål siger altså noget om variationen i data, og beskæftiger sig med, hvor meget observationerne afviger fra middelværdien
+
+<br>
 
 -   Der er to hovedbegreber i statistik for spredningsmål\*:
 
@@ -603,7 +605,7 @@ axis(1)
 
 # Standardafvigelse
 
--   Tager du kvadratroden af variansen, får du standardafvigelsen (𝑆), som er angivet i samme enhed som variablen (f.eks. år eller kroner)
+-   Tager du kvadratroden af variansen, får du standardafvigelsen (sd), som er angivet i samme enhed som variablen (f.eks. år eller kroner)
 
 $$
 \text{Var}(x) = \sigma^2(x) = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2
@@ -619,7 +621,7 @@ $$
 
 -   Standardafvigelsen udtrykker kvadratroden af den gennemsnitlige kvadrerede afvigelse fra gennemsnittet på en variabel
 
--   Den er med andre ord tæt på at være et mål for den gennemsnitlige afvigelse fra gennemsnittet på en variabel, på variablens oprindelige skala - derfor bruges den ofte deskriptivt
+-   Den er med andre ord tæt på at være et mål for den gennemsnitlige afvigelse fra gennemsnittet, på variablens oprindelige skala - derfor bruges den ofte deskriptivt
 
 -   Find f.eks. variansen og standardafvigelsen på variablen ***omsaetning*** i firmadatasættet:
 
