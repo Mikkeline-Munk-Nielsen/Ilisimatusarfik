@@ -240,7 +240,7 @@ ggplot(data = mtcars) +
 
 # Ændring af plot-udseende
 
-Man kan også ændre farver med `color()`
+Man kan også ændre farver på sine ggplots. Afhængigt af hvilken type geometrisk objekt du arbejder med, bruger man `fill()` eller `color()`. **`color()`** ændrer kantfarver og punktfarver, `fill()` ændrer fyldfarver på objekter, der har en indre fyldning. I et scatterplot med punkter bruges `color()`:
 
 ::: panel-tabset
 ### Scatterplot

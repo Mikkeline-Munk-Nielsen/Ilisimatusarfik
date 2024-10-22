@@ -321,7 +321,7 @@ Variablen **cyl** (antal cylindre), som er en kategorisk variabel, kan visualise
 ```{r echo=TRUE}
 ggplot(mtcars) +
   aes(x = factor(cyl)) +  # Omform cyl til en kategorisk variabel
-  geom_bar() +
+  geom_bar(fill = "#003366") +
   labs(
     title = "Antal biler pr. antal cylindere",
     x = "Antal cylindre",
@@ -337,7 +337,7 @@ Variablen **mpg** (miles per gallon), som er en numerisk, kan visualiseres via. 
 ```{r echo=TRUE}
 ggplot(mtcars) +
   aes(x = mpg) +
-  geom_histogram() +
+  geom_histogram(fill = "#003366") +
   labs(
     title = "Histogram af brændstoføkonomi",
     x = "Miles per gallon (mpg)",
@@ -506,7 +506,7 @@ ggplot(data = mtcars) +
   scale_y_continuous(limits = c(0, 40), breaks = seq(0, 40, by = 5)) 
 ```
 
-Man kan også ændre farver med `color()`
+Man kan også ændre farver på sine ggplots. Afhængigt af hvilken type geometrisk objekt du arbejder med, bruger man `fill()` eller `color()`. **`color()`** ændrer kantfarver og punktfarver, `fill()` ændrer fyldfarver på objekter, der har en indre fyldning. I et scatterplot med punkter bruges `color()`:
 
 ```{r echo=TRUE}
 ggplot(data = mtcars) +
