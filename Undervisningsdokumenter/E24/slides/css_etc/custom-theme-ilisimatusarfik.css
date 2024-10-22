@@ -295,3 +295,21 @@ $primary-color: #003366; /* Dark blue resembling Beamer */
     font-size: 1.5em;
     color: #f7931e;
   }
+  
+  .home-button {
+    position: fixed;  /* Fixed position relative to the viewport */
+    top: 10px;
+    right: 20px;
+    z-index: 1000; /* Sørg for, at knappen er øverst */
+  }
+  
+  .home-button a {
+    font-size: 18px;
+    color: #0066cc;
+    text-decoration: none;
+  }
+  
+  .home-button a:hover {
+    text-decoration: underline;
+  }
+  

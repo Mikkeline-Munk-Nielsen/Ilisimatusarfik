@@ -2,13 +2,18 @@
 format: 
   revealjs:
     theme: css_etc/custom-theme-ilisimatusarfik.css
-    slide-level: 0  # Disable automatic slide creation from headings
-    incremental: false 
+    slide-level: 0
+    incremental: false
     logo: css_etc/ilisimatusarfik.png
     highlight: true
     highlight-style: github-dark
+    include-before: |
+      <div class="home-button">
+        <a href="../../index.html">Tilbage</a>
+      </div>
 editor: visual
 ---
+
 
 ::: center
 # Grundlæggende univariat analyse
@@ -354,10 +359,7 @@ Mål for en variabels centrale tendens siger noget om en ”typiske” værdi p�
 
 # Typetal
 
--   Den værdi, der optræder flest gange (kaldes også modus eller modalværdi)
-
-<!-- -->
-
+-   Den værdi, der optræder flest gange (kaldes også modus eller modalværdi
 -   Vi kan bruge `Mode()` funktionen fra pakken `DescTools` til at finde typetallet
 
 ```{r echo=T}

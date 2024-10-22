@@ -5,8 +5,9 @@ subtitle: "Statistik 15 ECTS, Ilisimatusarfik"
 format:
   html:
     toc: true
-    toc-depth: 2
+    toc-depth: 4
     css: custom-toc.css
+    include-before-body: home-button.html    
     include-after-body: logo-after-toc.html
 editor: visual
 ---
@@ -39,6 +40,7 @@ Du kan naturligvis også gemme tal som objekter...
 
 ```{r echo=T}
 mit_tal <- 2
+mit_tal
 ```
 
 lave beregninger med dine objekter...
@@ -86,9 +88,7 @@ Pakker indlæses med funktionen library() i dit script.
 library('tidyverse') 
 ```
 
-Man kan kun indlæse en enkelt pakke af gangen, med mindre man anskaffer
-sig en package-manager såsom pacmann. Pacman er selv en pakke, der
-f.eks. indeholder en funktion `p_load` til at indlæse flere andre pakker på en gang:
+Man kan kun indlæse en enkelt pakke af gangen, med mindre man anskaffer sig en package-manager såsom pacmann. Pacman er selv en pakke, der f.eks. indeholder en funktion `p_load` til at indlæse flere andre pakker på en gang:
 
 ```{r echo=T, eval=F}
 pacman::p_load(tidyverse, janitor)
@@ -225,16 +225,16 @@ Udover at omkode variable med matematiske operationer, er det nyttigt at kunne o
 -   `case_when()` : funktion til at implementere flere betingelser
 -   `fct_recode()` : funktion til specifikt at omkode `factor` variable
 
-`if_else()` kan f.eks. bruges hvis man vil lave en dikotom variabel, der måler, om man er over 18 år gammel og dermed myndig:
+`if_else()` kan f.eks. bruges hvis man vil lave en dikotom variabel, der måler, om man er 18 år gammel eller ældre og dermed myndig:
 
 ```{r echo=T}
 df <- df %>%
-  mutate(myndig = if_else(alder > 18,
+  mutate(myndig = if_else(alder >= 18,
                           "Myndig", # Kategori vis den binære betingelse er sand.
                           "Ikke myndig")) # Kategori hvis den binære betingelse ikke er sand.
 ```
 
-`case_when` bruges også sammen med logiske operatorer, men kan også bruges med funktioner, som i eksemplet nedenfor, hvor funktionen `between()`er anvendt til at lave en variabel med alderskategorier:
+`case_when` kan også bruges med funktioner, som i eksemplet nedenfor, hvor funktionen `between()`er anvendt til at lave en variabel med alderskategorier:
 
 ```{r echo=T}
 df <- df %>%
@@ -258,7 +258,7 @@ df <- df %>% mutate(gender = fct_recode(koen, "Male" = "Mand", "Female" = "Kvind
 
 ## Subsetting
 
-Nogle gange er vi kun interesserede i at arbejde med særlige dele af vores datasæt. Måske er vi f.eks. kun interesseret i to variable fra vores datasæt, eller kun observationer med specifikke værdier på udvalgte variable. I de tilfælde kan vi lave "subsets" af vores datasæt, hvor vi udvælger de specifikke informationer, som vi gerne vil beholde.Når vi "subsetter" udvælger vi data fra vores datasæt ud for logiske udsagn. To nyttige funktioner i arbejde med datasæt/matricer er `select()` og `filter()`
+Nogle gange er vi kun interesserede i at arbejde med særlige dele af vores datasæt. Måske er vi f.eks. kun interesseret i to variable fra vores datasæt, eller kun observationer med specifikke værdier på udvalgte variable. I de tilfælde kan vi lave "subsets" af vores datasæt, hvor vi udvælger de specifikke informationer, som vi gerne vil beholde. To nyttige funktioner i arbejde med datasæt/matricer er `select()` og `filter()`
 
 `Select()` funktionen bruges til at udvælge kolonner/variable i datasættet. Hvis man f.eks. kun er interesseret i variablene koen og net_indkomst, kan man pipe sit dataset over i `select()`, vælge variablene og gemme dem i et nyt datasæt:
 
@@ -278,11 +278,11 @@ kvinde_df <- df %>% filter(koen=="Kvinde")
 
 ### De tre grundelementer i ggplot2
 
-1.  **Data**: Data, du vil plotte
-2.  **Aesthetic mappings (aes)**: Kortlægning af variabler
-3.  **Geometriske objekter (geom)**: plot-type, f.eks. søjlediagram, scatterplot, eller boksplot
+-   `data`: data, du vil plotte
+-   `aes`:kortlægning af variabler (aesthetic mappings)
+-   `geom`**:** plot-type, f.eks. søjlediagram, scatterplot, eller boksplot
 
-ggplot2 er som at bygge med LEGO-klodser: Du tilføjer forskellige lag for at skabe det endelige plot. Hvert lag bygger på det forrige og tilføjer nye visuelle elementer. Basen er data, og du bygger videre med lag som akser, farver og geometriske former
+ggplot2 er som at bygge med LEGO-klodser: Du tilføjer forskellige lag for at skabe det endelige plot. Hvert lag bygger på det forrige og tilføjer nye visuelle elementer. Basen er data, og derfra bygger du videre med lag som akser, farver og geometriske former
 
 ```{r echo=TRUE, eval=F}
 ggplot(data = <DATA>) +
@@ -584,4 +584,95 @@ ggsave("mit_plot.jpeg", plot = mit_ggplot_objekt, width = 10, height = 8)
 
 -   Juster størrelse med `width` og `height` (i tommer).
 
-Medmindre du specificerer en anden lokation på computeren gemmes plottet i den mappe, som du arbejder i (tjek evt. med `getwd()`)
+Medmindre du specificerer en anden lokation på computeren gemmes plottet i den mappe, som du arbejder i (tjek evt. med `getwd()`).
+
+# Univariat analyse
+
+## Tabeller
+
+Brug funktionen `tabyl()` fra pakken `janitor` til at lave tabeller. Du kan f.eks. lave en envejstabel med frekvenser og andele på variablen **udd** fra ESS datasættet således:
+
+```{r echo=T}
+library(janitor) 
+tabyl(df, udd)
+```
+
+Du kan eksportere din tabel til Excel med `writexl`-pakken ved at gemme tabellen i et objekt og bruge funktionen `write_xlxs()`:
+
+```{r echo=T, eval=F}
+min_tabel <- tabyl(df, udd)
+
+library(writexl)
+write_xlsx(list("Min tabel" = min_tabel), "min_tabel.xlsx")
+```
+
+Denne funktion gemmer en excel-fil ved navn "min_tabel.xlsx" på din computer med tabellen i. Excel-filen gemmes i din mapper, som du arbejder i (tjekt med `getwd()`), hvis du ikke specificerer en anden sti.
+
+## Centrummål
+
+Mål for en variabels centrale tendens siger noget om en ”typiske” værdi på variablen. Man taler oftest om tre centrummål:
+
+-   **Typetal**: den værdi, der optræder flest gange (kaldes også modus eller modalværdi)
+
+-   **Middelværdi/gennemsnit**: $\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i$
+
+-   **Median**: værdien af den midterste observation på en variabel eller gennemsnittet mellem de to midterste (den værdi, der deler enhederne i to lige store dele).
+
+### Typetal/modus
+
+Vi kan bruge `Mode()` funktionen fra pakken `DescTools` til at finde typetallet. Vi er dog nødt til at fortælle funktionen, at den skal ignorere missing-værdier, før den virker, ved at skrive: `na.rm = TRUE.`
+
+```{r echo=TRUE}
+library(DescTools)
+Mode(df$udd, na.rm = TRUE)
+```
+
+Mode() fortæller os at modus på variablen **uddannelse** er *Ungdoms-/erhvervsuddannelse*, og at det optræder 4501 gange i datasættet.
+
+### Gennemsnit/middelværdi
+
+Du kan finde middelværdien af en intervalskaleret variabel med funktionen `Mean()`. Igen er vi nødt til at fortælle funktionen, at den skal ignorere missing-værdier, før den virker, ved at skrive: `na.rm = TRUE`
+
+```{r echo=TRUE}
+Mean(df$alder, na.rm = T)
+```
+
+### Median
+
+Du kan finde medianen på en ordinal- eller intervalskaleret variabel med funktionen `Median()`. Igen er vi nødt til at fortælle funktionen, at den skal ignorere missing-værdier, før den virker, ved at skrive: `na.rm = TRUE`
+
+```{r echo=TRUE}
+Median(df$alder, na.rm=T)
+```
+
+## Fraktiler
+
+Hvis du er interesseret i andre fraktiler kan du bruge funktionen quantile(). Hvis det f.eks. gerne vil have kvartiler på en variable, kan du specificere følgende fraktiler:
+
+```{r echo=TRUE}
+quantile(df$alder, probs = c(0.25, 0.5, 0.75), na.rm = TRUE)
+```
+
+### All-in-one summary
+
+En god funktion er `summary()` som viser: minimum (`Min.`), første kvartil (`1st Qu.`), median (`Median`), gennemsnit (`Mean`), tredje kvartil (`3rd Qu.`), maximum (`Max.`), og manglende værdier (`NA`):
+
+```{r echo=TRUE}
+summary(df$alder)
+```
+
+## Spredningsmål
+
+Udover den ”typiske værdi” er det informativt at undersøge spredningen på en variabel, dvs. hvor langt de forskellige enheders værdier ligger fra hinanden. Spredningsmål siger altså noget om variationen i data, og beskæftiger sig med, hvor meget observationerne afviger fra middelværdien.
+
+Du kan finde variansen på en variabel med funktionen `Var()`:
+
+```{r}
+Var(df$alder, na.rm = TRUE)
+```
+
+Eller standardafvigelsen med funktionen `sd()`:
+
+```{r}
+sd(df$alder, na.rm = TRUE)
+```
