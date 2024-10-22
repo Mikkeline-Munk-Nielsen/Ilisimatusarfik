@@ -7,10 +7,6 @@ format:
     logo: css_etc/ilisimatusarfik.png
     highlight: true
     highlight-style: github-dark
-    include-before: |
-      <div class="home-button">
-        <a href="../../index.html">Tilbage</a>
-      </div>
 editor: visual
 ---
 
