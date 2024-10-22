@@ -1,13 +1,3 @@
-/* Tilføj link til Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
-
-/* Globale variabler */
-:root {
-  --primary-color: #003366;
-  --font-family-body: "Source Sans Pro", sans-serif; /* Brug Source Sans Pro fra Google Fonts */
-}
-
-/* TOC-styling */
 #TOC h2 {
   content: "Indhold";
   visibility: hidden;
@@ -22,49 +12,34 @@
 
 /* Juster placering af logo under indholdsfortegnelsen */
 #toc-logo {
-  text-align: center; /* Centrerer logoet */
-  margin-top: 20px; /* Juster margin for at få lidt afstand fra TOC */
-}
+    text-align: center; /* Centrerer logoet */
+    margin-top: 20px; /* Juster margin for at få lidt afstand fra TOC */
+  }
+  
+  #toc-logo img {
+    width: 150px; /* Juster størrelsen efter behov */
+  }
 
-#toc-logo img {
-  width: 150px; /* Juster størrelsen efter behov */
-}
-
-.home-button {
-  position: absolute;
-  top: 10px; /* Justér højden efter behov */
-  right: 20px; /* Justér afstanden fra højre kant */
-  z-index: 1000; /* Sørger for, at knappen altid er øverst */
-  margin: 0; /* Fjern margin for at undgå skubben af tekst */
-}
-
-.home-button a {
-  font-size: 18px;
-  color: #003366;
-  text-decoration: none;
-}
-
-.home-button a:hover {
-  text-decoration: underline;
-}
-
-body {
-  font-family: var(--font-family-body); /* Brug Google Font til body */
-  font-size: 14px; /* Body text size */
-  color: #333333; /* Primær tekstfarve */
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Calibri", sans-serif; /* Headers font set to Calibri */
-  color: #003366; /* Farve til overskrifter */
-  text-align: left; /* Venstrestillet tekst for overskrifter */
-}
-
-a {
-  color: #0066cc; /* Link color */
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
+  .home-button {
+    position: fixed; /* Keep the button fixed while scrolling */
+    top: 10px; /* Adjust the height as needed */
+    right: 30px; /* Adjust the distance from the right edge */
+    z-index: 1000; /* Ensure the button stays on top */
+    margin: 0; /* Remove margin to prevent pushing text */
+  }
+  
+  .home-button a {
+    font-size: 18px;
+    color: #003366;
+    text-decoration: none;
+  }
+  
+  .home-button a:hover {
+    text-decoration: underline;
+  }
+ 
+  h1, h2, h3, h4, h5, h6 {
+    color: #003366; /* Set header color */
+    font-weight: 500; /* Adjust font weight to make it slimmer */
+  }  
+   
