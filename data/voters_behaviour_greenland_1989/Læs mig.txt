@@ -1,0 +1,14 @@
+24-03-2022
+
+Du har downloadet et forskningsdatamateriale fra Rigsarkivet.
+
+Det downloadede materiale består af:
+- Data i formaterne CSV, R, SAS, SPSS og STATA 
+- Dokumenter, som er afleveret sammen med data og som beskriver data
+
+Datamaterialet har fået fjernet evt. oplysninger, der kan identificere enkeltpersoner, f.eks. cpr.numre, løbennumre, adresse- og kontaktoplysninger, fritekst mv. 
+Skriv til data@sa.dk for information om hvilke specifikke oplysninger, der er fjernet, og om hvordan du kan søge om adgang til det fuldstændige datamateriale.
+
+God arbejdslyst.
+
+Rigsarkivet

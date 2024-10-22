@@ -1,0 +1,665 @@
+---
+format: 
+  revealjs:
+    theme: css_etc/custom-theme-ilisimatusarfik.css
+    slide-level: 0
+    incremental: false
+    logo: css_etc/ilisimatusarfik.png
+    highlight: true
+    highlight-style: github-dark
+editor: visual
+---
+
+
+::: center
+# Grundlæggende univariat analyse
+
+### Statistik E24 (15 ECTS)
+
+### ved Mikkeline Munk Nielsen
+:::
+
+------------------------------------------------------------------------
+
+# Hvad er univariat analyse?
+
+-   Uni er latin for én eller et, dvs. analyser med kun én enkelt variabel
+-   Univariat analyse falder inden for ***deskriptiv*** (beskrivende) statistik i modsætning til ***inferentiel*** (forklarende) statistik
+-   I univariat analyse beskriver vi fordelingen af én variabel.
+-   Vi bruger univariat analyse til at skabe overblik over et karakteristikum i en population, f.eks. at beskrive indkomstfordelingen i en population
+
+------------------------------------------------------------------------
+
+# Hvad er univariat analyse?
+
+Typer af spørgsmål vi kan besvare med univariat analyse:
+
+-   Hvordan ser fordelingen af denne variabel ud? → tabeller eller plots
+
+-   Hvad er den typiske værdi på denne variabel? → centrummål
+
+-   Er der meget stor forskel på, hvilke værdier forskellige observationer har på denne variabel? → spredningsmål
+
+------------------------------------------------------------------------
+
+## Eksempel med datasæt
+
+Firmadatasættet fra sidst:
+
+::: panel-tabset
+### Datasæt
+
+```{r, echo=F}
+(df <- readRDS("firma_data.rds"))
+```
+
+### Kode
+
+```{r, echo=TRUE, eval=F}
+getwd()
+df <- readRDS("firma_data.rds")
+```
+:::
+
+------------------------------------------------------------------------
+
+# Frekvenser
+
+Variablen Industri måler, hvilken industri hvert firma tilhører:
+
+::: {style="font-size: 0.8em; border-collapse: collapse; width: 100%;"}
+| Industri   |
+|------------|
+| Detail     |
+| Finans     |
+| Produktion |
+| Sundhed    |
+| Teknologi  |
+:::
+
+------------------------------------------------------------------------
+
+# Frekvenser
+
+En typisk måde at opsummere frekvenser er via. frekvenstabeller (evt. procenter)
+
+::: panel-tabset
+### Envejstabel
+
+```{r, echo=F}
+library(janitor) 
+tabyl(df, industri)
+```
+
+### Kode
+
+```{r, echo=TRUE, eval=F}
+library(janitor) 
+tabyl(df, industri)
+```
+:::
+
+------------------------------------------------------------------------
+
+# Frekvenser
+
+Frekvenser visualeres også ofte via. søjlediagrammer:
+
+::: panel-tabset
+### Barplot
+
+```{r, echo=F}
+library(ggplot2)
+
+ggplot(df, aes(x = industri)) + 
+  geom_bar(fill = "#003366", na.rm = FALSE) + 
+  labs(
+    x = "Industri",
+    y = "Frekvens") +
+  theme(
+    text = element_text(size = 14))  # Gør skriften større
+
+```
+
+### Kode
+
+```{r, echo=TRUE, eval=F}
+library(ggplot2)
+
+ggplot(df, aes(x = industri)) + 
+  geom_bar(fill = "#003366", na.rm = FALSE) + 
+  labs(
+    x = "Industri",
+    y = "Frekvens") +
+  theme(
+    text = element_text(size = 14))  # Gør skriften større
+```
+:::
+
+------------------------------------------------------------------------
+
+# Andele
+
+-   Andele beskriver relativ frekvens/hyppighed
+
+-   Andelsfunktion: $g(z) = \frac{\text{antal observationer med værdien } z}{\text{Antallet af observationer}}$
+
+<br>
+
+::: panel-tabset
+### Envejstabel
+
+```{r, echo=F}
+library(janitor) 
+tabyl(df, industri)
+```
+
+### Kode
+
+```{r, echo=TRUE, eval=F}
+library(janitor) 
+tabyl(df, industri)
+```
+:::
+
+------------------------------------------------------------------------
+
+# Andele
+
+Andele kan også visualiseres med søjlediagrammer (barplots)...
+
+::: panel-tabset
+### Barplot (procent)
+
+```{r, echo=F}
+library(ggplot2)
+
+ggplot(df, aes(x = industri)) + 
+  geom_bar(aes(y = (..count..) / sum(..count..) * 100), 
+           fill = "#003366", na.rm = FALSE) + 
+  labs(
+    x = "Industri",
+    y = "Procent") +
+  theme(
+    text = element_text(size = 14))  # Gør skriften større
+```
+
+### Kode
+
+```{r, echo=TRUE, eval=F}
+library(ggplot2)
+
+ggplot(df, aes(x = industri)) + 
+  geom_bar(aes(y = (..count..) / sum(..count..) * 100), 
+           fill = "#003366", na.rm = FALSE) + 
+  labs(
+    x = "Industri",
+    y = "Procent") +
+  theme(
+    text = element_text(size = 14))  # Gør skriften større
+```
+:::
+
+------------------------------------------------------------------------
+
+# Andele
+
+... eller f.eks. cirkeldiagrammer
+
+::: panel-tabset
+### Pie chart (procent)
+
+```{r echo=F}
+library(dplyr)
+library(ggplot2)
+
+# Beregn procenterne manuelt
+df_pie <- df %>%
+  group_by(industri) %>%
+  summarise(count = n()) %>%
+  mutate(percentage = count / sum(count) * 100)
+
+# Opret cirkeldiagrammet med procenter og hvid tekst
+ggplot(df_pie, aes(x = "", y = percentage, fill = factor(industri))) + 
+  geom_bar(stat = "identity", width = 1) + 
+  coord_polar(theta = "y") + 
+  geom_text(aes(label = paste0(round(percentage, 1), "%")), 
+            position = position_stack(vjust = 0.5), 
+            color = "white") +  # Gør teksten hvid
+  labs(x = NULL, y = NULL, fill = "Industri") +
+  theme_void() +  # Fjerner akse-linjer og labels
+  scale_fill_manual(values = c("#003366", "#6699CC", "#336699", "#99CCFF", "#0066CC"))  # Blå farver
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+library(dplyr)
+library(ggplot2)
+# Beregn procenterne manuelt
+df_pie <- df %>%
+  group_by(industri) %>%
+  summarise(count = n()) %>%
+  mutate(percentage = count / sum(count) * 100)
+
+# Opret cirkeldiagrammet med procenter og hvid tekst
+ggplot(df_pie, aes(x = "", y = percentage, fill = factor(industri))) + 
+  geom_bar(stat = "identity", width = 1) + 
+  coord_polar(theta = "y") + 
+  geom_text(aes(label = paste0(round(percentage, 1), "%")), 
+            position = position_stack(vjust = 0.5), 
+            color = "white") +  # Gør teksten hvid
+  labs(x = NULL, y = NULL, fill = "Industri") +
+  theme_void() +  # Fjerner akse-linjer og labels
+  scale_fill_manual(values = c("#003366", "#6699CC", "#336699", "#99CCFF", "#0066CC"))  # Blå farver
+```
+:::
+
+------------------------------------------------------------------------
+
+# Andele
+
+-   Kummulativ andelsfunktion: $g(z) = \frac{\text{antal observationer} \leq z}{\text{antallet af observationer}}$
+
+-   Først rigtig meningsfuld, når værdier kan rangordnes (fra ordinalt måleniveau)
+
+Ny variabel: **Antal ansatte** **(grupperet)**:
+
+::: {style="font-size: 0.8em; border-collapse: collapse; width: 100%;"}
+| Værdi     |
+|-----------|
+| 0-1000    |
+| 1001-2000 |
+| 2001-3000 |
+| 3001-4000 |
+| 4000+     |
+:::
+
+------------------------------------------------------------------------
+
+# Andele
+
+::: panel-tabset
+### Søjlediagram
+
+```{r, echo=F}
+library(ggplot2)
+library(dplyr)
+
+df <- df %>%
+  mutate(ansatte_gruppe = case_when(
+    ansatte <= 1000 ~ "0 - 1k",
+    ansatte > 1000 & ansatte <= 2000 ~ "1k - 2k",
+    ansatte > 2000 & ansatte <= 3000 ~ "2k - 3k",
+    ansatte > 3000 & ansatte <= 4000 ~ "3k - 4k",
+    ansatte > 4000 ~ "4k+"
+  ))
+
+# Opret barplot med de rigtige aldersgrupper på x-aksen
+ggplot(df, aes(x = ansatte_gruppe)) + 
+  geom_bar(aes(y = cumsum(..count..) / sum(..count..) * 100), 
+           stat = "count", fill = "#003366") + 
+  labs(
+    x = "Ansatte",
+    y = "Kumulativ andel") +
+  scale_x_discrete(drop = FALSE) + # Vis alle kategorier
+  theme(
+    text = element_text(size = 14))  # Gør skriften større
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+library(ggplot2)
+library(dplyr)
+
+
+df <- df %>%
+  mutate(ansatte_gruppe = case_when(
+    ansatte <= 1000 ~ "0 - 1k",
+    ansatte > 1000 & ansatte <= 2000 ~ "1k - 2k",
+    ansatte > 2000 & ansatte <= 3000 ~ "2k - 3k",
+    ansatte > 3000 & ansatte <= 4000 ~ "3k - 4k",
+    ansatte > 4000 ~ "4k+"
+  ))
+
+# Opret barplot med de rigtige aldersgrupper på x-aksen
+ggplot(df, aes(x = ansatte_gruppe)) + 
+  geom_bar(aes(y = cumsum(..count..) / sum(..count..) * 100), 
+           stat = "count", fill = "#003366") + 
+  labs(
+    x = "Ansatte",
+    y = "Kumulativ andel") +
+  scale_x_discrete(drop = FALSE) + # Vis alle kategorier
+  theme(
+    text = element_text(size = 14))  # Gør skriften større
+
+```
+:::
+
+------------------------------------------------------------------------
+
+# Mål for den centrale tendens (centrummål)
+
+Mål for en variabels centrale tendens siger noget om en ”typiske” værdi på variablen. Man taler oftest om tre centrummål:
+
+<br>
+
+-   **Typetal**: den værdi, der optræder flest gange (kaldes også modus eller modalværdi)
+
+-   **Middelværdi/gennemsnit**: $\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i$
+
+-   **Median**: værdien af den midterste observation eller gennemsnittet mellem de to midterste (den værdi, der deler enhederne i to lige store dele).
+
+------------------------------------------------------------------------
+
+# Typetal
+
+-   Den værdi, der optræder flest gange (kaldes også modus eller modalværdi
+-   Vi kan bruge `Mode()` funktionen fra pakken `DescTools` til at finde typetallet
+
+```{r echo=T}
+library(DescTools)
+(mode <- Mode(df$industri, na.rm = TRUE))
+```
+
+-   `Mode()` fortæller os, at typetallet/modus er "Finans", og at det optræder 400 gange i datasættet
+
+------------------------------------------------------------------------
+
+# Middelværdi
+
+-   Det mest brugte centrummål er middelværdien, bedre kendt som gennemsnittet
+
+-   Gennemsnittet er defineret som $\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i$
+
+-   Det beregnes altså ved at lægge alle værdierne på en variabel sammen og dividere med antallet af værdier/observationer. Det er derfor følsomt over for meget store eller meget små værdier, som kan trække gennemsnittet op eller ned.
+
+```{r echo=T}
+Mean(df$omsaetning, na.rm = T)
+```
+
+------------------------------------------------------------------------
+
+# Median
+
+-   Medianen er et mål for den "midterste værdi" på en variabel, når værdierne er rangeret i stigende rækkefølge.
+
+-   De enkelte empiriske observationer af en variabel $(Z)$ noteres som $a$ tildeles et nummer svarende til den enhed (f.eks. individ), der er observeret: $a_1, a_2, a_3, ... a_n$. Dernæst rangordnes observationerne efter værdi:
+
+    <br>
+
+    |        |        |        |        |        |        |        |        |        |        |
+    |--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+    | **18** | **26** | **32** | **34** | **41** | **48** | **55** | **62** | **74** | **78** |
+
+-   Intuitionen bag medianen er, at halvdelen af observationerne vil være større end medianen og halvdelen af observationerne vil være mindre end medianen.
+
+------------------------------------------------------------------------
+
+# Median
+
+-   Hvis der er et lige antal observationer er medianen gennemsnittet af de to midterste tal.
+
+    $$
+    \text{Median} = \frac{x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2} + 1\right)}}{2}
+    $$
+
+-   Hvis der er et ulige antal observationer er medianen det midterste tal i rækken
+
+    $$
+    \text{Median} = x_{\left(\frac{n+1}{2}\right)}
+    $$
+
+------------------------------------------------------------------------
+
+# Fraktiler
+
+-   Medianen er et tilfælde af typen af statistiske mål, der hedder ***fraktiler***
+
+-   En $p$-fraktil er en værdi, hvor andelen $p$ af elementerne i en population har en værdi mindre end $p$ fraktilen. Medianen er altså 0,5 fraktilen
+
+-   Andre nyttige fraktiler er $0,25$ og $0,75$ fraktiler. Tilsammen kaldes $0,25$, $0,50$, og $0,75$ fraktilerne for ***kvartiler***, da de inddeler enhederne i fire lige store grupper
+
+    ```{r echo=T}
+    Median(df$omsaetning, na.rm=T)
+    ```
+
+    ```{r echo=T}
+    quantile(df$omsaetning, probs = c(0.25, 0.5, 0.75), na.rm = TRUE)
+    ```
+
+------------------------------------------------------------------------
+
+# Boksplot
+
+Kvartiler kan visualiseres ved hjælp af boksplots, der viser: `min`, `p25`, `p50`, `p75`, og `max`
+
+::: panel-tabset
+### Boksplot
+
+```{r echo=F}
+library(ggplot2)
+
+ggplot(df, aes(x = omsaetning)) + # Variabel = omsaetning
+  geom_boxplot() +  # Opretter et boxplot 
+  theme_minimal() + # Tema
+      scale_x_continuous(breaks = # Definerer x-aksen
+            seq(min(50000), 
+            max(1000000), 
+            by = 100000)) +
+    labs(
+    x = "Omsætning (DKK)") + # Tilføjer en brugerdefineret titel til x-aksen
+    theme(
+      axis.text.y = element_blank(),  # Fjerner værdierne på y-aksen
+      axis.ticks.y = element_blank(),  # Fjerner stregmarkeringer på y-aksen
+      text = element_text(size = 14)) +  # Gør skriften større
+      coord_fixed(ratio = 300000)  # Justér på højden af boksplottet
+
+
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+library(ggplot2)
+
+ggplot(df, aes(x = omsaetning)) + # Variabel = omsaetning
+  geom_boxplot() +  # Opretter et boxplot 
+  theme_minimal() + # Tema
+      scale_x_continuous(breaks = # Definerer x-aksen
+            seq(min(50000), 
+            max(1000000), 
+            by = 100000)) +
+    labs(
+    x = "Omsætning (DKK)") + # Tilføjer en brugerdefineret titel til x-aksen
+    theme(
+      axis.text.y = element_blank(),  # Fjerner værdierne på y-aksen
+      axis.ticks.y = element_blank(),  # Fjerner stregmarkeringer på y-aksen
+      text = element_text(size = 14)) +  # Gør skriften større
+      coord_fixed(ratio = 300000)  # Justér på højden af boksplottet
+
+```
+:::
+
+------------------------------------------------------------------------
+
+# Centrummål
+
+Øvelse: find eksempler på, hvornår hvert af disse centrummål er interessante at anvende
+
+<br>
+
+-   Typetal
+
+-   Middelværdi
+
+-   Median
+
+------------------------------------------------------------------------
+
+# Centrummål
+
+<br>
+
+::: {style="width: 100%; font-size: 1em; border-collapse: collapse;"}
+|                | **Nominel** | **Ordinal** | **Interval** |
+|----------------|-------------|-------------|--------------|
+| **Typetal**    | ✓           | ✓           | ✓\*          |
+| **Median**     |             | ✓           | ✓            |
+| **Gennemsnit** |             |             | ✓            |
+:::
+
+<br>
+
+::: aside
+\*Typisk kun meningsfuld for variable med diskrete værdier
+:::
+
+------------------------------------------------------------------------
+
+# Shortcut i R
+
+En god funktion er `summary()` som viser: minimum (`Min.`), første kvartil (`1st Qu.`), median (`Median`), gennemsnit (`Mean`), tredje kvartil (`3rd Qu.`), maximum (`Max.`), og manglende værdier (`NA`):
+
+```{r echo=T}
+summary(df$omsaetning)
+
+```
+
+------------------------------------------------------------------------
+
+# Spredningsmål
+
+-   Udover den ”typiske værdi” er det informativt at undersøge spredningen på en variabel, dvs. hvor langt de forskellige enheders værdier ligger fra hinanden.
+
+-   Spredningsmål siger altså noget om variationen i data, og beskæftiger sig med, hvor meget observationerne afviger fra middelværdien
+
+<br>
+
+-   Der er to hovedbegreber i statistik for spredningsmål\*:
+
+    -   Varians: $Var(x)$ eller $\sigma^2{(x)}$
+
+    -   Standardafvigelse: $sd(x)$ eller $\sigma{(x)}$
+
+::: aside
+\*Grundbogen *Metoder i Statskundskab* nævner flere for andre måleniveauer, kap. 14
+:::
+
+------------------------------------------------------------------------
+
+# Varians
+
+-   Variansen siger noget om, hvor stor spredning, der er på en variabel. Med andre ord, ligger observationerne kort eller langt fra middelværdien?
+
+-   Variansen er givet ved gennemsnittet af de kvardrerede afstande mellem hver observation og middelværdien:
+
+$$
+\text{Var}(x) = \sigma^2(x) = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2
+$$
+
+\- $N$ er antallet af observationer
+
+\- $x_i$ er den enkelte observation
+
+\- $\bar{x}$ er gennemsnittet
+
+------------------------------------------------------------------------
+
+# Varians
+
+```{r echo=T}
+data <- c(3, 5, 7, 8, 10, 12, 15, 18, 20, 25)
+mean(data)
+```
+
+```{r, echo=F}
+# Dataserie
+data <- c(3, 5, 7, 8, 10, 12, 15, 18, 20, 25)
+mean_value <- mean(data)
+
+# Generer tilfældige y-værdier
+set.seed(42)  # For reproducerbarhed
+y_vals_random <- runif(length(data), min = 0.5, max = length(data) + 0.5)
+
+# Plot af observationer (scatterplot)
+plot(data, y_vals_random, pch = 19, xlim = c(min(data) - 5, max(data) + 5), ylim = c(0.5, length(data) + 0.5),
+     xlab = "Observationer", ylab = "", axes = FALSE)
+
+# Tilføj gennemsnittet som en rød linje
+abline(v = mean_value, col = "red", lty = 2, lwd = 2)
+
+# Tilføj pile for hver observation, der peger på gennemsnittet
+arrows(x0 = data, y0 = y_vals_random, x1 = rep(mean_value, length(data)), y1 = y_vals_random,
+       col = "blue", length = 0.1, angle = 20)
+
+# Tilføj kun x-akse
+axis(1)
+
+```
+
+------------------------------------------------------------------------
+
+# Standardafvigelse
+
+-   Tager du kvadratroden af variansen, får du standardafvigelsen (sd), som er angivet i samme enhed som variablen (f.eks. år eller kroner)
+
+$$
+\text{Var}(x) = \sigma^2(x) = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2
+$$
+
+$$
+\text{sd}(x)= \sigma(x)=\sqrt{\sigma(x)^2}=\sqrt{\sigma^2(x) = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2}
+$$
+
+------------------------------------------------------------------------
+
+# Standardafvigelse
+
+-   Standardafvigelsen udtrykker kvadratroden af den gennemsnitlige kvadrerede afvigelse fra gennemsnittet på en variabel
+
+-   Den er med andre ord tæt på at være et mål for den gennemsnitlige afvigelse fra gennemsnittet, på variablens oprindelige skala - derfor bruges den ofte deskriptivt
+
+-   Find f.eks. variansen og standardafvigelsen på variablen ***omsaetning*** i firmadatasættet:
+
+```{r echo=T}
+var(df$omsaetning, na.rm=T)
+sd(df$omsaetning, na.rm=T)
+```
+
+------------------------------------------------------------------------
+
+# Opsamling
+
+<br>
+
+|                   |             |             |              |
+|-------------------|-------------|-------------|--------------|
+|                   | **Nominal** | **Ordinal** | **Interval** |
+| Typetal           | ✓           | ✓           | ✓            |
+| Median            |             | ✓           | ✓            |
+| Middelværdi       |             | (✓)         | ✓            |
+| Standardafvigelse |             |             | ✓            |
+
+------------------------------------------------------------------------
+
+# Opsamling
+
+Centrale funktioner:
+
+-   `tabyl()`
+
+-   `ggplot()`
+
+-   `Mode()`
+
+-   `Mean()`
+
+-   `Median()`
+
+-   `Quantile()`
+
+-   `var()`
+
+-   `sd()`
