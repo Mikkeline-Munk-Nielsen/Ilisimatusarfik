@@ -240,7 +240,7 @@ ggplot(data = mtcars) +
 
 # Ændring af plot-udseende
 
-Man kan også ændre farver på sine ggplots. Afhængigt af hvilken type geometrisk objekt du arbejder med, bruger man `fill()` eller `color()`. **`color()`** ændrer kantfarver og punktfarver, `fill()` ændrer fyldfarver på objekter, der har en indre fyldning. I et scatterplot med punkter bruges `color()`:
+Man kan også ændre farver på sine ggplots. Afhængigt af hvilken type geometrisk objekt du arbejder med, bruger man `fill()` eller `color()`. `color()` ændrer kantfarver og punktfarver, `fill()` ændrer fyldfarver på objekter, der har en indre fyldning. I et scatterplot med punkter bruges `color()`:
 
 ::: panel-tabset
 ### Scatterplot
@@ -438,7 +438,7 @@ Variablen **cyl** (antal cylindre), som er en kategorisk variabel, kan visualise
 ```{r echo=F, fig.width=6, fig.height=3}
 ggplot(mtcars) +
   aes(x = factor(cyl)) +  # Omform cyl til en kategorisk variabel
-  geom_bar() +
+  geom_bar(fill = "#003366") +
   labs(
     title = "Antal biler pr. antal cylindere",
     x = "Antal cylindre",
@@ -452,7 +452,7 @@ ggplot(mtcars) +
 ```{r echo=T, eval=F}
 ggplot(mtcars) +
   aes(x = factor(cyl)) +  # Omform cyl til en kategorisk variabel
-  geom_bar() +
+  geom_bar(fill = "#003366") +
   labs(
     title = "Antal biler pr. antal cylindere",
     x = "Antal cylindre",
@@ -590,7 +590,8 @@ ggplot(mtcars) +
     title = "Spredning af biler mellem cylinder og gear",
     x = "Antal cylindre",
     y = "Antal gear"
-  ) 
+  ) +
+  theme_minimal()
 ```
 
 ### Kode

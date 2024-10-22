@@ -604,7 +604,7 @@
 <section class="slide level0">
 
 <h1>Ændring af plot-udseende</h1>
-<p>Man kan også ændre farver med <code>color()</code></p>
+<p>Man kan også ændre farver på sine ggplots. Afhængigt af hvilken type geometrisk objekt du arbejder med, bruger man <code>fill()</code> eller <code>color()</code>. <code>color()</code> ændrer kantfarver og punktfarver, <code>fill()</code> ændrer fyldfarver på objekter, der har en indre fyldning. I et scatterplot med punkter bruges <code>color()</code>:</p>
 <div class="panel-tabset">
 <ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Scatterplot</a></li><li><a href="#tabset-5-2">Kode</a></li></ul>
 <div class="tab-content">
@@ -776,7 +776,7 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">ggplot</span>(mtcars) <span class="sc">+</span></span>
 <span id="cb11-2"><a href=""></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl)) <span class="sc">+</span>  <span class="co"># Omform cyl til en kategorisk variabel</span></span>
-<span id="cb11-3"><a href=""></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#003366"</span>) <span class="sc">+</span></span>
 <span id="cb11-4"><a href=""></a>  <span class="fu">labs</span>(</span>
 <span id="cb11-5"><a href=""></a>    <span class="at">title =</span> <span class="st">"Antal biler pr. antal cylindere"</span>,</span>
 <span id="cb11-6"><a href=""></a>    <span class="at">x =</span> <span class="st">"Antal cylindre"</span>,</span>
