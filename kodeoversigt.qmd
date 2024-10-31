@@ -7,18 +7,20 @@ format:
     toc: true
     toc-depth: 4
     css: custom-toc.css
-    include-before-body: home-button.html    
+    include-before-body: home-button.html
     include-after-body: logo-after-toc.html
 editor: visual
 ---
 
 # Introduktion
 
-Dette dokument giver en oversigt over grundlæggende kode og funktioner i R, som vi skal bruge i kurset. Det er en guide, der hjælper dig med at komme i gang med at oprette objekter, indlæse pakker, arbejde med datasæt og lave grundlæggende datavisualiseringer med **ggplot2**.
+Dette dokument giver en oversigt over grundlæggende kode og funktioner i R, som vi skal bruge i kurset. Det er en guide, der hjælper dig med at komme i gang med at oprette objekter, indlæse pakker, arbejde med datasæt, lave grundlæggende datavisualiseringer med **ggplot2** og gennemføre de analyser, som vi arbejder med på kurset.
 
-Du vil finde eksempler på, hvordan du kan arbejde med datasæt, omkode variable og lave forskellige typer af plots, som du kan tilpasse til dine egne data. Brug dokumentet som en opslagsbog, når du skriver din egen kode eller har brug for at forstå, hvordan specifikke funktioner fungerer.
+Du vil finde eksempler på, hvordan du kan arbejde med datasæt, omkode variable og lave forskellige typer af plots og analyser, som du kan tilpasse til dine egne data. Brug dokumentet som en opslagsbog, når du skriver din egen kode eller har brug for at forstå, hvordan specifikke funktioner fungerer.
 
 Husk at du kan kopiere koden direkte fra dokumentet og tilpasse den til dine egne opgaver. Der er også inkluderet eksempler på, hvordan du gemmer dine resultater og visualiseringer.
+
+Du kan benytte indholdsoversigten i højre side til at navigere i kodebogen, eller søge efter specifikke ord ved at trykke `Ctrl`+`F` (Windows) eller `Cmd`+`F` (Mac) og skrive et søgeord.
 
 # Objekter
 
