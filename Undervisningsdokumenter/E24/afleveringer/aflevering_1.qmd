@@ -4,8 +4,7 @@ format:
   html:
     css: css_etc/custom-theme-ilisimatusarfik-doc.css
     fontfamily: Calibri
-  pdf:
-    css: css_etc/custom-theme-ilisimatusarfik-doc.css
+    include-before-body: ../../home-button.html
 ---
 
 *Følgende er et forslag til besvarelse af den første ud af de seks obligatoriske afleveringer i faget.* *Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.*
