@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Aflevering 1</title>
+<title>Aflevering 1: forslag til besvarelse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Aflevering 1</h1>
+<h1 class="title">Aflevering 1: forslag til besvarelse</h1>
 </div>
 
 
@@ -98,26 +98,283 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<p><em>Følgende er et forslag til besvarelse af den første ud af de seks obligatoriske afleveringer i faget.</em> <em>Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.</em></p>
+<section id="opret-et-script-og-åben-data" class="level1">
+<h1>1 Opret et script og åben data</h1>
+<p>Start med at åbne R-Studio ved at klikke på dit R-project. Opret dernæst et nyt script og gem det i samme mappe, som dit R-project. Du kan f.eks. kalde scriptet <em>Aflevering_1</em>.</p>
+<ul>
+<li><p>Brug <code>getwd()</code> til at sikre dig, at du arbejder i den rigtige mappe på computeren</p></li>
+<li><p>Indlæs datasættet <strong>firma_data.rds</strong> som et objekt i dit script</p></li>
+<li><p>Brug funktionen <strong>names()</strong> til at se, hvilke variable datasættet indeholder</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C:/Users/mmn/Dropbox/Ilisimatusarfik/Undervisningsdokumenter/E24/afleveringer"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"firma_data.rds"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "navn"        "industri"    "ansatte"     "omsaetning"  "tilfredshed"</code></pre>
+</div>
+</div>
+<p>Du er nu klar til at starte analyserne!</p>
+<hr>
 </section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<section id="tabeller" class="level1">
+<h1>2 Tabeller</h1>
+<p>Variablen <strong>tilfredshed</strong> måler, hvor tilfredse firmaerne er med deres omsaetning på en likert skala:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 32%">
+<col style="width: 16%">
+<col style="width: 18%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>1: Meget utilfreds</td>
+<td>2: Utilfreds</td>
+<td>3: Hverken tilfreds eller utilfreds</td>
+<td>4: Tilfreds</td>
+<td>5: Meget tilfreds</td>
+</tr>
+</tbody>
+</table>
+<section id="a-lav-en-frekvenstabel-over-variablen-og-indsæt-den-herunder" class="level3">
+<h3 class="anchored" data-anchor-id="a-lav-en-frekvenstabel-over-variablen-og-indsæt-den-herunder">a) Lav en frekvenstabel over variablen og indsæt den herunder</h3>
+<p>Brug <code>tabyl()</code> fra <code>library(janitor)</code> til at lave en frekvenstabel med procenter. Gem tabellen i et objekt og brug <code>library(writexl)</code> til at eksportere den til excel.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(df<span class="sc">$</span>tilfredshed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>  df$tilfredshed   n percent
+ Meget utilfreds 300     0.3
+       Utilfreds 100     0.1
+         Neutral 200     0.2
+        Tilfreds 100     0.1
+  Meget tilfreds 300     0.3</code></pre>
 </div>
 </div>
-<p>You can add options to executable code like this</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tabel_tilfredshed <span class="ot">&lt;-</span> <span class="fu">tabyl</span>(df<span class="sc">$</span>tilfredshed)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(<span class="fu">list</span>(<span class="st">"Tabel over tilfredshed"</span> <span class="ot">=</span> tabel_tilfredshed), <span class="st">"Tabel_tilfredshed.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="b-kommentér-på-variablens-fordeling---hvor-mange-er-hhv.-mere-eller-mindre-tilfredse" class="level3">
+<h3 class="anchored" data-anchor-id="b-kommentér-på-variablens-fordeling---hvor-mange-er-hhv.-mere-eller-mindre-tilfredse">b) Kommentér på variablens fordeling - hvor mange er hhv. mere eller mindre tilfredse?</h3>
+<p>Tabellen viser, at der er flest firmaer, der enten har svaret “Meget utilfreds” (n=300, 30%) eller “Meget tilfreds” (n=300, 30%). 200 har svaret “Neutral” og 100 har enten svaret “Tilfreds” eller “Utilfreds”. Der er altså ganske stor spredning i, hvor tilfredse firmaerne er med deres omsætning.</p>
+<hr>
+</section>
+</section>
+<section id="barplot" class="level1">
+<h1>3 Barplot</h1>
+<section id="a-visualisér-fordelingen-på-variablen-tilfredshed-med-et-barplot." class="level3">
+<h3 class="anchored" data-anchor-id="a-visualisér-fordelingen-på-variablen-tilfredshed-med-et-barplot.">a) Visualisér fordelingen på variablen <strong>tilfredshed</strong> med et barplot.</h3>
+</section>
+<section id="b-prøv-om-du-kan-tilføje-aksetitler" class="level3">
+<h3 class="anchored" data-anchor-id="b-prøv-om-du-kan-tilføje-aksetitler">b) Prøv om du kan tilføje aksetitler</h3>
+</section>
+<section id="c-prøv-om-du-kan-ændre-farven-på-søjlerne-i-plottet" class="level3">
+<h3 class="anchored" data-anchor-id="c-prøv-om-du-kan-ændre-farven-på-søjlerne-i-plottet">c) Prøv om du kan ændre farven på søjlerne i plottet</h3>
+</section>
+<section id="d-hvis-du-har-lyst-kan-du-eksperimentere-med-at-gøre-plottet-endnu-flottere-med-temaer-eller-ændre-værdierne-på-akserne" class="level3">
+<h3 class="anchored" data-anchor-id="d-hvis-du-har-lyst-kan-du-eksperimentere-med-at-gøre-plottet-endnu-flottere-med-temaer-eller-ændre-værdierne-på-akserne">d) Hvis du har lyst, kan du eksperimentere med at gøre plottet endnu flottere med temaer eller ændre værdierne på akserne</h3>
+<p><br></p>
+<p>Fremgangsmåden er som følger:</p>
+<ul>
+<li><p>Indlæg ggplot2 til library</p></li>
+<li><p>Opret et ggplot, specificér datasættet (df), hvilken variabel der skal mappes på x-aksen (omsaetning), og hvilken type plot du vil have (geom_bar)</p></li>
+<li><p>Tilføj aksetitler (og evt. titel til plottet) ved at tilføje funktionen <code>labs()</code> , hvor du specificerer titler til plot, x-akse og y-akse</p></li>
+<li><p>Tilføj evt. et tema til det plot (her theme_minimal)</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(tilfredshed)) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">"#003366"</span>, <span class="at">na.rm =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Tilfredshed med omsætning"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tilfredshed"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Antal firmaer"</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="aflevering_1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="e-gem-barplottet-på-din-computer-med-ggsave" class="level3">
+<h3 class="anchored" data-anchor-id="e-gem-barplottet-på-din-computer-med-ggsave">e) Gem barplottet på din computer med <code>ggsave()</code></h3>
+<p>Først gemmer du plottet i et objekt, der hedder “barplot_tilfredshed”. Dernæst gemmer du plottet med <code>ggsave()</code>, hvor du fortæller funktionen, at den skal gemme objektet “barplot_tilfredshed” som en jpeg-fil (billede) på din computer som “Barplot_tilfredshed.jpeg”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>barplot_tilfredshed <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(tilfredshed)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">"#003366"</span>, <span class="at">na.rm =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Tilfredshed med omsætning"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Tilfredshed"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Antal firmaer"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"Barplot_tilfredshed.jpeg"</span>, <span class="at">plot =</span> barplot_tilfredshed, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="centrummål" class="level1">
+<h1>4 Centrummål</h1>
+<p>Du er interesseret i at finde ud af, hvilken industri der er flest firmaer fra i datasættet.</p>
+<section id="a-find-typetalletmodus-for-variablen-industri-hvilken-industri-er-mest-repræsenteret-i-datasættet" class="level3">
+<h3 class="anchored" data-anchor-id="a-find-typetalletmodus-for-variablen-industri-hvilken-industri-er-mest-repræsenteret-i-datasættet">a) Find typetallet/modus for variablen <strong>industri</strong> – hvilken industri er mest repræsenteret i datasættet?</h3>
+<p>Vi kan bruge funktionen <code>Mode()</code> fra <code>library(DescTools)</code> til at finde typetallet/modus for variablen industri. Funktionen fortæller os, at modus er “Finans” og at denne værdi optræder 400 gange i datasættet. Den printer desuden til sidst alle værdierne på variablen (levels).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>(mode <span class="ot">&lt;-</span> <span class="fu">Mode</span>(df<span class="sc">$</span>industri, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
+<pre><code>[1] Finans
+attr(,"freq")
+[1] 400
+Levels: Detail Finans Produktion Sundhed Teknologi</code></pre>
 </div>
 </div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+<p>Datasættet indeholder også information på firmaernes omsætning i variablen <strong>omsaetning</strong>. Du er interesseret i at vide noget om, hvad firmaerne i dit datasæt typisk tjener</p>
+</section>
+<section id="b-udregn-den-gennemsnitlige-omsætning" class="level3">
+<h3 class="anchored" data-anchor-id="b-udregn-den-gennemsnitlige-omsætning">b) Udregn den gennemsnitlige omsætning</h3>
+<p>Brug <code>Mean()</code> til at udregne den gennemsnitlige omsætning. Funktionen fortæller os, at den gennemsnitlige omsætning blandt firmaer er 397981.3 DKK.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Mean</span>(df<span class="sc">$</span>omsaetning)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 397981.3</code></pre>
+</div>
+</div>
+</section>
+<section id="c-find-medianen-for-omsætning" class="level3">
+<h3 class="anchored" data-anchor-id="c-find-medianen-for-omsætning">c) Find medianen for omsætning</h3>
+<p>Brug <code>Median()</code> til at udregne medianen for omsætning. Funktionen fortæller os, at medianen på variablen omsætning er en omsætning på 384974.1 DKK</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Median</span>(df<span class="sc">$</span>omsaetning)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 384974.1</code></pre>
+</div>
+</div>
+</section>
+<section id="d-sammenlig-gennemsnittetmiddelværdien-og-medianen-som-du-lige-har-udregnet.-forklar-med-ord-hvad-forskellen-er-på-dem-og-hvad-fordelen-ved-dem-hver-især-er." class="level3">
+<h3 class="anchored" data-anchor-id="d-sammenlig-gennemsnittetmiddelværdien-og-medianen-som-du-lige-har-udregnet.-forklar-med-ord-hvad-forskellen-er-på-dem-og-hvad-fordelen-ved-dem-hver-især-er.">d) Sammenlig gennemsnittet/middelværdien og medianen, som du lige har udregnet. Forklar med ord, hvad forskellen er på dem, og hvad fordelen ved dem hver især er.</h3>
+<p>Når vi sammenligner gennemsnit og median ser vi, at gennemsnittet er højere end medianen. Dette tyder på, at der er nogle meget høje værdier, der trækker op i gennemsnittet. Fordi medianen kun afhænger af placeringen i rækkefølgen af omsætninger og ikke af værdiernes størrelse, påvirkes den ikke af ekstreme værdier. De to mål giver altså to forskellige bud på, hvad den typiske “midterste” værdi på variablen er.</p>
+<hr>
+</section>
+</section>
+<section id="spredningsmål" class="level1">
+<h1>5 Spredningsmål</h1>
+<p>For at få et endnu bedre overblik over fordelingen på variablen omsaetning er du interesseret i, hvor meget firmaernes omsætning ligger spredt omkring den gennemsnitlige omsætning.</p>
+<section id="a-udregn-variansen-af-variablen-omsaetning" class="level3">
+<h3 class="anchored" data-anchor-id="a-udregn-variansen-af-variablen-omsaetning">a) Udregn variansen af variablen <strong>omsaetning</strong></h3>
+<p>Brug <code>var()</code> til et udregne variansen af variablen omsaetning:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(df<span class="sc">$</span>omsaetning)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 53016059543</code></pre>
+</div>
+</div>
+</section>
+<section id="b-udregn-standardafvigelsen-af-variablen-omsaetning" class="level3">
+<h3 class="anchored" data-anchor-id="b-udregn-standardafvigelsen-af-variablen-omsaetning">b) Udregn standardafvigelsen af variablen <strong>omsaetning </strong></h3>
+<p>Brug <code>sd()</code> til at udregne standardafvigelsen af variablen omsaetning:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(df<span class="sc">$</span>omsaetning)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 230252.2</code></pre>
+</div>
+</div>
+</section>
+<section id="c-forklar-med-ord-hvad-varians-og-standardafvigelse-hver-især-måler-og-hvilken-information-de-giver-os" class="level3">
+<h3 class="anchored" data-anchor-id="c-forklar-med-ord-hvad-varians-og-standardafvigelse-hver-især-måler-og-hvilken-information-de-giver-os">c) Forklar med ord, hvad varians og standardafvigelse hver især måler, og hvilken information de giver os</h3>
+<p>Varians og standardafvigelse er begge mål, der bruges til at beskrive, hvor meget værdierne i et datasæt spreder sig omkring gennemsnittet. Varians måler den gennemsnitlige kvadrerede afvigelse fra gennemsnittet. Med andre ord viser variansen, hvor langt hver værdi ligger fra gennemsnittet i gennemsnit, når man har kvadreret afvigelserne. Varians kan hjælpe os med at forstå, hvor “spredt” eller “varierende” dataene er, men målet er i kvadrerede enheder, hvilket kan gøre det svært at tolke direkte.</p>
+<p>Standardafvigelse er kvadratroden af variansen. Den måler også spredningen af dataene, men angiver groft sagt den gennemsnitlige afvigelse fra gennemsnittet i de samme enheder som variablen (her DKK). Standardafvigelsen er derfor lettere at tolke, fordi den svarer til de oprindelige dataenheder og giver en mere intuitiv forståelse af variationen på variablen. En lav standardafvigelse betyder, at de fleste værdier ligger tæt på gennemsnittet, mens en høj standardafvigelse betyder, at værdierne er mere spredte.</p>
+<p>Begge mål fortæller os, hvor meget variation der er i datasættet. De kan hjælpe os med at forstå, om data er ensartede og ligger tæt på gennemsnittet, eller om de varierer meget og spreder sig bredt. For eksempel kan en lav standardafvigelse indikere en mere forudsigelig eller stabil situation, mens en høj standardafvigelse kan tyde på større uforudsigelighed eller variation i dataene.</p>
+<hr>
+</section>
+</section>
+<section id="boksplot" class="level1">
+<h1>6 Boksplot</h1>
+<p>Endelig vil du gerne visualisere, hvor mange ansatte firmaerne i datasættet har</p>
+<section id="a-brug-et-boksplot-til-at-visualisere-fordelingen-på-variablen-ansatte" class="level3">
+<h3 class="anchored" data-anchor-id="a-brug-et-boksplot-til-at-visualisere-fordelingen-på-variablen-ansatte">a) Brug et boksplot til at visualisere fordelingen på variablen ansatte</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> ansatte) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"#003366"</span>, <span class="at">color =</span> <span class="st">"grey"</span>) <span class="sc">+</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Boksplot af antal ansatte"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>,  <span class="co"># Tomt for at undgå en x-akse etiket</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Antal / frekvens"</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="co"># Her flippes boksplottet til horisontal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="aflevering_1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="b-gem-dit-plot-på-computeren-med-ggsave-og-indsæt-det-herunder" class="level3">
+<h3 class="anchored" data-anchor-id="b-gem-dit-plot-på-computeren-med-ggsave-og-indsæt-det-herunder">b) Gem dit plot på computeren med <code>ggsave()</code> og indsæt det herunder</h3>
+<p>Først gemmer jeg plottet i et objekt, der hedder “boksplot_ansatte”, dernæst gemmer jeg plottet med ggsave(), hvor jeg fortæller funktionen, at den skal gemme objektet “boksplot_ansatte” som en jpeg-fil (billede) på min computer som “Boksplot_antal_ansatte.jpeg”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bokstplot_ansatte <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> ansatte) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"#003366"</span>, <span class="at">color =</span> <span class="st">"grey"</span>) <span class="sc">+</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Boksplot af antal ansatte"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>,  <span class="co"># Tomt for at undgå en x-akse etiket</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Antal / frekvens"</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"Boksplot_antal_ansatte.jpeg"</span>, <span class="at">plot =</span> bokstplot_ansatte, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="c-forklar-med-ord-hvad-boksplottet-viser-hvilke-værdier-viser-det-os" class="level3">
+<h3 class="anchored" data-anchor-id="c-forklar-med-ord-hvad-boksplottet-viser-hvilke-værdier-viser-det-os">c) Forklar med ord, hvad boksplottet viser (hvilke værdier viser det os)</h3>
+<p>Et boksplot viser variablens fordeling ved hjælp af fraktiler:</p>
+<ul>
+<li><p>Medianen (50%-fraktilen) er den midterste linje i boksen</p></li>
+<li><p>Nedre kvartil (25%-fraktilen) og øvre kvartil (75%-fraktilen) udgør boksens kanter</p></li>
+<li><p>Linjerne (Whiskers) strækker sig til fra minimumsværdien i bunden til maksimumværdien i toppen (ekslusiv outliers, dvs. inden for 1,5 gange interkvartilafstanden (IQR) fra Q1 og Q3).</p></li>
+<li><p>Punkter udenfor linjerne (whiskers) er outliers, som er ekstreme værdier uden for dette interval.</p></li>
+</ul>
+<p>Med andre ord viser boksplottet, at miminmedianen er list under 1000 ansatte (det er nogle store firmaer!), første kvartil er lidt under 1500 (dvs. 25 % af firmaerne har omkring 1500 ansatte eller derunder), medianen (andet kvartil) er omkring 2300 ansatte (50 % af firmaerne har færre end 2300 ansatte, 50 % har flere), tredje kvartil er omkring 2900 ansatte (dvs. 75 % har 2900 eller færre, 25 % har flere ansatte) og maksimumværdien er lidt under 4500 ansatte. Vi kan også se, at der er lidt mere masse (dvs. firmaer) i den lave ende af fordelingen, da vores whishers er kortere i bunden og medianen er tættere på toppen af boksen end bunden.</p>
+<section id="tip" class="level4">
+<h4 class="anchored" data-anchor-id="tip">Tip</h4>
+<p>Du kan få de præcise værdier med funktionen <code>summary()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df<span class="sc">$</span>ansatte)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    962    1459    2299    2428    2897    4453 </code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
 </section>
 
 </main>

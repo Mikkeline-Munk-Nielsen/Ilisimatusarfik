@@ -1,17 +1,16 @@
 ---
-title: "Aflevering 1"
+title: "Aflevering 1: forslag til besvarelse"
 format:
   html:
     css: css_etc/custom-theme-ilisimatusarfik-doc.css
     fontfamily: Calibri
   pdf:
     css: css_etc/custom-theme-ilisimatusarfik-doc.css
-    fontfamily: Calibri
 ---
 
-Følgende opgavesæt er den første ud af de seks obligatoriske afleveringer i faget. Du skal lave dine udregninger i R, men indsætte dine resultater og skrive dine svar i dette word-dokument. Når du er færdig med opgaven, skal du kopiere din kode fra R ind nederst i dokumentet og aflevere opgaven på Lectio under *afleveringer*.
+*Følgende er et forslag til besvarelse af den første ud af de seks obligatoriske afleveringer i faget.* *Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.*
 
-## 1 Opret et script og åben data
+# 1 Opret et script og åben data
 
 Start med at åbne R-Studio ved at klikke på dit R-project. Opret dernæst et nyt script og gem det i samme mappe, som dit R-project. Du kan f.eks. kalde scriptet *Aflevering_1*.
 
@@ -21,51 +20,74 @@ Start med at åbne R-Studio ved at klikke på dit R-project. Opret dernæst et n
 
 -   Brug funktionen **names()** til at se, hvilke variable datasættet indeholder
 
-Du er nu klar til at starte analyserne!
-
-```{r include=F}
+```{r echo=T, warning=F, message=F}
 getwd()
 df <- readRDS("firma_data.rds")
 names(df)
 ```
 
+Du er nu klar til at starte analyserne!
+
+---
+
 # 2 Tabeller
 
 Variablen **tilfredshed** måler, hvor tilfredse firmaerne er med deres omsaetning på en likert skala:
 
-1 (Meget utilfreds)
+|  |  |  |  |  |
+|--------------|----------|------------------------|------------|--------------|
+| 1: Meget utilfreds | 2: Utilfreds | 3: Hverken tilfreds eller utilfreds | 4: Tilfreds | 5: Meget tilfreds |
 
-2 (Utilfreds)
+### a) Lav en frekvenstabel over variablen og indsæt den herunder
 
-3 (Hverken tilfreds eller utilfreds)
+Brug `tabyl()` fra `library(janitor)` til at lave en frekvenstabel med procenter. Gem tabellen i et objekt og brug `library(writexl)` til at eksportere den til excel.
 
-4 (Tilfreds)
-
-5 (Meget tilfreds)
-
-Lav en frekvenstabel over variablen. Kommentér på variablens fordeling - hvor mange er hhv. mere eller mindre tilfredse?
-
-```{r}
+```{r echo=T, warning=F, message=F}
 library(janitor)
 tabyl(df$tilfredshed)
 ```
 
-# Barplot
+```{r echo=T, warning=F, message=F, eval=F}
+tabel_tilfredshed <- tabyl(df$tilfredshed)
 
--   Visualisér fordelingen på variablen **tilfredshed** med et barplot.
+library(writexl)
+write_xlsx(list("Tabel over tilfredshed" = tabel_tilfredshed), "Tabel_tilfredshed.xlsx")
+```
 
--   Prøv om du kan tilføje aksetitler
+### b) Kommentér på variablens fordeling - hvor mange er hhv. mere eller mindre tilfredse?
 
--   Prøv om du kan ændre farven på søjlerne i plottet
+Tabellen viser, at der er flest firmaer, der enten har svaret "Meget utilfreds" (n=300, 30%) eller "Meget tilfreds" (n=300, 30%). 200 har svaret "Neutral" og 100 har enten svaret "Tilfreds" eller "Utilfreds". Der er altså ganske stor spredning i, hvor tilfredse firmaerne er med deres omsætning.
 
--   Hvis du har lyst, kan du eksperimentere med at gøre plottet endnu flottere med temaer eller ændre værdierne på akserne
+---
 
--   Gem barplottet på din computer med `ggsave()`
+# 3 Barplot
+
+### a) Visualisér fordelingen på variablen **tilfredshed** med et barplot.
+
+### b) Prøv om du kan tilføje aksetitler
+
+### c) Prøv om du kan ændre farven på søjlerne i plottet
+
+### d) Hvis du har lyst, kan du eksperimentere med at gøre plottet endnu flottere med temaer eller ændre værdierne på akserne
+
+<br>
+
+Fremgangsmåden er som følger:
+
+-   Indlæg ggplot2 til library
+
+-   Opret et ggplot, specificér datasættet (df), hvilken variabel der skal mappes på x-aksen (omsaetning), og hvilken type plot du vil have (geom_bar)
+
+-   Tilføj aksetitler (og evt. titel til plottet) ved at tilføje funktionen `labs()` , hvor du specificerer titler til plot, x-akse og y-akse
+
+-   Tilføj evt. et tema til det plot (her theme_minimal)
 
 ```{r}
+library(ggplot2)
+
 ggplot(df) +
   aes(x = factor(tilfredshed)) +
-  geom_bar() +
+  geom_bar(fill="#003366", na.rm = FALSE) +
   labs(
     title = "Tilfredshed med omsætning",
     x = "Tilfredshed",
@@ -74,63 +96,158 @@ ggplot(df) +
   theme_minimal()
 ```
 
-# Centrummål
+### e) Gem barplottet på din computer med `ggsave()`
+
+Først gemmer du plottet i et objekt, der hedder "barplot_tilfredshed". Dernæst gemmer du plottet med `ggsave()`, hvor du fortæller funktionen, at den skal gemme objektet "barplot_tilfredshed" som en jpeg-fil (billede) på din computer som "Barplot_tilfredshed.jpeg".
+
+```{r echo=T, message=F, warning=F, eval=FALSE}
+
+barplot_tilfredshed <- ggplot(df) +
+  aes(x = factor(tilfredshed)) +
+  geom_bar(fill="#003366", na.rm = FALSE) +
+  labs(
+    title = "Tilfredshed med omsætning",
+    x = "Tilfredshed",
+    y = "Antal firmaer"
+  ) +
+  theme_minimal()
+```
+
+```{r echo=TRUE, eval=F}
+ggsave("Barplot_tilfredshed.jpeg", plot = barplot_tilfredshed, width = 10, height = 8)
+```
+
+---
+
+# 4 Centrummål
 
 Du er interesseret i at finde ud af, hvilken industri der er flest firmaer fra i datasættet.
 
--   Brug `Mode()` til at finde typetallet/modus for variablen industri
+### a) Find typetallet/modus for variablen **industri** – hvilken industri er mest repræsenteret i datasættet?
 
-```{r}
+Vi kan bruge funktionen `Mode()` fra `library(DescTools)` til at finde typetallet/modus for variablen industri. Funktionen fortæller os, at modus er "Finans" og at denne værdi optræder 400 gange i datasættet. Den printer desuden til sidst alle værdierne på variablen (levels).
+
+```{r echo=T, message=F, warning=F}
 library(DescTools)
 (mode <- Mode(df$industri, na.rm = TRUE))
 ```
 
 Datasættet indeholder også information på firmaernes omsætning i variablen **omsaetning**. Du er interesseret i at vide noget om, hvad firmaerne i dit datasæt typisk tjener
 
--   Brug `Mean()` til at udregne den gennemsnitlige omsætning
+### b) Udregn den gennemsnitlige omsætning
 
-```{r}
+Brug `Mean()` til at udregne den gennemsnitlige omsætning. Funktionen fortæller os, at den gennemsnitlige omsætning blandt firmaer er 397981.3 DKK.
+
+```{r echo=T, message=F, warning=F}
 Mean(df$omsaetning)
 ```
 
--   Brug `Median()` til at udregne medianen for omsætning
+### c) Find medianen for omsætning
 
-```{r}
+Brug `Median()` til at udregne medianen for omsætning. Funktionen fortæller os, at medianen på variablen omsætning er en omsætning på 384974.1 DKK
+
+```{r echo=T, message=F, warning=F}
 Median(df$omsaetning)
 ```
 
--   Sammenlig gennemsnittet/middelværdien og medianen, som du lige har udregnet. Forklar med ord, hvad forskellen er på dem, og hvad fordelen ved dem hver især er
+### d) Sammenlig gennemsnittet/middelværdien og medianen, som du lige har udregnet. Forklar med ord, hvad forskellen er på dem, og hvad fordelen ved dem hver især er.
 
-# Spredningsmål
-
-For at få et endnu bedre overblik over fordelingen på variablen omsaetning er du interesseret i, hvor meget firmaernes omsætning ligger spredt omkring den gennemsnitlige omsætning.
-
--   Brug var() til et udregne variansen af variablen omsaetning
-
--   Brug sd() til at udregne standardafvigelsen af variablen omsaetning
-
--   Forklar med ord, hvad varians og standardafvigelse hver især måler, og hvilken information de giver os
-
-# Boksplot
-
-Endelig vil du gerne visualisere, hvor mange ansatte firmaerne i datasættet har
-
--   Brug et boksplot til at visualisere fordelingen på variablen ansatte
-
--   Forklar med ord, hvad boksplottet viser (hvilke værdier viser det os)
-
-```{r}
-library(ggplot2)
-
-ggplot(df, aes(x = ansatte)) + # Variabel = omsaetning
-  geom_boxplot() +  # Opretter et boxplot 
-  theme_minimal() 
-```
-
-```{r}
-sd
-```
+Når vi sammenligner gennemsnit og median ser vi, at gennemsnittet er højere end medianen. Dette tyder på, at der er nogle meget høje værdier, der trækker op i gennemsnittet. Fordi medianen kun afhænger af placeringen i rækkefølgen af omsætninger og ikke af værdiernes størrelse, påvirkes den ikke af ekstreme værdier. De to mål giver altså to forskellige bud på, hvad den typiske "midterste" værdi på variablen er.
 
 ---
 
-Når du er færdig skal du kopiere koden fra dit script og indsætte det nederst i dit dokument. Aflevér derefter din besvarelse på lectio under "Aflevering 1".
+# 5 Spredningsmål
+
+For at få et endnu bedre overblik over fordelingen på variablen omsaetning er du interesseret i, hvor meget firmaernes omsætning ligger spredt omkring den gennemsnitlige omsætning.
+
+### a) Udregn variansen af variablen **omsaetning**
+
+Brug `var()` til et udregne variansen af variablen omsaetning:
+
+```{r echo=T, message=F, warning=F}
+var(df$omsaetning)
+```
+
+### b) Udregn standardafvigelsen af variablen **omsaetning **
+
+Brug `sd()` til at udregne standardafvigelsen af variablen omsaetning:
+
+```{r echo=T, message=F, warning=F}
+sd(df$omsaetning)
+```
+
+### c) Forklar med ord, hvad varians og standardafvigelse hver især måler, og hvilken information de giver os
+
+Varians og standardafvigelse er begge mål, der bruges til at beskrive, hvor meget værdierne i et datasæt spreder sig omkring gennemsnittet. Varians måler den gennemsnitlige kvadrerede afvigelse fra gennemsnittet. Med andre ord viser variansen, hvor langt hver værdi ligger fra gennemsnittet i gennemsnit, når man har kvadreret afvigelserne. Varians kan hjælpe os med at forstå, hvor "spredt" eller "varierende" dataene er, men målet er i kvadrerede enheder, hvilket kan gøre det svært at tolke direkte.
+
+Standardafvigelse er kvadratroden af variansen. Den måler også spredningen af dataene, men angiver groft sagt den gennemsnitlige afvigelse fra gennemsnittet i de samme enheder som variablen (her DKK). Standardafvigelsen er derfor lettere at tolke, fordi den svarer til de oprindelige dataenheder og giver en mere intuitiv forståelse af variationen på variablen. En lav standardafvigelse betyder, at de fleste værdier ligger tæt på gennemsnittet, mens en høj standardafvigelse betyder, at værdierne er mere spredte.
+
+Begge mål fortæller os, hvor meget variation der er i datasættet. De kan hjælpe os med at forstå, om data er ensartede og ligger tæt på gennemsnittet, eller om de varierer meget og spreder sig bredt. For eksempel kan en lav standardafvigelse indikere en mere forudsigelig eller stabil situation, mens en høj standardafvigelse kan tyde på større uforudsigelighed eller variation i dataene.
+
+---
+
+# 6 Boksplot
+
+Endelig vil du gerne visualisere, hvor mange ansatte firmaerne i datasættet har
+
+### a) Brug et boksplot til at visualisere fordelingen på variablen ansatte
+
+```{r echo=T, message=F, warning=F}
+library(ggplot2)
+
+ggplot(df) +
+  aes(x = "", y = ansatte) +
+  geom_boxplot(fill = "#003366", color = "grey") + 
+  labs(
+    title = "Boksplot af antal ansatte",
+    x = "",  # Tomt for at undgå en x-akse etiket
+    y = "Antal / frekvens"
+  ) +
+  theme_minimal() + 
+  coord_flip() # Her flippes boksplottet til horisontal
+```
+
+### b) Gem dit plot på computeren med `ggsave()` og indsæt det herunder
+
+Først gemmer jeg plottet i et objekt, der hedder "boksplot_ansatte", dernæst gemmer jeg plottet med ggsave(), hvor jeg fortæller funktionen, at den skal gemme objektet "boksplot_ansatte" som en jpeg-fil (billede) på min computer som "Boksplot_antal_ansatte.jpeg".
+
+```{r echo=T, message=F, warning=F, eval=FALSE}
+bokstplot_ansatte <- ggplot(df) +
+  aes(x = "", y = ansatte) +
+  geom_boxplot(fill = "#003366", color = "grey") + 
+  labs(
+    title = "Boksplot af antal ansatte",
+    x = "",  # Tomt for at undgå en x-akse etiket
+    y = "Antal / frekvens"
+  ) +
+  theme_minimal()
+```
+
+```{r echo=TRUE, eval=F}
+ggsave("Boksplot_antal_ansatte.jpeg", plot = bokstplot_ansatte, width = 10, height = 8)
+```
+
+### c) Forklar med ord, hvad boksplottet viser (hvilke værdier viser det os)
+
+Et boksplot viser variablens fordeling ved hjælp af fraktiler:
+
+-   Medianen (50%-fraktilen) er den midterste linje i boksen
+
+-   Nedre kvartil (25%-fraktilen) og øvre kvartil (75%-fraktilen) udgør boksens kanter
+
+-   Linjerne (Whiskers) strækker sig til fra minimumsværdien i bunden til maksimumværdien i toppen (ekslusiv outliers, dvs. inden for 1,5 gange interkvartilafstanden (IQR) fra Q1 og Q3).
+
+-   Punkter udenfor linjerne (whiskers) er outliers, som er ekstreme værdier uden for dette interval.
+
+Med andre ord viser boksplottet, at miminmedianen er list under 1000 ansatte (det er nogle store firmaer!), første kvartil er lidt under 1500 (dvs. 25 % af firmaerne har omkring 1500 ansatte eller derunder), medianen (andet kvartil) er omkring 2300 ansatte (50 % af firmaerne har færre end 2300 ansatte, 50 % har flere), tredje kvartil er omkring 2900 ansatte (dvs. 75 % har 2900 eller færre, 25 % har flere ansatte) og maksimumværdien er lidt under 4500 ansatte. Vi kan også se, at der er lidt mere masse (dvs. firmaer) i den lave ende af fordelingen, da vores whishers er kortere i bunden og medianen er tættere på toppen af boksen end bunden.
+
+#### Tip
+
+Du kan få de præcise værdier med funktionen `summary()`:
+
+```{r echo=T, message=F, warning=F}
+summary(df$ansatte)
+
+```
+
+------------------------------------------------------------------------
