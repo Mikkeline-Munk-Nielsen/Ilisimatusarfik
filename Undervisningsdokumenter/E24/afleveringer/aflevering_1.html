@@ -185,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><br></p>
 <p>Fremgangsmåden er som følger:</p>
 <ul>
-<li><p>Indlæg ggplot2 til library</p></li>
+<li><p>Indlæs ggplot2 til library</p></li>
 <li><p>Opret et ggplot, specificér datasættet (df), hvilken variabel der skal mappes på x-aksen (omsaetning), og hvilken type plot du vil have (geom_bar)</p></li>
 <li><p>Tilføj aksetitler (og evt. titel til plottet) ved at tilføje funktionen <code>labs()</code> , hvor du specificerer titler til plot, x-akse og y-akse</p></li>
 <li><p>Tilføj evt. et tema til det plot (her theme_minimal)</p></li>
@@ -360,7 +360,7 @@ Levels: Detail Finans Produktion Sundhed Teknologi</code></pre>
 <li><p>Linjerne (Whiskers) strækker sig til fra minimumsværdien i bunden til maksimumværdien i toppen (ekslusiv outliers, dvs. inden for 1,5 gange interkvartilafstanden (IQR) fra Q1 og Q3).</p></li>
 <li><p>Punkter udenfor linjerne (whiskers) er outliers, som er ekstreme værdier uden for dette interval.</p></li>
 </ul>
-<p>Med andre ord viser boksplottet, at miminmedianen er list under 1000 ansatte (det er nogle store firmaer!), første kvartil er lidt under 1500 (dvs. 25 % af firmaerne har omkring 1500 ansatte eller derunder), medianen (andet kvartil) er omkring 2300 ansatte (50 % af firmaerne har færre end 2300 ansatte, 50 % har flere), tredje kvartil er omkring 2900 ansatte (dvs. 75 % har 2900 eller færre, 25 % har flere ansatte) og maksimumværdien er lidt under 4500 ansatte. Vi kan også se, at der er lidt mere masse (dvs. firmaer) i den lave ende af fordelingen, da vores whishers er kortere i bunden og medianen er tættere på toppen af boksen end bunden.</p>
+<p>Med andre ord viser boksplottet, at minimum er lidt under 1000 ansatte (det er nogle store firmaer!), første kvartil er lidt under 1500 (dvs. 25 % af firmaerne har omkring 1500 ansatte eller derunder), medianen (andet kvartil) er omkring 2300 ansatte (50 % af firmaerne har færre end 2300 ansatte, 50 % har flere), tredje kvartil er omkring 2900 ansatte (dvs. 75 % har 2900 eller færre, 25 % har flere ansatte) og maksimumværdien er lidt under 4500 ansatte. Vi kan også se, at der er lidt mere masse (dvs. firmaer) i den lave ende af fordelingen, da vores whishers er kortere i bunden og medianen er tættere på toppen af boksen end bunden.</p>
 <section id="tip" class="level4">
 <h4 class="anchored" data-anchor-id="tip">Tip</h4>
 <p>Du kan få de præcise værdier med funktionen <code>summary()</code>:</p>
