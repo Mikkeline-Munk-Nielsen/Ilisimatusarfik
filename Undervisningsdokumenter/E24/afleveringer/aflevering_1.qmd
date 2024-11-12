@@ -73,7 +73,7 @@ Tabellen viser, at der er flest firmaer, der enten har svaret "Meget utilfreds" 
 
 Fremgangsmåden er som følger:
 
--   Indlæg ggplot2 til library
+-   Indlæs ggplot2 til library
 
 -   Opret et ggplot, specificér datasættet (df), hvilken variabel der skal mappes på x-aksen (omsaetning), og hvilken type plot du vil have (geom_bar)
 
@@ -238,7 +238,7 @@ Et boksplot viser variablens fordeling ved hjælp af fraktiler:
 
 -   Punkter udenfor linjerne (whiskers) er outliers, som er ekstreme værdier uden for dette interval.
 
-Med andre ord viser boksplottet, at miminmedianen er list under 1000 ansatte (det er nogle store firmaer!), første kvartil er lidt under 1500 (dvs. 25 % af firmaerne har omkring 1500 ansatte eller derunder), medianen (andet kvartil) er omkring 2300 ansatte (50 % af firmaerne har færre end 2300 ansatte, 50 % har flere), tredje kvartil er omkring 2900 ansatte (dvs. 75 % har 2900 eller færre, 25 % har flere ansatte) og maksimumværdien er lidt under 4500 ansatte. Vi kan også se, at der er lidt mere masse (dvs. firmaer) i den lave ende af fordelingen, da vores whishers er kortere i bunden og medianen er tættere på toppen af boksen end bunden.
+Med andre ord viser boksplottet, at minimum er lidt under 1000 ansatte (det er nogle store firmaer!), første kvartil er lidt under 1500 (dvs. 25 % af firmaerne har omkring 1500 ansatte eller derunder), medianen (andet kvartil) er omkring 2300 ansatte (50 % af firmaerne har færre end 2300 ansatte, 50 % har flere), tredje kvartil er omkring 2900 ansatte (dvs. 75 % har 2900 eller færre, 25 % har flere ansatte) og maksimumværdien er lidt under 4500 ansatte. Vi kan også se, at der er lidt mere masse (dvs. firmaer) i den lave ende af fordelingen, da vores whishers er kortere i bunden og medianen er tættere på toppen af boksen end bunden.
 
 #### Tip
 
