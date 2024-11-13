@@ -430,7 +430,7 @@ Dog må vi leve med, at der altid er en hvis usikkerhed forbundet med stikprøve
 # Konfidensintervaller: intervalskala
 
 $$
-u = 1.96 \cdot \frac{\sigma}{\sqrt{n}}
+u = 1,96 \cdot \frac{\sigma}{\sqrt{n}}
 $$
 
 -   $u$ = den statistiske usikkerhed
@@ -601,7 +601,7 @@ Man kan finde ud af, om ens stikprøve er repræsentativ for populationen ved at
 
 ::: table-slide
 | Køn | Alder (år) | Univers (antal) | Univers (pct.) | Stikprøve (antal) | Stikprøve (pct.) | Vægt |
-|---------|----------|--------------|---------|----------|----------|-----------------|
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
 | Mænd | 15-40 | 874.044 | 19,8 | 165 | 13,3 | 19,8/13,3=**1,49** |
 | Mænd | 40-69 | 1.057.619 | 24,0 | 368 | 29,6 | 24/29,6=**0,81** |
 | Mænd | 70+ | 233.798 | 5,3 | 77 | 6,2 | 5,3/6,2=**0,86** |
@@ -619,7 +619,7 @@ Man kan finde ud af, om ens stikprøve er repræsentativ for populationen ved at
 
 ::: table-slide
 | Begreb | Definition |
-|----------------------------------------------|--------------------------|
+|---------------------------------------------|--------------------------|
 | **Universet/populationen** | Målgruppe, hvori en stikprøve udtrækkes (fx alle statsborgere i Danmark). |
 | **Den mulige population** | Del af universet, som kan udtrækkes til stikprøven. |
 | **Stikprøve/sample** | Lille del af universet, udvalgt til at repræsentere hele universet. |
