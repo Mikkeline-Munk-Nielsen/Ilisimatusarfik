@@ -515,16 +515,21 @@
 </ul>
 <p><span class="math display">\[
 P(z) = \frac{\text{antal enheder i population med værdien } z \text{ i populationen}}{N_{\text{pop}}}
-\]</span> - Når vi skal udregne statistisk usikkerhed forbundet med andele af f.eks. kvinder i vores stikprøve, gør vi det altså på baggrund af sandsynligheden for at trække en kvinde, når vi trækker vores stikprøve fra populationen!</p>
+\]</span></p>
+<ul>
+<li>Når vi skal udregne statistisk usikkerhed forbundet med andele af f.eks. kvinder i vores stikprøve, gør vi det altså på baggrund af sandsynligheden for at trække en kvinde, når vi trækker vores stikprøve fra populationen!</li>
+</ul>
 </section>
 <section class="slide level0">
 
 <h1>Binomial-fordeling</h1>
 <p>Middelværdi og varians for binomialfordelte variable udregnes som følgende:</p>
+<p><br></p>
 <p><span class="math display">\[
 \text{Middelværdi: } E(Y) = n \cdot p \\
 \text{Varians: } V(Y) = n \cdot p \cdot (1 - p)
 \]</span></p>
+<p><br></p>
 <p><span class="math inline">\(Y\)</span> angiver antal succeser blandt <span class="math inline">\(n\)</span> uafhængige udtrækninger fra en population, hvor udfaldsrummet <span class="math inline">\(\Omega=\text{{success, fiasko}}\)</span> og der er konstant sandsynlighed, <span class="math inline">\(𝑝\)</span>, for succes i hver udtrækning.</p>
 </section>
 <section class="slide level0">
@@ -555,32 +560,56 @@ P(z) = \frac{\text{antal enheder i population med værdien } z \text{ i populati
 <p><br></p>
 <p>Den centrale grænseværdisætning fortæller os, at uanset hvilken fordeling hver observation fra en simpel tilfældig stikprøve følger, så er stikprøvegennemsnittet approksimativt (”så godt som”) normalfordelt, når bare stikprøven er tilstrækkelig stor.</p>
 <p><em>(Malchow-Møller &amp; Würst 2014:242)</em></p>
+<p><br></p>
+<p>… så hvad er en normalfordeling?</p>
 </section>
-<section class="slide level0">
-
-<h1>Normalfordeling</h1>
-<p>Hvad er så særligt ved normalfordelingen?</p>
-<p>Mange naturlige størrelser i virkelige populationer har en fordeling, som ligner normalfordelingen, f.eks. højde i en befolkning. Mange estimatorer og test-statistikker er normalfordelte; f.eks. stikprøvegennemsnit jf. den centrale grænseværdisætning</p>
-
-<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
 <section class="slide level0">
 
 <h1>Normalfordeling</h1>
 <ul>
 <li><p>Normalfordelingen er kendetegnet ved at være symmetrisk fordelt omkring middelværdi <span class="math inline">\(\mu\)</span>, og dens bredde afhænger af varians <span class="math inline">\(\sigma^2\)</span>.</p></li>
 <li><p>Kurven (tæthedsfunktionen) angiver sandsynligheden for at observere en given værdi.</p></li>
+</ul>
+
+<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<section class="slide level0">
+
+<h1>Normalfordeling</h1>
+<p>Højde i en befolkning er typisk naturligt normaltfordelt. Her er et eksempel på højdefordelingen blandt en population med <span class="math inline">\(\mu=170\)</span> cm og <span class="math inline">\(\sigma=10\)</span> cm</p>
+
+<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section class="slide level0">
+
+<h1>Normalfordeling</h1>
+<p>Hvis vi plotter højdefordelingen blandt babyer vil den også være normalfordelt, men med et lavere gennemsnit, og en mindre standardafvigelse! Her er et eksempel på højdefordelingen blandt en baby-population med <span class="math inline">\(\mu=50\)</span> cm og <span class="math inline">\(\sigma=5\)</span> cm</p>
+
+<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section class="slide level0">
+
+<h1>Normalfordeling</h1>
+<p><br></p>
+<h3 id="øvelse"><strong>Øvelse</strong></h3>
+<p>Lad os prøve at simulere en normalfordeling med simpelt tilfældigt udtræk!</p>
+</section>
+<section class="slide level0">
+
+<h1>Normalfordeling</h1>
+<ul>
+<li><p>Mange naturlige størrelser i virkelige populationer har en fordeling, som ligner normalfordelingen, f.eks. højde i en befolkning. Mange estimatorer og test-statistikker er normalfordelte; f.eks. stikprøvegennemsnit jf. den centrale grænseværdisætning</p></li>
 <li><p>Hvis en stokastisk variabel <span class="math inline">\(Y\)</span> er normalfordelt <span class="math inline">\(Y \sim \mathcal{N}(\mu, \sigma^2)\)</span> så er det altså mest sandsynligt at observere værdier, der ligger tæt på gennemsnittet.</p></li>
-<li><p>Vi kan bruge denne information til at regne på usikkerheden på vores resultater!</p></li>
+<li><p>Faktisk er normalfordelte variable skruet sådan sammen, at vi ud fra standardafvigelsen på en variabel kan sige, hvor stor en andel af observationerne der ligger inden for et given afstand til gennemsnittet.</p></li>
+<li><p>Derfor kan man bruge standardafvigelsen fra en normalfordeling til at fastlægge et acceptabelt niveau af usikkerhed, og estimere usikkerheden på sine stikprøveberegninger!</p></li>
 </ul>
 </section>
 <section class="slide level0">
 
 <h1>Normalfordeling</h1>
 <ul>
-<li><p>Faktisk er normalfordelte variable skruet sådan sammen, at vi ud fra standardafvigelsen på en variabel kan sige, hvor stor en andel af observationerne der ligger inden for et given afstand til gennemsnittet.</p></li>
-<li><p>Derfor kan man bruge standardafvigelsen fra en normalfordeling til at fastlægge en acceptabel niveau af usikkerhed, og estimere usikkerheden på sine stikprøveberegninger!</p></li>
+<li>Hele arealet under en normalfordelingskurve svarer til 100 % sandsynlighed (eller 1 i decimaltal). Dette betyder, at alle observationer i populationen er inkluderet i kurven.</li>
+<li>Arealet mellem to værdier på x-aksen (f.eks. mellem -1 og +1 standardafvigelser fra gennemsnittet) angiver sandsynligheden for, at en observation falder inden for dette interval.</li>
 </ul>
-</section>
+
+<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section class="slide level0">
 
 <h1>Normalfordelingen og statistisk usikkerhed</h1>
@@ -597,7 +626,7 @@ P(z) = \frac{\text{antal enheder i population med værdien } z \text{ i populati
 <p>I praksis bruger man en særlig normalfordeling, nemlig <strong><em>standardnormalfordelingen</em></strong>.</p>
 <p>Hvorfor? Det er nemmest at tage udgangspunkt i en standardiseret udgave af normalfordelingen. Standardnormalfordelingen er en normalfordeling med et gennemsnit <span class="math inline">\(\mu=0\)</span> og en standardafvigelse <span class="math inline">\(\sigma=1\)</span></p>
 
-<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section class="slide level0">
 
 <h1>Standardnormalfordeling</h1>
@@ -613,8 +642,9 @@ P(z) = \frac{\text{antal enheder i population med værdien } z \text{ i populati
 <h1>Estimation i stikprøver</h1>
 <p>Når vi ikke har adgang til fuld population kan vi altså bruge stikprøver til at estimere, hvordan fordelinger ser ud i populationen:</p>
 <ul>
-<li><p><span class="math inline">\(\mu\)</span>: Populationsgennemsnittet (det sande gennemsnit for hele populationen).</p></li>
-<li><p><span class="math inline">\(\bar{X}\)</span>: Stikprøvegennemsnittet (gennemsnittet beregnet ud fra en stikprøve, som bruges som et skøn for populationsgennemsnittet).</p></li>
+<li><p><span class="math inline">\(\mu\)</span>: populationsgennemsnittet (det sande gennemsnit for hele populationen).</p></li>
+<li><p><span class="math inline">\(\bar{X}\)</span>: stikprøvegennemsnittet (gennemsnittet beregnet ud fra en stikprøve, som bruges som et skøn for populationsgennemsnittet <span class="math inline">\(\mu\)</span>).</p></li>
+<li><p><span class="math inline">\(s\)</span>: stikprøvens standardafvigelse (bruges som estimat for <span class="math inline">\(\sigma\)</span>, populationens standardafvigelse)</p></li>
 <li><p>Når stikprøven er stor og repræsentativ, kan vi antage at: <span class="math inline">\(\bar{X} \approx \mu\)</span></p></li>
 </ul>
 <p>Dog må vi leve med, at der altid er en hvis usikkerhed forbundet med stikprøvegennemsnittet… til gengæld kan vi bruge vores viden om normalfordelingen til at regne på den!</p>
@@ -632,7 +662,7 @@ P(z) = \frac{\text{antal enheder i population med værdien } z \text{ i populati
 <h1>Konfidensintervaller</h1>
 <ul>
 <li><p>Ved hjælp af den standardnormalfordelingen kan vi beregne, hvor sandsynligt det er, at populationsgennemsnittet ligger i et bestemt interval omkring stikprøvegennemsnittet. Det er meget almindeligt at konstruere 95% konfidensintervaller.</p></li>
-<li><p>Princippet er, at man så udregner et interval, hvor vi populationens værdi med 95 % sikkerhed ligger indenfor. For en normalfordeling svarer dette til <span class="math inline">\(\pm 1.96\)</span> standardafvigelser omkring stikprøvegennemsnittet.</p></li>
+<li><p>Princippet er, at man så udregner et interval, hvor vi populationens værdi med 95 % sikkerhed ligger indenfor. For en normalfordeling svarer dette til <span class="math inline">\(\pm 1,96\)</span> standardafvigelser omkring stikprøvegennemsnittet.</p></li>
 </ul>
 </section>
 <section class="slide level0">
@@ -642,21 +672,20 @@ P(z) = \frac{\text{antal enheder i population med værdien } z \text{ i populati
 <img data-src="images/standardnormalfordeling.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section class="slide level0">
 
-<h1>Konfidensintervaller: intervalskala</h1>
+<h1>Stikprøveusikkerhed: intervalskala</h1>
 <p><span class="math display">\[
-u = 1,96 \cdot \frac{\sigma}{\sqrt{n}}
+u = 1,96 \cdot \frac{s}{\sqrt{n}}
 \]</span></p>
 <ul>
 <li><p><span class="math inline">\(u\)</span> = den statistiske usikkerhed</p></li>
-<li><p><span class="math inline">\(\sigma\)</span> = standardafvigelsen (vores beskrivende mål fra tidligere)</p></li>
-<li><p><span class="math inline">\(n\)</span> = antal individer i stikprøven <span class="math display">\[
-\frac{\sigma}{\sqrt{n}} = \text{Standardfejlen (standard error – beregnes på baggrund af standardafvigelsen)}
-\]</span></p></li>
+<li><p><span class="math inline">\(s\)</span> = standardafvigelsen</p></li>
+<li><p><span class="math inline">\(n\)</span> = antal individer i stikprøven</p></li>
+<li><p><span class="math inline">\(\frac{s}{\sqrt{n}}\)</span> = standardfejlen (standard error – beregnes på baggrund af standardafvigelsen)</p></li>
 </ul>
 </section>
 <section class="slide level0">
 
-<h1>Konfidensintervaller: nominal og ordinal skala</h1>
+<h1>Stikprøveusikkerhed: nominal og ordinal skala</h1>
 <p><span class="math display">\[
 u = 1,96 \cdot \frac{p \cdot q}{n}
 \]</span></p>
@@ -668,10 +697,57 @@ u = 1,96 \cdot \frac{p \cdot q}{n}
 <li><span class="math inline">\(q\)</span> = andel i variablens resterende kategorier<br>
 </li>
 <li><span class="math inline">\(n\)</span> = antal individer i stikprøven</li>
+<li><span class="math inline">\(\frac{p \cdot q}{n}\)</span> = standardfejlen (standard error – beregnes på baggrund af fordelingerne)</li>
 </ul>
+</section>
+<section class="slide level0">
+
+<h1>Konfidensintervaller: intervalskala</h1>
+<p>Formlen for beregningen af konfidensinterval ved gennemsnit:</p>
 <p><span class="math display">\[
-\frac{p \cdot q}{n} = \text{Standardfejlen (standard error – beregnes på baggrund af fordelingerne)}
+\text{Intervallets nedre grænse} = \bar{X} - z \cdot \frac{s}{\sqrt{n}}
 \]</span></p>
+<p><span class="math display">\[
+\text{Intervallets øvre grænse} = \bar{X} + z \cdot \frac{s}{\sqrt{n}}
+\]</span></p>
+<ul>
+<li><p>Hvor <span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span> standardfejlen (Standard error).</p></li>
+<li><p><span class="math inline">\(\bar{X} =\)</span> gennemsnit i stikprøven</p></li>
+<li><p><span class="math inline">\(z =\)</span> antallet af valgte standardafvigelser, ofte <span class="math inline">\(z = 1,96\)</span> (svarende til <span class="math inline">\(95%\)</span>)</p></li>
+<li><p><span class="math inline">\(s =\)</span> standardafvigelse i stikprøven</p></li>
+<li><p><span class="math inline">\(n =\)</span> antallet af observationer i stikprøven (stikprøvestørrelsen)</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Konfidensintervaller: nominal- og ordinalskala</h1>
+<p>Formlen for beregningen af konfidensinterval ved andele:</p>
+<p><span class="math display">\[
+\text{Intervallets nedre grænse} = p - z \cdot \sqrt{\frac{p(1-p)}{n}}
+\]</span></p>
+<p><span class="math display">\[
+\text{Intervallets øvre grænse} = p + z \cdot \sqrt{\frac{p(1-p)}{n}}
+\]</span></p>
+<ul>
+<li><p>Hvor: <span class="math inline">\(\sqrt{\frac{p(1-p)}{n}}\)</span> er standardfejlen (Standard error).</p></li>
+<li><p><span class="math inline">\(p =\)</span> andelen i stikprøven (fx <span class="math inline">\(0,3\)</span> eller <span class="math inline">\(0,25\)</span>)</p></li>
+<li><p><span class="math inline">\(z=\)</span> antallet af valgte standardafvigelser, ofte <span class="math inline">\(z=1,96\)</span> (svarende til <span class="math inline">\(95%\)</span>)</p></li>
+<li><p><span class="math inline">\(s =\)</span> standardafvigelse i stikprøven</p></li>
+<li><p><span class="math inline">\(n =\)</span> antallet af observationer i stikprøven (stikprøvestørrelsen)</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Standardfejl</h1>
+<p>Standardfejl måler, hvor meget en stikprøveestimator (f.eks. gennemsnit) typisk vil variere fra stikprøve til stikprøve, hvis vi gentager målingen flere gange:</p>
+<p><span class="math inline">\(SE = \frac{s}{\sqrt{n}}\)</span><br>
+</p>
+<ul>
+<li><p><span class="math inline">\(s\)</span> er stikprøvens standardafvigelse (bruges som estimat for <span class="math inline">\(\sigma\)</span>, populationens standardafvigelse).</p></li>
+<li><p><span class="math inline">\(n\)</span> er stikprøvestørrelsen.</p></li>
+</ul>
+<p>Standardfejlen angiver usikkerheden på stikprøvegennemsnittet og viser, hvor tæt stikprøvegennemsnittet forventes at være på populationsgennemsnittet (<span class="math inline">\(\mu\)</span>).</p>
+<p>En større stikprøve (<span class="math inline">\(n\)</span>) giver en mindre standardfejl, fordi større stikprøver er mere præcise.</p>
 </section>
 <section class="slide level0">
 
@@ -881,13 +957,13 @@ u = 1,96 \cdot \frac{p \cdot q}{n}
 <h1>Statistisk usikkerhed og stikprøvestørrelse</h1>
 <p>Eksempel med 50/50 fordeling (høj variation)</p>
 
-<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section class="slide level0">
 
 <h1>Statistisk usikkerhed og stikprøvestørrelse</h1>
 <p>Eksempel med 1/99 fordeling (lav variation)</p>
 
-<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="5_population_stikproever_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
 <section class="slide level0">
 
 <h1>Repræsentativitet og bortfald</h1>
@@ -1024,8 +1100,8 @@ u = 1,96 \cdot \frac{p \cdot q}{n}
 <div class="table-slide">
 <table class="caption-top">
 <colgroup>
-<col style="width: 63%">
-<col style="width: 36%">
+<col style="width: 62%">
+<col style="width: 37%">
 </colgroup>
 <thead>
 <tr class="header">
