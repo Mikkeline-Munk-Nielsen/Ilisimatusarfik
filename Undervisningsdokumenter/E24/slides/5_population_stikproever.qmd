@@ -122,6 +122,64 @@ Selvom mange observationer umiddelbart er godt, så er måden, hvorpå en stikpr
 
 ------------------------------------------------------------------------
 
+# Udtagning
+
+I praksis kan man udtrække stikprøver fra populationer med udgangspunkt i forskellige typer af information. Traditionelle samplingmetoder inkluderer:
+
+-   Registerbaseret sampling (fulde populationslister)
+
+-   Telefonnummerbaseret sampling (hustands eller individ niveau? Tidspunkt for kontakt?)
+
+-   Internetpanelsampling (mange besvarelser, svært at sikre repræsentativitet, adgang til svært tilgængelige målgrupper)
+
+-   Bekvemmelighedssampling (f.eks. Facebook, som udgangspunkt ikke repræsentativt da det ikke er tilfældig udvælgelse)
+
+---
+
+## Case 1: Kundetilfredshed i butikskæde 
+
+**Case**: En grønlandsk butikskæde med butikker i Nuuk, Sisimiut og Ilulissat ønsker at undersøge kundetilfredshed. Kæden har samlet set 5.000 faste kunder, men det er for dyrt og tidskrævende at spørge dem alle. De beslutter at lave en stikprøve.
+
+**Opgaver:**
+
+1.  Definer target population og frame population
+
+2.  Hvordan vil I sammensætte stikprøven, så kunder fra alle tre byer er repræsenteret? Diskuter brugen af stratificeret stikprøve versus simpel tilfældig stikprøve.
+
+3.  Hvordan kunne man i praksis udtrække stikprøven? Hvilke bias ville I være særligt bekymrede for?
+
+---
+
+## Case 2: Social integration i bygder og byer
+
+**Case**: En undersøgelse skal vurdere graden af social integration i Grønland, både i større byer og bygder. Man vil gerne undersøge forskelle mellem unge (18-29 år) og ældre (30+ år) i deres deltagelse i sociale aktiviteter.
+
+**Opgaver:**
+
+1.  Hvordan vil I sikre, at både bygder og byer er repræsenteret i stikprøven? Diskuter brugen af simpel tilfældig, stratificeret og klyngebaseret stikprøve.
+
+2.  Hvordan kan man indsamle data på tværs af bygder med sproglig og teknologisk variation?
+
+3.  Hvad betyder det for stikprøven, hvis bygderne bliver underrepræsenterede? Hvilke bias bør man være opmærksom på?
+
+---
+
+## Case 3: Oplysningskampagner om sundhed
+
+**Case**: Sundhedsmyndighederne i Grønland har gennemført en oplysningskampagne om fordelene ved sund kost. De ønsker at undersøge kampagnens effekt blandt borgere i Grønland. Der er ca. 57.000 indbyggere, og man planlægger at spørge 1.200 personer i hele landet.
+
+**Opgaver:**
+
+1.  Hvordan kan man vælge en repræsentativ stikprøve, der inkluderer både by- og bygdebefolkningen? Diskuter styrker og svagheder ved forskellige stikprøveudtræk.
+
+2.  Hvordan påvirker det analysen, hvis de personer, der deltager i undersøgelsen, har større interesse i sund kost end dem, der ikke gør?
+
+3.  Hvordan kan vægtning af stikprøvens data hjælpe med at korrigere for skævheder i repræsentationen?
+
+4.  Hvordan kan vi måle, om stikprøven reelt afspejler hele Grønlands befolkning?
+
+---
+
 # Stikprøveudtræk og statistisk usikkerhed
 
 -   På baggrund af en stikprøve drages konklusioner om en population (inferens). Slutningen er baseret på stikprøvens **repræsentativitet**
@@ -584,17 +642,15 @@ $$
 \text{Intervallets nedre grænse} = \bar{X} - z \cdot \frac{s}{\sqrt{n}}
 $$
 
-
 $$
 \text{Intervallets øvre grænse} = \bar{X} + z \cdot \frac{s}{\sqrt{n}}
 $$
-
 
 -   Hvor $\frac{\sigma}{\sqrt{n}}$ standardfejlen (Standard error).
 
 -   $\bar{X} =$ gennemsnit i stikprøven
 
--   $z =$ antallet af valgte standardafvigelser, ofte $z = 1,96$ (svarende til $95%$)
+-   $z =$ antallet af valgte standardafvigelser, ofte $z = 1,96$ (svarende til $95%$ %)
 
 -   $s =$ standardafvigelse i stikprøven
 
@@ -610,7 +666,6 @@ $$
 \text{Intervallets nedre grænse} = p - z \cdot \sqrt{\frac{p(1-p)}{n}}
 $$
 
-
 $$
 \text{Intervallets øvre grænse} = p + z \cdot \sqrt{\frac{p(1-p)}{n}}
 $$
@@ -619,11 +674,28 @@ $$
 
 -   $p =$ andelen i stikprøven (fx $0,3$ eller $0,25$)
 
--   $z=$ antallet af valgte standardafvigelser, ofte $z=1,96$ (svarende til $95%$)
-
--   $s =$ standardafvigelse i stikprøven
+-   $z=$ antallet af valgte standardafvigelser, ofte $z=1,96$ (svarende til $95%$ %)
 
 -   $n =$ antallet af observationer i stikprøven (stikprøvestørrelsen)
+
+---
+
+# Eks. Konfidensintervaller: nominal- og ordinalskala
+
+$$
+stikprøvegennemsnit/andel = \bar{x}=0,3
+$$
+$$
+n = 10
+$$
+
+$$
+\text{Intervallets nedre grænse} = 0,3 - 1,96 \cdot \sqrt{\frac{0,3(1-0,3)}{10}}=0,3-0,284=0.016
+$$
+
+$$
+\text{Intervallets øvre grænse} = 0,3 + 1,96 \cdot \sqrt{\frac{0,3(1-0,3)}{10}}=0,3+0,284=0.584
+$$
 
 ------------------------------------------------------------------------
 
@@ -631,9 +703,7 @@ $$
 
 Standardfejl måler, hvor meget en stikprøveestimator (f.eks. gennemsnit) typisk vil variere fra stikprøve til stikprøve, hvis vi gentager målingen flere gange:
 
-
 $SE = \frac{s}{\sqrt{n}}$\
-
 
 -   $s$ er stikprøvens standardafvigelse (bruges som estimat for $\sigma$, populationens standardafvigelse).
 

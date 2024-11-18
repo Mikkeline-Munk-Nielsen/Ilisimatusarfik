@@ -1,0 +1,30 @@
+---
+title: "Supplerende materialer"
+format:
+  html:
+    css: custom-toc.css
+    include-before-body: home-button.html
+editor: visual
+---
+
+Herunder finder I en rækker supplerende materialer, som I kan benytte som supplement til pensum, når I ikke gider læse flere formler.
+
+# StatQuest videoer (Youtube)   ![](Undervisningsdokumenter/E24/slides/images/statquest.jpg){width="100"}
+
+StatQuest by Josh Starmer er en videorække på Youtube, der laver introducerende videoer om statistik. Der er videoer om stort set alt, men herunder finder I linkt til nogle udvalgte videoer, der introducerer hovedbegreber i vores undervisning.
+
+#### [Introduktion til statistiske fordelinger](https://www.youtube.com/watch?v=oI3hZJqXJuc&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=2&ab_channel=StatQuestwithJoshStarmer)
+
+#### [Normalfordeling](https://www.google.com/search?client=firefox-b-d&q=statquest+normal+distribution#fpstate=ive&vld=cid:75c56403,vid:rzFX5NWojp0,st:0)
+
+#### [Centrale grænseværdi sætning (Central Limit Theorem)](https://www.youtube.com/watch?v=YAlJCEDH2uY&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=25&ab_channel=StatQuestwithJoshStarmer)
+
+#### [Hypotesetest](https://www.youtube.com/watch?v=0oc49DyA3hU&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=10&ab_channel=StatQuestwithJoshStarmer)
+
+# Videnskabeligt udfordret (podcast)    ![](Undervisningsdokumenter/E24/slides/images/Videnskabeligt_udfordret.png){width="100"}
+
+Videnskabeligt Udfordret er en gakket podcast hvor de to forskere Mark og Flemming dækker historier, data og kontroverser fra videnskabens verden. De siger selv, at deres mål er at gøre dig klog på en dum måde.
+
+Afsnit 151 handler om statistik, mere specifikt t-testen, og hvordan den blev til. Find den på [Spotify](https://open.spotify.com/show/3UbKcFIjMu8ZsCp8OqVKdk), [Apple Podcasts](https://podcasts.apple.com/dk/podcast/videnskabeligt-udfordret/id1391141040), eller hvor end du hører podcasts. Alternativt på linket herunder:
+
+#### [Afsnit 151: statistik kommer fra øl](https://videnskabeligtudfordret.dk/afsnit)

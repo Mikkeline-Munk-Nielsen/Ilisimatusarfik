@@ -165,6 +165,9 @@ window.Quarto = {
   <li><a href="#all-in-one-summary" id="toc-all-in-one-summary" class="nav-link" data-scroll-target="#all-in-one-summary">All-in-one summary</a></li>
   </ul></li>
   <li><a href="#spredningsmål" id="toc-spredningsmål" class="nav-link" data-scroll-target="#spredningsmål">Spredningsmål</a></li>
+  <li><a href="#t-test-for-univariat-analyse" id="toc-t-test-for-univariat-analyse" class="nav-link" data-scroll-target="#t-test-for-univariat-analyse">T-test for univariat analyse</a></li>
+  <li><a href="#konfidensintervaller" id="toc-konfidensintervaller" class="nav-link" data-scroll-target="#konfidensintervaller">Konfidensintervaller</a></li>
+  <li><a href="#chi2-test-for-univariat-analyse-goodness-of-fit" id="toc-chi2-test-for-univariat-analyse-goodness-of-fit" class="nav-link" data-scroll-target="#chi2-test-for-univariat-analyse-goodness-of-fit"><span class="math inline">\(\chi^2\)</span>-test for univariat analyse (goodness of fit)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -980,6 +983,123 @@ attr(,"freq")
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 18.9896</code></pre>
 </div>
+</div>
+</section>
+<section id="t-test-for-univariat-analyse" class="level2">
+<h2 class="anchored" data-anchor-id="t-test-for-univariat-analyse">T-test for univariat analyse</h2>
+<p>I univariat analyse kan man anvende t-testen til formelt at teste, om gennemsnittet i ens stikprøve er signifikant forskelligt fra en specifik værdi (f.eks. Hvis du har viden om populationens sande gennemsnit). Vi bruger funktionen <code>t.test()</code>.</p>
+<p>Vi kan f.eks. teste om gennemsnitsalderen i stikprøven (<span class="math inline">\(s\)</span>) er signifikant forskellig fra gennemsnitsalderen i populationen i 2020: <span class="math inline">\(\mu=42,8\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Indlæs nødvendige pakker</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) </span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Kør testen og gem resultaterne i et objekt </span></span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>ttest_resultat <span class="ot">&lt;-</span> <span class="fu">t.test</span>(df<span class="sc">$</span>alder, <span class="at">mu =</span> <span class="fl">42.8</span>)</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Opret en data frame med de ønskede metrics i rækker</span></span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>resultat_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metric =</span> <span class="fu">c</span>(<span class="st">"Gennemsnit"</span>,                  <span class="co"># Gennemsnittet af prøven</span></span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Test-statistik"</span>,              <span class="co"># Teststatistikken (t-værdien)</span></span>
+<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a>             <span class="st">"P-værdi"</span>,                    <span class="co"># P-værdien med 4 decimaler</span></span>
+<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Nedre konfidensinterval"</span>,      <span class="co"># Nedre konfidensinterval for konfidensintervallet</span></span>
+<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Øvre konfidensinterval"</span>,       <span class="co"># Øvre konfidensinterval for konfidensintervallet</span></span>
+<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Frihedsgrader"</span>),             <span class="co"># Frihedsgrader (df)</span></span>
+<span id="cb77-16"><a href="#cb77-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="fu">c</span>(</span>
+<span id="cb77-17"><a href="#cb77-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat<span class="sc">$</span>estimate, <span class="dv">3</span>),        <span class="co"># Gennemsnittet afrundet til 3 decimaler</span></span>
+<span id="cb77-18"><a href="#cb77-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat<span class="sc">$</span>statistic, <span class="dv">3</span>),      <span class="co"># Teststatistikken afrundet til 3 decimaler</span></span>
+<span id="cb77-19"><a href="#cb77-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, ttest_resultat<span class="sc">$</span>p.value), <span class="co"># P-værdi med 3 decimaler </span></span>
+<span id="cb77-20"><a href="#cb77-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat<span class="sc">$</span>conf.int[<span class="dv">1</span>], <span class="dv">3</span>),    <span class="co"># Nedre konfidensinterval afrundet til 3 decimaler</span></span>
+<span id="cb77-21"><a href="#cb77-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat<span class="sc">$</span>conf.int[<span class="dv">2</span>], <span class="dv">3</span>),    <span class="co"># Øvre konfidensinterval afrundet til 3 decimaler</span></span>
+<span id="cb77-22"><a href="#cb77-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat<span class="sc">$</span>parameter, <span class="dv">1</span>)       <span class="co"># Frihedsgrader afrundet til 1 decimal</span></span>
+<span id="cb77-23"><a href="#cb77-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb77-24"><a href="#cb77-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb77-25"><a href="#cb77-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-26"><a href="#cb77-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Udskriv tabellen i konsollen</span></span>
+<span id="cb77-27"><a href="#cb77-27" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(resultat_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Metric  Value
+1              Gennemsnit 50.789
+2          Test-statistik 49.385
+3                 P-værdi  0.000
+4 Nedre konfidensinterval 50.472
+5  Øvre konfidensinterval 51.106
+6           Frihedsgrader  13778</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eksporter tabellen til en CSV-fil</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(resultat_df, <span class="st">"t_test_resultat.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Da p-værdien er under 0,05 konkluderer vi, at gennemsnitsalderen i stikprøven (<span class="math inline">\(s\)</span>) er signifikant lavere end den forventede værdi (gennemsnitsalderen i populationen, <span class="math inline">\(\mu\)</span>).</p>
+</section>
+<section id="konfidensintervaller" class="level2">
+<h2 class="anchored" data-anchor-id="konfidensintervaller">Konfidensintervaller</h2>
+<p>Man kan også bruge funktionen <code>t.test()</code> til at udregne konfidensintervaller:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(df<span class="sc">$</span>alder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  df$alder
+t = 313.95, df = 13778, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 50.47215 51.10634
+sample estimates:
+mean of x 
+ 50.78924 </code></pre>
+</div>
+</div>
+<p>Konfidensintervallerne fortæller os, at populationsgennemsnittet <span class="math inline">\(\mu\)</span> med 95% sandsynlighed ligger i intervallet <span class="math inline">\(50,47\)</span> og <span class="math inline">\(51,1\)</span> år.</p>
+</section>
+<section id="chi2-test-for-univariat-analyse-goodness-of-fit" class="level2">
+<h2 class="anchored" data-anchor-id="chi2-test-for-univariat-analyse-goodness-of-fit"><span class="math inline">\(\chi^2\)</span>-test for univariat analyse (goodness of fit)</h2>
+<p>Ordinal og nominalskalerede variable har ikke gennemsnit og varians uafhængigt af vores nummerering og derfor er disse meningsløse. T-testen er derfor også meningsløs. I stedet tester vi, om fordelingen mellem variablens kategorier er forskellig fra en forventet fordeling.</p>
+<p>Testen hedder χ² – udtales ‘Chi i anden’ eller <strong>goodness of fit</strong>. Vi bruger <span class="math inline">\(\chi^2\)</span> goodness of fit testen til at teste, om fordelingen på variablen i stikprøven stemmer overens med en forventet fordeling. F.eks. kan vi teste, om uddannelsesfordelingen i stikprøven stemmer overens med en forventet uddannelsesfordeling.</p>
+<p>Den observerede fordeling i stikprøven er:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(df<span class="sc">$</span>udd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      df$udd    n     percent valid_percent
+                  Grundskole 3087 0.223711863     0.2258230
+ Ungdoms-/erhvervsuddannelse 4501 0.326183057     0.3292612
+     Mellemlang videregående 3934 0.285093123     0.2877835
+           Lang videregående 2148 0.155663454     0.1571324
+                        &lt;NA&gt;  129 0.009348504            NA</code></pre>
+</div>
+</div>
+<p>De observerede værdier er antallet i hver kategori <span class="math inline">\((n)\)</span>, og den forventede fordeling er en sandsynlighedsfordeling <span class="math inline">\((p)\)</span>.</p>
+<p>De observerede værdier fra tabellen er:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>observeret <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3087</span>, <span class="dv">4501</span>, <span class="dv">3934</span>, <span class="dv">2148</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Den forrventede fordeling på variablen udtrykkes som andele, f.eks. 15% grundskole, 30% Ungdoms-/erhvervsuddannelse, 30 % mellemlang videregående, 25 % lang videregående:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>forventet_andele <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.15</span>, <span class="fl">0.30</span>, <span class="fl">0.30</span>, <span class="fl">0.25</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Brug funktionen <code>chisq.test()</code> for at sammenligne de observerede værdier med de forventede:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>chi_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(<span class="at">x =</span> observeret, <span class="at">p =</span> forventet_andele)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Formatér test-resultater og gem som tabel</span></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>(chi_tabel <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Parameter =</span> <span class="fu">c</span>(<span class="st">"Chi-squared"</span>, <span class="st">"Frihedsgrader"</span>, <span class="st">"p-værdi"</span>),</span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>  Værdi <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">formatC</span>(chi_test<span class="sc">$</span>statistic, <span class="at">format =</span> <span class="st">"f"</span>, <span class="at">digits =</span> <span class="dv">3</span>),  <span class="co"># Chi-squared værdi</span></span>
+<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a>            chi_test<span class="sc">$</span>parameter,                                     <span class="co"># Frihedsgrader</span></span>
+<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">formatC</span>(chi_test<span class="sc">$</span>p.value, <span class="at">format =</span> <span class="st">"f"</span>, <span class="at">digits =</span> <span class="dv">3</span>))    <span class="co"># p-værdi</span></span>
+<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Parameter    Værdi
+X-squared   Chi-squared 1041.334
+df        Frihedsgrader        3
+                p-værdi    0.000</code></pre>
+</div>
+</div>
+<p>P-værdien på 0,000 er under0,05 og vi afviser dermed nulhypotesen og konkluderer, at uddannelsesfordelingen i stikprøven er signifikant forskellig fra den forventede fordeling.</p>
+<p>Du kan som altid eksportere dine resultater fra testen til excel med <code>write.csv()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eksporter tabellen til en CSV-fil</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(chi_tabel, <span class="st">"chi_test_resultat.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>

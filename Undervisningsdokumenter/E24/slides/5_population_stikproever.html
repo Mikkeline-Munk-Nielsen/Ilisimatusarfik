@@ -430,6 +430,51 @@
 </section>
 <section class="slide level0">
 
+<h1>Udtagning</h1>
+<p>I praksis kan man udtrække stikprøver fra populationer med udgangspunkt i forskellige typer af information. Traditionelle samplingmetoder inkluderer:</p>
+<ul>
+<li><p>Registerbaseret sampling (fulde populationslister)</p></li>
+<li><p>Telefonnummerbaseret sampling (hustands eller individ niveau? Tidspunkt for kontakt?)</p></li>
+<li><p>Internetpanelsampling (mange besvarelser, svært at sikre repræsentativitet, adgang til svært tilgængelige målgrupper)</p></li>
+<li><p>Bekvemmelighedssampling (f.eks. Facebook, som udgangspunkt ikke repræsentativt da det ikke er tilfældig udvælgelse)</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Case 1: Kundetilfredshed i butikskæde</h2>
+<p><strong>Case</strong>: En grønlandsk butikskæde med butikker i Nuuk, Sisimiut og Ilulissat ønsker at undersøge kundetilfredshed. Kæden har samlet set 5.000 faste kunder, men det er for dyrt og tidskrævende at spørge dem alle. De beslutter at lave en stikprøve.</p>
+<p><strong>Opgaver:</strong></p>
+<ol type="1">
+<li><p>Definer target population og frame population</p></li>
+<li><p>Hvordan vil I sammensætte stikprøven, så kunder fra alle tre byer er repræsenteret? Diskuter brugen af stratificeret stikprøve versus simpel tilfældig stikprøve.</p></li>
+<li><p>Hvordan kunne man i praksis udtrække stikprøven? Hvilke bias ville I være særligt bekymrede for?</p></li>
+</ol>
+</section>
+<section class="slide level0">
+
+<h2>Case 2: Social integration i bygder og byer</h2>
+<p><strong>Case</strong>: En undersøgelse skal vurdere graden af social integration i Grønland, både i større byer og bygder. Man vil gerne undersøge forskelle mellem unge (18-29 år) og ældre (30+ år) i deres deltagelse i sociale aktiviteter.</p>
+<p><strong>Opgaver:</strong></p>
+<ol type="1">
+<li><p>Hvordan vil I sikre, at både bygder og byer er repræsenteret i stikprøven? Diskuter brugen af simpel tilfældig, stratificeret og klyngebaseret stikprøve.</p></li>
+<li><p>Hvordan kan man indsamle data på tværs af bygder med sproglig og teknologisk variation?</p></li>
+<li><p>Hvad betyder det for stikprøven, hvis bygderne bliver underrepræsenterede? Hvilke bias bør man være opmærksom på?</p></li>
+</ol>
+</section>
+<section class="slide level0">
+
+<h2>Case 3: Oplysningskampagner om sundhed</h2>
+<p><strong>Case</strong>: Sundhedsmyndighederne i Grønland har gennemført en oplysningskampagne om fordelene ved sund kost. De ønsker at undersøge kampagnens effekt blandt borgere i Grønland. Der er ca. 57.000 indbyggere, og man planlægger at spørge 1.200 personer i hele landet.</p>
+<p><strong>Opgaver:</strong></p>
+<ol type="1">
+<li><p>Hvordan kan man vælge en repræsentativ stikprøve, der inkluderer både by- og bygdebefolkningen? Diskuter styrker og svagheder ved forskellige stikprøveudtræk.</p></li>
+<li><p>Hvordan påvirker det analysen, hvis de personer, der deltager i undersøgelsen, har større interesse i sund kost end dem, der ikke gør?</p></li>
+<li><p>Hvordan kan vægtning af stikprøvens data hjælpe med at korrigere for skævheder i repræsentationen?</p></li>
+<li><p>Hvordan kan vi måle, om stikprøven reelt afspejler hele Grønlands befolkning?</p></li>
+</ol>
+</section>
+<section class="slide level0">
+
 <h1>Stikprøveudtræk og statistisk usikkerhed</h1>
 <ul>
 <li><p>På baggrund af en stikprøve drages konklusioner om en population (inferens). Slutningen er baseret på stikprøvens <strong>repræsentativitet</strong></p></li>
@@ -713,7 +758,7 @@ u = 1,96 \cdot \frac{p \cdot q}{n}
 <ul>
 <li><p>Hvor <span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span> standardfejlen (Standard error).</p></li>
 <li><p><span class="math inline">\(\bar{X} =\)</span> gennemsnit i stikprøven</p></li>
-<li><p><span class="math inline">\(z =\)</span> antallet af valgte standardafvigelser, ofte <span class="math inline">\(z = 1,96\)</span> (svarende til <span class="math inline">\(95%\)</span>)</p></li>
+<li><p><span class="math inline">\(z =\)</span> antallet af valgte standardafvigelser, ofte <span class="math inline">\(z = 1,96\)</span> (svarende til <span class="math inline">\(95%\)</span> %)</p></li>
 <li><p><span class="math inline">\(s =\)</span> standardafvigelse i stikprøven</p></li>
 <li><p><span class="math inline">\(n =\)</span> antallet af observationer i stikprøven (stikprøvestørrelsen)</p></li>
 </ul>
@@ -731,10 +776,24 @@ u = 1,96 \cdot \frac{p \cdot q}{n}
 <ul>
 <li><p>Hvor: <span class="math inline">\(\sqrt{\frac{p(1-p)}{n}}\)</span> er standardfejlen (Standard error).</p></li>
 <li><p><span class="math inline">\(p =\)</span> andelen i stikprøven (fx <span class="math inline">\(0,3\)</span> eller <span class="math inline">\(0,25\)</span>)</p></li>
-<li><p><span class="math inline">\(z=\)</span> antallet af valgte standardafvigelser, ofte <span class="math inline">\(z=1,96\)</span> (svarende til <span class="math inline">\(95%\)</span>)</p></li>
-<li><p><span class="math inline">\(s =\)</span> standardafvigelse i stikprøven</p></li>
+<li><p><span class="math inline">\(z=\)</span> antallet af valgte standardafvigelser, ofte <span class="math inline">\(z=1,96\)</span> (svarende til <span class="math inline">\(95%\)</span> %)</p></li>
 <li><p><span class="math inline">\(n =\)</span> antallet af observationer i stikprøven (stikprøvestørrelsen)</p></li>
 </ul>
+</section>
+<section class="slide level0">
+
+<h1>Eks. Konfidensintervaller: nominal- og ordinalskala</h1>
+<p><span class="math display">\[
+stikprøvegennemsnit/andel = \bar{x}=0,3
+\]</span> <span class="math display">\[
+n = 10
+\]</span></p>
+<p><span class="math display">\[
+\text{Intervallets nedre grænse} = 0,3 - 1,96 \cdot \sqrt{\frac{0,3(1-0,3)}{10}}=0,3-0,284=0.016
+\]</span></p>
+<p><span class="math display">\[
+\text{Intervallets øvre grænse} = 0,3 + 1,96 \cdot \sqrt{\frac{0,3(1-0,3)}{10}}=0,3+0,284=0.584
+\]</span></p>
 </section>
 <section class="slide level0">
 
