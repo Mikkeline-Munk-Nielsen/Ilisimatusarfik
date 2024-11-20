@@ -690,40 +690,59 @@ Udover den ”typiske værdi” er det informativt at undersøge spredningen på
 
 Du kan finde variansen på en variabel med funktionen `Var()`:
 
-```{r}
+```{r echo=TRUE}
 Var(df$alder, na.rm = TRUE)
 ```
 
 Eller standardafvigelsen med funktionen `sd()`:
 
-```{r}
+```{r echo=TRUE}
 sd(df$alder, na.rm = TRUE)
 ```
 
+## Konfidensintervaller
+
+Man kan bruge funktionen `t.test()` til at udregne konfidensintervaller (95 % konfidensintervaller er standard):
+
+```{r echo=TRUE}
+t.test(df$alder)
+```
+
+Konfidensintervallerne fortæller os, at populationsgennemsnittet $\mu$ med 95% sandsynlighed ligger i intervallet $50,47$ og $51,1$ år.
+
 ## T-test for univariat analyse
 
-I univariat analyse kan man anvende t-testen til formelt at teste, om gennemsnittet i ens stikprøve er signifikant forskelligt fra en specifik værdi (f.eks. Hvis du har viden om populationens sande gennemsnit). Vi bruger funktionen `t.test()`.
+I univariat analyse kan man anvende t-testen til formelt at teste, om gennemsnittet i ens stikprøve er signifikant forskelligt fra en forventet værdi (f.eks. Hvis du har viden om populationens sande gennemsnit). Vi bruger funktionen `t.test()`.
 
-Vi kan f.eks. teste om gennemsnitsalderen i stikprøven ($s$) er signifikant forskellig fra gennemsnitsalderen i populationen i 2020: $\mu=42,8$.
+Vi kan f.eks. teste om gennemsnitsalderen i stikprøven ($\bar{x}$) er signifikant forskellig fra gennemsnitsalderen i populationen i 2020: $\mu=42,8$.
 
-```{r}
-# Indlæs nødvendige pakker
-library(broom) 
-library(dplyr)
+Hypoteserne for en univariat t-test er:
 
-# Kør testen og gem resultaterne i et objekt 
+-   **H0**: Stikprøvegennemsnittet er lig populationens gennemsnit, $\bar{x}=μ$
+
+<!-- -->
+
+-   **H1:** Stikprøvegennemsnittet er forskelligt fra populationens gennemsnit $\bar{x}\ne \mu$
+
+```{r echo=TRUE}
 ttest_resultat <- t.test(df$alder, mu = 42.8)
+```
 
+Da p-værdien er under 0,05 forkaster vi nulhypotesen og konkluderer vi, at gennemsnitsalderen i stikprøven ($\bar{x}$) er signifikant lavere end den forventede værdi (gennemsnitsalderen i populationen, $\mu$).
+
+Du kan samle outputtet fra t-testen i en lidt pænere tabel og eksportere den, ved at følge nedenstående kode:\
+
+```{r echo=T, eval=F}
 # Opret en data frame med de ønskede metrics i rækker
 resultat_df <- data.frame(
-  Metric = c("Gennemsnit",                  # Gennemsnittet af prøven
-             "Test-statistik",              # Teststatistikken (t-værdien)
-             "P-værdi",                    # P-værdien med 4 decimaler
+  Parameter = c("Gennemsnit",                # Gennemsnittet af prøven
+             "Test-statistik",               # Teststatistikken (t-værdien)
+             "P-værdi",                      # P-værdien med 4 decimaler
              "Nedre konfidensinterval",      # Nedre konfidensinterval for konfidensintervallet
              "Øvre konfidensinterval",       # Øvre konfidensinterval for konfidensintervallet
-             "Frihedsgrader"),             # Frihedsgrader (df)
-  Value = c(
-    round(ttest_resultat$estimate, 3),        # Gennemsnittet afrundet til 3 decimaler
+             "Frihedsgrader"),               # Frihedsgrader (df)
+  Værdi = c(
+    round(ttest_resultat$estimate, 3),       # Gennemsnittet afrundet til 3 decimaler
     round(ttest_resultat$statistic, 3),      # Teststatistikken afrundet til 3 decimaler
     sprintf("%.3f", ttest_resultat$p.value), # P-værdi med 3 decimaler 
     round(ttest_resultat$conf.int[1], 3),    # Nedre konfidensinterval afrundet til 3 decimaler
@@ -739,27 +758,23 @@ print(resultat_df)
 write.csv(resultat_df, "t_test_resultat.csv", row.names = FALSE)
 ```
 
-Da p-værdien er under 0,05 konkluderer vi, at gennemsnitsalderen i stikprøven ($s$) er signifikant lavere end den forventede værdi (gennemsnitsalderen i populationen, $\mu$).
-
-## Konfidensintervaller
-
-Man kan også bruge funktionen `t.test()` til at udregne konfidensintervaller:
-
-```{r}
-t.test(df$alder)
-```
-
-Konfidensintervallerne fortæller os, at populationsgennemsnittet $\mu$ med 95% sandsynlighed ligger i intervallet $50,47$ og $51,1$ år.
-
 ## $\chi^2$-test for univariat analyse (goodness of fit)
 
 Ordinal og nominalskalerede variable har ikke gennemsnit og varians uafhængigt af vores nummerering og derfor er disse meningsløse. T-testen er derfor også meningsløs. I stedet tester vi, om fordelingen mellem variablens kategorier er forskellig fra en forventet fordeling.
 
 Testen hedder χ² – udtales 'Chi i anden' eller **goodness of fit**. Vi bruger $\chi^2$ goodness of fit testen til at teste, om fordelingen på variablen i stikprøven stemmer overens med en forventet fordeling. F.eks. kan vi teste, om uddannelsesfordelingen i stikprøven stemmer overens med en forventet uddannelsesfordeling.
 
+Hypoteserne i en goodness-of-fit test er:
+
+-   **H0**: Den observerede fordeling er ikke signifikant forskellig fra den forventede fordeling
+
+<!-- -->
+
+-   **H1**: Den observerede fordeling er signifikant forskellig fra den forventede fordeling
+
 Den observerede fordeling i stikprøven er:
 
-```{r}
+```{r echo=TRUE}
 tabyl(df$udd)
 ```
 
@@ -767,19 +782,19 @@ De observerede værdier er antallet i hver kategori $(n)$, og den forventede for
 
 De observerede værdier fra tabellen er:
 
-```{r}
+```{r echo=TRUE}
 observeret <- c(3087, 4501, 3934, 2148)
 ```
 
 Den forrventede fordeling på variablen udtrykkes som andele, f.eks. 15% grundskole, 30% Ungdoms-/erhvervsuddannelse, 30 % mellemlang videregående, 25 % lang videregående:
 
-```{r}
+```{r echo=TRUE}
 forventet_andele <- c(0.15, 0.30, 0.30, 0.25) 
 ```
 
 Brug funktionen `chisq.test()` for at sammenligne de observerede værdier med de forventede:
 
-```{r}
+```{r echo=TRUE}
 chi_test <- chisq.test(x = observeret, p = forventet_andele)
 
 # Formatér test-resultater og gem som tabel
@@ -791,11 +806,11 @@ chi_test <- chisq.test(x = observeret, p = forventet_andele)
 ))
 ```
 
-P-værdien på 0,000 er under0,05 og vi afviser dermed nulhypotesen og konkluderer, at uddannelsesfordelingen i stikprøven er signifikant forskellig fra den forventede fordeling.
+P-værdien på 0,000 er under 0,05 og vi afviser dermed nulhypotesen og konkluderer, at uddannelsesfordelingen i stikprøven er signifikant forskellig fra den forventede fordeling.
 
 Du kan som altid eksportere dine resultater fra testen til excel med `write.csv()`:
 
-```{r}
+```{r echo=TRUE}
 # Eksporter tabellen til en CSV-fil
 write.csv(chi_tabel, "chi_test_resultat.csv", row.names = FALSE)
 ```

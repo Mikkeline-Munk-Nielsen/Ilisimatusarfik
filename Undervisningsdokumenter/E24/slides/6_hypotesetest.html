@@ -392,8 +392,8 @@
 
 <section class="slide level0">
 
-<section id="hypotesetestning" class="center">
-<h1>Hypotesetestning</h1>
+<section id="hypotesetest" class="center">
+<h1>Hypotesetest</h1>
 <h3 id="statistik-e24-15-ects">Statistik E24 (15 ECTS)</h3>
 <h3 id="ved-mikkeline-munk-nielsen">ved Mikkeline Munk Nielsen</h3>
 </section>
@@ -583,9 +583,11 @@
 <p>I skal kende til to hypotesetests for univariat analyse (én variabel):</p>
 <p><br></p>
 <ul>
-<li><p><strong>T-test</strong> (intervalskala variable): Tester, om et gennemsnit er forskelligt fra en specifik værdi, vi kender på forhånd.</p></li>
-<li><p><br></p></li>
-<li><p><span class="math inline">\(\chi^2\)</span><strong>-tes</strong>t (nominal/ordinal): Bruges til at teste, om der er forskel på fordelingen af en nominal variabel i forhold til en forventet fordeling.</p></li>
+<li><strong>T-test</strong> (intervalskala variable): Tester, om et gennemsnit er forskelligt fra en specifik værdi, vi kender på forhånd.</li>
+</ul>
+<p><br></p>
+<ul>
+<li><span class="math inline">\(\chi^2\)</span><strong>-tes</strong>t (nominal/ordinal): Bruges til at teste, om der er forskel på fordelingen af en nominal variabel i forhold til en forventet fordeling.</li>
 </ul>
 </section>
 <section class="slide level0">
@@ -777,29 +779,26 @@ mean of x
 </div>
 <div id="tabset-1-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">library</span>(broom)</span>
-<span id="cb4-2"><a href=""></a><span class="fu">library</span>(dplyr)</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># Kør t-testen</span></span>
+<span id="cb4-2"><a href=""></a>test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(df<span class="sc">$</span>e5, <span class="at">mu =</span> <span class="fl">35.5</span>)</span>
 <span id="cb4-3"><a href=""></a></span>
-<span id="cb4-4"><a href=""></a><span class="co"># Kør t-testen</span></span>
-<span id="cb4-5"><a href=""></a>test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(df<span class="sc">$</span>e5, <span class="at">mu =</span> <span class="fl">35.5</span>)</span>
-<span id="cb4-6"><a href=""></a></span>
-<span id="cb4-7"><a href=""></a><span class="co"># Opret en data frame med de ønskede metrics i rækker</span></span>
-<span id="cb4-8"><a href=""></a>(result_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb4-9"><a href=""></a>  <span class="at">Parameter =</span> <span class="fu">c</span>(<span class="st">"Gennemsnit"</span>,                 <span class="co"># Gennemsnittet af prøven</span></span>
-<span id="cb4-10"><a href=""></a>             <span class="st">"Teststatistik"</span>,              <span class="co"># Teststatistikken (t-værdien)</span></span>
-<span id="cb4-11"><a href=""></a>             <span class="st">"P-værdi"</span>,                    <span class="co"># P-værdien med 4 decimaler</span></span>
-<span id="cb4-12"><a href=""></a>             <span class="st">"Nedre konfidensgrænse"</span>,      <span class="co"># Nedre grænse for konfidensintervallet</span></span>
-<span id="cb4-13"><a href=""></a>             <span class="st">"Øvre konfidensgrænse"</span>,       <span class="co"># Øvre grænse for konfidensintervallet</span></span>
-<span id="cb4-14"><a href=""></a>             <span class="st">"Frihedsgrader"</span>),             <span class="co"># Frihedsgrader (df)</span></span>
-<span id="cb4-15"><a href=""></a>  Værdi <span class="ot">=</span> <span class="fu">c</span>(</span>
-<span id="cb4-16"><a href=""></a>    <span class="fu">round</span>(test_result<span class="sc">$</span>estimate, <span class="dv">3</span>),        <span class="co"># Gennemsnittet afrundet til 3 decimaler</span></span>
-<span id="cb4-17"><a href=""></a>    <span class="fu">round</span>(test_result<span class="sc">$</span>statistic, <span class="dv">3</span>),       <span class="co"># Teststatistikken afrundet til 3 decimaler</span></span>
-<span id="cb4-18"><a href=""></a>    <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, test_result<span class="sc">$</span>p.value),  <span class="co"># P-værdi med 4 decimaler uden eksponentiel notation</span></span>
-<span id="cb4-19"><a href=""></a>    <span class="fu">round</span>(test_result<span class="sc">$</span>conf.int[<span class="dv">1</span>], <span class="dv">3</span>),     <span class="co"># Nedre grænse afrundet til 3 decimaler</span></span>
-<span id="cb4-20"><a href=""></a>    <span class="fu">round</span>(test_result<span class="sc">$</span>conf.int[<span class="dv">2</span>], <span class="dv">3</span>),     <span class="co"># Øvre grænse afrundet til 3 decimaler</span></span>
-<span id="cb4-21"><a href=""></a>    <span class="fu">round</span>(test_result<span class="sc">$</span>parameter, <span class="dv">1</span>)        <span class="co"># Frihedsgrader afrundet til 1 decimal</span></span>
-<span id="cb4-22"><a href=""></a>  )</span>
-<span id="cb4-23"><a href=""></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href=""></a><span class="co"># Opret en data frame med de ønskede metrics i rækker</span></span>
+<span id="cb4-5"><a href=""></a>(result_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-6"><a href=""></a>  <span class="at">Parameter =</span> <span class="fu">c</span>(<span class="st">"Gennemsnit"</span>,                 <span class="co"># Gennemsnittet af prøven</span></span>
+<span id="cb4-7"><a href=""></a>             <span class="st">"Teststatistik"</span>,              <span class="co"># Teststatistikken (t-værdien)</span></span>
+<span id="cb4-8"><a href=""></a>             <span class="st">"P-værdi"</span>,                    <span class="co"># P-værdien med 4 decimaler</span></span>
+<span id="cb4-9"><a href=""></a>             <span class="st">"Nedre konfidensgrænse"</span>,      <span class="co"># Nedre grænse for konfidensintervallet</span></span>
+<span id="cb4-10"><a href=""></a>             <span class="st">"Øvre konfidensgrænse"</span>,       <span class="co"># Øvre grænse for konfidensintervallet</span></span>
+<span id="cb4-11"><a href=""></a>             <span class="st">"Frihedsgrader"</span>),             <span class="co"># Frihedsgrader (df)</span></span>
+<span id="cb4-12"><a href=""></a>  Værdi <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb4-13"><a href=""></a>    <span class="fu">round</span>(test_result<span class="sc">$</span>estimate, <span class="dv">3</span>),        <span class="co"># Gennemsnittet afrundet til 3 decimaler</span></span>
+<span id="cb4-14"><a href=""></a>    <span class="fu">round</span>(test_result<span class="sc">$</span>statistic, <span class="dv">3</span>),       <span class="co"># Teststatistikken afrundet til 3 decimaler</span></span>
+<span id="cb4-15"><a href=""></a>    <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, test_result<span class="sc">$</span>p.value),  <span class="co"># P-værdi med 4 decimaler uden eksponentiel notation</span></span>
+<span id="cb4-16"><a href=""></a>    <span class="fu">round</span>(test_result<span class="sc">$</span>conf.int[<span class="dv">1</span>], <span class="dv">3</span>),     <span class="co"># Nedre grænse afrundet til 3 decimaler</span></span>
+<span id="cb4-17"><a href=""></a>    <span class="fu">round</span>(test_result<span class="sc">$</span>conf.int[<span class="dv">2</span>], <span class="dv">3</span>),     <span class="co"># Øvre grænse afrundet til 3 decimaler</span></span>
+<span id="cb4-18"><a href=""></a>    <span class="fu">round</span>(test_result<span class="sc">$</span>parameter, <span class="dv">1</span>)        <span class="co"># Frihedsgrader afrundet til 1 decimal</span></span>
+<span id="cb4-19"><a href=""></a>  )</span>
+<span id="cb4-20"><a href=""></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -847,6 +846,15 @@ mean of x
 
 <h1>Eksempel: <span class="math inline">\(\chi^2-test\)</span> for univariat analyse</h1>
 <p>Variablen e5 måler om respondenterne identificerer sig som værende grønlandsk, dansk, både grønlandsk og dansk, eller andet:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                    df$e4   n    percent
+                    Andet  10 0.01567398
+ Både Grønlandsk og Dansk  61 0.09561129
+                    Dansk  29 0.04545455
+               Grønlandsk 538 0.84326019</code></pre>
+</div>
+</div>
 <p>Vi kan bruge <span class="math inline">\(\chi^2\)</span> goodness of fit testen til at teste, om fordelingen på variablen i stikprøven stemmer overens med en forventet fordeling.</p>
 </section>
 <section class="slide level0">
@@ -856,15 +864,25 @@ mean of x
 <ul>
 <li>De observerede værdier fra tabellen er:</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>observeret <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">61</span>, <span class="dv">29</span>, <span class="dv">538</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li>Antag en forventet fordeling som andele (5% andet, 10% grønlandsk og dansk, 5% dansk, 80% grønlandsk):</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>forventet_andele <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.80</span>)  <span class="co"># Din forventede fordeling</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section class="slide level0">
 
 <h1>Eksempel: <span class="math inline">\(\chi^2-test\)</span> for univariat analyse</h1>
 <p>Brug funktionen <code>chisq.test()</code> for at sammenligne de observerede værdier med de forventede:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>chi_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(<span class="at">x =</span> observeret, <span class="at">p =</span> forventet_andele)</span>
+<span id="cb8-2"><a href=""></a></span>
+<span id="cb8-3"><a href=""></a><span class="co"># Print resultatet</span></span>
+<span id="cb8-4"><a href=""></a><span class="fu">print</span>(chi_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Chi-squared test for given probabilities
@@ -894,16 +912,16 @@ df        Degrees of Freedom  3.000000
 </div>
 <div id="tabset-2-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># Saml resultaterne i en tabel</span></span>
-<span id="cb7-2"><a href=""></a>chi_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb7-3"><a href=""></a>  <span class="at">Parameter =</span> <span class="fu">c</span>(<span class="st">"Chi-squared"</span>, <span class="st">"Degrees of Freedom"</span>, <span class="st">"p-value"</span>),</span>
-<span id="cb7-4"><a href=""></a>  Værdi <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">round</span>(chi_test<span class="sc">$</span>statistic, <span class="dv">3</span>),  <span class="co"># Chi-squared værdi</span></span>
-<span id="cb7-5"><a href=""></a>            chi_test<span class="sc">$</span>parameter,           <span class="co"># Frihedsgrader</span></span>
-<span id="cb7-6"><a href=""></a>            <span class="fu">signif</span>(chi_test<span class="sc">$</span>p.value, <span class="dv">3</span>))  <span class="co"># p-værdi (signifikant til 3 decimaler)</span></span>
-<span id="cb7-7"><a href=""></a>)</span>
-<span id="cb7-8"><a href=""></a></span>
-<span id="cb7-9"><a href=""></a><span class="fu">library</span>(writexl)</span>
-<span id="cb7-10"><a href=""></a><span class="fu">write_xlsx</span>(<span class="fu">list</span>(<span class="st">"Chi test"</span> <span class="ot">=</span> chi_table), <span class="st">"Chi_tabel.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="co"># Saml resultaterne i en tabel</span></span>
+<span id="cb11-2"><a href=""></a>chi_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-3"><a href=""></a>  <span class="at">Parameter =</span> <span class="fu">c</span>(<span class="st">"Chi-squared"</span>, <span class="st">"Degrees of Freedom"</span>, <span class="st">"p-value"</span>),</span>
+<span id="cb11-4"><a href=""></a>  Værdi <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">round</span>(chi_test<span class="sc">$</span>statistic, <span class="dv">3</span>),  <span class="co"># Chi-squared værdi</span></span>
+<span id="cb11-5"><a href=""></a>            chi_test<span class="sc">$</span>parameter,           <span class="co"># Frihedsgrader</span></span>
+<span id="cb11-6"><a href=""></a>            <span class="fu">signif</span>(chi_test<span class="sc">$</span>p.value, <span class="dv">3</span>))  <span class="co"># p-værdi (signifikant til 3 decimaler)</span></span>
+<span id="cb11-7"><a href=""></a>)</span>
+<span id="cb11-8"><a href=""></a></span>
+<span id="cb11-9"><a href=""></a><span class="fu">library</span>(writexl)</span>
+<span id="cb11-10"><a href=""></a><span class="fu">write_xlsx</span>(<span class="fu">list</span>(<span class="st">"Chi test"</span> <span class="ot">=</span> chi_table), <span class="st">"Chi_tabel.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>

@@ -13,7 +13,7 @@ editor: visual
 
 
 ::: center
-# Hypotesetestning
+# Hypotesetest
 
 ### Statistik E24 (15 ECTS)
 
@@ -243,7 +243,7 @@ I skal kende til to hypotesetests for univariat analyse (én variabel):
 
 -   **T-test** (intervalskala variable): Tester, om et gennemsnit er forskelligt fra en specifik værdi, vi kender på forhånd.
 
--   <br>
+<br>
 
 -   $\chi^2$**-tes**t (nominal/ordinal): Bruges til at teste, om der er forskel på fordelingen af en nominal variabel i forhold til en forventet fordeling.
 
@@ -434,9 +434,6 @@ Resultaterne fra testen kan samles pænere i en tabel:
 ::: {.cell}
 
 ```{.r .cell-code}
-library(broom)
-library(dplyr)
-
 # Kør t-testen
 test_result <- t.test(df$e5, mu = 35.5)
 
@@ -520,7 +517,18 @@ Variablen e5 måler om respondenterne identificerer sig som værende grønlandsk
 
 
 ::: {.cell}
+::: {.cell-output .cell-output-stdout}
 
+```
+                    df$e4   n    percent
+                    Andet  10 0.01567398
+ Både Grønlandsk og Dansk  61 0.09561129
+                    Dansk  29 0.04545455
+               Grønlandsk 538 0.84326019
+```
+
+
+:::
 :::
 
 
@@ -539,6 +547,9 @@ De observerede værdier er antallet i hver kategori $(n)$, og den forventede for
 
 ::: {.cell}
 
+```{.r .cell-code}
+observeret <- c(10, 61, 29, 538)
+```
 :::
 
 
@@ -549,6 +560,9 @@ De observerede værdier er antallet i hver kategori $(n)$, og den forventede for
 
 ::: {.cell}
 
+```{.r .cell-code}
+forventet_andele <- c(0.05, 0.10, 0.05, 0.80)  # Din forventede fordeling
+```
 :::
 
 
@@ -562,6 +576,14 @@ Brug funktionen `chisq.test()` for at sammenligne de observerede værdier med de
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+chi_test <- chisq.test(x = observeret, p = forventet_andele)
+
+# Print resultatet
+print(chi_test)
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```

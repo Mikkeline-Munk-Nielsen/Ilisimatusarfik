@@ -1,0 +1,44 @@
+---
+title: "Aflevering 2: forslag til besvarelse"
+format:
+  html:
+    css: css_etc/custom-theme-ilisimatusarfik-doc.css
+    fontfamily: Calibri
+    include-before-body: ../../home-button.html
+---
+
+*Følgende er et forslag til besvarelse af den anden ud af de seks obligatoriske afleveringer i faget.* *Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.*
+
+# 1 Opret et script og åben data
+
+Start med at åbne R-Studio ved at klikke på dit R-project. Opret dernæst et nyt script og gem det i samme mappe, som dit R-project. Du kan f.eks. kalde scriptet *Aflevering_2*.
+
+-   Brug `getwd()` til at sikre dig, at du arbejder i den rigtige mappe på computeren
+
+-   Indlæs datasættet **firma_data.rds** som et objekt i dit script
+
+-   Brug funktionen **names()** til at se, hvilke variable datasættet indeholder
+
+```{r}
+df <- readRDS("Data/GL_perspektiver.rds")
+```
+
+T-test
+
+```{r}
+
+tabyl(df$l7afoodhunt)
+t.test(df$l7afoodhunt)
+```
+
+```{r}
+
+tabyl(df$j16greenlandicjudicialsystem)
+observeret <- c(33, 72, 183, 148, 86)
+forventet_andele <- c(0.2, 0.2, 0.2, 0.2, 0.2)  # Din forventede fordeling
+
+chi_test <- chisq.test(x = observeret, p = forventet_andele)
+
+# Print resultatet
+print(chi_test)
+```

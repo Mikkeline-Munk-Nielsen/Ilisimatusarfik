@@ -11,7 +11,7 @@ editor: visual
 ---
 
 ::: center
-# Hypotesetestning
+# Hypotesetest
 
 ### Statistik E24 (15 ECTS)
 
@@ -241,7 +241,7 @@ I skal kende til to hypotesetests for univariat analyse (én variabel):
 
 -   **T-test** (intervalskala variable): Tester, om et gennemsnit er forskelligt fra en specifik værdi, vi kender på forhånd.
 
--   <br>
+<br>
 
 -   $\chi^2$**-tes**t (nominal/ordinal): Bruges til at teste, om der er forskel på fordelingen af en nominal variabel i forhold til en forventet fordeling.
 
@@ -377,9 +377,6 @@ Resultaterne fra testen kan samles pænere i en tabel:
 ```{r echo=F}
 df <- readRDS("Data/GL_perspektiver.rds")
 
-library(broom)
-library(dplyr)
-
 # Kør t-testen
 test_result <- t.test(df$e5, mu = 35.5)
 
@@ -409,9 +406,6 @@ test_result <- t.test(df$e5, mu = 35.5)
 ### Kode
 
 ```{r echo=T, eval=F}
-library(broom)
-library(dplyr)
-
 # Kør t-testen
 test_result <- t.test(df$e5, mu = 35.5)
 
@@ -510,9 +504,10 @@ ggplot(data, aes(x = x, y = density)) +
 
 Variablen e5 måler om respondenterne identificerer sig som værende grønlandsk, dansk, både grønlandsk og dansk, eller andet:
 
-```{r eval=F}
+```{r echo=F}
 df <- readRDS("Data/GL_perspektiver.rds")
 df <- df[df$e4 != "", ]
+library(janitor)
 tabyl(df$e4)
 ```
 
@@ -526,13 +521,13 @@ De observerede værdier er antallet i hver kategori $(n)$, og den forventede for
 
 -   De observerede værdier fra tabellen er:
 
-```{r}
+```{r echo=T}
 observeret <- c(10, 61, 29, 538)
 ```
 
 -   Antag en forventet fordeling som andele (5% andet, 10% grønlandsk og dansk, 5% dansk, 80% grønlandsk):
 
-```{r}
+```{r echo=T}
 forventet_andele <- c(0.05, 0.10, 0.05, 0.80)  # Din forventede fordeling
 ```
 
@@ -542,7 +537,7 @@ forventet_andele <- c(0.05, 0.10, 0.05, 0.80)  # Din forventede fordeling
 
 Brug funktionen `chisq.test()` for at sammenligne de observerede værdier med de forventede:
 
-```{r}
+```{r echo=T}
 chi_test <- chisq.test(x = observeret, p = forventet_andele)
 
 # Print resultatet
