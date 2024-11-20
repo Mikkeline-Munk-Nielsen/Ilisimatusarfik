@@ -9,7 +9,7 @@ editor: visual
 
 Herunder finder I en rækker supplerende materialer, som I kan benytte som supplement til pensum, når I ikke gider læse flere formler.
 
-# StatQuest videoer (Youtube)   ![](Undervisningsdokumenter/E24/slides/images/statquest.jpg){width="100"}
+# StatQuest videoer (Youtube) ![](Undervisningsdokumenter/E24/slides/images/statquest.jpg){width="100"}
 
 StatQuest by Josh Starmer er en videorække på Youtube, der laver introducerende videoer om statistik. Der er videoer om stort set alt, men herunder finder I linkt til nogle udvalgte videoer, der introducerer hovedbegreber i vores undervisning.
 
@@ -17,11 +17,13 @@ StatQuest by Josh Starmer er en videorække på Youtube, der laver introducerend
 
 #### [Normalfordeling](https://www.google.com/search?client=firefox-b-d&q=statquest+normal+distribution#fpstate=ive&vld=cid:75c56403,vid:rzFX5NWojp0,st:0)
 
-#### [Centrale grænseværdi sætning (Central Limit Theorem)](https://www.youtube.com/watch?v=YAlJCEDH2uY&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=25&ab_channel=StatQuestwithJoshStarmer)
+#### [Centrale grænseværdi sætning (Central Limit Theorem)](https://www.youtube.com/watch?v=YAlJCEDH2uY&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=25&ab_channel=StatQuestwithJoshStarmer)  [Konfidensintervaller](https://www.youtube.com/watch?v=TqOeMYtOc1w&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=35&ab_channel=StatQuestwithJoshStarmer)
 
 #### [Hypotesetest](https://www.youtube.com/watch?v=0oc49DyA3hU&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=10&ab_channel=StatQuestwithJoshStarmer)
 
-# Videnskabeligt udfordret (podcast)    ![](Undervisningsdokumenter/E24/slides/images/Videnskabeligt_udfordret.png){width="100"}
+#### [P-værdier](https://www.youtube.com/watch?v=vemZtEM63GY&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=12&ab_channel=StatQuestwithJoshStarmer)
+
+# Videnskabeligt udfordret (podcast) ![](Undervisningsdokumenter/E24/slides/images/Videnskabeligt_udfordret.png){width="100"}
 
 Videnskabeligt Udfordret er en gakket podcast hvor de to forskere Mark og Flemming dækker historier, data og kontroverser fra videnskabens verden. De siger selv, at deres mål er at gøre dig klog på en dum måde.
 
