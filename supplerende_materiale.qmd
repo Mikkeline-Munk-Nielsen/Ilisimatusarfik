@@ -17,7 +17,9 @@ StatQuest by Josh Starmer er en videorække på Youtube, der laver introducerend
 
 #### [Normalfordeling](https://www.google.com/search?client=firefox-b-d&q=statquest+normal+distribution#fpstate=ive&vld=cid:75c56403,vid:rzFX5NWojp0,st:0)
 
-#### [Centrale grænseværdi sætning (Central Limit Theorem)](https://www.youtube.com/watch?v=YAlJCEDH2uY&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=25&ab_channel=StatQuestwithJoshStarmer)  [Konfidensintervaller](https://www.youtube.com/watch?v=TqOeMYtOc1w&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=35&ab_channel=StatQuestwithJoshStarmer)
+#### [Centrale grænseværdi sætning (Central Limit Theorem)](https://www.youtube.com/watch?v=YAlJCEDH2uY&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=25&ab_channel=StatQuestwithJoshStarmer)
+
+#### [Konfidensintervaller](https://www.youtube.com/watch?v=TqOeMYtOc1w&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=35&ab_channel=StatQuestwithJoshStarmer)
 
 #### [Hypotesetest](https://www.youtube.com/watch?v=0oc49DyA3hU&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=10&ab_channel=StatQuestwithJoshStarmer)
 
