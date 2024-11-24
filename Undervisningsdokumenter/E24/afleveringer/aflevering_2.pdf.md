@@ -9,6 +9,10 @@ format:
     keep-md: true # Optional: Keeps the intermediate Markdown file
 ---
 
+
+
+
+
 *Følgende er et forslag til besvarelse af den anden ud af de seks obligatoriske afleveringer i faget.* *Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.*
 
 ## Opret et script og åben data
@@ -21,19 +25,52 @@ Start med at åbne R-Studio ved at klikke på dit R-project. Opret dernæst et n
 
 -   Brug funktionen `names()` til at se, hvilke variable datasættet indeholder
 
-```{r echo=F}
-df <- readRDS("C:/Users/mmn/Dropbox/Ilisimatusarfik/Undervisningsdokumenter/E24/slides/data/GL_perspektiver.rds")
 
-```
 
-```{r echo=T, eval=F, warning=F, message=F}
+
+::: {.cell}
+
+:::
+
+::: {.cell}
+
+```{.r .cell-code}
 getwd() 
 df <- readRDS("GL_perspektiver.rds")
 ```
+:::
 
-```{r echo=T, warning=F, message=F}
+::: {.cell}
+
+```{.r .cell-code}
 names(df)
 ```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ [1] "e2"                           "e3agreenlandic"              
+ [3] "e3bdanish"                    "e3cenglish"                  
+ [5] "e3dother"                     "e4"                          
+ [7] "e5"                           "j16municipality"             
+ [9] "j16greenland_government"      "j16denmark_governmet"        
+[11] "j16greenlandicmedia"          "j16danishmedia"              
+[13] "j16greenlandicjudicialsystem" "l7foodhunt"                  
+[15] "l7afoodhunt"                  "l7bfoodhunt"                 
+[17] "l7cfoodhunt"                  "l7dfoodhunt"                 
+[19] "l8foodshr"                    "l10church"                   
+[21] "l11indbelfs"                  "l12income"                   
+[23] "l13"                          "l15family"                   
+[25] "l15friends"                   "l15bank"                     
+[27] "l16educlev"                   "l19health"                   
+```
+
+
+:::
+:::
+
+
+
 
 ## **1 Populationer og stikprøver**
 
@@ -77,9 +114,37 @@ Den dikotome variabel **l7afoodhunt** måler, hvor mange respondenter, der har s
 
 Outputtet nedenfor viser, at ca. 21 % har svaret, at det meste af deres families mad kommer fra vildt, som de selv jager, fisker eller indsamler.
 
-```{r echo=T, warning=F, message=F}
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 t.test(df$l7afoodhunt)
 ```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	One Sample t-test
+
+data:  df$l7afoodhunt
+t = 12.709, df = 612, p-value < 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 0.1765430 0.2410753
+sample estimates:
+mean of x 
+0.2088091 
+```
+
+
+:::
+:::
+
+
+
 
 **b) Forklar hvilken information konfidensintervallet giver**
 
@@ -97,7 +162,12 @@ Ifølge Wikipedia mestrer ca. 85 % af befolkningen i Grønland det grønlandske 
 
 **b) Gennemfør en t-test mod den forventede værdi i R. Du skal bruge variablen *e3agreenlandic*.**
 
-```{r}
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 ttest_resultat <- t.test(df$e3agreenlandic, mu=0.85)
 
 resultat_df <- data.frame(
@@ -121,6 +191,25 @@ resultat_df <- data.frame(
 print(resultat_df)
 ```
 
+::: {.cell-output .cell-output-stdout}
+
+```
+                Parameter Værdi
+1              Gennemsnit 0.919
+2          Test-statistik 6.446
+3                 P-værdi 0.000
+4 Nedre konfidensinterval 0.898
+5  Øvre konfidensinterval  0.94
+6           Frihedsgrader   643
+```
+
+
+:::
+:::
+
+
+
+
 **c) Konkludér på testen – er der signifikant forskel på andelen i surveyen der taler grønlandsk og den forventede andel? Forklar hvordan du konkluderer som du gør.**
 
 Outputtet herunder viser, at andelen i stikprøven er $0,92=92\%$. I vores test af, om denne værdi er signifikant forskellig fra den forventede andel $85\%$ får vi en p-værdi på $0,000$. Da det er under vores kritiske grænse på $0,05$ forkaster/afviser vi nulhypotesen(H0) og konkluderer, at der er signifikant forskel på den forventende andel af folk, der taler grønlandsk og den andel, vi har i vores stikprøve. Hvis 85 % var et rigtig tal fra Grønlands statistik (det er jo kun fra Wikipedia), så ville der altså være grund til at tænke over, hvad dethar af konsekvenser for stikprøvens repræsentativitet, at grønlandsktalene er overrepræsenterede i vores stikprøve.
@@ -133,9 +222,18 @@ Variablen **j16greenlandicjudicialsystem** måler, i hvor høj grad respondenter
 
 Herunder definerer jeg, at jeg tror, at der er lige mange i hver kategori, dvs. 20 %:
 
-```{r echo=T, warning=F, message=F}
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 forventet_andele <- c(0.2, 0.2, 0.2, 0.2, 0.2)  # Din forventede fordeling
 ```
+:::
+
+
+
 
 Du skal nu bruge en chi^2^-test til at teste, hvor fordelingen i surveyen er signifikant forskellig fra din forventede fordeling
 
@@ -149,15 +247,47 @@ Du skal nu bruge en chi^2^-test til at teste, hvor fordelingen i surveyen er sig
 
 Først laves en frekvenstabel for at se, hvor mange vi har observeret i hver kategori. Antallet i hver kategori gemmes som en liste i et objekt som den *observerede fordeling*:
 
-```{r echo=T, warning=F, message=F}
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 library(janitor)
 tabyl(df$j16greenlandicjudicialsystem)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ df$j16greenlandicjudicialsystem   n    percent valid_percent
+                               1  33 0.05124224    0.06285714
+                               2  73 0.11335404    0.13904762
+                               3 183 0.28416149    0.34857143
+                               4 149 0.23136646    0.28380952
+                               5  87 0.13509317    0.16571429
+                              NA 119 0.18478261            NA
+```
+
+
+:::
+
+```{.r .cell-code}
 observeret <- c(33, 72, 183, 148, 86)
 ```
+:::
+
+
+
 
 Herefter er vi klar til at sammenligne den observerede fordeling med den forventede fordeling med chi-testen:
 
-```{r echo=T, warning=F, message=F}
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 chi_test <- chisq.test(x = observeret, p = forventet_andele)
 
 # Formatér test-resultater og gem som tabel
@@ -168,6 +298,22 @@ chi_test <- chisq.test(x = observeret, p = forventet_andele)
             formatC(chi_test$p.value, format = "f", digits = 3))    # p-værdi
 ))
 ```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+              Parameter   Værdi
+X-squared   Chi-squared 139.513
+df        Frihedsgrader       4
+                p-værdi   0.000
+```
+
+
+:::
+:::
+
+
+
 
 **d) Konkludér på testen – kan du afvise nulhypotesen? Er fordelingen i surveyen signifikant forskellig fra din forventede fordeling?**
 
