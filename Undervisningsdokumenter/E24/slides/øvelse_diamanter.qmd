@@ -30,7 +30,7 @@ Datasættet indeholder følgende variable
 names(df)
 ```
 
----
+------------------------------------------------------------------------
 
 ### Univariat analyse
 
@@ -68,11 +68,11 @@ I skal teste, om gennemsnittet for variablen carat er signifikant forskellig fra
 
 I skal teste, om fordelingen på variablen cut er forskellig fra en forventet fordeling. Den forventede fordeling er, at der er lige mange diamanter i hver af kategorierne *Fair, Good, Very Good, Premium*, og *Ideal* dvs. 20 % i hver.
 
--   Opstil hypoteser for en $\chi^"$-test mod en forventet fordeling
+-   Opstil hypoteser for en $\chi^2$-test mod en forventet fordeling
 
 -   Gennemfør og konkluder på testen
 
----
+------------------------------------------------------------------------
 
 ### Bivariat analyse
 
@@ -92,6 +92,6 @@ I skal teste, om fordelingen på variablen cut er forskellig fra en forventet fo
 
 I skal nu bruge en chi-test til at teste, om der ser ud til at være en sammenhæng mellem variablene color og cut
 
--   Opstil hypoteser for en $\chi^"$-test for uafhængighed
+-   Opstil hypoteser for en $\chi^2$-test for uafhængighed
 
 -   Gennemfør og konkludér på testen
