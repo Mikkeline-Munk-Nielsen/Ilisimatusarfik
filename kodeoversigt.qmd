@@ -719,9 +719,6 @@ Vi kan f.eks. teste om gennemsnitsalderen i stikprøven ($\bar{x}$) er signifika
 Hypoteserne for en univariat t-test er:
 
 -   **H0**: Stikprøvegennemsnittet er lig populationens gennemsnit, $\bar{x}=μ$
-
-<!-- -->
-
 -   **H1:** Stikprøvegennemsnittet er forskelligt fra populationens gennemsnit $\bar{x}\ne \mu$
 
 ```{r echo=TRUE}
@@ -767,14 +764,12 @@ Testen hedder χ² – udtales 'Chi i anden' eller **goodness of fit**. Vi bruge
 Hypoteserne i en goodness-of-fit test er:
 
 -   **H0**: Den observerede fordeling er ikke signifikant forskellig fra den forventede fordeling
-
-<!-- -->
-
 -   **H1**: Den observerede fordeling er signifikant forskellig fra den forventede fordeling
 
 Den observerede fordeling i stikprøven er:
 
 ```{r echo=TRUE}
+library(janitor)
 tabyl(df$udd)
 ```
 
@@ -814,3 +809,153 @@ Du kan som altid eksportere dine resultater fra testen til excel med `write.csv(
 # Eksporter tabellen til en CSV-fil
 write.csv(chi_tabel, "chi_test_resultat.csv", row.names = FALSE)
 ```
+
+# Bivariat analyse
+
+## Krydstabeller
+
+-   En tabel med to variable kaldes også en tovejs-tabel eller en **krydstabel**
+
+-   En krydstabel er en tabel, der organiserer data for **to kategoriske variable** og viser, hvordan observationer fordeler sig **i kombination af de to variable**.
+
+-   Hver celle i tabellen indeholder antallet af observationer (eller andelen), der falder inden for en bestemt kombination af de to variable.
+
+Brug funktionen `tabyl()` fra pakken `janitor` til at lave tabeller. Du kan f.eks. lave en krydstabel med R datasættet `Titanic` over passageres klasse og overlevelse:
+
+```{r include=F}
+data("Titanic")
+
+# Indlæs Titanic-datasættet og konverter til en data frame
+titanic_df <- as.data.frame(Titanic)
+
+# Udvid datasættet, så hver passager bliver en individuel række
+titanic <- titanic_df[rep(seq_len(nrow(titanic_df)), titanic_df$Freq), 1:4]
+```
+
+```{r echo=TRUE}
+library(janitor)
+tabyl(titanic, Class, Survived)
+```
+
+Tilføj totaler (både rækker og kolonner) med `adorn_totals()`:
+
+```{r echo=TRUE}
+tabyl(titanic, Class, Survived) %>% adorn_totals(where = c("row", "col"))
+```
+
+Tilføj procenter med `adorn_percentages()` og bestem antal decimaler med `adorn_pct_formatting()`:
+
+```{r echo=TRUE}
+tabyl(titanic, Class, Survived) %>% 
+  adorn_totals(where = c("row", "col")) %>% 
+  adorn_percentages() %>% 
+  adorn_pct_formatting(digits = 1)
+```
+
+## Korrelationskoefficienter
+
+```{r include=F}
+library(dplyr)
+ ESS <- readRDS("C:/Users/mmn/Dropbox/Ilisimatusarfik/R/Ilisimatusarfik_Statistik_EO_F24/Data/ESS.rds")
+ 
+ ESS <- filter(ESS, land=="DK")
+```
+
+### Cramers v
+
+Når der indgår en nominalskala variabel anbefales det at bruge korrelationsmålet Cramer’s $V$. Denne korrelationskoefficient ligger mellem $0$ og $1$. Brug funktionen `CramerV` fra pakken `DescTools`:
+
+*Eksempel med køn og ansættelsestype fra European Social Survey:*
+
+```{r echo=TRUE, message=F, warning=FALSE}
+krydstabel <- table(as.character(ESS$koen),                     
+                    as.character(ESS$ansaettelse_type)) 
+
+library(DescTools) 
+CramerV(krydstabel)
+```
+
+-   Cramer’s $V=0.12$
+-   Der ser ud til at være en svag sammenhæng mellem køn og ansættelsestype.
+
+### Spearman's rho
+
+Til to ordinale variable bruges korrelationskoefficienten *Spearman’s Rho* og funktionen `cor.test()` :
+
+Eks: Eget uddannelsesniveau og partners uddannelsesniveau:
+
+```{r echo=TRUE, message=F, warning=FALSE}
+cor.test(as.numeric(ESS$udd),
+         as.numeric(ESS$udd_partner),
+         method = "spearman")
+```
+
+-   $rho=0.5$
+
+-   Der ser ud til at være en ret solid positiv sammenhæng mellem folks eget og deres partners uddannelsesniveau
+
+### Pearsons r
+
+Til to intervalskalerede variable bruges korrelationskoefficienten Pearson’s $r$ og funktionen `cor.test()`:
+
+Eks. Indkomst og antal års uddannelse.
+
+```{r echo=TRUE, message=F, warning=FALSE}
+cor.test(ESS$udd_aar, ESS$net_indkomst)
+```
+
+-   $Pearsons=0.26$
+
+<!-- -->
+
+-   Der ser ud til at være en svag/moderat positiv sammenhæng mellem indkomst og antal års uddannelse.
+
+## T-test for forskelle på to middelværdier
+
+Hvis vi har en skala variabel kan vi bruge hypotesetest til at undersøge, om middelværdien på denne variabel er forskellig mellem to grupper. Her vender vi tilbage til t-testen!
+
+\
+F.eks. Er der forskel på mænd og kvinders gennemsnitlige løn?
+
+**H0**: der er ikke nogen signifikant forskel på de to grupper, når det kommer til løn
+
+**H1**: der er en signifikant forskel på de to grupper, når det kommer til løn
+
+<br>
+
+Brug funktionen `t.test()` og specificér de to variable:
+
+```{r echo=TRUE, message=F, warning=FALSE}
+t.test(net_indkomst ~ koen, data=ESS)
+```
+
+-   Gennemsnits netteindkomst for $mænd=16.893$ og $kvinder=15.024$ DKK
+
+-   Siden p-værdien er mindre end 0,05 afviser vi nulhypotesen og konkluderer, at der ER en statistisk signifikant forskel på gennemsnitsindkomsten for mænd og kvinder.
+
+## $\chi^2$-test for uafhængighed
+
+Vi kan anvende en $\chi^2$ testen til at teste, om to variable er uafhængige, eller om der ser ud til at være en statistisk sammenhæng mellem dem.
+
+$\chi^2$-testen kan anvendes til kategorielle variable, dvs. variable på ordinalt eller nominalt niveau (men i øvrigt til variable på alle måleniveauer, hvis de omkodes til kategorier).
+
+[Hypoteserne er som følgende:]{.underline}
+
+**H0**: Der er ingen sammenhæng mellem de to variabler
+
+**H1**: Der er en sammenhæng mellem de to variabler
+
+<br>
+
+F.eks. Er der en sammenhæng mellem ansættelsestype og uddannelsesniveau?
+
+```{r echo=TRUE, message=F, warning=FALSE}
+ESS %>%
+select(udd, ansaettelse_type) %>%
+na.omit() %>%
+tabyl(udd, ansaettelse_type) %>%
+chisq.test()
+
+```
+
+$\chi^2$-testen returnerer en p-værdi på 0,2. Da det er over grænsen på 0,05 kan vi ikke forkaste nulhypotesen. Vi kan ikke afvise, at der ikke er nogen sammenhæng mellem de to variable, med udgangspunkt i denne stikprøve.

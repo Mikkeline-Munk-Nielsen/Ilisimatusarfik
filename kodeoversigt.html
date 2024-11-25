@@ -169,6 +169,18 @@ window.Quarto = {
   <li><a href="#t-test-for-univariat-analyse" id="toc-t-test-for-univariat-analyse" class="nav-link" data-scroll-target="#t-test-for-univariat-analyse">T-test for univariat analyse</a></li>
   <li><a href="#chi2-test-for-univariat-analyse-goodness-of-fit" id="toc-chi2-test-for-univariat-analyse-goodness-of-fit" class="nav-link" data-scroll-target="#chi2-test-for-univariat-analyse-goodness-of-fit"><span class="math inline">\(\chi^2\)</span>-test for univariat analyse (goodness of fit)</a></li>
   </ul></li>
+  <li><a href="#bivariat-analyse" id="toc-bivariat-analyse" class="nav-link" data-scroll-target="#bivariat-analyse">Bivariat analyse</a>
+  <ul>
+  <li><a href="#krydstabeller" id="toc-krydstabeller" class="nav-link" data-scroll-target="#krydstabeller">Krydstabeller</a></li>
+  <li><a href="#korrelationskoefficienter" id="toc-korrelationskoefficienter" class="nav-link" data-scroll-target="#korrelationskoefficienter">Korrelationskoefficienter</a>
+  <ul class="collapse">
+  <li><a href="#cramers-v" id="toc-cramers-v" class="nav-link" data-scroll-target="#cramers-v">Cramers v</a></li>
+  <li><a href="#spearmans-rho" id="toc-spearmans-rho" class="nav-link" data-scroll-target="#spearmans-rho">Spearman’s rho</a></li>
+  <li><a href="#pearsons-r" id="toc-pearsons-r" class="nav-link" data-scroll-target="#pearsons-r">Pearsons r</a></li>
+  </ul></li>
+  <li><a href="#t-test-for-forskelle-på-to-middelværdier" id="toc-t-test-for-forskelle-på-to-middelværdier" class="nav-link" data-scroll-target="#t-test-for-forskelle-på-to-middelværdier">T-test for forskelle på to middelværdier</a></li>
+  <li><a href="#chi2-test-for-uafhængighed" id="toc-chi2-test-for-uafhængighed" class="nav-link" data-scroll-target="#chi2-test-for-uafhængighed"><span class="math inline">\(\chi^2\)</span>-test for uafhængighed</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -1013,9 +1025,6 @@ mean of x
 <p>Hypoteserne for en univariat t-test er:</p>
 <ul>
 <li><strong>H0</strong>: Stikprøvegennemsnittet er lig populationens gennemsnit, <span class="math inline">\(\bar{x}=μ\)</span></li>
-</ul>
-<!-- -->
-<ul>
 <li><strong>H1:</strong> Stikprøvegennemsnittet er forskelligt fra populationens gennemsnit <span class="math inline">\(\bar{x}\ne \mu\)</span></li>
 </ul>
 <div class="cell">
@@ -1057,14 +1066,12 @@ mean of x
 <p>Hypoteserne i en goodness-of-fit test er:</p>
 <ul>
 <li><strong>H0</strong>: Den observerede fordeling er ikke signifikant forskellig fra den forventede fordeling</li>
-</ul>
-<!-- -->
-<ul>
 <li><strong>H1</strong>: Den observerede fordeling er signifikant forskellig fra den forventede fordeling</li>
 </ul>
 <p>Den observerede fordeling i stikprøven er:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(df<span class="sc">$</span>udd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(df<span class="sc">$</span>udd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                      df$udd    n     percent valid_percent
                   Grundskole 3087 0.223711863     0.2258230
@@ -1107,6 +1114,186 @@ df        Frihedsgrader        3
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eksporter tabellen til en CSV-fil</span></span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(chi_tabel, <span class="st">"chi_test_resultat.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+</section>
+<section id="bivariat-analyse" class="level1">
+<h1>Bivariat analyse</h1>
+<section id="krydstabeller" class="level2">
+<h2 class="anchored" data-anchor-id="krydstabeller">Krydstabeller</h2>
+<ul>
+<li><p>En tabel med to variable kaldes også en tovejs-tabel eller en <strong>krydstabel</strong></p></li>
+<li><p>En krydstabel er en tabel, der organiserer data for <strong>to kategoriske variable</strong> og viser, hvordan observationer fordeler sig <strong>i kombination af de to variable</strong>.</p></li>
+<li><p>Hver celle i tabellen indeholder antallet af observationer (eller andelen), der falder inden for en bestemt kombination af de to variable.</p></li>
+</ul>
+<p>Brug funktionen <code>tabyl()</code> fra pakken <code>janitor</code> til at lave tabeller. Du kan f.eks. lave en krydstabel med R datasættet <code>Titanic</code> over passageres klasse og overlevelse:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(titanic, Class, Survived)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Class  No Yes
+   1st 122 203
+   2nd 167 118
+   3rd 528 178
+  Crew 673 212</code></pre>
+</div>
+</div>
+<p>Tilføj totaler (både rækker og kolonner) med <code>adorn_totals()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(titanic, Class, Survived) <span class="sc">%&gt;%</span> <span class="fu">adorn_totals</span>(<span class="at">where =</span> <span class="fu">c</span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Class   No Yes Total
+   1st  122 203   325
+   2nd  167 118   285
+   3rd  528 178   706
+  Crew  673 212   885
+ Total 1490 711  2201</code></pre>
+</div>
+</div>
+<p>Tilføj procenter med <code>adorn_percentages()</code> og bestem antal decimaler med <code>adorn_pct_formatting()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(titanic, Class, Survived) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="at">where =</span> <span class="fu">c</span>(<span class="st">"row"</span>, <span class="st">"col"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_percentages</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_pct_formatting</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Class    No   Yes  Total
+   1st 37.5% 62.5% 100.0%
+   2nd 58.6% 41.4% 100.0%
+   3rd 74.8% 25.2% 100.0%
+  Crew 76.0% 24.0% 100.0%
+ Total 67.7% 32.3% 100.0%</code></pre>
+</div>
+</div>
+</section>
+<section id="korrelationskoefficienter" class="level2">
+<h2 class="anchored" data-anchor-id="korrelationskoefficienter">Korrelationskoefficienter</h2>
+<section id="cramers-v" class="level3">
+<h3 class="anchored" data-anchor-id="cramers-v">Cramers v</h3>
+<p>Når der indgår en nominalskala variabel anbefales det at bruge korrelationsmålet Cramer’s <span class="math inline">\(V\)</span>. Denne korrelationskoefficient ligger mellem <span class="math inline">\(0\)</span> og <span class="math inline">\(1\)</span>. Brug funktionen <code>CramerV</code> fra pakken <code>DescTools</code>:</p>
+<p><em>Eksempel med køn og ansættelsestype fra European Social Survey:</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>krydstabel <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">as.character</span>(ESS<span class="sc">$</span>koen),                     </span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">as.character</span>(ESS<span class="sc">$</span>ansaettelse_type)) </span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools) </span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">CramerV</span>(krydstabel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1169228</code></pre>
+</div>
+</div>
+<ul>
+<li>Cramer’s <span class="math inline">\(V=0.12\)</span></li>
+<li>Der ser ud til at være en svag sammenhæng mellem køn og ansættelsestype.</li>
+</ul>
+</section>
+<section id="spearmans-rho" class="level3">
+<h3 class="anchored" data-anchor-id="spearmans-rho">Spearman’s rho</h3>
+<p>Til to ordinale variable bruges korrelationskoefficienten <em>Spearman’s Rho</em> og funktionen <code>cor.test()</code> :</p>
+<p>Eks: Eget uddannelsesniveau og partners uddannelsesniveau:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(<span class="fu">as.numeric</span>(ESS<span class="sc">$</span>udd),</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">as.numeric</span>(ESS<span class="sc">$</span>udd_partner),</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Spearman's rank correlation rho
+
+data:  as.numeric(ESS$udd) and as.numeric(ESS$udd_partner)
+S = 83376532, p-value &lt; 2.2e-16
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.5101004 </code></pre>
+</div>
+</div>
+<ul>
+<li><p><span class="math inline">\(rho=0.5\)</span></p></li>
+<li><p>Der ser ud til at være en ret solid positiv sammenhæng mellem folks eget og deres partners uddannelsesniveau</p></li>
+</ul>
+</section>
+<section id="pearsons-r" class="level3">
+<h3 class="anchored" data-anchor-id="pearsons-r">Pearsons r</h3>
+<p>Til to intervalskalerede variable bruges korrelationskoefficienten Pearson’s <span class="math inline">\(r\)</span> og funktionen <code>cor.test()</code>:</p>
+<p>Eks. Indkomst og antal års uddannelse.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(ESS<span class="sc">$</span>udd_aar, ESS<span class="sc">$</span>net_indkomst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  ESS$udd_aar and ESS$net_indkomst
+t = 9.2884, df = 1201, p-value &lt; 2.2e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.2053692 0.3108539
+sample estimates:
+      cor 
+0.2588832 </code></pre>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(Pearsons=0.26\)</span></li>
+</ul>
+<!-- -->
+<ul>
+<li>Der ser ud til at være en svag/moderat positiv sammenhæng mellem indkomst og antal års uddannelse.</li>
+</ul>
+</section>
+</section>
+<section id="t-test-for-forskelle-på-to-middelværdier" class="level2">
+<h2 class="anchored" data-anchor-id="t-test-for-forskelle-på-to-middelværdier">T-test for forskelle på to middelværdier</h2>
+<p>Hvis vi har en skala variabel kan vi bruge hypotesetest til at undersøge, om middelværdien på denne variabel er forskellig mellem to grupper. Her vender vi tilbage til t-testen!</p>
+<p><br>
+F.eks. Er der forskel på mænd og kvinders gennemsnitlige løn?</p>
+<p><strong>H0</strong>: der er ikke nogen signifikant forskel på de to grupper, når det kommer til løn</p>
+<p><strong>H1</strong>: der er en signifikant forskel på de to grupper, når det kommer til løn</p>
+<p><br></p>
+<p>Brug funktionen <code>t.test()</code> og specificér de to variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(net_indkomst <span class="sc">~</span> koen, <span class="at">data=</span>ESS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  net_indkomst by koen
+t = 3.996, df = 1196.2, p-value = 6.835e-05
+alternative hypothesis: true difference in means between group Mand and group Kvinde is not equal to 0
+95 percent confidence interval:
+  951.6131 2787.3512
+sample estimates:
+  mean in group Mand mean in group Kvinde 
+            16893.57             15024.09 </code></pre>
+</div>
+</div>
+<ul>
+<li><p>Gennemsnits netteindkomst for <span class="math inline">\(mænd=16.893\)</span> og <span class="math inline">\(kvinder=15.024\)</span> DKK</p></li>
+<li><p>Siden p-værdien er mindre end 0,05 afviser vi nulhypotesen og konkluderer, at der ER en statistisk signifikant forskel på gennemsnitsindkomsten for mænd og kvinder.</p></li>
+</ul>
+</section>
+<section id="chi2-test-for-uafhængighed" class="level2">
+<h2 class="anchored" data-anchor-id="chi2-test-for-uafhængighed"><span class="math inline">\(\chi^2\)</span>-test for uafhængighed</h2>
+<p>Vi kan anvende en <span class="math inline">\(\chi^2\)</span> testen til at teste, om to variable er uafhængige, eller om der ser ud til at være en statistisk sammenhæng mellem dem.</p>
+<p><span class="math inline">\(\chi^2\)</span>-testen kan anvendes til kategorielle variable, dvs. variable på ordinalt eller nominalt niveau (men i øvrigt til variable på alle måleniveauer, hvis de omkodes til kategorier).</p>
+<p><u>Hypoteserne er som følgende:</u></p>
+<p><strong>H0</strong>: Der er ingen sammenhæng mellem de to variabler</p>
+<p><strong>H1</strong>: Der er en sammenhæng mellem de to variabler</p>
+<p><br></p>
+<p>F.eks. Er der en sammenhæng mellem ansættelsestype og uddannelsesniveau?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>ESS <span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(udd, ansaettelse_type) <span class="sc">%&gt;%</span></span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(udd, ansaettelse_type) <span class="sc">%&gt;%</span></span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  .
+X-squared = 8.6358, df = 6, p-value = 0.1951</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\chi^2\)</span>-testen returnerer en p-værdi på 0,2. Da det er over grænsen på 0,05 kan vi ikke forkaste nulhypotesen. Vi kan ikke afvise, at der ikke er nogen sammenhæng mellem de to variable, med udgangspunkt i denne stikprøve.</p>
 </section>
 </section>
 
