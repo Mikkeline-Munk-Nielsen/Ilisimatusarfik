@@ -657,6 +657,7 @@ Mode() fortæller os at modus på variablen **uddannelse** er *Ungdoms-/erhvervs
 Du kan finde middelværdien af en intervalskaleret variabel med funktionen `Mean()`. Igen er vi nødt til at fortælle funktionen, at den skal ignorere missing-værdier, før den virker, ved at skrive: `na.rm = TRUE`
 
 ```{r echo=TRUE}
+library(DescTools)
 Mean(df$alder, na.rm = T)
 ```
 
@@ -665,6 +666,7 @@ Mean(df$alder, na.rm = T)
 Du kan finde medianen på en ordinal- eller intervalskaleret variabel med funktionen `Median()`. Igen er vi nødt til at fortælle funktionen, at den skal ignorere missing-værdier, før den virker, ved at skrive: `na.rm = TRUE`
 
 ```{r echo=TRUE}
+library(DescTools)
 Median(df$alder, na.rm=T)
 ```
 
@@ -834,18 +836,23 @@ titanic <- titanic_df[rep(seq_len(nrow(titanic_df)), titanic_df$Freq), 1:4]
 
 ```{r echo=TRUE}
 library(janitor)
+
 tabyl(titanic, Class, Survived)
 ```
 
 Tilføj totaler (både rækker og kolonner) med `adorn_totals()`:
 
 ```{r echo=TRUE}
+library(janitor)
+
 tabyl(titanic, Class, Survived) %>% adorn_totals(where = c("row", "col"))
 ```
 
 Tilføj procenter med `adorn_percentages()` og bestem antal decimaler med `adorn_pct_formatting()`:
 
 ```{r echo=TRUE}
+library(janitor)
+
 tabyl(titanic, Class, Survived) %>% 
   adorn_totals(where = c("row", "col")) %>% 
   adorn_percentages() %>% 
