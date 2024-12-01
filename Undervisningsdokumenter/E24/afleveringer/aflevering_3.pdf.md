@@ -6,8 +6,12 @@ format:
     fontfamily: Calibri
     include-before-body: ../../home-button.html
   pdf:
-    keep-md: true # Optional: Keeps the intermediate Markdown filee
+    keep-md: true
 ---
+
+
+
+
 
 *Følgende er et forslag til besvarelse af den tredje ud af de seks obligatoriske afleveringer i faget.* *Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.*
 
@@ -19,16 +23,44 @@ Start med at åbne RStudio ved at klikke på dit R-project. Opret dernæst et ny
 
 -   Indlæs det indbyggede dataset `diamonds` fra `ggplot` i R i et objekt `df`:
 
-    ```{r echo=T, warning=F, message=F}
+
+
+
+    ::: {.cell}
+    
+    ```{.r .cell-code}
     library(ggplot2)
     df <- diamonds
     ```
+    :::
+
+
+
 
 -   Brug funktionen `names()` til at se, hvilke variable datasættet indeholder
 
-    ```{r echo=T, warning=F, message=F}
+
+
+
+    ::: {.cell}
+    
+    ```{.r .cell-code}
     names(df)
     ```
+    
+    ::: {.cell-output .cell-output-stdout}
+    
+    ```
+     [1] "carat"   "cut"     "color"   "clarity" "depth"   "table"   "price"  
+     [8] "x"       "y"       "z"      
+    ```
+    
+    
+    :::
+    :::
+
+
+
 
 ## **1 Korrelationer**
 
@@ -47,8 +79,12 @@ I følgende opgave skal du bruge R.
 
 **a) Lav et scatterplot over variablene** `carat` **som x-variabel** **og** `price` **som y-variabel**
 
-```{r echo=T, warning=F, message=F}
 
+
+
+::: {.cell}
+
+```{.r .cell-code}
 library(ggplot2)
 
 ggplot(df) +
@@ -60,8 +96,15 @@ ggplot(df) +
     y = "Pris (USD)"
   ) +
   theme_minimal()
-
 ```
+
+::: {.cell-output-display}
+![](aflevering_3_files/figure-pdf/unnamed-chunk-3-1.pdf){fig-pos='H'}
+:::
+:::
+
+
+
 
 **b) På baggrund af plottet, mener du, at der er korrelation mellem carat og pris? Og i så fald, er den så positiv eller negativ?**
 
@@ -75,9 +118,37 @@ I følgende opgave skal du bruge R.
 
 Givet at carat og pris begge kan betragtes som intervalskalerede variable bruges Pearsons r korrelationskoefficienten, som tager en værdi mellem -1 og 1.
 
-```{r echo=T, warning=F, message=F}
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 cor.test(df$price, df$carat)
 ```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Pearson's product-moment correlation
+
+data:  df$price and df$carat
+t = 551.41, df = 53938, p-value < 2.2e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.9203098 0.9228530
+sample estimates:
+      cor 
+0.9215913 
+```
+
+
+:::
+:::
+
+
+
 
 **b) På baggrund af korrelationskoefficienten, mener du så, at der er en korrelation mellem carat og pris? Og i så fald, er den svag, moderat eller stærk?**
 
@@ -91,12 +162,21 @@ Du skal nu teste, om der er en signifikant forskel på den gennemsnitlige pris p
 
 **a) Kør nedenstående kode for at gemme et nyt datasæt der hedder `diamonds_filtered`, som kun indeholder "Premium" og "Ideal" diamanter:**
 
-```{r echo=T, warning=F, message=F}
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 library(dplyr)
 
 diamonds_filtered <- diamonds %>%
   filter(cut %in% c("Ideal", "Premium"))
 ```
+:::
+
+
+
 
 **b) Du skal nu igang med t-testen. Start med at opstil hypoteser for en t-test for forskelle på to gennemsnit**
 
@@ -106,7 +186,12 @@ H1: Der *er* en signifikant forskel på gennemsnitsprisen for diamanter med cut 
 
 **c) Gennemfør t-testen i R. Husk at brug datasættet `diamonds_filtered`**
 
-```{r echo=T, warning=F, message=F}
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 # Udfør t-test
 ttest_resultat_bivariat <- t.test(price ~ cut, data = diamonds_filtered)
 
@@ -129,8 +214,27 @@ ttest_resultat_bivariat <- t.test(price ~ cut, data = diamonds_filtered)
     round(ttest_resultat_bivariat$parameter, 1)        
   )
 ))
+```
+
+::: {.cell-output .cell-output-stdout}
 
 ```
+                Parameter    Værdi
+1     Gennemsnit Gruppe 1  4584.26
+2     Gennemsnit Gruppe 2  3457.54
+3          Test-statistik   24.918
+4                 P-værdi   0.0000
+5 Nedre konfidensinterval 1038.088
+6  Øvre konfidensinterval 1215.344
+7           Frihedsgrader  26552.2
+```
+
+
+:::
+:::
+
+
+
 
 **d) Forklar på baggrund af p-værdien, hvilken hypotese tror du på. Er der en signifikant forskel på den gennemsnitlige pris for diamanter, der har cut "premium" og diamanter, der har cut "ideal"?**
 
@@ -138,9 +242,37 @@ P-værdien for testen er 0,0000 og altså under den kritiske grænse 0,05. Derfo
 
 Hvis du er i tvivl om, hvilken kategori (premium eller ideal) der er hhv. "gruppe 1" eller "gruppe 2", så kan du køre det originale test-output og tjekke efter:
 
-```{r echo=T, warning=F, message=F}
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 ttest_resultat_bivariat
 ```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Welch Two Sample t-test
+
+data:  price by cut
+t = 24.918, df = 26552, p-value < 2.2e-16
+alternative hypothesis: true difference in means between group Premium and group Ideal is not equal to 0
+95 percent confidence interval:
+ 1038.088 1215.344
+sample estimates:
+mean in group Premium   mean in group Ideal 
+             4584.258              3457.542 
+```
+
+
+:::
+:::
+
+
+
 
 ## 5 $\chi^2$-test for uafhængighed
 
@@ -156,7 +288,12 @@ H1: Der *er* en sammenhæng mellem variablene color og cut
 
 **b) Gennemfør testen i R**
 
-```{r echo=T, warning=F, message=F}
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 library(dplyr)
 library(janitor)
 
@@ -178,6 +315,22 @@ chi_resultat_bivariat <- df %>%
     sprintf("%.4f", chi_resultat_bivariat$p.value)  
 )))
 ```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+               Parameter   Værdi
+X-squared Chi²-statistik 310.318
+df         Frihedsgrader      24
+                 P-værdi  0.0000
+```
+
+
+:::
+:::
+
+
+
 
 **c) Forklar på baggrund af p-værdien, hvilken hypotese tror du på. Er der en signifikant sammenhæng mellem diamanters cut og farve?**
 
