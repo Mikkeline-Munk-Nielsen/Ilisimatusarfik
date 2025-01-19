@@ -1,0 +1,453 @@
+---
+title: "Opgave 6"
+subtitle: "- med svar"
+format: pdf
+editor: visual
+---
+
+Denne sidste obligatoriske opgave er "blandede bolsjer" af de ting, som I har ønsket jer at genbesøge. Som forberedelse til eksamen skal I denne gang selv oprette et Quarto dokument og skrive både kode og svar (enkelte steder har jeg dog givet jer kode her i dokumentet).
+
+Hvis I ikke kan køre Quarto på jeres computer, så kan I bare skrive i et word dokument og kopiere jeres tabeller og plots ind. Brug i så fald ggsave() til at gemme plots og texreg::wordreg() til regressionstabeller.
+
+I skal aflevere i PDF format, da I også skal dette til eksamen.
+
+## Installér tinytex
+
+Sørg for at installere tinytex, så du kan "render" din Quarto fil til PDF format. Hvis du allerede kan render til PDF kan du springe dette skridt over. Pakken skal kun installeres en enkelt gang.
+
+```{r message=F, warning=F, eval=F}
+
+tinytex::install_tinytex()
+```
+
+## Indlæs data
+
+-   Indlæs ESS datasættet
+
+```{r message=F, warning=F, eval=T, include=F}
+
+getwd() # Denne kommando fortæller dig, hvilken mappe du arbejder i lige nu.
+
+df <- readRDS("Data/ESS.rds") # Her hentes datasættet 
+```
+
+-   Brug `filter()` funktionen til at gemme et nyt datasæt, der BÅDE indeholder besvarelser fra DK og SE.
+
+-   Brug `select()` funktionen til at vælge variablene *net_indkomst, koen, alder, udd, udd_mor, udd_aar*, og funktionen `na.omit()`til at slette observationer, der har NA på en eller flere af disse variable.
+
+```{r message=F, warning=F}
+
+# Først indlæses de nødvendige pakker
+library(tidyverse)
+library(janitor)
+library(dplyr)
+
+# Dernæst bruges filter til at udvælge observationer fra DK og SE
+df <- df %>%
+  filter(land %in% c("DK", "SE"))
+
+# Endelig bruges select til at udvælge variable og na.omit() til at
+# fjerne observationer, der har NA på en eller flere af de valgte variable.
+
+df <- df %>% select(net_indkomst, koen, alder, udd, udd_mor, udd_aar) %>% na.omit()
+```
+
+## Opgave 1: Sammenhængen mellem uddannelsesniveau og forældres uddannelsesniveau
+
+Det er et veletableret faktum i samfundsvidenskaben, at vi ofte ligner vores forældre når det kommer til, hvilken (og hvor meget) uddannelse vi tager. Dette er kendt som social arv i uddannelse. I skal nu gennemføre en $chi^2$ test for uafhængighed for at teste, om respondenternes uddannelsesniveau er uafhængigt af deres mødres uddannelsesniveau.
+
+I skal bruge variablen "udd" til at måle respondenternes eget uddannelsesniveau og variablen "udd_mor" til at måle respondenternes mødres uddannelsesniveau. Begge variable måler uddannelsesniveau i kategorierne *Grundskole*, *Ungdoms-/erhvervsuddannelse, Mellemlang videregående,* og *Lang videregående uddannelse.\
+*
+
+**1a: Opstil null- og alternativ hypoteser for** $chi^2$ **testen for uafhængighed**\
+\
+I $chi^2$ testen for uafhængighed tester vi, om der er en sammenhæng mellem to variable. Med andre ord tester vi, om de virker til at være uafhængige. Nulhypotesen i denne test er derfor, at der ikke er en sammenhæng mellem respondenternes eget uddannelsesniveau og deres mødres uddannelsesniveau. Alternativ hypotesen er, at der er en sammenhæng:
+
+***\
+*****H0**: Der er ingen sammenhæng mellem respondenternes eget uddannelsesniveau og deres mødres uddannelsesniveau (uafhængighed)
+
+**H1**: Der er en sammenhæng mellem respondenternes eget uddannelsesniveau og deres mødres uddannelsesniveau\
+
+------------------------------------------------------------------------
+
+**1b: gennemfør og konkludér på testen. Er respondenternes uddannelsesniveau uafhængigt at deres mødres uddannelsesniveau, eller ser der ud til at være en statistisk sammenhæng mellem de to variable? Beskriv og forklar, hvorfor du konkluderer, som du gør.**\
+\
+Nedenstående kode kører en $Chi^2$ test. Læg mærke til, at hvis man sætter parentes om hele koden, så printes resultatet automatisk. Den nederste linje printer p-værdien uden "videnskabelig notation".
+
+```{r message=F, warning=F}
+
+(chi_test <- df %>% # I denne linje gemmes resultaterne i objektet "chi_test"
+  select(udd, udd_mor) %>% # Her vælges de to variable til analysen.
+  na.omit() %>% # Alle observationer med missing på variablene fjernes.
+  tabyl(udd, udd_mor) %>% # Her laves en den krydstabel chi-testen køres på
+  chisq.test()) # Her køres chi-testen.
+
+# Print p-værdi uden "scientific notation"
+format.pval(chi_test$p.value, scientific = FALSE)
+```
+
+$Chi^2$ testen returnerer en p-værdi på under 0,05. Vi kan dermed forkaste nulhypotesen, der siger, at der ingen sammenhæng er mellem respondenternes eget uddannelsesniveau og deres mødres uddannelsesniveau. Det er med andre ord mindre end 5 % sandsynligt at observere de forskelle der er på respondenternes mødres uddannelsesniveau mellem respondenternes egne uddannelseskategorier, hvis nullhypotesen er sand. Derfor siger vi, at der er en signifikant sammenhæng mellem de to variable.
+
+## Opgave 2: Forlæns modelsøgning
+
+I denne opgave skal I arbejde videre på regressionsanalyse. I skal fortsat undersøge sammenhængen mellem køn og indkomst, mens I løbende indfører kontrolvariable samt nye specifikationer.
+
+**2a: Estimér følgende model (1):** $Indkomst_i = \alpha + \beta_1 * \text{Kvinde}_i + \epsilon_i$
+
+```{r message=F, warning=F}
+library(broom)
+library(texreg)
+
+model1 <- lm(net_indkomst ~ koen, data=df)
+(texreg::screenreg(list(model1), include.ci = FALSE)) 
+```
+
+**Hvad er den forventede indkomst for mænd i stikprøven?\
+**\
+Den forventede indkomst for en mand i stikprøven kan aflæses i konstantleddet/intercepten, da intercepten angiver den forventede værdi, når alle de uafhængige variable = 0. Denne model har én uafhængig variabel, nemlig dummyvariablen "kvinde". Når variablen "kvinde" tager værdien 0, er det fordi respondenten er kategoriseret som "mand". Den forventede værdi for en mand kan altså udledes af regressionsligningen som følgende. Regressionsligningern er givet ved:
+
+$Indkomst_i = \alpha + \beta_1*Kvinde_i+\epsilon_i$\
+\
+Med parameterestimater giver dette:\
+\
+$Indkomst_i = 18.839,63-(2359,08*Kvinde_i)+\epsilon_i$\
+\
+Vi erstatter nu værdien på den uafhænige variabel med den værdi, der karakteriserer en mand. Variablen "Kvinde" tager værdien 1 for kvinder og 0 for mænd. Regressionsligningen kan nu udfyldes for en mand som følgende:\
+*\
+*$Indkomst_{mand} = 18.839,63-(2.359,08*0) = 18.839,63-0=\underline{\underline{18.839,63}}$
+
+```{r message=FALSE, warning=FALSE}
+
+18839.63-0
+
+```
+
+**Hvad er den forventede indkomst for kvinder i stikprøven?**\
+\
+Som for mænd kan vi finde den forventede værdi for kvinder ved at udfylde regressionsligningen og indsætte den korrekte værdi på den uafhængige variabel "kvinde". Regressionsligningen er givet ved:
+
+\
+$Indkomst_i = 18.839,63-(2359,08*Kvinde_i)+\epsilon_i$
+
+\
+Vi erstatter nu værdien på den afhængige variabel "Kvinde" med værdien 1 og udregner den forventede værdi for kvinder i stikprøven:
+
+\
+$Indkomst_{Kvinde} = 18.839,63-(2359,08*1)=18.839,63-2359,08=\underline{\underline{16480,55}}$
+
+```{r message=F, warning=F, eval=F, include=F}
+
+18839.63-2359.08*1
+```
+
+**Er der en statistisk signifikant sammenhæng mellem køn og indkomst?**\
+\
+Vi kan aflæse den statistiske sammenhæng mellem dummyvariablen "kvinde" og "indkomst" ved at kigge på den p-værdi, der tilhører parameterestimatet for "kvinde". Vi kan aflæse af regressionsoutputtet, at P-værdien er under 0,001 (\*\*\*). Den er derfor under vores statistiske grænseværdi på 0,05, hvilket betyder at vi kan afvise nulhypotesen om, at $\beta_1=0$. Der ser således ud til at være en statistisk signifikant sammenhæng mellem køn og indkomst - kvinder ser ud til have en signifikant lavere nette-indkomst end mænd (2359 kroner lavere).\
+
+------------------------------------------------------------------------
+
+**2b: Tilføj variablen "alder" til modellen som kontrolvariabel og estimér følgende model (2):**\
+\
+$Indkomst_i = \alpha + \beta_1*Kvinde_i+\beta_2*Alder_i+\epsilon_i$
+
+```{r message=F, warning=F}
+
+model2 <- lm(net_indkomst ~ koen + alder, data=df)
+(texreg::screenreg(list(model1, model2), include.ci = FALSE)) 
+```
+
+**Er der en statistisk signifikant sammenhæng mellem alder og indkomst?**\
+\
+Selvom parameterestimatet for variablen alder er $-9,39$ , så viser regressionsoutputtet, at p-værdien for dette estimat er over grænseværdien på 0,05 (summary viser, at p-værdien = 0,317, screenreg viser ingen stjerner). Med andre ord er resultatet insignifkant, og vi kan ikke afvise nulhypotesen om, at $\beta_2=0$. Vi kan altså ikke konkludere, at der er nogen statistisk signifikant sammenhæng mellem alder og indkomst.
+
+------------------------------------------------------------------------
+
+**2c: Indkomstudviklingen for individer er ofte ikke lineær over livsbanen. De fleste går ned i timer eller på pension senere i livet, hvilket ofte medfører en nedgang i indkomst ift. toppen af karrieren. Lav et scatterplot med indkomst på y-aksen og alder på x-aksen for at undersøge sammenhængen mellem indkomst og alder grafisk.**
+
+**Ser tendensen ud til at være lineær, eller er der grund til at inkludere aldersvariablen som et polynomium?**\
+\
+Nedenstående kode indlæser ggplot, laver et scatterplot med alder på x-aksen og indkomst på y-aksen, og gemmer plottet under navnet "scatterplot". Til sidst gemmes plottet som en png-fil på computeren med "ggsave".
+
+```{r include=T, message=F, warning=F}
+library(ggplot2)
+
+(scatterplot <- ggplot(df, aes(x = alder, y = net_indkomst)) +
+  geom_point() +
+  labs(x = "Alder",
+       y = "Netto indkomst"))
+
+# Gem plottet på din computer som en png fil (billede fil)
+ggsave("Scatterplot_indkomst_alder.png", 
+       scatterplot, width = 8, height = 6, units = "in", dpi = 300)
+```
+
+*\
+*Scatterplottet viser de observerede værdier på variablen "net_indkomst" fordelt over de observerede værdier på "alder". Indkomst ser ud til at fordele sig som en parabel over alder. De fleste under 20 år har en indkomst under 10.000 DKK, de fleste omkring 50 år har indkomst mellem 25.000-35.000 DKK, og de fleste over 75 har indkomst omkring 10.000-15.000DKK. Det ser altså ud til, at respondenterne har en lavere netto indkomst tidligt og sent i livet, mens den er højest i midten af livet.*\
+*
+
+------------------------------------------------------------------------
+
+**2d: Estimér modellen igen med alder som andengrads polynomium (model 3):** $Indkomst_i = \alpha + \beta_1*Kvinde_i+beta_2*Alder_i+\beta_3*Alder{^2}_i+\epsilon_i$
+
+```{r message=F, warning=F}
+
+model3 <- lm(net_indkomst ~ koen + poly(alder,2, raw=T), data=df)
+(texreg::screenreg(list(model1, model2, model3), include.ci = FALSE)) 
+```
+
+**Vurdér parameterestimaterne for** $alder$ **og** $alder^2$**. Ser der ud til at være en signifikant sammenhæng mellem alder og indkomst nu?**
+
+Parameterestimaterne for $alder$ og $alder^2$ er begge signifikante, da deres tilhørende p-værdier er under 0,05. Der ser altså nu ud til at være en signifikant sammenhæng mellem alder og indkomst. Ser vi på fortegnene for parameterestimaterne kan vi se, at $alder$ har et positivt fortegn, og $alder^2$ har et negativt fortegn. Dette betyder, at alder har en positiv effekt på indkomst, men at denne effekt er aftagende, og på et tidspunkt bliver negativ. Det negative fortegn på $alder^2$ kan fortolkes således, at parablen er "sur". Altså er fortegnet sigende for "retningen" på vores parabel.
+
+Parameterestimatet for konstantleddet (skæringen) falder markant og bliver negativt. Pas dog på med at tolke direkte på skæringspunktet. Konstantleddet beskriver altid den gennemsnitlige værdi på Y, når alle uafhængige variable = 0. Det vil sige, at det nu beskriver den gennemsnitlige indkomst for en mand (kvinde = 0) på 0 år (alder = 0 og alder\^2 = 0). Dette resultat er således ikke meningsfuldt rent substantielt. Husk at regressionen fitter bare en linje på baggrund af de datapunkter, som er i datasættet (og her er ingen 0-årige). Konstantleddet er bare et udtryk for, hvor den linje, som OLS har fittet, skærer y-aksen. Man kan tænke på konstantleddet som den referencekategori, vi måler alle andre ændringer fra i de andre estimater. Når vi skal regne meningsfulde værdier ud for specifikke karakteristika såsom "mænd på 40 år", tager vi ugangspunkt i konstantleddet og lægger så de øvrige estimater til svarende til de gældende karakteristika på de uafhængige variable (såsom køn og alder).\
+
+**Er der fortsat en signifikant sammenhæng mellem køn og indkomst, når der kontrolleres for alder?\
+**
+
+Parameterestimatet for variablen "kvinde" er nu -2397 og p-værdien er under 0,05. Vi kan altså forkaste nulhypotesen om at $\beta_1=0$. Der ser med andre ord ud til at være en statistisk signifikant sammenhæng mellem køn og indkomst, selv når vi kontollerer for alder (holder alder konstant og kun sammenlinger folk, der er lige gamle). Kvinder tjener stadig gennemsnitligt 2397 DKK mindre om måneden end mænd.
+
+------------------------------------------------------------------------
+
+**2e: Du skal nu estimere modellen igen, men denne gang også kontrollere for respondenternes uddannelsesniveau. Brug variablen "udd", der måler respondenternes uddannelsesniveau i kategorierne *Grundskole*, *Ungdoms-/erhvervsuddannelse, Mellemlang videregående,* og *Lang videregående uddannelse.***\
+\
+Variablen udd er gemt som en *ordered factor.* Start derfor med at gem den påny som en "normal" uordnet factor, ved at køre nedenstående kode:
+
+```{r warning=F, message=F}
+
+df <- df %>%
+mutate(
+udd = factor(udd, ordered = FALSE))
+```
+
+\pagebreak
+
+**Estimér følgende model (4):**\
+\
+$Indkomst_i = \alpha + \beta_1*Kvinde_i+\beta_2*Alder_i+\beta_3*Alder{^2}_i+\beta_4*Ungdomsuddannelse_i+\beta_5*+Mellemlangvideregaaende_i+\beta_6*Langvideregaaende+\epsilon_i$
+
+```{r warning=F, message=F}
+
+model4 <- lm(net_indkomst ~ koen + poly(alder, 2, raw=T) + udd, data = df)
+(texreg::screenreg(list(model1, model2, model3, model4), include.ci = FALSE)) 
+```
+
+\pagebreak
+
+**Hvad er fortolknignen af konstantleddet intercept?**\
+\
+Da vi har alder med som 2.grads polynomium er konstantleddet ikke længere substantielt meningsfuldt at udtale sig om. Men i princippet er fortolkningen den samme, som den altid har været. Parameterestimatet for konstantleddet beskriver altid den forventede værdi på den afhængige variabel, når alle de uafhængige variable = 0. Det vil sige, at intercept i model 4 beskriver den forventede indkomst for en mand (kvinde=0) på 0 år (alder=0 og $alder^2$=0) med grundskole (alle tre uddannelsesdummier Ungdoms-/erhvervsuddannelse, Mellemlang videregående uddannelse og Lang videregående = 0). Altså er Grundskole i referencekategorien, da man nødvendigvis har Grundskole = 1, hvis man har 0 på alle andre uddannelsesdummier.\
+\
+Det vigtige at få fat i her er, at intercepten indeholder den uddannelseskategori, som er udeladt fra modellen. Det er i dette tilfælde kategorien "Grundskole". Der udelades altid en dummy/kategori fra kategoriske variabler, for at undgå dummyfælden! Konstantleddet/intercepten kaldes også den "referencekategori", som de andre parameterestimater måler relativt til.\
+
+**Hvad er fortolknignen af parameterestimatet for** $\beta_1$ **? Er der fortsat en signifikant sammenhæng mellem køn og indkomst?\
+**\
+Parameterestimatet for $\beta_1$ måler forskellen i indkomst mellem mænd og kvinder, når der kontrolleres for alder og uddannelse. Med andre ord måler den forskellen i indkomst fra referencekategorien (mand) til kategorien kvinde, når alder og uddannelse samtidig holdes konstant. Parameterestimatet fortæller os, at kvinder gennemsnitligt tjener 2913 DKK mindre end mænd, når vi holder uddannelse og alder konstant. Denne forskel er statistisk signifikant, da p-værdien er under grænsen på 0,05. Vi kan altså afvise nulhypotesen om, at $\beta_1=0$.\
+
+**Hvad er fortolknignen af parameterestimatet for** $\beta_4$ **? Beskriv også statistisk signifikans\
+**\
+Parameterestimatet for $\beta_4$ måler den gennemsnitlige forskel i indkomst mellem folk med det uddannelsesniveau, som ligger i referencekategorien (dvs. grundskole) og dem, der har en ungdomsuddannelse, når der kontrolleres for køn og alder. Folk med en ungdomsuddannelse tjener altså gennemsnitligt 1765 DKK mere om måneden end dem, der har grundskoleuddannelse som højeste uddannelsesniveau. Denne forskel er statistisk signifikant, da p-værdien er under 0,05. Vi kan altså afvise nulhypotesen om, at $\beta_4=0$.\
+
+**Hvad er fortolknignen af parameterestimatet for** $\beta_5$ **? Beskriv også statistisk signifikans\
+**\
+Parameterestimatet for $\beta_5$ måler den gennemsnitlige forskel i indkomst mellem folk med det uddannelsesniveau, som ligger i referencekategorien (dvs. grundskole) og dem, der har en mellemlang videregående uddannelse, når der kontrolleres for køn og alder. Folk med en mellemlang videregående uddannelse tjener altså gennemsnitligt 5034 DKK mere om måneden end dem, der har grundskoleuddannelse som højeste uddannelsesniveau. Denne forskel er statistisk signifikant, da p-værdien er under 0,05. Vi kan altså afvise nulhypotesen om, at $\beta_5=0$.\
+
+**Hvad er fortolknignen af parameterestimatet for** $\beta_6$ **? Beskriv også statistisk signifikans\
+**\
+Parameterestimatet for $\beta_6$ måler den gennemsnitlige forskel i indkomst mellem folk med det uddannelsesniveau, som ligger i referencekategorien (dvs. grundskole) og dem, der har en lang videregående uddannelse, når der kontrolleres for køn og alder. Folk med en lang videregående uddannelse tjener altså gennemsnitligt 9706 DKK mere om måneden end dem, der har grundskoleuddannelse som højeste uddannelsesniveau. Denne forskel er statistisk signifikant, da p-værdien er under 0,05. Vi kan altså afvise nulhypotesen om, at $\beta_6=0$.\
+
+**Hvad er den forventede indkomst for en kvinde på 25 år med grundskole som uddannelsesniveau?**
+
+Vi kan udregne den forventede indkomst for en kvinde på 25 år med grundskole som uddannelsesniveau ved at udfylde regressionsligningen. Vi indsætter parameterestimaterne og erstatter værdierne på de uafhængige variable med de relevante værdier.\
+
+Regressionsligningen er givet ved:\
+\
+\
+$Indkomst_i = \alpha + \beta_1*Kvinde_i+\beta_2*Alder_i+\beta_3*Alder{^2}_i+\beta_4*Ungdomsuddannelse_i+\beta_5*+Mellemlangvideregaaende_i+\beta_6*Langvideregaaende\epsilon_i$\
+\
+
+Vi erstatter nu alle koefficienter med parameterestimater fra regressionsoutputtet:\
+\
+\
+$Indkomst_{i} = -6353,79 - 2913,25*Kvinde_i+983,63*Alder_i-9,66*Alder{^2}_i+1764,84*Ungdomsuddannelse_i+5033,58*+Mellemlangvideregaaende_i+9706,34*Langvideregaaende+\epsilon_i$
+
+Vi erstatter nu også værdierne på de uafhænige variable med de værdier, der karakteriserer en kvinde på 25 år med grundskole som højeste uddannelsesniveau:
+
+\
+$Indkomst_{kvinde25aargrundskole} = -6353,79 - (2913,25*1)+983,63*25-(9,66*25{^2})+1764,84*0+5033,58*0+9706,34*0=\underline{\underline{9.286,21}}$
+
+```{r warning=FALSE, message=F}
+-6353.79-(2913.25*1)+(983.63*25)-(9.66*25^2)+1764.84*0+5033.58*0+9706.34*0
+```
+
+En 25 årig kvinde med grundskole som højest fuldførte uddannelse har altså ifølge vores stikprøve gennemsnitligt en netto-indkomst på 9.285 DKK.
+
+\
+
+**Hvad er den forventede indkomst for en mand på 40 år med lang videregående uddannelse som uddannelsesniveau?**\
+\
+Vi kan udregne den forventede indkomst for en mand på 40 år med lang videregående uddannelse som uddannelsesniveau ved at udfylde regressionsligningen. Vi indsætter parameterestimaterne og erstatter værdierne på de uafhængige variable med de relevante værdier.
+
+\
+Regressionsligningen er givet ved:\
+\
+\
+$Indkomst_i = \alpha + \beta_1*Kvinde_i+\beta_2*Alder_i+\beta_3*Alder{^2}_i+\beta_4*Ungdomsuddannelse_i+\beta_5*+Mellemlangvideregående_i+\beta_6*Langvideregående\epsilon_i$\
+\
+\
+Vi erstatter nu alle koefficienter med parameterestimater fra regressionsoutputtet:\
+\
+\
+$Indkomst_{i} = -6353,79 - 2913,25*Kvinde_i+983,63*Alder_i-9,66*Alder{^2}_i+1764,84*Ungdomsuddannelse_i+5033,58*+Mellemlangvideregående_i+9706,34*Langvideregående\epsilon_i$
+
+\
+Vi erstatter nu også værdierne på de uafhænige variable med de værdier, der karakteriserer en mand på 40 år med lang videregående uddannelse som højeste uddannelsesniveau:\
+
+$Indkomst_{mand40aarlangvideregående} = -6353,79 - (2913,25*0)+983,63*40-(9,66*40{^2})+1764,84*0+5033,58*0+9706,34*1$
+
+```{r warning=F, message=F}
+
+-6353.79-(2913.25*0)+(983.63*40)-(9.66*40^2)+1764.84*0+5033.58*0+9706.34*1
+```
+
+\
+Dette kan reduceres til:\
+\
+$Indkomst_{mand40aarlangvideregående} = -6353,79+39345-15456+9706,34=\underline{\underline{27.241}}$\
+\
+En 40-årig mand med lang videregående uddannelse som højest fuldførte uddannelse har altså ifølge vores stikprøve gennemsnitligt en netto-indkomst på 27.241 DKK.
+
+------------------------------------------------------------------------
+
+## Opgave 3: Forklaringskraft
+
+I har nu estimeret fire modeller med forskellige specifikationer og kontrolvariable. I denne opgave skal I sammenligne modellernes forklaringskraft.
+
+**3a: beregn** $R^2$ **værdien for model 1-4.**
+
+Vi kan enten beregne $R^2$ værdien ved at bruge funktionen `glance()` for hver model, eller ved at printe alle modeller en af gangen med `screenreg()`:
+
+\pagebreak
+
+```{r warning=F, message=F}
+
+(texreg::screenreg(list(model1, model2, model3, model4), include.ci = FALSE)) 
+```
+
+**Hvilken model har den største forklaringskraft?**\
+\
+*Model 4 har den største forklaringskraft med en* $R^2$ *værdi på* $0.36$.\
+
+**Hvor meget af variationen i den afhængige variabel kan den bedste model forklare?**\
+\
+*Med en* $R^2 = 0.36$ *kan model 4 med variablene koen, alder og uddannelsesniveau forklare 36% af variationen i indkomst i stikprøven.*
+
+------------------------------------------------------------------------
+
+\
+**3b: For at afgøre om forklaringskraften i model 4 er signifikant højere end i model 3 er det nødvendigt med en F-test mellem to modeller. I model 4 tilføjes nemlig hele tre dummyvariable på en gang, og det er dermed nødvendigt at teste, om de tilsammen tilføjer forklaringskraft til modellen.**
+
+**Opstil hypoteser for en F-test mellem model 3 og mod**el 4
+
+\
+F-testen kan teste, om den forklaringskraft, som flere variable tilsammen tilføjer, er signifikant forskellig fra 0. Hypoteserne i en F-test for to modeller således:
+
+**H0:** model 4 forklarer ikke singifikant mere end model 3
+
+**H1:** model 4 forklarer signifikant mere end model 3.\
+
+------------------------------------------------------------------------
+
+**3c: Fortolk på F-testen. Er forklaringskraften signifikant højere i model 4 end i model 3? Hvilken betydning har dette for vores vurdering af uddannelsesniveau-dummierne som relevante kontrolvariable?**
+
+```{r warning=F, message=F}
+
+f_test <- anova(model3, model4)
+print(f_test)
+```
+
+F-testen returnerer en p-værdi med tre stjerner (\*\*\*) der altså er langt under 0,05. Vi kan med andre ord afvise nulhypotesen om, at model 4 ikke forklarer signifikant mere end model 3. Det fortæller os, at det er relevant at inddrage variablen uddannelsesniveau (som dummier) i vores regressionsmodel, da de bidrager signifikant til modellens forklaringskraft.
+
+## Opgave 4: Heteroskedasticitet
+
+**Hvis en regressionsmodel lider af heteroskedasticitet bliver vores p-værdier upålidelige. Heldigvis kan vi lave en grafisk inspektion, der giver os en idé om, hvorvidt der er heteroskedasticitet tilstede.**
+
+**5a: Lav et plot af residualerne mod de forudsagte værdier fra model 4 for at inspicere modellen for heteroskedasticitet:**
+
+```{r message=F, warning=F, eval=T}
+
+# Beregn forudsagte værdier
+predicted <- predict(model4)
+
+# Beregn residualer
+residuals <- resid(model4)
+
+# Lav plot dataframe
+plot_data <- data.frame(predicted = predicted, residuals = residuals)
+
+# Byg dit plot
+(plot_heteroskedasticitet <- ggplot(plot_data, aes(x = predicted, y = residuals)) +
+  geom_point(shape = 20, color = "black") +  # Set point shape and color
+  labs(x = "Forudsagte værdier", 
+       y = "Residualer", 
+       title = "Plot for heteroskedasticitet") +  # Set axis labels and title
+  theme_minimal() +  # Apply a minimalistic theme
+  theme(plot.title = element_text(hjust = 0.5)))  # Center the title
+ 
+ggsave("Plot_heteroskedasticitet.png", 
+       plot_heteroskedasticitet, 
+       width = 8, height = 6, units = "in", dpi = 300)
+```
+
+------------------------------------------------------------------------
+
+**5b: konkludér på plottet. Mener du, at der er heteroskedasticitet tilstede?**\
+
+Heteroskedasticitet beskriver en situation, hvor variansen på fejlleddet er forskellig over forskellige værdier på de uafhængige variable. Plottet ovenfor viser residualerne (fejlleddene) på y-aksen, fordelt over forudsagte værdier på x-aksen. Vi bruger de forudsagte værdier som en slags genvej til at plotte residualerne mod de uafhængige variable på én gang, fremfor at plotte dem mod hver uafhængig variabel en af gangen. Heteroskedasticitet vil vise sig som en ændring i "variansen" af residualerne. Med andre ord er det ikke et tegn på heteroskedasticitet, at residualerne er faldende over de forudsagte værdier. Derimod ser vi, at de bevæger sig parallelt over x-aksen. Dette indikerer homoskedasticitet, ikke heteroskedasticitet. Heteroskedasticitet kunne have vist sig ved at residualerne havde ligget i en "vaffel-form", hvor variansen havde været meget lille for nogle forudsagte værdier (spidsen af isvaflen), mens den havde været større for andre (toppen af isvaflen). Vi ser altså ikke ud til at have et problem med heteroskedasticitet.\
+
+------------------------------------------------------------------------
+
+**5c: estimér model 4 med robuste standardfejl og sammenlign med modellen uden robuste standardfejl. Ændrer dine resultater sig?**
+
+```{r message=F, warning=F}
+library(estimatr)
+
+model_robust <- lm_robust(net_indkomst ~ koen + poly(alder, 2, raw=T) + udd, data = df)
+(texreg::screenreg(list(model4, model_robust), include.ci = FALSE)) 
+```
+
+Robuste standardfejl ændrer ikke parameterestimaterne, da det udelukkende er en korrektion af standardfejl, som bruges til at udregne p-værdier. Vi kan se, at standardfejlene er blevet en anelse mindre (standardfejl står i parantes under parameterestimaterne), men at det ikke rykker ved signifikansen på vores parameterestimater. Dette stemmer overens med, at vi ikke umiddelbart kunne identificere heteroskedasticitet i scatterplottet. Robuste standardfejl bruges til at korrigere for heteroskedasticitet, som kan give forfejlede standardafvigelser på parameterestimaterne og dermed upålidelige p-værdier. Her gør det dog ikke nogen forskel.
+
+## Opgave 5: Interaktioner
+
+**Interaktionsvariable tillader os at se, om "effekten" af uafhængige variable varierer mellem forskellige grupper/værdier på andre uafhængige variable. I skal nu teste, om "effekten" af antal års uddannelse er forskelligt fra mænd til kvinder.**
+
+**5a: estimér model 5:** $Indkomst = \alpha+\beta_1*Kvinde_i+\beta_2*Antalaarsuddannelse_i+\epsilon_i$
+
+```{r warning=F,message=F}
+
+model5 <- lm(net_indkomst ~koen+udd_aar, data=df)
+(texreg::screenreg(list(model5), include.ci = FALSE)) 
+```
+
+**Er der en signifikant sammenhæng mellem køn og indkomst, når vi kontrollerer for antal års uddannelse?**\
+\
+Ja. Parameterestimatet for $\beta_1$ er signifikant med en p-værdi under 0,05. Det fortæller os, at kvinder gennemsnitligt tjener 2602 DKK mindre end mænd, når der kontrolleres for antal års uddannelse.\
+
+**Er der en signifikant sammenhæng mellem antal års uddannelse og indkomst, når vi kontrollerer for køn?**\
+\
+Ja. Parameterestimatet for $\beta_2$ er signifikant med en p-værdi under 0,05. Det fortæller os, at man gennemsnitligt tjener 495 DKK mere for hvert års ekstra uddannelse, som man tager, når man kontrollerer for køn.
+
+**Estimér model 6 med en interaktionsvariabel mellem *Kvinde* og *Antal års uddannelse:****\
+*$Indkomst = \alpha+\beta_1*Kvinde_i+\beta_2*Antalaarsuddannelse_i+\beta_3*(Kvinde*Antalårsuddannelse)+\epsilon_i$
+
+Man estimerer en model med en interaktionsvariabel ved at gange de to variable, der skal interageres med hinanden:
+
+```{r warning=F, message=F}
+
+model6 <- lm(net_indkomst ~ koen*udd_aar, data = df)
+(texreg::screenreg(list(model5, model6), include.ci = FALSE))
+```
+
+**Konkludér på parameterestimatet for** $\beta_3$ **. Er der forskel på effekten af antal års uddannelse på indkomst for mænd og kvinder?**
+
+Parameterestimatet for $\beta_3$ estimerer, om der er en ekstra "effekt" (dermed ikke sagt kausal) af at tage et års uddannelse mere på indkomst specifikt for kvinder fremfor mænd. Parameterestimatet har en p-værdi på over 0,05, og vi kan dermed ikke afvise nulhypotesen, at $\beta_3=0$ . Der ser altså ikke ud til at være en særlig gevinst for kvinder ved at tage mere uddannelse i forhold til mænd. Vi kan også se, at parameterestimatet for "udd_aar" ikke ændrer sig substantielt fra model 5 til model 6.

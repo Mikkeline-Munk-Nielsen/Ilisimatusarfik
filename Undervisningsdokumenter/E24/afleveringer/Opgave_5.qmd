@@ -1,0 +1,289 @@
+---
+title: "Opgave 5"
+format: html
+editor: visual
+author: [dit navn]
+---
+
+## Introduktion og data
+
+I denne øvelse skal I arbejde videre med European Social Survey. I skal derfor ikke downloade et nyt datasæt.
+
+-   *Skriv dit navn øverst i desnne fil der hvor der står “\[dit navn\]”.*
+
+-   *Nedenfor er en række spørgsmål. Sæt dit svar ind der hvor der står “\[dit svar\]”.*
+
+-   *Når du er færdig med besvarelsen skal du klikke på ‘Render’ og uploade .html filen på Lectio under ‘Opgaver’.*
+
+## Indlæs data
+
+-   Start med at check, at både dette dokument og ESS datasættet ligger i samme mappe som dit R-project. Indlæs det med funktionen `readRDS`:
+
+```{r warning=F}
+
+getwd() # Denne kommando fortæller dig, hvilken mappe du arbejder i lige nu.
+
+df <- readRDS("Data/ESS.rds") # Her hentes datasættet 
+```
+
+-   Brug `filter()` funktionen til at gemme et nyt datasæt, der kun indeholder besvarelser fra DK.
+
+```{r warning=F, message=F}
+library(tidyverse)
+
+df <- filter(df, land=="DK")
+
+```
+
+-   I skal arbejde med variablene *net_indkomst*, *koen*, *udd_aar* og *ansaettelse_type*. Kør nedenstående kode for at udvælge variablene og fjerne observationer med missingværdier (NA). Vi skal fjerne missing værdier på alle de variable, som vi skal bruge for at undgå at antallet af observationer svinger fra analyse til analyse.
+
+```{r}
+
+df <- df %>% select(net_indkomst, koen, udd_aar, ansaettelse_type) %>% na.omit()
+```
+
+## Sammenhæng mellem køn og indkomst
+
+Over de næste opgaver skal I undersøge sammenhængen mellem køn og indkomst.
+
+### Opgave 1: simpel lineær regression
+
+-   Start med at lav en tabel over variablen koen (køn).
+
+```{r warning=F, message=F}
+
+library(janitor)
+
+```
+
+-   Skriv med ord, hvilket måleniveau du mener, at variablen koen bør være på
+
+    \[dit svar\]
+
+-   Brug `glimpse()` funktionen til at undersøge, hvilken typen variablen koen er. Den skal være en factor for at R behandler dens kategorier som dummy variable.
+
+```{r warning=F, message=F}
+
+
+```
+
+I skal nu undersøge sammenhængen mellem køn og indkomst med lineær regressionsanalyse.
+
+-   Kig på den nedenståene formel. Skriv med ord, hvilken variabel der er den afhængige, og hvilken variabel, der er den uafhængige:
+
+    $Indkomst = \alpha+\beta*Kvinde+\epsilon$
+
+\[dit svar\]
+
+-   Du skal nu estimere modellen for at teste, om der er en signifikant forskel på gennemsnitsindkomsten for mænd og kvinder i stikprøven. Start med at opstille hypoteser for hældningen på regressionskoefficienten beta:
+
+    \[dit svar\]
+
+-   Indlæs pakken "broom". Brug så `lm()` funktionen til at estimere modellen og `tidy()` eller `summary()` til at printe resultaterne.
+
+```{r warning=F, message=F}
+library(broom)
+
+model1 <- lm(net_indkomst ~ koen, data = df)
+
+tidy(model1)
+#summary(model1)
+```
+
+-   Hvad er fortolkningen af værdien for konstantleddet (alpha)?
+
+\[dit svar\]
+
+-   Hvad er fortolkningen af værdien på koefficienten for "kvinde" (beta)?
+
+\[dit svar\]
+
+-   Er der en statistisk signifikant sammenhæng mellem køn og indkomst?
+
+\[dit svar\]
+
+Nu skal du sætte koefficienterne fra dit resultat ind i formlen for regressionsmodellen for at udregne følgende:
+
+-   Hvad er den forventede indkomst for en mand?
+
+\[dit svar\]
+
+-   Hvad er den forventede indkomst for en kvinde?
+
+\[dit svar\]
+
+Prøv at udfør en t-test for at teste, om der er forskel på gennemsnitsindkomsten mellem mænd og kvinder.
+
+```{r warning=F, message=FALSE}
+
+t.test(net_indkomst ~ koen, data=df)
+
+```
+
+-   Sammenlign t-værdien og gennemsnit med den t-værdi du fik for koefficienten for kvinde i regressionen. Det er de præis samme resultater... hvorfor?
+
+    \[dit svar\]
+
+### Opgave 2: multipel lineær regression (forlæns modelsøgning)
+
+I har nu undersøgt sammenhængen mellem køn og indkomst i en simpel regressionsmodel. Nu skal i undersøge, om sammenhængen i virkeligheden kan forklares af andre forhold.
+
+Nogle påstår, at lønforskellen på mænd og kvinder skyldes, at mænd gennemsnitligt set har mere uddannelse end kvinder. I skal derfor indføre variablen "udd_aar" som kontrolvariabel i jeres regressionsmodel for at teste, om sammenhængen mellem køn og indkomst kan forklares af, at mænd gennemsnitligt tager flere års uddannelse end kvinder.
+
+-   Variablen "udd_aar" måler, hvor mange års uddannelse respondenterne har. Skriv med ord, hvilket måleniveau du mener, at variablen bør have
+
+    \[dit svar\]
+
+-   Brug `glimpse()` funktionen til at undersøge, hvilken type variablen er.
+
+```{r warning=F, message=F}
+
+
+```
+
+I skal nu undersøge, om sammenhængen mellem køn og indkomst kan forklares af forskelle i antal års uddannelse.
+
+$Indkomst = \alpha+\beta*Kvinde+\delta * Antal års uddannelse +\epsilon$
+
+-   Brug `lm()` funktionen til at estimere modellen MED kontrolvariablen og `tidy()` eller `summary()` til at printe resultaterne.
+
+```{r warning=F, message=F}
+
+model2 <- lm(net_indkomst ~ koen + udd_aar, data = df)
+
+tidy(model2)
+#summary(model2)
+```
+
+-   Beskriv med ord, hvad fortolkningen af værdien på konstantleddet er nu
+
+    \[dit svar\]
+
+-   Beskriv med ord, hvad fortolkningen af værdien på koefficienten for "udd_aar" er
+
+    \[dit svar\]
+
+-   Er der en signifikant sammenhæng mellem antal års uddannelse og indkomst?
+
+    \[dit svar\]
+
+Er der fortsat en signifikant forskel mellem koen og indkomst, selv når der kontrolleres for antal aars uddannelse?
+
+\[dit svar\]
+
+Andre påstår, at lønforskellen på mænd og kvinder skyldes, at mænd har andre typer af ansættelse end kvinder har. I skal derfor indføre variablen "ansaettelse_type" som endnu en kontrolvariabel i jeres regressionsmodel for at teste, om sammenhængen mellem køn og indkomst kan forklares af forskelle i *ansættelsestyper*.
+
+-   Lav en tabel over variablen "ansættelse_type" for at undersøge, hvilke ansættelsestyper variablen indeholder.
+
+```{r warning=F, message=F}
+
+
+```
+
+-   Skriv med ord, hvilket måleniveau du mener, at variablen ansaettelse_type bør være på
+
+\[dit svar\]
+
+-   Brug `glimpse()` funktionen til at undersøge, hvilken typen variablen er. Den skal være en factor for at R behandler dens kategorier som dummy variable.
+
+```{r warning=F, message=F}
+
+
+```
+
+-   I skal nu undersøge om sammenhængen mellem køn og indkomst kan forklares af antal års uddannelse eller ansættelsestype. Kig på formlen nedenfor. Hvilken ansættelsestype ligger i referencekategorien?
+
+$Indkomst = \alpha+\beta*Kvinde+\delta * Antal års uddannelse +\gamma_1 * Selvstændig + \gamma_2 * Familie + \epsilon$
+
+-   Brug `lm()` funktionen til at estimere modellen med kontrolvariablerne aar_udd og ansaettelse_type. Brug så `tidy()` eller `summary()` til at printe resultaterne.
+
+```{r warning=F, message=F}
+
+model3 <- lm(net_indkomst ~ koen + udd_aar + ansaettelse_type, data = df)
+
+tidy(model3)
+#summary(model3)
+```
+
+-   Beskriv med ord, hvad fortolkningen af værdien på konstantleddet er nu
+
+    \[dit svar\]
+
+-   Beskriv med ord, hvad fortolkningen af værdien på koefficienten for ansættelsestypen "Selvstændig" er
+
+    \[dit svar\]
+
+-   Beskriv med ord, hvad fortolkningen af værdien på koefficienten for ansættelsestypen "Familie" er
+
+    \[dit svar\]
+
+-   Hvad betyder det, at koefficienten for ansættelsestypen *Familie* er signifikant, men at koefficienten for ansættelsestypen *Selvstændig* ikke er? Skriv med ord.\
+    \
+    \[dit svar\]
+
+-   Er der fortsat en signifikant forskel mellem koen og indkomst, selv når der kontrolleres for antal års uddannelse OG ansættelsestype? Skriv med ord.
+
+    \[dit svar\]
+
+### Opgave 3: forklaringskraft
+
+I har nu undersøgt sammenhængen mellem køn og indkomst via. forlæns modelsøgning. I har estimeret tre forskelige modeller:
+
+*Model 1: simpel model kun med afhængigh og uafhængig variabel (indkomst og køn)*
+
+*Model 2: multipel model med én kontrolvariabel (indkomst, køn og antal års uddannelse)*
+
+*Model 3: multipel model med to kontrolvariable (indkomst, køn, antal års uddannelse og ansættelsestype).*
+
+I skal nu sammenligne de tre modeller for at afgøre, hvilken en der har den største forklaringskraft ved at sammenligne de tre modellers R\^2 værdi.
+
+-   Skriv med ord, hvad R\^2 værdien fortæller os
+
+    \[dit svar\]
+
+-   Sammenlign dine modellers R\^2 værdi med `glance()` funktionen og aflæs R\^2 værdien
+
+```{r warning=F, message=F}
+
+glance(model1)
+```
+
+```{r warning=F, message=F}
+glance(model2)
+```
+
+```{r warning=F, message=F}
+
+glance(model3)
+```
+
+-   Skriv med ord, hvilken model der har den højeste forklaringskraft?
+
+    \[dit svar\]
+
+-   Skriv med ord, hvor stor en del af variationen i indkomst den bedste model kan forklare?
+
+    \[dit svar\]
+
+### Opgave 4: F-test for to modeller
+
+Man kan få en idé om, hvilke modeller der er bedst, ved at sammenligne deres forklaringskraft (R\^2 værdi). Men der skal en hypotesetest til at afgøre, om én model forklarer signifikant mere end en anden.
+
+Når man sammenligner to modellers forklaringskraft, hvor der er mere end ét parameterestimat til forskel – som her hvor model 2 og 3 har både parameterestimatet for ansættelsestypen "familie" og ansættelsestypen "selvstændig" til forskel – skal man altid benytte F-testen. F-testen kan nemlig teste, om den forklaringskraft, som flere variable tilsammen tilføjer, er signifikant forskellig fra 0.
+
+-   Opstil hypoteserne for F-testen mellem mellem model 2 og model 3 med ord:\
+    \
+    \[dit svar\]
+
+-   Kør en F-test mellem model 2 og model 3 med følgende kode:
+
+```{r}
+
+f_test <- anova(model2, model3)
+
+print(f_test)
+```
+
+-   Konkludér på testen. Forklarer model 3 signifikant mere end model 2?
+
+    \[dit svar\]

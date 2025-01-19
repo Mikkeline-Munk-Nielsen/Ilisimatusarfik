@@ -1,0 +1,278 @@
+---
+title: 'Øvelse i univariat analyse: fangstbeviser'
+output:
+  pdf_document: default
+  html_document: null
+---
+```{r include= F, warning=FALSE, message=FALSE, comment=FALSE}
+
+
+################## HENTER OG OMKODER DATA FRA STATISTIKBANKEN ####################################
+library(readr)
+
+df <- read_csv("https://bank.stat.gl:443/sq/be2c0c96-ca5f-49b1-a190-669fe06c56ad")
+
+
+library(haven)
+library(janitor)
+library(tidyverse)
+
+
+df <- clean_names(df)
+
+df <- rename(df, 
+             fangstbeviser = fangerbevis_indehavere)
+
+# Start med kun ervhervsfangere
+df <- df %>% filter(type == "Erhvervsfanger")
+
+write_dta(df, "Data/Fangstbeviser.dta")
+
+
+```
+
+
+## 1. Hent og indlæs data
+
+I denne øvelser skal du lave lidt indledende deskriptiv statistik for at beskrive udviklingen i antal fangstbeviser fra 1993 til 2022. Mere konkret skal du bruge de værktøjer, som du har lært om i univariat analyse. Start med at hente datasættet "Fangstbeviser.dta" fra lectio. Gem det i samme mappe som dit R-project. Du kan også oprette en mappe i folderen med dit project, der hedder "Data". Læg mærke til at filen har formatet ".dta". Derfor skal du indlæse pakken *haven* for at indlæse datasættet. Dereftre skal du bruge funktionen `read_dta()` til at indlæse datasættet og gemme det i et objekt, der f.eks. kunne hedde "df":
+
+```{r message=F, warning=F}
+
+library(haven)
+
+df <- read_dta("Data/Fangstbeviser.dta")
+
+```
+
+
+* Start med at dan dig et overblik over datasættet. Hvor mange variable indeholder det, og hvad hedder de? Brug evt. funktionen `names` til at liste variablenes navne:
+
+```{r message=F, warning=F}
+
+library(janitor)
+
+names(df)
+
+```
+
+* Undersøg nu hvilken type variablerne er ved at bruge funktionen `class()`. Hvilket måleniveau har hver af variablene?
+
+```{r include = F, echo=T, eval=F}
+
+class(df$type)
+
+class(df$tid)
+
+class(df$fangstbeviser)
+
+```
+
+
+Variablen *fangstbeviser* viser antallet af fangstbeviser hvert år. Variablen *type* indikerer, at der er tale om erhvervsfangstbeviser, og variablen *tid* viser hvilket år, der er tale om.
+
+## 2. Lav en akkumuleret frekvenstabel
+
+* Start med at undersøg datasættet. Det er faktisk allerede sorteret som en frekvenstabel. Hvad viser tabellen?
+
+```{r warning=F, echo=T, eval=F}
+
+# Her starter vi med datasættet, som vi sender videre over i select funktionen, 
+# hvor vi udvælger de variable, som vi gerne vil se. De tre variable, sender vi 
+# over i funktionen "view", som viser os datasættet. 
+
+df %>% select(tid, fangstbeviser) %>% View()
+
+```
+
+* Brug nu funktionen `cumsum()` til at lave en variabel, der giver den akkumulerede frekvens. Kald variablen "fangstbeviser_akkum"
+
+```{r warning=F, echo=T, eval=F}
+
+# Her tilføjer vi en ny variabel "akkum" til datasættet "df". Funktionen cumsum 
+# laver en akkumuleret variabel over variablen fangstbeviser over tid. 
+df$fangstbeviser_akkum <- cumsum(df$fangstbeviser)
+
+# Se nu variablen i datasettet
+df %>% select(tid, fangstbeviser, fangstbeviser_akkum) %>% View()
+
+```
+* Hvad fortæller den akkumulerede variabel? 
+
+## 3. Skab overblik over tabellen med visualiseringer
+Tabellen er ganske lang over derfor også uoverskuelig. Det er nemmere at danne sig et overblik over udviklingen i fangstbeviser over tid med en figur. Brug ggplot til at lave et søjlediagram over antallet af fangerbeviser over tid. Du skal specificere:
+
+- variablen på x-aksen
+- variablen på y-aksen
+- hvilken "statistik" grafen skal vise. For at få frekvenser, skal du vælge "identity", da det fortæller ggplot, at grafen skal vise nøjagtig de værdier, som er i variablen i datasættet. 
+
+```{r warning=F}
+
+ggplot(df, aes(x = tid, y = fangstbeviser)) + # specificer datasæt samt x og y 
+  geom_bar(stat = "identity") # Brug geom_bar til at lave et søjediagram
+
+
+```
+
+* Kan du gøre plottet endnu flottere? Prøv at tilføj en titel til figuren og titler til akserne via `labs()` funktionen, som står for "labels" eller "mærkater". 
+
+```{r warning=F}
+
+ggplot(df, aes(x = tid, y = fangstbeviser)) +
+  geom_bar(stat = "identity") +  # Brug geom_bar til at lave et søjediagram
+  labs(title = "Antal fangstbeviser, 1993-2022",  # tilføj en titel
+       x = "År", # tilføj titel til x-aksen
+       y = "Antal") # tilføj titel til y-aksen
+ 
+```
+
+* Du kan evt. tilføje nedenstående for at centrere titlen via `theme()`:
+
+```{r}
+
+ggplot(df, aes(x = tid, y = fangstbeviser)) +
+  geom_bar(stat = "identity") +  # Brug geom_bar til at lave et søjediagram
+  labs(title = "Antal fangstbeviser, 1993-2022",  # tilføj en titel
+       x = "År", # tilføj titel til x-aksen
+       y = "Antal") + # tilføj titel til y-aksen 
+  theme(plot.title = element_text(hjust = 0.5)) # Centrerer titlen
+```
+
+
+* X-aksen viser årstal, men de fleste år bliver udeladt. Brug `scale_x_continuous()` funktionen inde i `labs()` og skriv `breaks = unique(df$tid)`. Det fortæller ggplot, at du gerne vil have, at dine labels på x-aksen (som er kontinuert) skal "breake" (dvs. lave et nyt mærkat) for hver unikke værdi på variablen "tid" i dit datasæt. 
+
+```{r warning=F}
+
+ggplot(df, aes(x = tid, y = fangstbeviser)) +
+  geom_bar(stat = "identity") +  # Brug geom_bar til at lave et søjediagram
+  labs(title = "Antal fangstbeviser, 1993-2022",  # tilføj en titel
+       x = "År", # tilføj titel til x-aksen
+       y = "Antal") + # tilføj titel til y-aksen 
+    scale_x_continuous(breaks = unique(df$tid)) + # Denne linje specificerer, 
+  # at der skal være lige så mange "labels" på xaksen skal være, som der er 
+  # værdier på variablen "tid". 
+  theme(plot.title = element_text(hjust = 0.5)) # Centrerer titlen
+
+```
+
+
+* Fordi der er så mange labels på x-aksen nu, ligger de oveni hinanden. Tilføj `axis.text.x = element_text(angle = 90, hjust = 1` under `theme()` for at rotere labels 90 grader. 
+
+```{r warning=F}
+
+
+ggplot(df, aes(x = tid, y = fangstbeviser)) +
+  geom_bar(stat = "identity") +  # Use geom_bar for bar plot
+  labs(title = "Antal fangstbeviser, 1993-2022",
+       x = "År",
+       y = "Antal") + 
+  scale_x_continuous(breaks = unique(df$tid)) + # Denne linje specificerer, 
+  # at der skal være lige så mange "labels" på xaksen skal være, som der er 
+  # værdier på variablen "tid". 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), # roterer x-labels 
+        plot.title = element_text(hjust = 0.5)) # Centrerer titlen 
+
+
+
+
+```
+
+
+* Vælg som det sidste en flot farve til dit plot. Tilføj f.eks. farven blå ved at skrive `fill = "blue"` efter `stat` i `geom_bar()` funktionen. 
+
+```{r warning=F}
+
+
+ggplot(df, aes(x = tid, y = fangstbeviser)) +
+  geom_bar(stat = "identity", fill = "blue") +  # Use geom_bar for bar plot
+  labs(title = "Antal fangstbeviser, 1993-2022",
+       x = "År",
+       y = "Antal") + 
+  scale_x_continuous(breaks = unique(df$tid)) + # Denne linje specificerer, at 
+  # der skal være lige så mange "labels" på xaksen skal være, som der er værdier
+  # på variablen "tid". 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), # roterer x-labels
+        plot.title = element_text(hjust = 0.5)) # Centrerer titlen 
+
+
+
+
+```
+
+
+* Hvad viser dit plot? Hvordan har antallet af fangstbeviser udviklet sig de seneste 30 år?
+
+
+## 4. Centrummål
+Søjlediagrammet viser fordelingen af fangstbeviser over tid. Men hvad hvis du gerne vil vide, hvor mange fangstbeviser der typisk er per år? Det er det, vi bruger centrummål til. 
+
+
+* Brug funktionen `summary` til at at give dig gennemsnit, median og kvartiler for variablen fangstbeviser:
+```{r warning=F, echo=T, eval=F}
+
+summary(df$fangstbeviser)
+
+
+```
+
+* Hvad er gennemsnittet på variablen? 
+* Hvad er medianen på variablen?
+* Hvad betyder det, at de ikke er helt ens?
+
+
+`summary()` giver dig også minimumsværdien og maksimumsværdien samt første og tredje kvartil. Disse værdier kan nemt visualiseres i et boxplot med ggplot:
+
+```{r warning=F, message=F, echo=T, eval=F}
+
+ggplot(df) + 
+  geom_boxplot(aes(y = fangstbeviser)) + 
+  scale_x_discrete( ) +
+  labs(title = "Fangstbeviser",
+       y = "Antal") +
+  theme(plot.title = element_text(hjust = 0.5)) + # Centrerer titlen 
+   ylim(c(1500, 4500)) + # Specificerer hvor y-aksen stopper og slutter
+  scale_y_continuous(breaks = seq(1500, 5000, by = 500)) # Labels på y-aksen 
+# skal starte på 1500, slutte på 5000 og have 500 imellem for hver label
+
+```
+
+
+* Hvor er minimumsværdien og maksimumsværdien at finde på boxplottet?
+* Hvor er medianen?
+* Hvor er først og tredje kvartil?
+* Hvad fortæller kvartilerne os om fordelingen på antallet af fangstbeviser?
+
+
+## 5. Varians og standardafvigelse
+Udreng nu variablens varians og standardafvigelse. Brug funktionerne `var()` og `sd()`:
+
+```{r warning=F, echo=T, eval=F}
+
+# Varians
+
+var(df$fangstbeviser)
+
+
+# Standardafvigelse
+
+sd(df$fangstbeviser)
+
+```
+* Hvad fortæller henholdsvis varians og standardafvigelse? 
+
+* Hvis du skulle forklare en arbejdsgiver, hvor meget variation der har været i antallet af fangstbeviser over de senest30 år, hvilket mål ville du så finde mest anvendeligt?
+
+
+## 6. Konfidensintervaller
+Som det sidste skal du udregne konfidensintervallet for det gennemsnitlige antal fangstbeviser i perioden. Brug funktionen `t.test()`:
+
+
+```{r echo=T, eval=F}
+
+t.test(df$fangstbeviser)
+```
+* Forklar hvilken information dine konfidensintervaller giver. Hvad er fordelen ved at udregne konfidensintervaller, når du rapporterer gennemsnit? 
+
+
+
+
+

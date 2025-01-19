@@ -1,0 +1,305 @@
+---
+title: "Opgave 6"
+format: pdf
+editor: visual
+---
+
+Denne sidste obligatoriske opgave er "blandede bolsjer" af de ting, som I har ønsket jer at genbesøge. Som forberedelse til eksamen skal I denne gang selv oprette et Quarto dokument og skrive både kode og svar (enkelte steder har jeg dog givet jer kode her i dokumentet).
+
+Hvis I ikke kan køre Quarto på jeres computer, så kan I bare skrive i et word dokument og kopiere jeres tabeller og plots ind. Brug i så fald ggsave() til at gemme plots og texreg::wordreg() til regressionstabeller.
+
+I skal aflevere i PDF format, da I også skal dette til eksamen.
+
+## Installér tinytex
+
+Sørg for at installere tinytex, så du kan "render" din Quarto fil til PDF format. Hvis du allerede kan render til PDF kan du springe dette skridt over.
+
+```{r message=F, warning=F, eval=F}
+
+tinytex::install_tinytex()
+```
+
+## Indlæs data
+
+-   Indlæs ESS datasættet
+
+-   Brug `filter()` funktionen til at gemme et nyt datasæt, der BÅDE indeholder besvarelser fra DK og SE.
+
+-   Brug `select()` funktionen til at vælge variablene *net_indkomst, koen, alder, udd, udd_mor, udd_aar*, og funktionen `na.omit()`til at slette observationer, der har NA på en eller flere af disse variable.
+
+```{r message=F, warning=F, eval=T, include=F}
+
+getwd() # Denne kommando fortæller dig, hvilken mappe du arbejder i lige nu.
+
+df <- readRDS("Data/ESS.rds") # Her hentes datasættet 
+```
+
+```{r message=F, warning=F, include=F}
+library(tidyverse)
+library(janitor)
+
+library(dplyr)
+
+
+df <- df %>%
+  filter(land %in% c("DK", "SE"))
+
+df <- df %>% select(net_indkomst, koen, alder, udd, udd_mor, udd_aar) %>% na.omit()
+```
+
+## Opgave 1: Sammenhængen mellem uddannelsesniveau og forældres uddannelsesniveau
+
+Det er et veletableret faktum i samfundsvidenskaben, at vi ofte ligner vores forældre når det kommer til, hvilken (og hvor meget) uddannelse vi tager. Dette er kendt som social arv i uddannelse. I skal nu gennemføre en $chi^2$ test for uafhængighed for at teste, om respondenternes uddannelsesniveau er uafhængigt af deres mødres uddannelsesniveau.
+
+I skal bruge variablen "udd" til at måle respondenternes eget uddannelsesniveau og variablen "udd_mor" til at måle respondenternes mødres uddannelsesniveau. Begge variable måler uddannelsesniveau i kategorierne *Grundskole*, *Ungdoms-/erhvervsuddannelse, Mellemlang videregående,* og *Lang videregående uddannelse.*
+
+-   1a: Opstil null- og alternativ hypoteser for $chi^2$ testen for uafhængighed
+
+-   1b: gennemfør og konkludér på testen. Er respondenternes uddannelsesniveau uafhængigt at deres mødres uddannelsesniveau, eller ser der ud til at være en statistisk sammenhæng mellem de to variable? Beskriv og forklar, hvorfor du konkluderer, som du gør.
+
+```{r include=F, message=F, warning=F}
+
+(chi_test <- df %>%
+  select(udd, udd_mor) %>% 
+  na.omit() %>%
+  tabyl(udd, udd_mor) %>%
+  chisq.test())
+
+# Print p-værdi uden "scientific notation"
+format.pval(chi_test$p.value, digits = 4, scientific = FALSE)
+```
+
+## Opgave 2: Forlæns modelsøgning
+
+I denne opgave skal I arbejde videre på regressionsanalyse. I skal fortsat undersøge sammenhængen mellem køn og indkomst, mens i løbende indfører kontrolvariable samt nye specifikationer.
+
+-   2a: Estimér følgende model (1) : $Indkomst_i = \alpha + \beta_1*Kvinde_i+\epsilon_i$
+
+    ```{r message=F, warning=F}
+    library(broom)
+    library(texreg)
+
+    model1 <- lm(net_indkomst ~ koen, data=df)
+    tidy(model1)
+
+    (texreg::screenreg(list(model1), include.ci = FALSE)) 
+    ```
+
+    -   Hvad er den forventede indkomst for mænd i stikprøven?
+
+    -   Hvad er den forventede indkomst for kvinder i stikprøven?
+
+    -   Er der en statistisk signifikant sammenhæng mellem køn og indkomst?\
+
+-   2b: Tilføj variablen "alder" din modellen som kontrolvariabel og estimér følgende model (2):\
+    \
+    $Indkomst_i = \alpha + \beta_1*Kvinde_i+beta_2*Alder_i+\epsilon_i$
+
+    ```{r message=F, warning=F}
+
+    model2 <- lm(net_indkomst ~ koen + alder, data=df)
+
+    tidy(model2)
+
+    (texreg::screenreg(list(model1, model2), include.ci = FALSE)) 
+    ```
+
+    -   Er der en statistisk signifikant sammenhæng mellem alder og indkomst?
+
+-   2c: Indkomstudviklingen for individer er ofte ikke lineær over livsbanen. De fleste går ned i timer eller på pension senere i livet, hvilket ofte medfører en nedgang i indkomst ift. toppen af karrieren. Lav et scatterplot med indkomst på y-aksen og alder på x-aksen for at undersøge sammenhængen mellem indkomst og alder grafisk.
+
+    -   Ser tendensen ud til at være lineær, eller er der grund til at inkludere aldersvariablen som et polynomium?
+
+```{r eval=F, include=T, message=F, warning=F}
+library(ggplot2)
+
+(scatterplot <- ggplot(df, aes(x = alder, y = net_indkomst)) +
+  geom_point() +
+  labs(x = "Alder",
+       y = "Netto indkomst"))
+
+# Gem plottet på din computer som en png fil (billede fil)
+ggsave("Scatterplot_indkomst_alder.png", 
+       scatterplot, width = 8, height = 6, units = "in", dpi = 300)
+```
+
+-   2d: Estimér modellen igen med alder som andengrads polynomium (model 3): $Indkomst_i = \alpha + \beta_1*Kvinde_i+beta_2*Alder_i+\beta_3*Alder{^2}_i+\epsilon_i$
+
+    ```{r}
+
+    model3 <- lm(net_indkomst ~ koen + poly(alder,2, raw=T), data=df)
+
+    (texreg::screenreg(list(model1, model2, model3), include.ci = FALSE)) 
+    ```
+
+    -   Vurdér koefficienterne for alder og alder\^2. Ser der ud til at være en signifikant sammenhæng mellem alder og indkomst nu?
+
+    -   Er der fortsat en signifikant sammenhæng mellem køn og indkomst, når der kontrolleres for alder?
+
+-   2e: Du skal nu estimere modellen igen, men denne gang også kontrollere for respondenternes uddannelsesniveau. Brug variablen "udd", der måler respondenternes uddannelsesniveau i kategorierne *Grundskole*, *Ungdoms-/erhvervsuddannelse, Mellemlang videregående,* og *Lang videregående uddannelse.*\
+    \
+    Variablen udd er gemt som en *ordered factor.* Start derfor med at gem den påny som en "normal" uordnet factor, ved at køre nedenstående kode:
+
+-   Estimér følgende model (4):\
+    \
+    $Indkomst_i = \alpha + \beta_1*Kvinde_i+\beta_2*Alder_i+\beta_3*Alder{^2}_i+\beta_4*Ungdomsuddannelse_i+\beta_5*+Mellemlangvideregående_i+\beta_6*Langvideregående\epsilon_i$
+
+    -   Hvad er fortolknignen af konstantleddet intercept?\
+        Den forventede indkomst for en mand på 0 år med grundskole\
+
+    -   Hvad er fortolknignen af parametret $\beta_1$ ? Er der fortsat en signifikant sammenhæng mellem køn og indkomst?\
+        Forskellen i indkomst mellem mænd og kvinder, når der kontrolleres for alder og uddannelse\
+
+    -   Hvad er fortolknignen af parametret $\beta_4$ ? Beskriv også statistisk signifikans\
+        Forskellen på gennemsnitsindkomsten mellem folk med grundskole og ungdomsuddannelse, når der kontrolleres for køn og alder\
+
+    -   Hvad er fortolknignen af parametret $\beta_5$ ? Beskriv også statistisk signifikans\
+        Forskellen på gennemsnitsindkomsten mellem folk med grundskole og mellemlang videregående uddannelse, når der kontrolleres for køn\
+
+    -   Hvad er fortolknignen af parametret $\beta_6$ ? Beskriv også statistisk signifikans
+
+    -   Hvad er den forventede indkomst for en kvinde på 25 år med grundskole som uddannelsesniveau?\
+        \
+
+    -   Hvad er den forventede indkomst for en mand på 40 år med lang videregående uddannelse som uddannelsesniveau?
+
+```{r message=F, warning=F}
+
+library(broom)
+
+#1
+model1 <- lm(net_indkomst ~ koen, data = df)
+tidy(model1)
+
+#2
+model2 <- lm(net_indkomst ~ koen + alder, data = df)
+tidy(model2)
+
+#3
+model3 <- lm(net_indkomst ~ koen + poly(alder, 2, raw=T), data = df)
+tidy(model3)
+
+# Mutate
+df <- df %>% 
+  mutate(
+    udd = factor(udd, ordered = FALSE),
+    alderq = alder*alder
+  )
+
+#4
+model4 <- lm(net_indkomst ~ koen + poly(alder, 2, raw=T) + udd, data = df)
+tidy(model4)
+
+#Print
+(texreg::screenreg(list(model1, model2, model3, model4), include.ci = FALSE)) 
+
+
+# (scatterplot <- ggplot(df, aes(x = alder, y = net_indkomst)) +
+#   geom_point() +  # Scatterplot of the data points
+#   geom_smooth(method = "lm", formula = y ~ poly(x, 2, raw=T), se = FALSE, color = "blue") +  # Add quadratic fitted line
+#     labs(x = "Alder",y = "Netto indkomst"))
+# 
+# model5 <- lm(net_indkomst ~ koen + alder +alderq + udd, data = df)
+# tidy(model5)
+
+```
+
+## Opgave 3: Forklaringskraft
+
+I har nu estimeret fire modeller med forskellige specifikationer og kontrolvariable. I denne opgave skal I sammenligne modellernes forklaringskraft.
+
+-   3a: beregn $R^2$ værdien for model 1-4.
+
+    -   Hvilken model har den største forklaringskraft?
+
+    -   Hvor meget af variationen i den afhængige variabel kan den bedste model forklare?\
+
+        ```{r warning=F, message=F}
+        glance(model1)
+        glance(model2)
+        glance(model3)
+        glance(model4)
+
+        (texreg::screenreg(list(model1, model2, model3, model4), include.ci = FALSE)) 
+
+        ```
+
+For at afgøre om forklaringskraften i model 4 er signifikant højere end i model 3 er det nødvendigt med en F-test mellem to modeller. I model 4 tilføjes nemlig hele tre dummyvariable på en gang, og det er dermed nødvendigt at teste, om de tilsammen tilføjer forklaringskraft til modellen.
+
+-   3b: Opstil hypoteser for en F-test mellem model 3 og model 4
+
+-   3c: Fortolk på F-testen. Er forklaringskraften signifikant højere i model 4 end i model 3? Hvilken betydning har dette for vores vurdering af uddannelsesniveau-dummierne som relevante kontrolvariable?
+
+    ```{r warning=F, message=F}
+
+    f_test <- anova(model3, model4)
+    print(f_test)
+    ```
+
+## Opgave 4: Heteroskedasticitet
+
+Hvis en regressionsmodel lider af heteroskedasticitet bliver vores p-værdier upålidelige. Heldigvis kan vi lave en grafisk inspektion, der giver os en idé om, hvorvidt der er heteroskedasticitet tilstede.
+
+-   5a: Lav et plot af residualerne mod de forudsagte værdier fra model 4 for at inspicere modellen for heteroskedasticitet:
+
+    ```{r message=F, warning=F, eval=F}
+
+    # Beregn forudsagte værdier
+    predicted <- predict(model4)
+
+    # Beregn residualer
+    residuals <- resid(model4)
+
+    # Lav plot dataframe
+    plot_data <- data.frame(predicted = predicted, residuals = residuals)
+
+    # Byg dit plot
+    (plot_heteroskedasticitet <- ggplot(plot_data, aes(x = predicted, y = residuals)) +
+      geom_point(shape = 20, color = "black") +  # Set point shape and color
+      labs(x = "Forudsagte værdier", 
+           y = "Residualer", 
+           title = "Plot for heteroskedasticitet") +  # Set axis labels and title
+      theme_minimal() +  # Apply a minimalistic theme
+      theme(plot.title = element_text(hjust = 0.5)))  # Center the title
+     
+    ggsave("Plot_heteroskedasticitet.png", 
+           plot_heteroskedasticitet, 
+           width = 8, height = 6, units = "in", dpi = 300)
+    ```
+
+-   5b: konkludér på plottet. Mener du, at der er heteroskedasticitet tilstede?
+
+-   5c: estimér model 4 med robuste standardfejl og sammenlign med modellen uden robuste standardfejl. Ændrer dine resultater sig?
+
+    ```{r message=F, warning=F, eval=F}
+    install.packages("estimatr")
+    library(estimatr)
+
+    model_robust <- lm_robust(net_indkomst ~ koen + poly(alder, 2) + udd, data = df)
+    tidy(model_robust)
+    ```
+
+## Opgave 5: Interaktioner
+
+Interaktionsvariable tillader os at se, om "effekten" af uafhængige variable varierer mellem forskellige grupper/værdier på andre uafhængige variable. I skal nu teste, om "effekten" af antal års uddannelse er forskelligt fra mænd til kvinder.
+
+-   5a: estimér model 5: $Indkomst = \alpha+\beta_1*Kvinde_i+\beta_2*Antalaarsuddannelse_i+\epsilon_i$
+
+    -   Er der en signifikant sammenhæng mellem køn og indkomst, når vi kontrollerer for antal års uddannelse
+
+    -   Er der en signifikant sammenhæng mellem antal års uddannelse og indkomst, når vi kontrollerer for køn?
+
+-   Estimér model 6 med en interaktionsvariabel mellem *Kvinde* og *Antal års uddannelse:\
+    *$Indkomst = \alpha+\beta_1*Kvinde_i+\beta_2*Antalaarsuddannelse_i+\beta_3*(Kvinde*Antalårsuddannelse)+\epsilon_i$
+
+    -   Konkludér på parameterestimatet $\beta_3$ . Er der forskel på effekten af antal års uddannelse på indkomst for mænd og kvinder?
+
+```{r message=F, warning=F, eval=F, include=F}
+
+model5 <- lm(net_indkomst ~ koen + udd_aar, data = df)
+tidy(model5)
+
+
+model6 <- lm(net_indkomst ~ koen*udd_aar, data = df)
+tidy(model6)
+```

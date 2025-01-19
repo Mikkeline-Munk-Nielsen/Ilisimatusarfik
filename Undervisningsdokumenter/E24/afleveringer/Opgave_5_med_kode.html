@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="dit navn">
+
+<title>Opgave 5 med svar</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Opgave_5_med_kode_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Opgave_5_med_kode_files/libs/quarto-html/quarto.js"></script>
+<script src="Opgave_5_med_kode_files/libs/quarto-html/popper.min.js"></script>
+<script src="Opgave_5_med_kode_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Opgave_5_med_kode_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Opgave_5_med_kode_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Opgave_5_med_kode_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Opgave_5_med_kode_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Opgave_5_med_kode_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Opgave_5_med_kode_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Opgave 5 med svar</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>dit navn </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduktion-og-data" class="level2">
+<h2 class="anchored" data-anchor-id="introduktion-og-data">Introduktion og data</h2>
+<p>I denne øvelse skal I arbejde videre med European Social Survey. I skal derfor ikke downloade et nyt datasæt.</p>
+<ul>
+<li><p><em>Skriv dit navn øverst i denne fil der hvor der står “[dit navn]”.</em></p></li>
+<li><p><em>Nedenfor er en række spørgsmål til forskellige variable i datasættet. Sæt dit svar ind der hvor der står “[dit svar]”.</em></p></li>
+<li><p><em>Når du er færdig med besvarelsen skal du klikke på ‘Render’ og uploade .html filen på Lectio under ‘Opgaver’.</em></p></li>
+</ul>
+</section>
+<section id="indlæs-data" class="level2">
+<h2 class="anchored" data-anchor-id="indlæs-data">Indlæs data</h2>
+<ul>
+<li>Start med at check, at både dette dokument og ESS datasættet ligger i samme mappe som dit R-project. Indlæs det med funktionen <code>readRDS</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>() <span class="co"># Denne kommando fortæller dig, hvilken mappe du arbejder i lige nu.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "C:/Users/mmn/Dropbox/Ilisimatusarfik/R/Ilisimatusarfik_Statistik_EO_F24"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"Data/ESS.rds"</span>) <span class="co"># Her hentes datasættet </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Brug <code>filter()</code> funktionen til at gemme et nyt datasæt, der kun indeholder besvarelser fra DK.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">filter</span>(df, land<span class="sc">==</span><span class="st">"DK"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>I skal arbejde med variablene net_indkomst, koen, udd_aar og ansaettelse_type. Kør nedenstående kode for at udvælge variablene og fjerne observationer med missingværdier (NA):</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">select</span>(net_indkomst, koen, udd_aar, ansaettelse_type) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sammenhæng-mellem-køn-og-indkomst" class="level2">
+<h2 class="anchored" data-anchor-id="sammenhæng-mellem-køn-og-indkomst">Sammenhæng mellem køn og indkomst</h2>
+<p>Over de næste opgaver skal I undersøge sammenhængen mellem køn og indkomst.</p>
+<section id="opgave-1-simpel-lineær-regression" class="level3">
+<h3 class="anchored" data-anchor-id="opgave-1-simpel-lineær-regression">Opgave 1: simpel lineær regression</h3>
+<ul>
+<li>Start med at lav en tabel over variablen koen (køn).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(koen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   koen   n   percent
+   Mand 617 0.5197978
+ Kvinde 570 0.4802022</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Skriv med ord, hvilket måleniveau du mener, at variablen koen bør være på</p>
+<p><em>En variabel der måler køn i to kategorier, mand og kvinde, bør have nominelt måleniveau, da det ikke er meningsfuldt at rangordne eller tale om meningsfulde afstande mellem kategorierne.</em></p></li>
+<li><p>Brug <code>glimpse()</code> funktionen til at undersøge, hvilken typen variablen koen er. Den skal være en factor for at R behandler dens kategorier som dummy variable.</p>
+<p><em>Glimpse fortæller, at variablen er en factor med to niveauer, mand og kvinde. Det er denne “klasse” vi gerne vil have til nominelle variable. Vi ved nu, at R automatisk vil behandle kategorierne som dummy variable, hvis variablen koen indkluderes i en regressionsmodel.</em></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df<span class="sc">$</span>koen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Factor w/ 2 levels "Mand","Kvinde": 1 1 2 1 2 1 2 1 1 2 ...</code></pre>
+</div>
+</div>
+<p>I skal nu undersøge sammenhængen mellem køn og indkomst med lineær regressionsanalyse.</p>
+<ul>
+<li>Kig på den nedenståene formel. Skriv med ord, hvilken variabel der er den afhængige, og hvilken variabel, der er den uafhængige:</li>
+</ul>
+<p><span class="math inline">\(Indkomst = \alpha+\beta*Kvinde+\epsilon\)</span></p>
+<p><em>Indkomst er den afhængige variabel og “Kvinde” er den uafhængige.</em></p>
+<ul>
+<li><p>Du skal nu estimere modellen for at teste, om der er en signifikant forskel på gennemsnitsindkomsten for mænd og kvinder i stikprøven. Start med at opstille hypoteser for hældningen på regressionskoefficienten beta:</p>
+<p><em>H0:</em> <span class="math inline">\(\beta =0\)</span> <em>, dvs. der er ikke nogen ændring i den afhængige variabel “indkomst”, når den uafhængige variabel “kvinde” ændrer sig.</em></p>
+<p><em>H1:</em> <span class="math inline">\(\beta \neq0\)</span> <em>, dvs. en ændring i den uafhængige variabel “Kvinde” skaber en ændring i den afhængige variabel “indkomst”.</em></p></li>
+<li><p>Indlæs pakken “broom”. Brug så <code>lm()</code> funktionen til at estimere modellen og <code>tidy()</code> eller <code>summary()</code> til at printe resultaterne.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> koen, <span class="at">data =</span> df)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   16978.      329.     51.7  1.01e-305
+2 koenKvinde    -1802.      474.     -3.80 1.52e-  4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = net_indkomst ~ koen, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-16977.7  -6175.2     22.3   5824.8  21824.8 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  16977.7      328.7   51.66  &lt; 2e-16 ***
+koenKvinde   -1802.5      474.3   -3.80 0.000152 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8164 on 1185 degrees of freedom
+Multiple R-squared:  0.01204,   Adjusted R-squared:  0.01121 
+F-statistic: 14.44 on 1 and 1185 DF,  p-value: 0.0001518</code></pre>
+</div>
+</div>
+<ul>
+<li>Hvad er fortolkningen af værdien for konstantleddet (alpha)?</li>
+</ul>
+<p><em>Konstantleddet alpha / intercept er den forventede værdi på den afhængige variabel indkomst, når alle uafhængige variable er lig 0. Dvs. Intercept beskriver den forventede indkomst for en person, der har 0 på den uafhængige variabel kvinde - med andre ord den forventede indkomst for mænd.</em></p>
+<ul>
+<li>Hvad er fortolkningen af værdien på koefficienten for “kvinde” (beta)?</li>
+</ul>
+<p><em>Betakoefficienten beskriver ændringen i den afhængige variabel indkomst for én enhedsændring i den uafhængige variabel Kvinde. Dvs. den beskriver den forventede ændring i indkomst, når variablen “kvinde” går fra 0 til 1 - med andre ord, når man går fra værdien “mand” til “kvinde”. Kvinder ser altså ud til gennemsnitligt at have en nettoindkomst på 1802 kroner mindre end mænd.</em></p>
+<ul>
+<li>Er der en statistisk signifikant sammenhæng mellem køn og indkomst?</li>
+</ul>
+<p><em>Vi kan aflæse den statistiske sammenhæng mellem dummyvariablen “kvinde” og “indkomst” ved at kigge på p-værdien. P-værdien er 0,0002 (brug summary til at printe den præcise værdi). Den er derfor under vores statistiske grænseværdi på 0,05, hvilket betyder at vi kan afvise nulhypotesen ovenfor. Der ser således ud til at være en statistisk signifikant sammenhæng mellem en køn og indkomst - kvinder ser ud til gennemsnitligt at tjene signifikant mindre end mænd (1802 kroner mindre).</em></p>
+<p>Nu skal du sætte koefficienterne fra dit resultat ind i formlen for regressionsmodellen for at udregne følgende:</p>
+<ul>
+<li>Hvad er den forventede indkomst for en mand?</li>
+</ul>
+<p><em>Regressionsligningen er givet ved:</em></p>
+<p><span class="math inline">\(Indkomst = \alpha+\beta*Kvinde+\epsilon\)</span></p>
+<p><em>Den forventede indkomst for en mand er således givet ved:</em></p>
+<p><span class="math inline">\(Indkomst _{mand}= 16978-1803*0=16978+0=16978\)</span></p>
+<p><em>Da mænd tager værdien 0 på den uafhængige dummyvariabel “kvinde”.</em></p>
+<ul>
+<li>Hvad er den forventede indkomst for en kvinde?</li>
+</ul>
+<p><em>Den forventede indkomst for en kvinde er givet ved:</em></p>
+<p><span class="math inline">\(Indkomst _{kvinde}= 16978-1803*1=16978-1803=15175\)</span></p>
+<p><em>Da kvinder tager værdien 1 på den uafhængige dummyvariabel “kvinde”.</em></p>
+<p>Prøv at udfør en t-test for at teste, om der er forskel på gennemsnitsindkomsten mellem mænd og kvinder.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(net_indkomst <span class="sc">~</span> koen, <span class="at">data=</span>df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  net_indkomst by koen
+t = 3.8244, df = 1177.5, p-value = 0.000138
+alternative hypothesis: true difference in means between group Mand and group Kvinde is not equal to 0
+95 percent confidence interval:
+  877.7695 2727.1779
+sample estimates:
+  mean in group Mand mean in group Kvinde 
+            16977.70             15175.23 </code></pre>
+</div>
+</div>
+<ul>
+<li><p>Sammenlign t-værdien og gennemsnit med den t-værdi du fik for koefficienten for kvinde i regressionen. Det er de præis samme resultater… hvorfor?</p>
+<p><em>Den lineære regressionsmodel har i virkeligheden bare lavet en t-test på betakoefficienten (for “kvinde” variablen). Det er altså præcis den samme test, som når vi tester forskel i gennemsnitsindkoms for mænd og kvinde med en t-test. Pointen med at bruge lineær regression er, at vi kan køre testen samtidig med at inkludere kontrolvariable (hint til næste opgave - uh!).</em></p></li>
+</ul>
+</section>
+<section id="opgave-2-multipel-lineær-regression-forlæns-modelsøgning" class="level3">
+<h3 class="anchored" data-anchor-id="opgave-2-multipel-lineær-regression-forlæns-modelsøgning">Opgave 2: multipel lineær regression (forlæns modelsøgning)</h3>
+<p>I har nu undersøgt sammenhængen mellem køn og indkomst i en simpel regressionsmodel. Nu skal i undersøge, om sammenhængen i virkeligheden kan forklares af andre ting.</p>
+<p>Nogle påstår, at lønforskellen på mænd og kvinder skyldes, at mænd gennemsnitligt set har mere uddannelse end kvinder. I skal derfor indføre variablen “udd_aar” som kontrolvariabel i jeres regressionsmodel for at teste, om sammenhængen mellem køn og indkomst kan forklares af, at mænd gennemsnitligt tager flere års uddannelse end kvinder.</p>
+<ul>
+<li><p>Variablen “udd_aar” måler, hvor mange års uddannelse respondenterne har. Skriv med ord, hvilket måleniveau du mener, at variablen bør have</p>
+<p><em>En variabel der måler antal års uddannelse må være intervalskaleret, da det giver mening at rangordne værdi og afstanden mellem værdierne er ensartede og meningsfulde. Man kan f.eks. godt have 12,5 års uddannelse og sige, at det er 0,5 år mere end 12 års uddannelse.</em></p></li>
+<li><p>Brug <code>glimpse()</code> funktionen til at undersøge, hvilken type variablen er. Den skal være en factor for at R behandler dens kategorier som dummy variable.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df<span class="sc">$</span>udd_aar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:1187] 9 35 13 25 13 16 2 14 4 13 ...
+ - attr(*, "label")= chr "Years of full-time education completed"
+ - attr(*, "format.stata")= chr "%4.0g"</code></pre>
+</div>
+</div>
+<p>I skal nu undersøge, om sammenhængen mellem køn og indkomst kan forklares af forskelle i antal års uddannelse.<br>
+<br>
+<span class="math inline">\(Indkomst = \alpha+\beta*Kvinde+\delta*aarsuddannelse+\epsilon\)</span></p>
+<ul>
+<li>Brug <code>lm()</code> funktionen til at estimere modellen MED kontrolvariablen og <code>tidy()</code> eller <code>summary()</code> til at printe resultaterne.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> koen <span class="sc">+</span> udd_aar, <span class="at">data =</span> df)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)   11506.     649.      17.7  1.59e-62
+2 koenKvinde    -1927.     457.      -4.22 2.68e- 5
+3 udd_aar         399.      41.3      9.65 2.80e-21</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = net_indkomst ~ koen + udd_aar, data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-25379.9  -5725.8    -90.8   5237.6  23297.1 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 11506.14     649.18  17.724  &lt; 2e-16 ***
+koenKvinde  -1926.81     457.02  -4.216 2.68e-05 ***
+udd_aar       398.91      41.32   9.654  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7864 on 1184 degrees of freedom
+Multiple R-squared:  0.08414,   Adjusted R-squared:  0.08259 
+F-statistic: 54.38 on 2 and 1184 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Beskriv med ord, hvad fortolkningen af værdien på konstantleddet er nu</p>
+<p><em>Konstantleddet alpha / intercept er den forventede værdi på den afhængige variabel indkomst, når alle uafhængige variable er lig 0. Intercept beskriver altså nu den forventede indkomst for en person, der har 0 på den uafhængige variabel “kvinde” OG den uafhængige variabel “antal års uddannelse”- med andre ord den forventede indkomst for mænd med 0 års uddannelse.</em></p></li>
+<li><p>Beskriv med ord, hvad fortolkningen af værdien på koefficienten for “udd_aar” er</p>
+<p><em>Deltakoefficienten beskriver ændringen i den afhængige variabel indkomst for én enhedsændring i den uafhængige variabel “antal års uddannelse”. Dvs. den beskriver den forventede ændring i indkomst, når variablen “antal års uddannelse” stiger med 1 - med andre ord, når man et års uddannelse mere. Det ser altså ud til, at man gennemsnitligt kan forvente en stigning i netto indkomst på 399 DKK, for hvert års ekstra uddannelse, som man tager.<br>
+<br>
+Da vi har at gøre med en multipel model nu (mere en én uafhængig variabel) er der dog en ekstra fortolkningsmæssig pointe. Deltakoefficienten beskriver ændringen i indkomst, når antal års uddannelse stiger med 1, når værdien på den anden uafhængige variabel “kvinde” holdes konstant. Med andre ord beskriver delta ændringen i indkomst, når antal års uddannelse stiger med 1 og der samtidig kontrolleres for forskelle mellem køn. I praksis svarer det til, at vi kigger på “effekten” af et års uddannelse, når vi kun sammenligner mænd med mænd og kvinder med kvinder. På den måde er vi sikre på, at den forskel i indkomst vi observerer, når vi skruer på antal års uddannelse, skyldes uddannelse og ikke underliggende forskelle mellem køn.</em></p></li>
+<li><p>Er der en signifikant sammenhæng mellem antal års uddannelse og indkomst?</p>
+<p><em>Vi kan aflæse den statistiske sammenhæng mellem variablen “antal års uddannelse” og “indkomst” ved at kigge på p-værdien for koefficienten tilhørende variablen “aar_udd”. Da p-værdien &lt; 0,0000 er den under vores statistiske grænseværdi på 0,05, hvilket betyder at vi kan afvise nulhypotesen om, at hældningen på deltakoefficienten er lig 0.<br>
+<br>
+Der ser således ud til at stadig være en statistisk signifikant sammenhæng mellem indkomst og køn. Desto flere års uddannelse man har, desto mere ser man ud til at tjene (399 DKK kroner mere for hvert år, i gennemsnit).</em></p></li>
+<li><p>Er der fortsat en signifikant forskel mellem koen og indkomst, selv når der kontrolleres for antal aars uddannelse?</p>
+<p><em>Vi kan aflæse den statistiske sammenhæng mellem variablen “kvinde” og “indkomst” ved at kigge på p-værdien for koefficienten tilhørende variablen “antal års uddannelse”. Da p-værdien &lt; 0,0000 er den under vores statistiske grænseværdi på 0,05, hvilket betyder at vi kan afvise nulhypotesen om, at hældningen på betakoefficienten er lig 0 (hypotesen her er stadig den samme).</em><br>
+<em>Der ser altså ud til at stadig være en statistisk signifikant sammenhæng mellem indkomst og køn. Kvinder ser faktisk ud til gennemsnitligt at tjene 1927 DKK mindre end mænd, når vi har kontrolleret for forskelle i antal års uddannelse. Vi undervurderede altså forskellen i den forrige model.</em></p></li>
+</ul>
+<p>Andre påstår, at lønforskellen på mænd og kvinder skyldes, at mænd har andre typer af ansættelse end kvinder har. I skal derfor indføre variablen “ansaettelse_type” som endnu en kontrolvariabel i jeres regressionsmodel for at teste, om sammenhængen mellem køn og indkomst kan forklares af forskelle i <em>ansættelsestyper</em>.</p>
+<ul>
+<li>Lav en tabel over variablen “ansættelses_type” for at undersøge, hvilke ansættelsestyper variablen indeholder.<br>
+<br>
+<em>Tabellen viser, at vi har tre kategorier “lønmodtager”, “selvstændig”, og “familie” (hjemmegående). Der er dog kun 4 observationer i kategorien “familie”. Dette gør den i princippet uegnet til statistisk analyse. Når vi har meget små antal observationer ved vi, at den statistiske usikkerhed bliver meget stor. I dette tilfælde indkluderer vi den dog for eksemplets skyld.</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(ansaettelse_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> ansaettelse_type    n    percent
+      Lønmodtager 1129 0.95113732
+      Selvstændig   54 0.04549284
+          Familie    4 0.00336984</code></pre>
+</div>
+</div>
+<ul>
+<li>Skriv med ord, hvilket måleniveau du mener, at variablen ansaettelse_type bør være på</li>
+</ul>
+<p>En variabel der måler ansættelsestyper såsom “lønmodtager”, “selvstændig”, og “familie” må være nominel, da kategorierne ikke kan rangordnes. Der er heller ikke meningsfuld afstand mellem dem.</p>
+<ul>
+<li>Brug <code>glimpse()</code> funktionen til at undersøge, hvilken typen variablen er.<br>
+<br>
+<em>Glimpse viser nedenfor, at vi har at gøre med en faktor med tre kategorier. Det vil sige, at R automatisk vil behandle kategorierne som dummy variable (hvilket er det eneste meningsfulde at gøre, hvis vi gerne vil inkludere en nominel variabel i en regressionsmodel).</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df<span class="sc">$</span>ansaettelse_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Factor w/ 3 levels "Lønmodtager",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+</div>
+<ul>
+<li><p>I skal nu undersøge om sammenhængen mellem køn og indkomst kan forklares af antal års uddannelse eller ansættelsestype. Kig på formlen nedenfor. Hvilken ansættelsestype ligger i referencekategorien?<br>
+<br>
+<span class="math inline">\(Indkomst = \alpha+\beta*Kvinde+\delta*aarsuddannelse+\tau_1Selvstændig+\tau2Familie+\epsilon\)</span></p>
+<p><em>Estimerer vi modellen, som den står skrevet i ligningen ovenfor, så er referencekategorien “lønmodtager”, da det er denne kategori, der udelades i modellen.</em></p></li>
+<li><p>Brug <code>lm()</code> funktionen til at estimere modellen med kontrolvariablerne aar_udd og ansaettelse_type. Brug så <code>tidy()</code> eller <code>summary()</code> til at printe resultaterne.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> koen <span class="sc">+</span> udd_aar <span class="sc">+</span> ansaettelse_type, <span class="at">data =</span> df)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  term                        estimate std.error statistic  p.value
+  &lt;chr&gt;                          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)                   11620.     652.     17.8   4.48e-63
+2 koenKvinde                    -1940.     459.     -4.23  2.57e- 5
+3 udd_aar                         396.      41.3     9.59  4.84e-21
+4 ansaettelse_typeSelvstændig    -984.    1100.     -0.894 3.71e- 1
+5 ansaettelse_typeFamilie       -7827.    3939.     -1.99  4.72e- 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = net_indkomst ~ koen + udd_aar + ansaettelse_type, 
+    data = df)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-25402.8  -5740.6     16.5   5311.3  23191.3 
+
+Coefficients:
+                            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                 11619.77     652.22  17.816  &lt; 2e-16 ***
+koenKvinde                  -1940.44     459.26  -4.225 2.57e-05 ***
+udd_aar                       396.31      41.31   9.594  &lt; 2e-16 ***
+ansaettelse_typeSelvstændig  -983.83    1100.27  -0.894   0.3714    
+ansaettelse_typeFamilie     -7826.67    3938.99  -1.987   0.0472 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7855 on 1182 degrees of freedom
+Multiple R-squared:  0.08778,   Adjusted R-squared:  0.08469 
+F-statistic: 28.43 on 4 and 1182 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Beskriv med ord, hvad fortolkningen af værdien på konstantleddet er nu</p>
+<p><em>Konstantleddet alpha / intercept er den forventede værdi på den afhængige variabel indkomst, når alle uafhængige variable er lig 0. Intercept beskriver altså nu den forventede indkomst for en person, der har 0 på den uafhængige variabel “kvinde” OG den uafhængige variabel “antal års uddannelse” OG den uafhængige variabel “Selvstændig” OG den uafhængige variabel “Familie”.<br>
+<br>
+Med andre ord beskriver konstantleddet nu den forventede indkomst for mænd med 0 års uddannelse, som er lønmodtagere. “Lønmodtager” bliver nemlig referencekategorien for de to dummyvariable “selvstændig” og familie”, da det er den kategori på variablen “ansættelsestype”, der bliver ekskluderet fra modellen. Da de tre kategorier er gensidigt udelukkede, er man per definition lønmodtager, hvis man har 0 på dummyvariablen “selvstændig” og dummyvariablen “familie”.</em></p></li>
+<li><p>Beskriv med ord, hvad fortolkningen af værdien på koefficienten for ansættelsestypen “Selvstændig” er</p>
+<p><em>Koefficienten for dummy variablen “selvstændig” beskriver den forventede forskel/ændring i den afhængige variabel “indkomst”, mellem referencekategorien “lønmodtager” og kategorien “selvstændig”, når der kontrolleres for køn og antal års uddannelse. Selvstændige ser altså ud til gennemsnitligt at tjene 984 DKK mindre end lønmodtagere. Da p-værdien er 0,37 (brug summary) er denne forskel dog insignifikant. Dette vender vi tilbage til…</em></p></li>
+<li><p>Beskriv med ord, hvad fortolkningen af værdien på koefficienten for ansættelsestypen “Familie” er</p>
+<p><em>Koefficienten for dummy variablen “familie” beskriver den forventede forskel/ændring i den afhængige variabel “indkomst”, mellem referencekategorien “lønmodtager” og kategorien “familie”, når der kontrolleres for køn og antal års uddannelse. Folk der arbejder i familien ser altså ud til gennemsnitligt at tjene 7827 DKK mindre end lønmodtagere. Da p-værdien er 0,047 (brug summary) er denne forskel faktisk signifikant på trods at det lave (!) antal observationer i denne kategori.</em><br>
+</p></li>
+<li><p>Hvad betyder det, at koefficienten for ansættelsestypen <em>Familie</em> er signifikant, men at koefficienten for ansættelsestypen <em>Selvstændig</em> ikke er? Skriv med ord.<br>
+<br>
+<em>Både kategorien “Selvstændig” og kategorien “Familie” beskriver forskellen i indkomst mellem referencekategorien “lønmodtager” til den pågældende kategori. Når koefficienten for dummyvariablen “selvstændig” ikke er signifikant, så betyder det, at der ikke ser ud til at være en statistisk signifikant forskel på indkomsten mellem lønmodtagere og selvstændige. Den forskel vi ser i koefficienten er altså ikke systematisk nok til at vi kan afvise nulhypotesen med et signifikansniveau på 5 %.</em></p>
+<p><em>Når koefficienten for dummyvariablen for “familie” er signifikant, betyder det derimod, at der er en statistisk signifikant forskel mellem lønmodtagere og hjemmegående. P-værdien fortæller os, at sandsynligheden for at observere de forskelle, som vi gør i vores stikprøve kun er 4,7 %, hvis nulhypotesen om ingen forskel er sand.</em> <em>Med andre ord er forskellene så systematiske, at vi med mindre en 5% risiko for type-I fejl kan sige, at forskellen kan genfindes i populationen.</em></p></li>
+<li><p>Er der fortsat en signifikant forskel mellem koen og indkomst, selv når der kontrolleres for antal aars uddannelse OG ansættelsestype? Skriv med ord.</p>
+<p><em>Da p-værdien tilhørende koefficienten “kvinde” er under vores kritiske grænse på 0,05 kan vi afvise nulhypotesen og konkludere, at kvinder gennemsnitligt tjener 1940 DKK mindre om måneden end mænd, når der kontrolleres for antal års uddannelse og ansættelsestype.</em></p></li>
+</ul>
+</section>
+<section id="opgave-3-forklaringskraft" class="level3">
+<h3 class="anchored" data-anchor-id="opgave-3-forklaringskraft">Opgave 3: forklaringskraft</h3>
+<p>I har nu undersøgt sammenhængen mellem køn og indkomst via. forlæns modelsøgning. I har estimeret tre forskelige modeller:</p>
+<p><em>Model 1: simpel model kun med afhængigh og uafhængig variabel (indkomst og køn)</em></p>
+<p><em>Model 2: multipel model med én kontrolvariabel (indkomst, køn og antal års uddannelse)</em></p>
+<p><em>Model 3: multipel model med to kontrolvariable (indkomst, køn, antal års uddannelse og ansættelsestype).</em></p>
+<p>I skal nu sammenligne de tre modeller for at afgøre, hvilken en der har den største forklaringskraft ved at sammenligne de tre modellers R^2 værdi.</p>
+<ul>
+<li><p>Skriv med ord, hvad R^2 værdien fortæller os</p>
+<p><em>R^2 værdien er et udtryk for, hvor meget af variationen i den afhængige variabel, de uafhængige variabler kan forklare. Der er altså et mål for, hvor god vores model er til at forklare variation/forskelle i vores afhængige variabel.</em></p></li>
+<li><p>Sammenlign dine modellers R^2 værdi med <code>glance()</code> funktionen og aflæs R^2 værdien</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic  p.value    df  logLik    AIC    BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1    0.0120        0.0112 8164.      14.4 0.000152     1 -12375. 24756. 24771.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic  p.value    df  logLik    AIC    BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1    0.0841        0.0826 7864.      54.4 2.54e-23     2 -12330. 24668. 24689.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic  p.value    df  logLik    AIC    BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1    0.0878        0.0847 7855.      28.4 1.39e-22     4 -12328. 24668. 24698.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Skriv med ord, hvilken model der har den højeste forklaringskraft?</p>
+<p><em>Model 3 har den højeste R^2 værdi og dermed forklaringskraft.</em></p></li>
+<li><p>Skriv med ord, hvor stor en del af variationen i indkomst kan den bedste model forklare?</p>
+<p><em>Model 3 kan forklare 8,8% af variationen i indkomst i vores stikprøve ved at tage højde for køn, antal års uddannelse og ansættelsestype.</em></p></li>
+</ul>
+</section>
+<section id="opgave-4-f-test-for-to-modeller" class="level3">
+<h3 class="anchored" data-anchor-id="opgave-4-f-test-for-to-modeller">Opgave 4: F-test for to modeller</h3>
+<p>Man kan sammenligne hvilke modeller der er bedst, ved at sammenligne deres forklaringskraft. Men der skal en hypotesetest til at afgøre, om én model forklarer signifikant mere end en anden.</p>
+<p>Når man sammenligner to modellers forklaringskraft, hvor der er mere end ét parameterestimat til forskel – som her hvor model 2 og 3 har både parameterestimatet for ansættelsestypen “familie” og ansættelsestypen “selvstændig” til forskel – skal man altid benytte F-testen. F-testen kan nemlig teste, om den forklaringskraft, som flere variable tilsammen tilføjer, er signifikant forskellig fra 0.</p>
+<ul>
+<li><p>Opstil hypoteserne for F-testen mellem mellem model 2 og model 3 med ord:<br>
+<br>
+<em>H0: model 3 forklarer ikke singifikant mere end model 2</em></p>
+<p><em>H1: model 3 forklarer signifikant mere end model 2.</em></p></li>
+<li><p>Kør en F-test mellem model 2 og model 3 med følgende kode:</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>f_test <span class="ot">&lt;-</span> <span class="fu">anova</span>(model2, model3)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(f_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: net_indkomst ~ koen + udd_aar
+Model 2: net_indkomst ~ koen + udd_aar + ansaettelse_type
+  Res.Df        RSS Df Sum of Sq      F  Pr(&gt;F)  
+1   1184 7.3213e+10                              
+2   1182 7.2922e+10  2 290983593 2.3583 0.09503 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Konkludér på testen. Forklarer model 3 signifikant mere end model 2?</p>
+<p><em>Da vi får en p-værdi på 0,09 overskrider den vores grænse på 0,05. Vi kan altså ikke afvise nulhypotesen og konkludere, at model 3forklarer signifikant mere end model 2. Dette giver mening, da forskellen på model 2 og model 3 kun var dummierne for ansættelsestype. Variablen “selvstændigh” var insignifikant og variablen “familie” kun lige akkurat signifikant (p=0,047). Vi kan med denne F-test konkludere, at de tilsammen ikke bidrager med nogen signifikant forklaringskraft til modellen, og de kan i princippet udelades.</em></p></li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

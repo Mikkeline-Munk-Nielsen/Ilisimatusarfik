@@ -1,0 +1,256 @@
+---
+title: "Øvelse 4"
+subtitle: "Kvantitativ metode og statistik"
+author: "dit navn"
+format: html
+editor: visual
+---
+
+## Introduktion og data
+
+I denne øvelse skal I prøve kræfter med et udsnit af European Social Survey (ESS), der gennemføres i 20 forskellige EU lande. European Social Survey er et samfundsvidenskabeligt forsøg på at kortlægge holdninger, overbevisninger og adfærdsmønstre hos forskellige befolkninger i Europa. Der findes mange runder med forskellige temaer, men alle spørger ind til grundlæggende socioøkonomiske variable: [European Social Survey](https://www.europeansocialsurvey.org/about-ess). I dag arbejder vi med land, køn, alder, uddannelse, indkomst og fagforeningsmedlemskab.
+
+*Der er flere variable i datasættet end du skal brug til at besvare øvelsen.*
+
+-   *Skriv dit navn øverst i denne fil der hvor der står “\[dit navn\]”.*
+
+-   *Nedenfor er en række spørgsmål til forskellige variable i datasættet. Sæt dit svar ind der hvor der står “\[dit svar\]”.*
+
+-   *Når du er færdig med besvarelsen skal du klikke på ‘Render’ og uploade .html filen på Lectio under ‘Opgaver’.*
+
+------------------------------------------------------------------------
+
+## Indlæs data
+
+Start med at download datasættet `ESS.rds` fra lectio og gem det sammen med denne fil i samme mappe som dit R projekt. Åben så opgaven her igen!
+
+Datasættet er i R-format. Indlæs det med funktionen `readRDS`:
+
+```{r warning=F}
+df <- readRDS("ESS.rds") # Her hentes datasættet
+```
+
+------------------------------------------------------------------------
+
+## Dataoverblik
+
+-   Brug `View()` til at få et overblik over datasættet og se hvilke spørgsmål variablene indeholder svar på.
+-   Datasættet indeholder surveydata fra flere forskellige lande. Lav en frekvenstabel over variablen "land" for at se hvilke.
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+library(janitor)
+
+
+```
+
+-   I denne omgang arbejder vi kun med Danmark. Brug `filter()` funktionen til at udvælge besvarelser fra DK. Brug derefter `select()` funktionen til at udvælge og gemme variablene *land,* *koen, alder, udd_aar, udd, net_indkomst,* og *mindske_ekon_ulig* i samme datasæt.
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+library(dplyr)
+
+```
+
+------------------------------------------------------------------------
+
+## Uddannelse
+
+-   Variablen *udd* måler respondentens uddannelse i fire niveauer. Hvilket måleniveau har denne variabel? Begrund din besvarelse.
+
+\[dit svar\]
+
+-   Kan man beregne median og middelværdi af denne variabel? Begrund din besvarelse.
+
+\[dit svar\]
+
+-   Lav en frekvenstabel med procent over uddannelsesvariablen. Hvilken kategori er den største?
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+
+```
+
+-   Visualisér uddannelsesniveauerne med et søjlediagram. Prøv om du kan sætte titler på x-aksen og y-aksen, og om du kan rotere teksten på x-aksen, så kategorierne ikke overlapper.
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+library(ggplot2)
+```
+
+------------------------------------------------------------------------
+
+## Indkomst
+
+-   Variablen net_indkomst måler respondenternes (netto) indkomst. Hvilket måleniveau har denne variabel?
+
+\[dit svar\]
+
+-   Beregn middelværdien for indkomst i stikprøven
+
+\[dit svar\]
+
+-   Find median indkomsten samt minimum og maximum værdi
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+summary(df$net_indkomst)
+```
+
+-   Forklar forskellen på middelværdien og medianen.
+
+\[dit svar\]
+
+-   Hvad vil det sige, at der ikke er særlig stor forskel på middelværdi og median?
+
+\[dit svar\]
+
+-   Beregn varians og standardafvigelsen. Forklar, hvad de to mål fortæller, og hvad forskellen er.
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+
+```
+
+-   Udregn konfidensintervaller for middelværdien på indkomstvariablen. Hvad fortæller konfidensintervallerne?
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+
+```
+
+Den gennemsnitlige nettoindkomst i Danmark var i 2019 ca. 20.000 DKK om måneden. Du skal nu udføre en t-test for at teste, om middelværdien i denne stikprøve er signifikant anderledes end denne forventede værdi (20.000 DKK).
+
+-   Opstil null-hypotese og alternativ hypotese for t-testen
+
+\[dit svar\]
+
+-   Udfør t-testen i R og konkludér på den. Er middelværdien i stikprøven signifikant anderledes fra gennemsnitsindkomsten i populationen i 2019?
+
+\[dit svar\]
+
+```{r}
+
+```
+
+------------------------------------------------------------------------
+
+## Fair indkomst?
+
+Variablen *unfair_indkomst* måler, hvorvidt respondenterne mener, at deres indkomst er uretfærdigt lav, retfærdig, eller uretfærdig høj.
+
+-   Lav en frekvenstabel over variablen. Er respondenterne overordnet set tilfredse med deres løn?
+
+\[dit svar\]
+
+```{r}
+
+df %>% tabyl(unfair_indkomst)
+```
+
+Du skal nu teste, om der er en ligelig fordeling af respondenter i hver svarkategori med en chi\^2 *goodness of fit* test.
+
+-   Hvad er null-hypotesen og alternativ hypotesen?
+
+\[dit svar\]\
+
+-   Udfør testen i R og konkludér på testen. Er der en ligelig fordeling af respondenter i hver svarkategori? Forklar hvorfor du konkluderer, som du gør.
+
+\[dit svar\]
+
+```{r}
+
+
+```
+
+------------------------------------------------------------------------
+
+## Holdningen til økonomisk ulighed
+
+Variablen *mindske_ekon_ulig* måler, hvor enig respondenten er i, at regeringen (i DK) burde gøre tiltag for at mindske den økonomiske ulighed i landet (på en fem-punkt likert skala: *meget uenig* til *meget enig*).
+
+-   Hvilket måleniveau er variablen? Begrund dit svar.
+
+\[dit svar\]
+
+-   Lav en frekvenstabel over variablen. Mener danskerne, at regeringen bør gøre noget ved den økonomiske ulighed?
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+
+```
+
+------------------------------------------------------------------------
+
+## Korrelation
+
+-   Hvad vil det sige at der er en korrelation mellem to variable?
+
+\[dit svar\]
+
+------------------------------------------------------------------------
+
+## Uddannelse og økonomisk ulighed
+
+Variablene *udd* og *fair_ekon_ulighed* er begge ordinalskalerede.
+
+-   Lav en krydstabel over de to variable. Ser der ud til at være forskel i holdningen til økonomisk ulighed blandt folk med forskellige uddannelsesniveauer?
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+
+```
+
+-   Tilføj totaler til din krydstabel (både rækker og kolonner)
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+
+```
+
+-   Nogle gange er det lettere at fortolke tabeller med procenter fremfor frekvenser. Tilføj procenter til din krydstabel. Fortolk tabellen igen. Ser der ud til at være en sammenhæng mellem uddannelsesniveau og holdningen til økonomisk ulighed?
+
+\[dit svar\]
+
+```{r warning=FALSE, message=FALSE}
+
+```
+
+-   Udregn en passened korrelationskoeficient mellem uddannelse og holdningen til økonomisk ulighed. Hvilken koeficient passer til variablenes måleniveauer?
+
+```{r warning=FALSE, message=FALSE}
+
+```
+
+-   Hvad fortæller korrelationskoefficienten dig? Ser der ud til at være en sammenhæng mellem de to variable? Og er den i så fald positiv eller negativ?
+
+\[dit svar\]
+
+-   Du skal nu lave en chi i anden-test for uafhængighed for formelt at teste, om der er en sammenhæng. Hvad nulhypotesen og alternativ hypotesen i en chi\^2 test for uafhængighed?
+
+\[dit svar\]
+
+-   Gennemfør og konkludér på testen. Er der en signifikant sammenhæng mellem uddannelsesniveau og holdningen til økonomisk ulighed?
+
+\[dit svar\]
+
+EKSTRAOPGAVE TIL DE R-ENTUSIASTISKE
+
+------------------------------------------------------------------------
+
+-   Lav et søjlediagram til at visualisere fordelingen mellem uddannelsesniveau og holdningen til økonomisk ulighed. Tilføj `geom_bar(position = "fill")` for at få procenter i stedet for frekvenser på y-aksen.
+
+```{r warning=FALSE, message=FALSE}
+
+
+```

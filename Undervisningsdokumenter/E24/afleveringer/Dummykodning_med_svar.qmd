@@ -1,0 +1,175 @@
+---
+title: "Dummykodning i R"
+format: pdf
+editor: visual
+---
+
+## Dummykodning i R
+
+I denne lille undervisningnote skal I lære at omkode diskrete variable til dummy variable. Princippet med dummier er, at man konstruerer en binær variabel for hver kategori på en disktret variabel. Disse binære variable tager enten værdien 0 eller 1.
+
+En variabel for køn med to kategorier, *Mand* og *Kvinde*, kodes til to nye variable:
+
+-   Mand
+
+-   Kvinde
+
+Respondenter med værdien "Kvinde" på den oprindelige variabel køn, tager værdien 1 på den nye variable *Kvinde.* Mænd tager værdien 0, og bliver dermed *referencekategori*. Det kaldes en referencekategori, fordi det er denne kategori, man måler ændringer fra i $\beta$ koefficienten på dummy–variablen:
+
+$Indkomst = \alpha+\beta*Kvinde+\epsilon$
+
+$\beta$ måler altid ændringen i Y, når den tilhørende afhængige variabel stiger med 1. I tilfældet med dummier, måler den ændringen på Y, når variablen *Kvinde* går fra 0 (mand) til 1 (kvinde).
+
+$\alpha$ måler altid den forventede værdi på Y, når alle uafhængige variable = 0. Når variablen Kvinde = 0, må det nødvendigvis betyde, at respondenten er en mand. Dermed estimere $\alpha$ den forventede værdi på Y for referencekategorien *Mand*.
+
+I denne øvelse skal I både arbejde med dummier som factors og "håndkode" dem.
+
+## Indlæs data
+
+-   Start med at check, at både dette dokument og ESS datasættet ligger i samme mappe som dit R-project. Indlæs det med funktionen `readRDS`:
+
+```{r warning=F, message=F}
+
+getwd() # Denne kommando fortæller dig, hvilken mappe du arbejder i lige nu.  
+
+df <- readRDS("Data/ESS.rds") # Her hentes datasættet. Skriv din egen sti.
+```
+
+-   Brug `filter()` funktionen til at gemme et nyt datasæt, der kun indeholder besvarelser fra DK.
+-   Brug så `select()` til at udvælge variablene net_indkomst, koen, udd_aar og ansaettelse_type.
+-   Brug `na.omit()` til at fjerne alle observationer i datasættet, der har missing (`NA`) på en eller flere af de udvalgte variable.
+
+```{r warning=F, message=F}
+
+library(tidyverse)  
+
+df <- filter(df, land=="DK") 
+
+df <- df %>% select(net_indkomst, koen, udd_aar, ansaettelse_type) %>% na.omit()
+```
+
+## Dummier som factors
+
+Hvis en variabel er indlæst i R som en factor, vil R automatisk behandle dens kategorier som en dummy-variable, når den inkluderes i en regressionsmodel. Hvis man ikke tager stilling til, hvilken kategori, der skal være referencekategori, vælger R selv. Men man *kan* selv gå ind og definere, hvilken kategori, der skal være referencekategori.
+
+Før vi laver dummier af en diskret variabel, skal vi danne os et overblik over dens kategorier. Start derfor med at lave en tabel over kategorierne på variablen køn:
+
+```{r warning=F, message=F}
+
+library(janitor)
+df %>% tabyl(koen)
+```
+
+Variablen har to kategorier, "Mand" og "Kvinde". Dernæst skal vi tjekke, hvilken type variablen er lagret som i datasættet:
+
+```{r warning=F, message=F}
+
+glimpse(df$koen)
+
+```
+
+Glimpse fortæller os, at variablen er gemt som en "factor" med to levels, "Mand" og "Kvinde". Vi ved, at R automatisk behandler factors som dummier, når de inkluderes i lineær regression.
+
+Glimpse fortæller os dog ikke, hvilken en af de to levels (kategorier), der vil blive som *referencekategori*. Men det kan du se med funktionen `contrasts()`:
+
+```{r warning=F, message=F}
+
+contrasts(df$koen)
+```
+
+Contrast fortæller dig, at kategorien "mand" vil tage værdien 0 kategorien "kvinde" vil tage værdien 1, når variablen koen inkluderes i regressionsmodellen. Dermed vil $\beta$ måle den gennemsnitlige ændring i Y (indkomst), når variablen går fra 0 (mand) til 1 (kvinde). Prøv selv at køre regressionen med variablen koen som uafhængig variablen og indkomst som afhængig variabel:
+
+```{r warning=F, message=F}
+library(broom)
+
+model1 <- lm(net_indkomst ~ koen, data = df)
+tidy(model1)
+```
+
+-   rækken *koenKvinde* viser nu estimatet $\beta=-1869$ . Værdien er ændringen i Y, når man går fra kategorien mand (referencekategorien) til værdien kvinde.
+
+-   rækken *intercept* viser estimatet $\alpha=16893,5$ . Værdien er den forventede værdi på Y for referencekategorien (mand).
+
+Hvis vi i stedet vil definere referencekategorien som værende *Kvinde* og måle ændringen i indkomst, når man går fra at være kvinde til at være mand, så kan man bruge funktionen `relevel()`. Her kan vi bestemme, hvilken kategori, der skal være referencekategorien. Nedenstående kode ændrer referencekategorien til *Kvinde*:
+
+```{r warning=F, message=F}
+
+df$koen <- relevel(df$koen, ref = "Kvinde")
+```
+
+Tjek efter med funktionen `contrast()` om det virkede:
+
+```{r warning=F, message=F}
+
+contrasts(df$koen)
+```
+
+Estimér nu modellen igen:
+
+```{r warning=F, message=F}
+model2 <- lm(net_indkomst ~ koen, data = df)
+tidy(model2)
+```
+
+-   rækken *koenMand* viser nu estimatet $\beta=1869$ . Værdien er ændringen i Y, når man går fra kategorien Kvinde(referencekategorien) til værdien Mand.
+
+-   rækken *intercept* viser estimatet $\alpha=15024$ . Værdien er den forventede værdi på Y for referencekategorien (kvinde).
+
+## Kode dummier i hånden
+
+Hvis man ikke gider rode med factors kan man i stedet kode variablene op i hånden. Her konstruerer vi simpelthen nye variable for hver kategori på den oprindelige variabel, og tilføjer dem til datasættet.
+
+Vi bruger funktionen `mutate()` til omkode og/eller at skabe nye variable og tilføje dem til datasættet. Funktionen bruges typisk i samspil med logiske funktioner. Her møder I funktionen `ifelse`.
+
+Koden nedenfor skal læses således:
+
+-   tag datasættet `df` og pipe den over i `mutate` funktionen
+
+```{r warning=F, message=F}
+
+(df <- df %>% mutate(
+              mand = ifelse(koen=="Mand",1,0),
+              kvinde = ifelse(koen=="Kvinde",1,0)
+))
+```
+
+Undersøg variablene mand og kvinde, som nu er blevet tilføjet til datasættet. Har de observationer, der tager værdien "Mand" på variablen koen også værdien 1 på variablen mand? Og omvendt for kvinder?
+
+Estimer regressionsmodellen igen, men vælg nu, om du vil inkludere variablen *mand* eller *kvinde.* Her inkluderes variablen *kvinde*:
+
+```{r warning=F, message=F}
+
+model3 <- lm(net_indkomst ~ kvinde, data = df)
+tidy(model3)
+
+```
+
+Intercepten beskriver nu den forventede indkomst for referencekategorien *mand* - med andre ord dem, der har 0 på variablen *kvinde.*
+
+Koefficienten for den uafhænige variabel kvinde, beskriver nu ændringen i den afhængige variabel Y (indkomst), når man går fra 0 til 1 på uafhænige variabel kvinde. Altså, den gennemsnitlige forskel/ændring i indkomst mellem mænd (referencekategori) og kvinder.
+
+## Prøv selv
+
+Prøv nu selv at omkod variablen "*ansaettelse_type"* til dummy variable. Følg fremgangsmåden beskrevet ovenfor. Vælg derefter en referencekategori og inkludér de andre dummier som kontrolvariable i regressionsmodellen:
+
+```{r warning=F, message=F}
+
+df %>% tabyl(ansaettelse_type)
+
+
+(df <- df %>% mutate(
+              loenmodtager = ifelse(ansaettelse_type=="Lønmodtager",1,0),
+              selvstaendig = ifelse(ansaettelse_type=="Selvstændig",1,0),
+              familie = ifelse(ansaettelse_type=="Familie",1,0)
+))
+
+
+
+model4 <- lm(net_indkomst ~ kvinde + selvstaendig + familie, data = df)
+tidy(model4)
+summary(model4)
+```
+
+-   Fortolk koefficienten for variablen kvinde (eller mand, hvis du har valgt denne). Beskriv med dine egne ord, hvad den måler
+
+-   Fortolk koefficienterne for dummierne. Beskriv med dine egne ord, hvad de måler

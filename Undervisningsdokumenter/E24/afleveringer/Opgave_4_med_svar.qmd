@@ -1,0 +1,334 @@
+---
+title: "Øvelse 4 - med svar"
+subtitle: "Kvantitativ metode og statistik"
+format: pdf
+editor: visual
+---
+
+## Introduktion og data
+
+I denne øvelse skal I prøve kræfter med et udsnit af European Social Survey (ESS), der gennemføres i 20 forskellige EU lande. European Social Survey er et samfundsvidenskabeligt forsøg på at kortlægge holdninger, overbevisninger og adfærdsmønstre hos forskellige befolkninger i Europa. Der findes mange runder med forskellige temaer, men alle spørger ind til grundlæggende socioøkonomiske variable: [European Social Survey](https://www.europeansocialsurvey.org/about-ess). I dag arbejder vi med land, køn, alder, uddannelse, indkomst og fagforeningsmedlemskab.
+
+*Der er flere variable i datasættet end du skal brug til at besvare øvelsen.*
+
+-   *Skriv dit navn øverst i denne fil der hvor der står “\[dit navn\]”.*
+
+-   *Nedenfor er en række spørgsmål til forskellige variable i datasættet. Sæt dit svar ind der hvor der står “\[dit svar\]”.*
+
+-   *Når du er færdig med besvarelsen skal du klikke på ‘Render’ og upload filen på Lectio under ‘Opgaver’.*
+
+------------------------------------------------------------------------
+
+## Indlæs data
+
+Start med at download datasættet fra lectio og gem det i samme mappe som dit R projekt. Lav alternativt en mappe i din projektmappe, som du kunne kalde "Data" og gem datasættet der. Åben så projektet!
+
+Datasættet er i R-format. Indlæs det med funktionen `readRDS`:
+
+```{r warning=F}
+df <- readRDS("Data/ESS.rds") 
+
+```
+
+Brug `View()` til at få et overblik over datasættet og se hvilke spørgsmål variablene indeholder svar på.
+
+------------------------------------------------------------------------
+
+## Dataoverblik
+
+-   Datasættet indeholder surveydata fra flere forskellige lande. Lav en frekvenstabel over variablen "land" for at se hvilke.
+
+```{r warning=FALSE, message=FALSE}
+library(janitor)
+
+df %>% tabyl(land)
+
+```
+
+-   I denne omgang arbejder vi kun med Danmark. Brug `filter()` funktionen til at gemme et nyt datasæt, der kun indeholder besvarelser fra DK. Brug derefter `select()` funktionen til at udvælge og gemme variablene *land,* *koen, alder, udd_aar, udd_ISCED, net_indkomst,* og *mindske_ekon_ulig* i samme datasæt.
+
+```{r warning=FALSE, message=FALSE}
+library(dplyr)
+
+df <- filter(df, land=="DK")
+df <- df %>% 
+  select(land, koen, alder, udd_aar, udd, net_indkomst, 
+         mindske_ekon_ulig, fair_ekon_ulighed, unfair_indkomst)
+```
+
+\pagebreak
+
+------------------------------------------------------------------------
+
+## Uddannelse
+
+-   Variablen *udd* måler respondentens uddannelse i fire niveauer. Hvilket måleniveau har denne variabel? Begrund din besvarelse.
+
+    *En variabel der måler uddannelse i niveauer vil være have måleniveuaet ordinal, da uddannelsesniveauer kan rangordnes, mens afstanden mellem niveauer ikke er meningsfulde.*\
+
+-   Kan man beregne median og middelværdi af denne variabel? Begrund din besvarelse.
+
+    *Det er ikke meningsfuldt at udregne middelværdi på en variabel af ordinalt måleniveau. Når vi ikke kender afstanden mellem værdierne på variablen er det nemlig ikke meningsfuldt at addere og dividere. Vi kan derimod godt finde medianen, da vi stadig kan rangordne værdier. Dermed kan observationerne stadig sorteres fra mininum til maksimum værdi på variablen, og vi kan finde den midterste værdi = medianen. Typetallet/modus er også meningsfuldt.*\
+
+-   Lav en frekvenstabel med procent over uddannelsesvariablen. Hvor mange procent er der i hver uddannelseskategori? Hvilken kategori er den største?
+
+    *Den største uddannelseskategori er mellemlang videregående uddannelse, da hele 533 af observationerne i datasættet ligger i denne uddannelseskategori. Det svarer til 34 procent.*
+
+```{r warning=FALSE, message=FALSE}
+tabyl(df$udd)
+```
+
+-   Visualisér uddannelsesniveauerne med et søjlediagram. Prøv om du kan sætte titler på x-aksen og y-aksen, og om du kan rotere teksten på x-aksen, så kategorierne ikke overlapper.
+
+```{r warning=FALSE, message=FALSE}
+library(ggplot2)
+ggplot(df, aes(udd)) + 
+  geom_bar() + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = "") +  
+  labs(y = "Frekvens")
+```
+
+------------------------------------------------------------------------
+
+## Indkomst
+
+-   Variablen net_indkomst måler respondenternes (netto) indkomst. Hvilket måleniveau har denne variabel?\
+    \
+    *Nettoindkomst er intervalskaleret, da der er den ens afstand mellem værdierne på variablen. Det giver derfor også mening at addere, trække fra, gange og dividere med denne variabel.*
+
+-   Beregn middelværdien for indkomst i stikprøven\
+    \
+    *Middelværdien for indkomst i stikprøven er 15991 DKK. Det er altså den gennemsnitlige indkomst for hele stikprøven.*
+
+```{r warning=FALSE, message=FALSE}
+summary(df$net_indkomst)
+```
+
+-   Find median indkomsten samt minimum og maximum værdi
+
+    *Medianen for indkomst er 16000. Dette er altså den midterste værdi i stikprøven, når observationerne sorteres fra laveste til højesteværdi på variablen indkomst.*
+
+-   Forklar forskellen på middelværdien og medianen.
+
+    *Middelværdien findes ved at summe alle værdier på indkomstvariablen i stikprøven og dividere med antallet af observationer. Den giver os dermed et udregnet gennemsnit. Medianen er den værdi på indkomstvariablen, som deler stikprøven i to lige store dele. Det er altså værdien på den observation, der har den "midterste" indkomst og er dermed en faktisk observeret værdi.*
+
+-   Hvad vil det sige, at der ikke er særlig stor forskel på middelværdi og median?
+
+    *Det vil sige, at der ikke ser ud til at være nogle ekstreme værdier i bunden eller toppen af indkomstfordelingen, som trækker i vores gennemsnit op eller ned. Indkomstfordelingen ser med andre ord ikke ud til at være særligt skævvredet til den ene eller anden side. Medianen er ikke følsom overfor ekstreme værdier, da det alligevel altid er værdien for den midterste person i indkomstfordelingen. Men det er gennemsnittet.*
+
+-   Visualiser indkomstfordelingen med et boxplot for at undersøge indkomstfordelingen nærmere.
+
+    \[dit svar\]
+
+    ```{r warning=FALSE, message=FALSE}
+    library(ggplot2)
+
+    ggplot(df) +
+      geom_boxplot(aes(y = net_indkomst))
+    ```
+
+-   Hvad er minimumsværdien, først kvartil, median, andet kvartil, og maks værdi på boksplottet ca.
+
+    *Minimumsværdien er at finde i bunden af linjen på boksplottet. Den ligger på 0. Første kvartil er bunden af kassen (box) i plottet. Det ligger lidt under 10000 kr. Medianen er midten af kassen, den tykke linje. Medianen ligger omkring 16000 kr. Tredje kvartil er toppen af kassen og ligger på omkring 23000 kr. Max er toppen af linjen over kassen. Den ligger omkring 38000 kr.*\
+
+-   Beregn varians og standardafvigelsen. Forklar, hvad de to mål fortæller, og hvad forskellen er.\
+
+    ```{r warning=FALSE, message=FALSE}
+    var(df$net_indkomst, na.rm = TRUE) 
+    sd(df$net_indkomst, na.rm = TRUE)
+    ```
+
+    *Varians og standardafvigelse er begge mål for spredning. De siger noget om, hvor langt observationerne faktisk ligger spredt fra gennemsnittet. Variansen er gennemsnittet af værdiernes kvadrerede afstand til gennemsnittet. Standardafvigelsen er kvadratroden af gennemsnittet. De er derfor forskellige mål for den samme spredning. Standardafvigelsen viser dog den gennemsnitlige afstand til gennemsnittet i stikprøven på samme skala som den oprindelige variabel (og ikke kvardreret) i modsætning til variansen. Derfor er det lettere at forholde sig til standardafvigelsen.*
+
+-   Udregn konfidensintervaller for middelværdien på indkomstvariablen. Hvad fortæller konfidensintervallerne?
+
+    *Konfidensintervallerne giver os et bud på et interval, hvor det sande gennemsnit for den population stikprøven er trukket fra med 95 % sandsynlighed ligger (DK). Fordi vi arbejder med en stikprøve udregner vi også et stikprøvegennemsnit, som altid vil være behæftet med en vis statistisk usikkerhed. Vi vil sandsynligvis få forskellige stikprøvegennemsnit, hver gang vi trækker en ny stikprøve. Derfor er det hjæpsomt at udregne konfidensintervaller, så vi kan udtale os om denne usikkerhed. Vi kan nu sige, at - givet vores stikprøve at simpel tilfældigt udtrukket, repræsentativ og har en fornuftig størrelse - så vil gennemsnittet i populationen (DK) med 95 % sandsynlighed i hvert fald ligge mellem 15526,52 og 16464,54 kr. Desto større vores stikprøve er, desto mindre konfidensintervallerne og dermed usikkerheden på vores stikprøvegennemsnit blive.*
+
+    ```{r warning=FALSE, message=FALSE}
+    t.test(df$net_indkomst)
+    ```
+
+Den gennemsnitlige nettoindkomst i Danmark var i 2019 ca. 20.000 DKK om måneden. Du skal nu udføre en t-test for at teste, om middelværdien i denne stikprøve er signifikant anderledes end denne forventede værdi (20.000 DKK).
+
+-   Opstil null-hypotese og alternativ hypotese for t-testen\
+    \
+    *Nulhypotesen i en t-test af et stikprøvegennemsnit mod en forventet værdi på 20.000 er, at stikprøvegennemsnittet ikke er signifikant forskelligt fra den forventede værdi 20.000:*
+
+    ***H0:** stikprøvegennemsnittet er ikke signifikant forskelligt fra 20.000*
+
+    *Alternativhypotesen er derimod, at stikprøvegennemsnittet er signifikant forskelligt fra den forventede værdi:*
+
+    ***H1**: stikprøvegennemsnittet er signifikant forskelligt fra den forventede værdi 20.000*
+
+-   Udfør t-testen i R og konkludér på den. Er middelværdien i stikprøven signifikant anderledes fra gennemsnitsindkomsten i populationen i 2019?
+
+    *T-testen returnerer en p-værdi på mindre end 0,05. Vi må derfor forkaste nulhypotesen og konkludere, at gennemsnitsindkomsten i denne stikprøve er signifikant forskelligt fra den forventede værdi 20.000. Signifikant forskellig betyder, at der er mindre end 5 % sandsynlighed for at observere det stikprøvegennemsnit, som vi har observeret (eller et gennemsnit der lå endnu længere fra de 20.000), hvis nulhypotesen var sand.*
+
+    ```{r}
+    t.test(df$net_indkomst, mu = 20000)
+    ```
+
+------------------------------------------------------------------------
+
+## Fair indkomst?
+
+Variablen *unfair_indkomst* måler, hvorvidt respondenterne mener, at deres indkomst er uretfærdigt lav, retfærdig, eller uretfærdig høj.
+
+-   Lav en frekvenstabel over variablen. Er respondenterne overordnet set tilfredse med deres løn?
+
+    *Størstedelen af respondenterne (56 %) mener, at deres indkomst er retfærdig. Der er dog stadig 30 %, der mener, at den er for lav, og ca. 4 %, der mener, at den er for høj (10 % har ikke svaret). Der er derfor en betragtelig del af stikprøven, der ikke mener, at deres indkomst er retfærdig.*
+
+```{r}
+
+df %>% tabyl(unfair_indkomst)
+```
+
+Du skal nu teste, om der er en ligelig fordeling af respondenter i hver uddannelseskategori med en $chi^2$ *goodness of fit* test.
+
+-   Hvad er null-hypotesen og alternativ hypotesen?\
+    \
+    *I en univariat* $chi^2$ *test tester vi, om fordelingen på en kategorisk variabel (nominel/ordinal) passer med en forventet fordeling (deraf navnet goodness of fit). Vi skal nu teste, om der er en ligelig fordeling af respondenter i hver kategori på variablen "unfair_indkomst". Vores nulhypotese er derfor, at der er en ligelig fordeling af respondenterne i hver kategori på variablen:*
+
+    ***H0:** der er en ligelig fordeling af respondenterne i hver kategori på variablen:*
+
+    *Alternativ hypotesen er derimod, at der ikke er en ligelig fordeling af respondenterne i hver kategori på variablen:*
+
+    ***H1:** der er ikke en lige fordeling af respondenterne i hver kategori på variablen*\
+
+-   Udfør testen i R og konkludér på testen. Er der en ligelig fordeling af respondenter i uddannelseskategorierne? Forklar hvorfor du konkluderer, som du gør.\
+    \
+    $Chi^2$ *testen returnerer en p-værdi på mindre end 0,05. Vi forkaster derfor nulhypotesen og konkluderer, at der ikke er en ligelig fordeling af respondenterne i hver kategori på variablen.*\
+
+```{r}
+chisq.test(summary(df$unfair_indkomst))
+```
+
+------------------------------------------------------------------------
+
+## Holdningen til økonomisk ulighed
+
+Variablen *mindske_ekon_ulig* måler, hvor enig respondenten er i, at regeringen (i DK) burde gøre tiltag for at mindske den økonomiske ulighed i landet (på en fem-punkt likert skala: *meget uenig* til *meget enig*).
+
+-   Hvilket måleniveau er variablen? Begrund dit svar.
+
+    *På en likert-skala kan svarene rangordnes, men afstanden imellem dem kan ikke nødvendigvis siges at være den samme. Derfor er det ordinalt måleniveau.*
+
+-   Lav en frekvenstabel over variablen. Mener danskerne, at regeringen bør gøre noget ved den økonomiske ulighed?\
+    \
+    *Der er næsten lige mange i hver kategori. Dette tyder på, at der er stor uenighed i den danske befolkning på spørgsmålet om, hvorvidt regeringen bør gøre noget ved den økonomiske ulighed.*
+
+    ```{r warning=FALSE, message=FALSE}
+    tabyl(df$mindske_ekon_ulig)
+    ```
+
+------------------------------------------------------------------------
+
+## Korrelation
+
+-   Hvad vil det sige at der er en korrelation mellem to variable?
+
+    *Korrelation vil sige, at der er en sammenhæng mellem to variable. Når den ene går op eller ned, går den anden også op eller ned. Dette betyder dog ikke nødvendigvis, at der er tale om en årsagssammenhæng. Korrelation kan skyldes tilfældighed eller spuriøse sammenhænge, hvor andre variable spøger i baggrunden og skaber hele eller dele af korrelationen.*
+
+------------------------------------------------------------------------
+
+## Uddannelse og økonomisk ulighed
+
+Variablene *udd* og *fair_ekon_ulighed* er begge ordinalskalerede.
+
+-   Lav en krydstabel over de to variable. Hvordan fordeler holdningen til økonomisk ulighed sig i forhold til uddannelsesniveau?
+
+    *Der er svært at aflæse, fordi der er et forskelligt antal observationer i hver uddannelseskategori. Men det tyder på, at dem med højest uddannelse mener, at den økonomiske ulighed er mest uretfærdig (høj).*
+
+```{r warning=FALSE, message=FALSE}
+library(janitor)
+
+df %>%
+  na.omit() %>% # udeluk missing værdier
+  tabyl(udd, fair_ekon_ulighed)
+```
+
+-   Tilføj totaler til din krydstabel (både rækker og kolonner)
+
+```{r warning=FALSE, message=FALSE}
+df %>%
+  na.omit() %>% # udeluk missing værdier
+  tabyl(udd, fair_ekon_ulighed) %>% 
+  adorn_totals(where = c("row", "col"))
+```
+
+-   Nogle gange er det lettere at fortolke tabeller med procenter fremfor frekvenser. Tilføj procenter til din krydstabel. Fortolk tabellen igen. Ser der ud til at være en sammenhæng mellem uddannelsesniveau og holdningen til økonomisk ulighed?
+
+    \
+    *Det er lettere at aflæse sammenhængen nu. Dem med højest uddannelse mener i højere grad end dem med lavere uddanenlse, at den økonomiske ulighed er uretfærdig høj.*
+
+```{r warning=FALSE, message=FALSE}
+df %>%
+  na.omit() %>% # udeluk missing værdier
+  tabyl(udd, fair_ekon_ulighed) %>% 
+  adorn_totals(where = c("row", "col")) %>% 
+  adorn_percentages() %>% 
+  adorn_pct_formatting(digits = 2)
+```
+
+-   Udregn en passende korrelationskoeficient mellem uddannelse og holdningen til økonomisk ulighed. Hvilken koeficient passer til variablenes måleniveauer?
+
+    \
+    *Når vi har at gøre med to ordinalskalerede variable bruges spearmans rho korrelationskoefficienten, der har et udfaldsrum mellem -1 og 1, hvor 0 indikererer ingen korrelation og +/- 1 indikerer en perfekt positiv/negativ korrelation.*
+
+```{r warning=FALSE, message=FALSE}
+cor.test(as.numeric(df$udd),
+         as.numeric(df$fair_ekon_ulighed), 
+         method = "spearman"
+         )
+```
+
+-   Hvad fortæller korrelationskoefficienten dig? Ser der ud til at være en sammenhæng mellem de to variable?
+
+    \
+    *Der er så godt som ingen korrelation/sammenhæng mellem uddannelsesniveau og holdningen til økonomisk ulighed. Korrelationskoefficienten er kun 0,6.*
+
+-   Du skal nu lave en $chi^2$-test for uafhængighed for formelt og teste, om der er en sammenhæng. Hvad nulhypotesen og alternativ hypotesen i en $chi^2$ test for uafhængighed?
+
+    \
+    *I*$chi^2$ *testen for uafhængighed tester vi, om der er en sammenhæng mellem to variable. Med andre ord tester vi, om de virker til at være uafhængige. Nulhypotesen i denne test er derfor, at der ikke er en sammenhæng, og alternativ hypotesen er, at der er en sammenhæng:*
+
+    ***\
+    H0**: Der er ingen sammenhæng mellem de to variabler (uafhængighed)*
+
+    ***H1**: Der er en sammenhæng mellem de to variabler*\
+
+-   Gennemfør og konkludér på testen. Er der en signifikant sammenhæng mellem uddannelsesniveau og holdningen til økonomisk ulighed?
+
+```{r}
+
+df_complete <- na.omit(df[, c("udd", "fair_ekon_ulighed")]) 
+
+chisq.test(tabyl(df_complete, udd, fair_ekon_ulighed))
+
+# Eller man kan gøre det sådan:
+
+df %>%
+  select(udd, fair_ekon_ulighed) %>% 
+  na.omit() %>%
+  tabyl(udd, fair_ekon_ulighed) %>%
+  chisq.test()
+
+```
+
+$Chi^2$ *testen returnerer en p-værdi på 0,09. Da det er over grænsen på 0,05 kan vi ikke forkaste nulhypotesen. Vi kan ikke afvise, at der ikke er nogen sammenhæng mellem de to variable. Dette understøtter vores konklusion ift. korrelationskoefficienten. Det er med andre ord mere end 5 % sandsynligt at observere de små forskelle der er på holdnignen til økonomisk ulighed mellem de forskellige uddannelseskategorier, som vi så i tabellen, hvis nullhypotesen er sand. Derfor siger vi, at der ikke er en signifikant sammenhæng mellem de to variable.*
+
+------------------------------------------------------------------------
+
+EKSTRAOPGAVE TIL DE R-ENTUSIASTISKE
+
+-   Lav et søjlediagram til at visualisere fordelingen mellem uddannelsesniveau og holdningen til økonomisk ulighed. Tilføj `geom_bar(position = "fill")` for at få procenter i stedet for frekvenser på y-aksen.
+
+```{r warning=FALSE, message=FALSE}
+ggplot(df, aes(x = udd, fill = fair_ekon_ulighed)) +
+  geom_bar(position = "fill") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+  labs(fill="Økonomisk ulighed", 
+       x="Uddannelsesniveau",
+       y="Andel")
+```
