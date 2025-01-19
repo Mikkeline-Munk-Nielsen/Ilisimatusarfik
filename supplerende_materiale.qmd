@@ -25,6 +25,8 @@ StatQuest by Josh Starmer er en videorække på Youtube, der laver introducerend
 
 #### [P-værdier](https://www.youtube.com/watch?v=vemZtEM63GY&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=12&ab_channel=StatQuestwithJoshStarmer)
 
+#### [Fitting a line to data (The Main Ideas of Least Squares and Linear Regression)](https://www.youtube.com/watch?v=PaFPbb66DxQ&ab_channel=StatQuestwithJoshStarmer)
+
 # Videnskabeligt udfordret (podcast) ![](Undervisningsdokumenter/E24/slides/images/Videnskabeligt_udfordret.png){width="100"}
 
 Videnskabeligt Udfordret er en gakket podcast hvor de to forskere Mark og Flemming dækker historier, data og kontroverser fra videnskabens verden. De siger selv, at deres mål er at gøre dig klog på en dum måde.
