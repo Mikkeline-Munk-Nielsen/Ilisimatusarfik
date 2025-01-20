@@ -1109,6 +1109,11 @@ library(texreg)
 (texreg::screenreg(list(model2), include.ci=F))
 ```
 
+```{r include=F, eval=T}
+df <- df %>% mutate(
+fagforening = ifelse(fagforeningsmedlem=="Ja",1,0))
+```
+
 ## Forlæns modelsøgning
 
 I forlæns modelsøgning estimerer man en række regressionsmodeller for den samme afhængige variabel $(Y)$, hvor der tilføjes flere og flere variable. Udgangspunktet for modelsøgningen er sammenhængen mellem den afhængige variabel $(Y)$ og uafhængige variabel $(X)$. Herefter tilføjes løbende flere og flere kontrolvariable $(Z)$. Formålet er at forsøge af forklare den simple sammenhæng mellem $X$ og $Y$.
@@ -1124,7 +1129,7 @@ Model 3: $INDK = \alpha + \beta*UDD + \delta_1 * ALDER+\delta_2*FAGFORENING+\eps
 ```{r echo=TRUE, message=F, warning=FALSE}
 model1 <- lm(net_indkomst ~ udd_aar, data = df)
 model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
-model3 <- lm(net_indkomst ~ udd_aar + alder + fagforeningsmedlem, data = df)
+model3 <- lm(net_indkomst ~ udd_aar + alder + fagforening, data = df)
 
 (texreg::screenreg(list(model1, model2, model3), include.ci=F))
 ```
@@ -1138,8 +1143,7 @@ texreg::screenreg(list(model1, model2, model3), include.ci=F,
                   custom.coef.names = c("Konstantled",
                                         "Antal års uddannelse",
                                         "Alder", 
-                                        "Tidligere fagforeningsmedlem",
-                                        "Ikke fagforeningsmedlem"))
+                                        "Fagforeningsmedlem"))
 ```
 
 ## Eksportér regressionsmodeller
@@ -1196,7 +1200,7 @@ head(df)
 
 Man kan dermed f.eks. plotte de forudsagte værdier mod de observerede:
 
-```{r echo=TRUE}
+```{r echo=TRUE, eval=T}
 library(ggplot2)  
 ggplot(df, aes(x = forudsagte_værdier, y = net_indkomst)) +   
   geom_point() +   
@@ -1236,7 +1240,7 @@ Hvis en regressionsmodel lider af heteroskedasticitet bliver vores p-værdier up
 
 Lav et plot af residualerne mod de forudsagte værdier fra model 3 for at inspicere modellen for heteroskedasticitet:
 
-```{r echo=TRUE}
+```{r echo=TRUE, eval=TRUE}
 # Beregn forudsagte værdier
 predicted <- predict(model3)
 

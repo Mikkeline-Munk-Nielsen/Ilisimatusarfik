@@ -1504,29 +1504,27 @@ Num. obs.    1201
 <div class="cell">
 <div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> udd_aar, <span class="at">data =</span> df)</span>
 <span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> udd_aar <span class="sc">+</span> alder, <span class="at">data =</span> df)</span>
-<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> udd_aar <span class="sc">+</span> alder <span class="sc">+</span> fagforeningsmedlem, <span class="at">data =</span> df)</span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> udd_aar <span class="sc">+</span> alder <span class="sc">+</span> fagforening, <span class="at">data =</span> df)</span>
 <span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model1, model2, model3), <span class="at">include.ci=</span>F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-====================================================================
-                             Model 1       Model 2      Model 3     
---------------------------------------------------------------------
-(Intercept)                  10754.20 ***  9767.01 ***  11524.66 ***
-                              (611.99)     (928.99)      (934.89)   
-udd_aar                        380.33 ***   387.68 ***    298.88 ***
-                               (40.98)      (41.29)       (39.22)   
-alder                                        17.76         54.18 ***
-                                            (12.58)       (13.63)   
-fagforeningsmedlemTidligere                             -6069.73 ***
-                                                         (559.28)   
-fagforeningsmedlemNej                                   -6229.50 ***
-                                                         (704.78)   
---------------------------------------------------------------------
-R^2                              0.07         0.07          0.19    
-Adj. R^2                         0.07         0.07          0.19    
-Num. obs.                     1201         1201          1201       
-====================================================================
+===================================================
+             Model 1       Model 2      Model 3    
+---------------------------------------------------
+(Intercept)  10754.20 ***  9767.01 ***  5334.70 ***
+              (611.99)     (928.99)     (929.98)   
+udd_aar        380.33 ***   387.68 ***   299.29 ***
+               (40.98)      (41.29)      (39.15)   
+alder                        17.76        55.37 ***
+                            (12.58)      (12.09)   
+fagforening                             6129.11 ***
+                                        (462.24)   
+---------------------------------------------------
+R^2              0.07         0.07         0.19    
+Adj. R^2         0.07         0.07         0.19    
+Num. obs.     1201         1201         1201       
+===================================================
 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
 </div>
 </div>
@@ -1539,28 +1537,25 @@ Num. obs.                     1201         1201          1201
 <span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">custom.coef.names =</span> <span class="fu">c</span>(<span class="st">"Konstantled"</span>,</span>
 <span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Antal års uddannelse"</span>,</span>
 <span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Alder"</span>, </span>
-<span id="cb121-5"><a href="#cb121-5" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Tidligere fagforeningsmedlem"</span>,</span>
-<span id="cb121-6"><a href="#cb121-6" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Ikke fagforeningsmedlem"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb121-5"><a href="#cb121-5" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Fagforeningsmedlem"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-=====================================================================
-                              Model 1       Model 2      Model 3     
----------------------------------------------------------------------
-Konstantled                   10754.20 ***  9767.01 ***  11524.66 ***
-                               (611.99)     (928.99)      (934.89)   
-Antal års uddannelse            380.33 ***   387.68 ***    298.88 ***
-                                (40.98)      (41.29)       (39.22)   
-Alder                                         17.76         54.18 ***
-                                             (12.58)       (13.63)   
-Tidligere fagforeningsmedlem                             -6069.73 ***
-                                                          (559.28)   
-Ikke fagforeningsmedlem                                  -6229.50 ***
-                                                          (704.78)   
----------------------------------------------------------------------
-R^2                               0.07         0.07          0.19    
-Adj. R^2                          0.07         0.07          0.19    
-Num. obs.                      1201         1201          1201       
-=====================================================================
+============================================================
+                      Model 1       Model 2      Model 3    
+------------------------------------------------------------
+Konstantled           10754.20 ***  9767.01 ***  5334.70 ***
+                       (611.99)     (928.99)     (929.98)   
+Antal års uddannelse    380.33 ***   387.68 ***   299.29 ***
+                        (40.98)      (41.29)      (39.15)   
+Alder                                 17.76        55.37 ***
+                                     (12.58)      (12.09)   
+Fagforeningsmedlem                               6129.11 ***
+                                                 (462.24)   
+------------------------------------------------------------
+R^2                       0.07         0.07         0.19    
+Adj. R^2                  0.07         0.07         0.19    
+Num. obs.              1201         1201         1201       
+============================================================
 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
 </div>
 </div>
@@ -1607,15 +1602,15 @@ Num. obs.                      1201         1201          1201
 <div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>forudsagte_værdier <span class="ot">&lt;-</span> <span class="fu">predict</span>(model3, <span class="at">data =</span> df)  </span>
 <span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  net_indkomst udd_aar alder fagforeningsmedlem forudsagte_værdier
-         &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;                           &lt;dbl&gt;
-1          200       9    16 Nej                             8852.
-2        25000      35    44 Ja                             24369.
-3        15600      13    43 Ja                             17740.
-4        24000      25    60 Ja                             22248.
-5        20000      13    54 Ja                             18336.
-6         5000      16    44 Ja                             18691.</code></pre>
+<pre><code># A tibble: 6 × 6
+  net_indkomst udd_aar alder fagforeningsmedlem fagforening forudsagte_værdier
+         &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
+1          200       9    16 Nej                          0              8914.
+2        25000      35    44 Ja                           1             24375.
+3        15600      13    43 Ja                           1             17735.
+4        24000      25    60 Ja                           1             22268.
+5        20000      13    54 Ja                           1             18344.
+6         5000      16    44 Ja                           1             18689.</code></pre>
 </div>
 </div>
 <p>Man kan dermed f.eks. plotte de forudsagte værdier mod de observerede:</p>
@@ -1629,7 +1624,7 @@ Num. obs.                      1201         1201          1201
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="kodeoversigt_files/figure-html/unnamed-chunk-94-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="kodeoversigt_files/figure-html/unnamed-chunk-95-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1651,7 +1646,7 @@ Num. obs.                      1201         1201          1201
 <span id="cb129-7"><a href="#cb129-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Forskel i Frihedsgrader F-statistik P-værdi
-1                       2    87.85652  0.0000</code></pre>
+1                       1    175.8191  0.0000</code></pre>
 </div>
 </div>
 <p>P-værdien på mindre end 0,0000 viser, at vi afviser H0 og accepterer H1. Model 3 forklarer signifikant mere end model 2.</p>
@@ -1686,7 +1681,7 @@ Num. obs.                      1201         1201          1201
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="kodeoversigt_files/figure-html/unnamed-chunk-96-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="kodeoversigt_files/figure-html/unnamed-chunk-97-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1712,7 +1707,7 @@ Num. obs.                      1201         1201          1201
 <span id="cb132-9"><a href="#cb132-9" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Teststatistik Frihedsgrader P.værdi
-BP      32.62002             4  0.0000</code></pre>
+BP      23.20578             3  0.0000</code></pre>
 </div>
 </div>
 <p>P-værdien på mindre end 0,0000 viser, at vi kan afvise nulhypotesen og accepterer H1. Der er altså heteroskedasticitet tilstede.</p>
