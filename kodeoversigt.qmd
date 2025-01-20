@@ -1196,7 +1196,7 @@ head(df)
 
 Man kan dermed f.eks. plotte de forudsagte værdier mod de observerede:
 
-```{r echo=TRUE, message=F, warning=FALSE}
+```{r echo=TRUE}
 library(ggplot2)  
 ggplot(df, aes(x = forudsagte_værdier, y = net_indkomst)) +   
   geom_point() +   
@@ -1236,7 +1236,7 @@ Hvis en regressionsmodel lider af heteroskedasticitet bliver vores p-værdier up
 
 Lav et plot af residualerne mod de forudsagte værdier fra model 3 for at inspicere modellen for heteroskedasticitet:
 
-```{r echo=TRUE, message=F, warning=FALSE}
+```{r echo=TRUE}
 # Beregn forudsagte værdier
 predicted <- predict(model3)
 
