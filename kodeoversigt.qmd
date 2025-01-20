@@ -1240,7 +1240,7 @@ Hvis en regressionsmodel lider af heteroskedasticitet bliver vores p-værdier up
 
 Lav et plot af residualerne mod de forudsagte værdier fra model 3 for at inspicere modellen for heteroskedasticitet:
 
-```{r echo=TRUE, eval=TRUE}
+```{r, echo=TRUE, eval=TRUE}
 # Beregn forudsagte værdier
 predicted <- predict(model3)
 
@@ -1300,12 +1300,11 @@ Hvis der er heteroskedasticitet tilstede i en regressionsmodel er det nødvendig
 ```{r echo=TRUE, message=F, warning=FALSE}
 library(estimatr)
 
-model_robust <- lm_robust(net_indkomst ~ udd_aar + alder + fagforeningsmedlem, data = df)
+model_robust <- lm_robust(net_indkomst ~ udd_aar + alder + fagforening, data = df)
 
 (texreg::screenreg(list(model_robust), include.ci=F,
                 custom.coef.names = c("Konstantled",
                                         "Antal års uddannelse",
                                         "Alder", 
-                                        "Tidligere fagforeningsmedlem",
-                                        "Ikke fagforeningsmedlem")))
+                                        "Fagforeningsmedlem")))
 ```

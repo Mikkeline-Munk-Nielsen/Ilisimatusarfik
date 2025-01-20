@@ -1715,35 +1715,32 @@ BP      23.20578             3  0.0000</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estimatr)</span>
 <span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a>model_robust <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(net_indkomst <span class="sc">~</span> udd_aar <span class="sc">+</span> alder <span class="sc">+</span> fagforeningsmedlem, <span class="at">data =</span> df)</span>
+<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a>model_robust <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(net_indkomst <span class="sc">~</span> udd_aar <span class="sc">+</span> alder <span class="sc">+</span> fagforening, <span class="at">data =</span> df)</span>
 <span id="cb133-4"><a href="#cb133-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb133-5"><a href="#cb133-5" aria-hidden="true" tabindex="-1"></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model_robust), <span class="at">include.ci=</span>F,</span>
 <span id="cb133-6"><a href="#cb133-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.coef.names =</span> <span class="fu">c</span>(<span class="st">"Konstantled"</span>,</span>
 <span id="cb133-7"><a href="#cb133-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Antal års uddannelse"</span>,</span>
 <span id="cb133-8"><a href="#cb133-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Alder"</span>, </span>
-<span id="cb133-9"><a href="#cb133-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Tidligere fagforeningsmedlem"</span>,</span>
-<span id="cb133-10"><a href="#cb133-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Ikke fagforeningsmedlem"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb133-9"><a href="#cb133-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Fagforeningsmedlem"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-==========================================
-                              Model 1     
-------------------------------------------
-Konstantled                   11524.66 ***
-                              (1040.54)   
-Antal års uddannelse            298.88 ***
-                                (44.21)   
-Alder                            54.18 ***
-                                (14.18)   
-Tidligere fagforeningsmedlem  -6069.73 ***
-                               (546.29)   
-Ikke fagforeningsmedlem       -6229.50 ***
-                               (834.98)   
-------------------------------------------
-R^2                               0.19    
-Adj. R^2                          0.19    
-Num. obs.                      1201       
-RMSE                           7427.07    
-==========================================
+=================================
+                      Model 1    
+---------------------------------
+Konstantled           5334.70 ***
+                      (923.07)   
+Antal års uddannelse   299.29 ***
+                       (43.79)   
+Alder                   55.37 ***
+                       (11.62)   
+Fagforeningsmedlem    6129.11 ***
+                      (477.54)   
+---------------------------------
+R^2                      0.19    
+Adj. R^2                 0.19    
+Num. obs.             1201       
+RMSE                  7424.08    
+=================================
 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
 </div>
 </div>
