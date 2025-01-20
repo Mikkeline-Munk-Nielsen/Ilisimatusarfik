@@ -434,7 +434,7 @@ ggplot(mtcars) +
     title = "Spredning af biler mellem cylinder og gear",
     x = "Antal cylindre",
     y = "Antal gear"
-  ) 
+  ) + theme_minimal()
 ```
 
 #### Boksplot (bivariat)
@@ -477,7 +477,7 @@ ggplot(mtcars) +
 
 Det er også muligt at lægge flere plots ovenpå hinanden med ggplot. F.eks. kan I lægge en regressionslinje indover jeres scatterplot med `geom_smooth()` :
 
-```{r echo=TRUE}
+```{r echo=TRUE, message=F}
 library(ggplot2)
 
 ggplot(mtcars) +
