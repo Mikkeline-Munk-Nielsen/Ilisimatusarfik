@@ -190,11 +190,8 @@ window.Quarto = {
   <ul>
   <li><a href="#installér-texreg" id="toc-installér-texreg" class="nav-link" data-scroll-target="#installér-texreg">Installér <code>texreg</code></a></li>
   <li><a href="#estimation-af-en-regressionsmodel-i-r" id="toc-estimation-af-en-regressionsmodel-i-r" class="nav-link" data-scroll-target="#estimation-af-en-regressionsmodel-i-r">Estimation af en regressionsmodel i R</a></li>
-  <li><a href="#eksempel-1" id="toc-eksempel-1" class="nav-link" data-scroll-target="#eksempel-1">Eksempel</a>
-  <ul class="collapse">
   <li><a href="#simpel-model" id="toc-simpel-model" class="nav-link" data-scroll-target="#simpel-model">Simpel model</a></li>
   <li><a href="#multipel-model" id="toc-multipel-model" class="nav-link" data-scroll-target="#multipel-model">Multipel model</a></li>
-  </ul></li>
   <li><a href="#forlæns-modelsøgning" id="toc-forlæns-modelsøgning" class="nav-link" data-scroll-target="#forlæns-modelsøgning">Forlæns modelsøgning</a></li>
   <li><a href="#labels-på-regressionstabeller" id="toc-labels-på-regressionstabeller" class="nav-link" data-scroll-target="#labels-på-regressionstabeller">Labels på regressionstabeller</a></li>
   <li><a href="#eksportér-regressionsmodeller" id="toc-eksportér-regressionsmodeller" class="nav-link" data-scroll-target="#eksportér-regressionsmodeller">Eksportér regressionsmodeller</a></li>
@@ -1421,7 +1418,7 @@ df         Frihedsgrader      6
 </section>
 <section id="estimation-af-en-regressionsmodel-i-r" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-af-en-regressionsmodel-i-r">Estimation af en regressionsmodel i R</h2>
-<p>I skal bruge funktionen lm() til at estimere regressionsmodeller. Syntaksen er som følgende med <em>k</em> antal kontrolvariable:</p>
+<p>I skal bruge funktionen <code>lm()</code> til at estimere regressionsmodeller. Syntaksen er som følgende med <em>k</em> antal kontrolvariable:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(afhængig_variabel <span class="sc">~</span> uafhængig_variabel <span class="sc">+</span> kontrol_variabel_1 <span class="sc">+</span> kontrol_variabel_2 ... kontrol_variabel_k, <span class="at">data=</span>df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1430,12 +1427,9 @@ df         Frihedsgrader      6
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model), <span class="at">include.ci =</span> F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="eksempel-1" class="level2">
-<h2 class="anchored" data-anchor-id="eksempel-1">Eksempel</h2>
-<p>I forlæns modelsøgning undersøger man forholdet mellem en afhængig variabel Y og en uafhængig variabel X. Man bruger regressionsanalyse til at teste sammenhængen mellem disse to variable, imens man gradvist inkluderer flere og flere kontrolvariable. I dette eksempel undersøges sammenhængen mellem indkomst (månedlig netto indkomst) og antal års uddannelse.</p>
-<section id="simpel-model" class="level3">
-<h3 class="anchored" data-anchor-id="simpel-model">Simpel model</h3>
-<p>Man kan bruge funktionen <code>lm()</code> til at estimere en simpel model med kun afhængig (indkomst) og én uafhængig variabel (antal års uddannelse):</p>
+<section id="simpel-model" class="level2">
+<h2 class="anchored" data-anchor-id="simpel-model">Simpel model</h2>
+<p>Brug funktionen <code>lm()</code> til at estimere en simpel model med kun afhængig variabel (indkomst) og én uafhængig variabel (antal års uddannelse):</p>
 <p><span class="math inline">\(INDK = \alpha + \beta*UDD + \epsilon\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> udd_aar, <span class="at">data =</span> df)</span>
@@ -1459,10 +1453,9 @@ Num. obs.     1201
 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
 </div>
 </div>
-<p>Regressionstabellen indeholder følgende oplysninger:</p>
 <p><strong><em>Intercept</em></strong>: parameterestimatet for konstantleddet <span class="math inline">\(\alpha=10754,2\)</span> . Dette er den forventede værdi på den afhængige variabel indkomst, når værdien på den uafhængige variabel <em>antal års uddannelse</em> = 0. Altså den forventede indkomst for en person med 0 års udddannelse.</p>
 <p><strong><em>udd_aar</em></strong>: parameterstimatet for <span class="math inline">\(\beta=380,33\)</span>. Dette er den forventede stigning i den afhængige variabel (indkomst<em>)</em> for hver gang den uafhængige variabel (antal års uddannelse)stiger med 1. Altså den forventede stigning i indkomst hver gang en person har 1 års uddannelse mere.</p>
-<p><span class="math inline">\(R^2\)</span> <em><strong>værdi</strong>: Under parameterestimaterne printes to</em> <span class="math inline">\(R^2\)</span>-værdier. Den første, <em>R^2</em>, viser hvor stor en andel af variationen i den afhænige variabel, som kan forklares af de uafhængige variable i modellen. Den anden, <em>Adj. R^2, viser hvor stor en andelen af variationen som forklares af signifikante uafhængige variable alene.</em></p>
+<p><span class="math inline">\(R^2\)</span> <em><strong>værdi</strong>:</em> Under parameterestimaterne printes to <span class="math inline">\(R^2\)</span>-værdier. Den første, <em>R^2</em>, viser hvor stor en andel af variationen i den afhænige variabel, som kan forklares af alle de uafhængige variable i modellen. Den anden, <em>Adj. R^2,</em> viser hvor stor en andelen af variationen som forklares af signifikante uafhængige variable alene.</p>
 <p><em><strong>Antal observationer</strong>:</em> I den nederste linje (<em>Num. obs</em>.) fremgår det, hvor mange observationer fra datasættet, der indgår i regressionanalysen<em>.</em></p>
 <p>Derudover printer <code>texreg</code> stjerner som indikatorer for, om parameterestimater er signifikante. Forklaringen i bunden af tabellen viser, at:</p>
 <p><strong>***</strong> betyder, at p-værdien for parameterestimatet er mindre end 0,001</p>
@@ -1471,8 +1464,8 @@ Num. obs.     1201
 <p>Det fremgår altså af tabellen, at der er en signifikant sammenhæng mellem den afhængige variabel, <em>indkomst</em>, og uafhængige variabel <em>antal års uddannelse</em> <span class="math inline">\((p &lt; 0,001)\)</span>.</p>
 <p>Tallene i parantes under hvert parameterestimat er standardfejlen.</p>
 </section>
-<section id="multipel-model" class="level3">
-<h3 class="anchored" data-anchor-id="multipel-model">Multipel model</h3>
+<section id="multipel-model" class="level2">
+<h2 class="anchored" data-anchor-id="multipel-model">Multipel model</h2>
 <p>Fremgangsmåden er den samme, når man udvider regressionsmodellen til at indeholde kontrolvariable. Kontrolvariablene tilføjes bare efter den afhængige variabel med et +</p>
 <p>En multipel model med afhængig variabel (indkomst), en uafhængig variabel (antal års uddannelse) og en kontrolvariabel (alder) estimeres således:</p>
 <p><span class="math inline">\(INDK = \alpha + \beta*UDD + \delta * ALDER+\epsilon\)</span></p>
@@ -1500,7 +1493,6 @@ Num. obs.    1201
 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
 </div>
 </div>
-</section>
 </section>
 <section id="forlæns-modelsøgning" class="level2">
 <h2 class="anchored" data-anchor-id="forlæns-modelsøgning">Forlæns modelsøgning</h2>
@@ -1681,7 +1673,7 @@ Num. obs.                      1201         1201          1201
 <span id="cb131-8"><a href="#cb131-8" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">predicted =</span> predicted, <span class="at">residuals =</span> residuals)</span>
 <span id="cb131-9"><a href="#cb131-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb131-10"><a href="#cb131-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Opret et plot for heteroskedasticitet</span></span>
-<span id="cb131-11"><a href="#cb131-11" aria-hidden="true" tabindex="-1"></a>(plot_heteroskedasticitet <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> predicted, <span class="at">y =</span> residuals)) <span class="sc">+</span></span>
+<span id="cb131-11"><a href="#cb131-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> predicted, <span class="at">y =</span> residuals)) <span class="sc">+</span></span>
 <span id="cb131-12"><a href="#cb131-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">20</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># Sæt punktform og farve (runde, sorte punkter)</span></span>
 <span id="cb131-13"><a href="#cb131-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb131-14"><a href="#cb131-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Forudsagte værdier"</span>,            <span class="co"># Navn til x-aksen</span></span>
@@ -1690,8 +1682,7 @@ Num. obs.                      1201         1201          1201
 <span id="cb131-17"><a href="#cb131-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb131-18"><a href="#cb131-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>                      <span class="co"># Brug et minimalistisk tema</span></span>
 <span id="cb131-19"><a href="#cb131-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb131-20"><a href="#cb131-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="co"># Centrér titlen vandret (hjust = 0.5)</span></span>
-<span id="cb131-21"><a href="#cb131-21" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb131-20"><a href="#cb131-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="co"># Centrér titlen vandret (hjust = 0.5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1699,7 +1690,6 @@ Num. obs.                      1201         1201          1201
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"plot_heteroskedasticitet.jpeg"</span>, <span class="at">plot =</span> plot_heteroskedasticitet, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For at vurdere heteroskedasticitet i plottet, skal man kigge på mønsteret i fordelingen af residualerne (y-aksen) mod de forudsagte værdier (x-aksen). Hvis spredningen af residualerne øges eller mindskes systematisk, efterhånden som de forudsagte værdier vokser, er der sandsynligvis heteroskedasticitet. F.eks. kan det tyde på heteroskadesticitet, hvis residualerne lægger sig i mønstre som en vaffel/tragt, vifte eller parabler.</p>
 <p>Plottet viser en vis ændring i spredningen, hvor residualerne ser ud til at have en smule bredere spredning i de lave værdier på x-aksen end i de højere. Dette kan indikere noget heteroskedasticitet, men det er ikke meget udtalt.</p>
@@ -1707,19 +1697,19 @@ Num. obs.                      1201         1201          1201
 <section id="breush-pagan-test" class="level3">
 <h3 class="anchored" data-anchor-id="breush-pagan-test">Breush Pagan Test</h3>
 <p>For formelt at teste for heteroskedasticitet kan man bruge <em>Breush Pagan Testen.</em> Hypoteserne er som følgende:</p>
-<p><strong>H0</strong>: Der er <em>ingen</em> heteroskedasticitet i residualerne</p>
-<p><strong>H1</strong>: Der <em>er</em> heteroskedasticitet i residualerne</p>
+<p><strong>H0</strong>: Der er <em>ingen</em> heteroskedasticitet</p>
+<p><strong>H1</strong>: Der <em>er</em> heteroskedasticitet</p>
 <p>Testen udføres i R som følgende:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
-<span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb133-3"><a href="#cb133-3" aria-hidden="true" tabindex="-1"></a>bptest_result <span class="ot">&lt;-</span> <span class="fu">bptest</span>(model3)</span>
-<span id="cb133-4"><a href="#cb133-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb133-5"><a href="#cb133-5" aria-hidden="true" tabindex="-1"></a>(bptest_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb133-6"><a href="#cb133-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Teststatistik</span><span class="st">`</span> <span class="ot">=</span> bptest_result<span class="sc">$</span>statistic,       <span class="co"># Teststatistik</span></span>
-<span id="cb133-7"><a href="#cb133-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Frihedsgrader</span><span class="st">`</span> <span class="ot">=</span> bptest_result<span class="sc">$</span>parameter,       <span class="co"># Frihedsgrader</span></span>
-<span id="cb133-8"><a href="#cb133-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">P-værdi</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.4f"</span>, bptest_result<span class="sc">$</span>p.value) <span class="co"># P-værdi med 4 decimaler</span></span>
-<span id="cb133-9"><a href="#cb133-9" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>bptest_result <span class="ot">&lt;-</span> <span class="fu">bptest</span>(model3)</span>
+<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-5"><a href="#cb132-5" aria-hidden="true" tabindex="-1"></a>(bptest_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb132-6"><a href="#cb132-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Teststatistik</span><span class="st">`</span> <span class="ot">=</span> bptest_result<span class="sc">$</span>statistic,       <span class="co"># Teststatistik</span></span>
+<span id="cb132-7"><a href="#cb132-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Frihedsgrader</span><span class="st">`</span> <span class="ot">=</span> bptest_result<span class="sc">$</span>parameter,       <span class="co"># Frihedsgrader</span></span>
+<span id="cb132-8"><a href="#cb132-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">P-værdi</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.4f"</span>, bptest_result<span class="sc">$</span>p.value) <span class="co"># P-værdi med 4 decimaler</span></span>
+<span id="cb132-9"><a href="#cb132-9" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Teststatistik Frihedsgrader P.værdi
 BP      32.62002             4  0.0000</code></pre>
@@ -1729,18 +1719,18 @@ BP      32.62002             4  0.0000</code></pre>
 </section>
 <section id="robuste-standardfejl" class="level3">
 <h3 class="anchored" data-anchor-id="robuste-standardfejl">Robuste standardfejl</h3>
-<p>Hvis der er heteroskedasticitet tilstede i en regressionsmodel er det nødvendigt at estimere den igen med robuste standardfejl. Det gøres med funktionen <code>lm_robust</code> fra pakken <code>estimatr</code></p>
+<p>Hvis der er heteroskedasticitet tilstede i en regressionsmodel er det nødvendigt at estimere den igen med robuste standardfejl. Det gøres med funktionen <code>lm_robust</code> fra pakken <code>estimatr</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estimatr)</span>
-<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>model_robust <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(net_indkomst <span class="sc">~</span> udd_aar <span class="sc">+</span> alder <span class="sc">+</span> fagforeningsmedlem, <span class="at">data =</span> df)</span>
-<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model_robust), <span class="at">include.ci=</span>F,</span>
-<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.coef.names =</span> <span class="fu">c</span>(<span class="st">"Konstantled"</span>,</span>
-<span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Antal års uddannelse"</span>,</span>
-<span id="cb135-8"><a href="#cb135-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Alder"</span>, </span>
-<span id="cb135-9"><a href="#cb135-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Tidligere fagforeningsmedlem"</span>,</span>
-<span id="cb135-10"><a href="#cb135-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Ikke fagforeningsmedlem"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estimatr)</span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>model_robust <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(net_indkomst <span class="sc">~</span> udd_aar <span class="sc">+</span> alder <span class="sc">+</span> fagforeningsmedlem, <span class="at">data =</span> df)</span>
+<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-5"><a href="#cb134-5" aria-hidden="true" tabindex="-1"></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model_robust), <span class="at">include.ci=</span>F,</span>
+<span id="cb134-6"><a href="#cb134-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">custom.coef.names =</span> <span class="fu">c</span>(<span class="st">"Konstantled"</span>,</span>
+<span id="cb134-7"><a href="#cb134-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Antal års uddannelse"</span>,</span>
+<span id="cb134-8"><a href="#cb134-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Alder"</span>, </span>
+<span id="cb134-9"><a href="#cb134-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Tidligere fagforeningsmedlem"</span>,</span>
+<span id="cb134-10"><a href="#cb134-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Ikke fagforeningsmedlem"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ==========================================

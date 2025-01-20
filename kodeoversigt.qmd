@@ -1044,7 +1044,7 @@ install.packages("texreg")
 
 ## Estimation af en regressionsmodel i R
 
-I skal bruge funktionen lm() til at estimere regressionsmodeller. Syntaksen er som følgende med *k* antal kontrolvariable:
+I skal bruge funktionen `lm()` til at estimere regressionsmodeller. Syntaksen er som følgende med *k* antal kontrolvariable:
 
 ```{r echo=TRUE, eval=F, message=F, warning=FALSE}
 model <- lm(afhængig_variabel ~ uafhængig_variabel + kontrol_variabel_1 + kontrol_variabel_2 ... kontrol_variabel_k, data=df)
@@ -1056,18 +1056,14 @@ Resultatet af regressionsanalysen gemmes i objektet *model*. Brug `texreg::scree
 (texreg::screenreg(list(model), include.ci = F))
 ```
 
-## Eksempel
-
 ```{r echo=F, eval=T, message=F, warning=FALSE}
 library(tidyverse)
 df <- ESS %>% select(net_indkomst, udd_aar, alder, fagforeningsmedlem) %>% na.omit()
 ```
 
-I forlæns modelsøgning undersøger man forholdet mellem en afhængig variabel Y og en uafhængig variabel X. Man bruger regressionsanalyse til at teste sammenhængen mellem disse to variable, imens man gradvist inkluderer flere og flere kontrolvariable. I dette eksempel undersøges sammenhængen mellem indkomst (månedlig netto indkomst) og antal års uddannelse.
+## Simpel model
 
-### Simpel model
-
-Man kan bruge funktionen `lm()` til at estimere en simpel model med kun afhængig (indkomst) og én uafhængig variabel (antal års uddannelse):
+Brug funktionen `lm()` til at estimere en simpel model med kun afhængig variabel (indkomst) og én uafhængig variabel (antal års uddannelse):
 
 $INDK = \alpha + \beta*UDD + \epsilon$
 
@@ -1078,13 +1074,11 @@ library(texreg)
 (texreg::screenreg(list(model1), include.ci=F))
 ```
 
-Regressionstabellen indeholder følgende oplysninger:
-
 ***Intercept***: parameterestimatet for konstantleddet $\alpha=10754,2$ . Dette er den forventede værdi på den afhængige variabel indkomst, når værdien på den uafhængige variabel *antal års uddannelse* = 0. Altså den forventede indkomst for en person med 0 års udddannelse.
 
 ***udd_aar***: parameterstimatet for $\beta=380,33$. Dette er den forventede stigning i den afhængige variabel (indkomst*)* for hver gang den uafhængige variabel (antal års uddannelse)stiger med 1. Altså den forventede stigning i indkomst hver gang en person har 1 års uddannelse mere.
 
-$R^2$ ***værdi**: Under parameterestimaterne printes to* $R^2$-værdier. Den første, *R\^2*, viser hvor stor en andel af variationen i den afhænige variabel, som kan forklares af de uafhængige variable i modellen. Den anden, *Adj. R\^2, viser hvor stor en andelen af variationen som forklares af signifikante uafhængige variable alene.*
+$R^2$ ***værdi**:* Under parameterestimaterne printes to $R^2$-værdier. Den første, *R\^2*, viser hvor stor en andel af variationen i den afhænige variabel, som kan forklares af alle de uafhængige variable i modellen. Den anden, *Adj. R\^2,* viser hvor stor en andelen af variationen som forklares af signifikante uafhængige variable alene.
 
 ***Antal observationer**:* I den nederste linje (*Num. obs*.) fremgår det, hvor mange observationer fra datasættet, der indgår i regressionanalysen*.*
 
@@ -1100,7 +1094,7 @@ Det fremgår altså af tabellen, at der er en signifikant sammenhæng mellem den
 
 Tallene i parantes under hvert parameterestimat er standardfejlen.
 
-### Multipel model
+## Multipel model
 
 Fremgangsmåden er den samme, når man udvider regressionsmodellen til at indeholde kontrolvariable. Kontrolvariablene tilføjes bare efter den afhængige variabel med et +
 
@@ -1253,7 +1247,7 @@ residuals <- resid(model3)
 plot_data <- data.frame(predicted = predicted, residuals = residuals)
 
 # Opret et plot for heteroskedasticitet
-(plot_heteroskedasticitet <- ggplot(plot_data, aes(x = predicted, y = residuals)) +
+ggplot(plot_data, aes(x = predicted, y = residuals)) +
   geom_point(shape = 20, color = "black") + # Sæt punktform og farve (runde, sorte punkter)
   labs(
     x = "Forudsagte værdier",            # Navn til x-aksen
@@ -1262,11 +1256,8 @@ plot_data <- data.frame(predicted = predicted, residuals = residuals)
   ) +
   theme_minimal() +                      # Brug et minimalistisk tema
   theme(
-    plot.title = element_text(hjust = 0.5) # Centrér titlen vandret (hjust = 0.5)
-  ))
-
-
-ggsave("plot_heteroskedasticitet.jpeg", plot = plot_heteroskedasticitet, width = 10, height = 8)
+    plot.title = element_text(hjust = 0.5)) # Centrér titlen vandret (hjust = 0.5)
+  
 ```
 
 For at vurdere heteroskedasticitet i plottet, skal man kigge på mønsteret i fordelingen af residualerne (y-aksen) mod de forudsagte værdier (x-aksen). Hvis spredningen af residualerne øges eller mindskes systematisk, efterhånden som de forudsagte værdier vokser, er der sandsynligvis heteroskedasticitet. F.eks. kan det tyde på heteroskadesticitet, hvis residualerne lægger sig i mønstre som en vaffel/tragt, vifte eller parabler.
@@ -1277,9 +1268,9 @@ Plottet viser en vis ændring i spredningen, hvor residualerne ser ud til at hav
 
 For formelt at teste for heteroskedasticitet kan man bruge *Breush Pagan Testen.* Hypoteserne er som følgende:
 
-**H0**: Der er *ingen* heteroskedasticitet i residualerne
+**H0**: Der er *ingen* heteroskedasticitet
 
-**H1**: Der *er* heteroskedasticitet i residualerne
+**H1**: Der *er* heteroskedasticitet
 
 Testen udføres i R som følgende:
 
@@ -1300,7 +1291,7 @@ P-værdien på mindre end 0,0000 viser, at vi kan afvise nulhypotesen og accepte
 
 ### Robuste standardfejl
 
-Hvis der er heteroskedasticitet tilstede i en regressionsmodel er det nødvendigt at estimere den igen med robuste standardfejl. Det gøres med funktionen `lm_robust` fra pakken `estimatr`
+Hvis der er heteroskedasticitet tilstede i en regressionsmodel er det nødvendigt at estimere den igen med robuste standardfejl. Det gøres med funktionen `lm_robust` fra pakken `estimatr` :
 
 ```{r echo=TRUE, message=F, warning=FALSE}
 library(estimatr)
