@@ -1,0 +1,35 @@
+---
+format: 
+  revealjs:
+    theme: css_etc/custom-theme-ilisimatusarfik.css
+    slide-level: 0  # Disable automatic slide creation from headings
+    incremental: false 
+    logo: css_etc/ilisimatusarfik.png
+    highlight-style: github-dark
+editor: visual
+---
+
+::: center
+# Skabelon
+
+### Statistik E24 (15 ECTS)
+
+### ved Mikkeline Munk Nielsen
+:::
+
+------------------------------------------------------------------------
+
+## Tema nummer 1
+
+-   Først det ene...
+-   Så det andet...
+
+------------------------------------------------------------------------
+
+## Kode
+
+Og kode skal vi også bruge
+
+```{r, echo=TRUE}
+1 + 1
+```
