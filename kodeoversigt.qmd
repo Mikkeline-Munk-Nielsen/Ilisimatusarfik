@@ -151,6 +151,13 @@ Brug `names()` til at printe navnene på variablene i datasættet
 names(df)
 ```
 
+Brug `glimpse()` til at få et overblik over variablene storage types i R:
+
+```{r echo=T, message=F, warning=F}
+library(dplyr)
+glimpse(df)
+```
+
 # Data wrangling
 
 En vigtig fordel i kodebaseret data software er, at vi kan skrive kode, der transformerer vores data til at se ud, præcis som vi vil have det. Det kaldes i folkemunde *data wrangling!*
@@ -272,6 +279,22 @@ Mens `select()` uvælger kolonner/variable, kan man bruge `filter()` til at væl
 
 ```{r echo=TRUE}
 kvinde_df <- df %>% filter(koen=="Kvinde")
+```
+
+## Gruppering af data
+
+Somme tider er det nytting at aggregere sit datasæt i nogle grupper. `group_by()` bruges til at gruppere data efter én eller flere variabler, som allerede er i dit datasæt.
+
+Funktionen laver grupper i datasættet, som derefter kan opsummeres eller manipuleres separat. Når dine data er grupperet, kan du bruge `summarise()` i forlængelse af `groupby()` til at beregne opsummeringer for hver gruppe. Eksempler på opsummeringer: gennemsnit, median, sum eller brugerdefinerede beregninger.
+
+<br>
+
+Vi kan f.eks. bruge `groupby()` til at gruppere uddannelsesniveau og derefter `summarise()` til at beregne gennemsnitsindkomsten og antal observationer for hver gruppe:
+
+```{r echo=T, warning=F, message=F}
+df %>% group_by(udd) %>% 
+  summarise(Gennemsnitsindkomst = mean(net_indkomst, na.rm = TRUE),
+            N = n())
 ```
 
 ## Dummy-variable

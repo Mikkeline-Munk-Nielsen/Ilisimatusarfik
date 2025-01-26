@@ -83,7 +83,7 @@ En stikprøve er en lille del af universet, der udvælges til at repræsentere/b
 
 -   Fordi en stikprøve ikke svarer præcist den population, som den er trukket fra, vil der altid være en ***statistisk usikkerhed*** forbundet med en generalisering fra stikprøve til population (også kaldet margin of error).
 
----
+------------------------------------------------------------------------
 
 # Inferens
 
@@ -97,7 +97,7 @@ En stikprøve er en lille del af universet, der udvælges til at repræsentere/b
 
 *I kender dem i praksis som p-værdier...*
 
----
+------------------------------------------------------------------------
 
 # Hvorfor hypotese-tests er vigtige...
 
@@ -109,7 +109,7 @@ En stikprøve er en lille del af universet, der udvælges til at repræsentere/b
 
 -   Konkret bruger vi dem til at vurdere, om forskelle og observationer vi ser i vores stikprøve er tilfælde pga. stikprøveusikkerhed, eller om det er sandsynligt, at de er udtryk for rigtige forskelle i populationen
 
----
+------------------------------------------------------------------------
 
 # Fremgangsmåde
 
@@ -134,7 +134,7 @@ I hypotesetests stiller man to hypoteser op og tester dem mod hinanden:
 3.  **Beregning af teststatistik**: Anvendelse af passende statistisk test til at beregne teststatistikken baseret på stikprøvedataene (dette gør R for jer)
 4.  **Afgørelse**: Sammenligning af teststatistikken med en kritisk værdi eller p-værdi for at afgøre, om man skal afvise nulhypotesen.
 
----
+------------------------------------------------------------------------
 
 # Statistisk signifikans
 
@@ -144,7 +144,7 @@ I hypotesetests stiller man to hypoteser op og tester dem mod hinanden:
 
 -   Man arbejder typisk med 𝛼=0,05 dvs. 5 % sandsynlighed for at begå type I fejl
 
----
+------------------------------------------------------------------------
 
 # Fortolkning af statistisk signifikans
 
@@ -156,7 +156,7 @@ I t-testen for bivariat analyse har I lært at teste, om der er forskel på et g
 
 -   I dette tilfælde konkluderer man, at der er en ***statistisk signifikan**t forskel* på gennemsnitsindkomsten for mænd og kvinder. Men hvad betyder det, egentlig?
 
----
+------------------------------------------------------------------------
 
 # Fortolkning af statistisk signifikans
 
@@ -184,7 +184,7 @@ Hvordan? Vi udregner med udgangspunkt i stikprøven, at det er tilstrækkeligt u
 
 -   Hvis $p≥0,05$ kan vi ikke afvise nulhypotesen. Dette er ikke det samme som, at nulhypotesen er sand! Vi kan bare ikke afvise den med udgangspunkt i den pågældende stikprøve.
 
----
+------------------------------------------------------------------------
 
 # P-værdier og signifikans i praksis...
 
@@ -194,7 +194,7 @@ Hvordan? Vi udregner med udgangspunkt i stikprøven, at det er tilstrækkeligt u
 
 Det er standard af fastlægge et signifikansniveau på 5 % ($\alpha=0,05$), men det er sådan set arbitrært. I nogle discpliner arbejder man med $\alpha=0,1$. Diskutér, hvad dette betyder for fortolkningen af resultatet af en hypotesetest.
 
----
+------------------------------------------------------------------------
 
 # Hypotese-tests i sidste semester
 
@@ -216,7 +216,7 @@ Sidste semester arbejdede vi med fire hypotesetests:
 
 # Variable og skalaer
 
-## <br>
+<br>
 
 Variable inddeles først i to typer baseret på deres skala:
 
@@ -254,7 +254,7 @@ Dernæst kategoriseres variable i ***måleniveauer***, afhængigt af hvilken ska
 :::
 :::::
 
----
+------------------------------------------------------------------------
 
 # Variable og skalaer
 
@@ -270,7 +270,7 @@ Dernæst kategoriseres variable i ***måleniveauer***, afhængigt af hvilken ska
 :::
 :::::
 
----
+------------------------------------------------------------------------
 
 # Variable og skalaer
 
@@ -284,7 +284,7 @@ Dernæst kategoriseres variable i ***måleniveauer***, afhængigt af hvilken ska
 :::
 :::::
 
----
+------------------------------------------------------------------------
 
 ```{r include=F}
 library(tidyverse)
@@ -299,21 +299,21 @@ Variablene i R har en *type*, vist i skrå parenteser `<>` efter variabelnavnet.
 glimpse(df_ESS)
 ```
 
----
+------------------------------------------------------------------------
 
 # Variable i R
 
 | Type | Forklaring | Eks. | Måleniveau |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--|
+|------------|-------------------------------|------------------|------------|
 | **Numeric** | Numeriske værdier, både heltal og decimaltal. | `3`, `42.5`, `-7`, `0.001` | Interval |
 | **Integer** | Heltal (underkategori af numeric) | `1L`, `100L`, `-50L` | Interval |
 | **Character** | Tekst eller strenge | `"Hello world"`, | Nominal |
 | **Factor** | Kategoriske data med faste niveauer | `"Mand", "Kvinde"` | Nominal eller Ordinal (\<ord\>) |
 | **Boolean** | Boolean values (sand/falsk). | `TRUE`, `FALSE` | Nominal |
 
----
+------------------------------------------------------------------------
 
-# Mød `groupby()`  og `summarise()`
+# Mød `groupby()` og `summarise()`
 
 -   `group_by()` bruges til at gruppere data efter én eller flere variabler.
 
@@ -321,13 +321,11 @@ glimpse(df_ESS)
 
 -   Når dine data er grupperet, kan du bruge `summarise()` til at beregne opsummeringer for hver gruppe.
 
-<!-- -->
-
 -   Eksempler på opsummeringer: gennemsnit, median, sum eller brugerdefinerede beregninger.
 
----
+------------------------------------------------------------------------
 
-# Mød `groupby()`  og `summarise()`
+# Mød `groupby()` og `summarise()`
 
 Datasæt før groupby():
 
@@ -335,9 +333,9 @@ Datasæt før groupby():
 head(df_ESS)
 ```
 
----
+------------------------------------------------------------------------
 
-# Mød `groupby()`  og `summarise()`
+# Mød `groupby()` og `summarise()`
 
 Vi kan nu bruge `groupby()` til at gruppere uddannelsesniveau og derefter `summarise()` til at beregne antal respondenter i og gennemsnitsindkomsten for hver gruppe:
 
@@ -347,7 +345,7 @@ df_ESS %>% group_by(udd) %>%
             N = n())
 ```
 
----
+------------------------------------------------------------------------
 
 # Øvelse i data wrangling
 
