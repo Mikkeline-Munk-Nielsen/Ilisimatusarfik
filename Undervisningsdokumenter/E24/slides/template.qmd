@@ -5,6 +5,7 @@ format:
     slide-level: 0  # Disable automatic slide creation from headings
     incremental: false 
     logo: css_etc/ilisimatusarfik.png
+    highlight-style: github-dark
 editor: visual
 ---
 

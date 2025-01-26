@@ -304,7 +304,7 @@ glimpse(df_ESS)
 # Variable i R
 
 | Type | Forklaring | Eks. | Måleniveau |
-|------------|-------------------------------|------------------|------------|
+|----|----|----|----|
 | **Numeric** | Numeriske værdier, både heltal og decimaltal. | `3`, `42.5`, `-7`, `0.001` | Interval |
 | **Integer** | Heltal (underkategori af numeric) | `1L`, `100L`, `-50L` | Interval |
 | **Character** | Tekst eller strenge | `"Hello world"`, | Nominal |
