@@ -412,14 +412,14 @@
 <section class="slide level0">
 
 <h2>Fokusområder</h2>
-<p>Sidste semester:</p>
+<p><u>Sidste semester:</u></p>
 <ul>
 <li><p>Stikprøve teori</p></li>
 <li><p>Grundlæggende statistik (måleniveauer, centrum- og spredningsmål)</p></li>
 <li><p>Hypotesetest</p></li>
 <li><p>Beskrivende statistik (uni- og bivariat)</p></li>
 </ul>
-<p>Dette semester</p>
+<p><u>Dette semester</u></p>
 <ul>
 <li><p>Fokus på inferens</p></li>
 <li><p>Forklarende statistik</p></li>
@@ -430,6 +430,15 @@
 
 <h1>Stikprøver</h1>
 <p>En stikprøve er en lille del af universet, der udvælges til at repræsentere/beskrive hele universet <img data-src="images/udtraek.png"></p>
+</section>
+<section class="slide level0">
+
+<h1>Stikprøveudtræk og statistisk usikkerhed</h1>
+<ul>
+<li><p>På baggrund af en stikprøve drages konklusioner om en population (inferens). Slutningen er baseret på stikprøvens <strong>repræsentativitet</strong></p></li>
+<li><p>Den bedste måde at opnå repræsentativitet på er at anvende en udvælgelsesmekanisme baseret på <strong>tilfældighed!</strong></p></li>
+</ul>
+<p><strong>Diskutér i 5 minutter</strong>: hvad betyder repræsentativitet? Hvad er en repræsentativ stikprøve?</p>
 </section>
 <section class="slide level0">
 
@@ -470,8 +479,8 @@
 <h1>Hvorfor hypotese-tests er vigtige…</h1>
 <ul>
 <li><p>Vi bruger hypotesetest til at evaluere hypoteser/påstande om en population <strong>baseret på stikprøvedata</strong></p></li>
-<li><p>Eksempel på hypotese: der er forskel på gennemsnitslønnen for mænd og kvinder i Grønland</p></li>
-<li><p>Formål: At træffe beslutninger om, hvorvidt der er tilstrækkeligt bevis for at afvise hypotesen med udgangspunkt i stikprøven</p></li>
+<li><p><strong>Eksempel på hypotese</strong>: der er forskel på gennemsnitslønnen for mænd og kvinder i Grønland</p></li>
+<li><p><strong>Formål</strong>: At træffe beslutninger om, hvorvidt der er tilstrækkeligt bevis for at afvise hypotesen med udgangspunkt i stikprøven</p></li>
 <li><p>Konkret bruger vi dem til at vurdere, om forskelle og observationer vi ser i vores stikprøve er tilfælde pga. stikprøveusikkerhed, eller om det er sandsynligt, at de er udtryk for rigtige forskelle i populationen</p></li>
 </ul>
 </section>
@@ -484,7 +493,7 @@
 <li><p><strong><em>Alternativ hypotese (H1)</em></strong>: En påstand om, at der er en signifikant forskel eller virkning.</p></li>
 </ul>
 <p><u>Eksempel</u>:</p>
-<p><strong>H0</strong>: Der er <u>ikke</u> nogenforskel i gennemsnitslønnen for mænd og kvinder</p>
+<p><strong>H0</strong>: Der er <u>ikke</u> nogen forskel i gennemsnitslønnen for mænd og kvinder</p>
 <p><strong>H1</strong>: Der <u>er</u> forskel i gennemsnitslønnen for mænd og kvinder</p>
 </section>
 <section class="slide level0">
@@ -492,19 +501,55 @@
 <h1>Fremgangsmåde</h1>
 <ol type="1">
 <li><strong>Formulering af hypoteser:</strong> Formulering af nulhypotese og alternativ hypotese</li>
-<li><strong>Valg af signifikansniveau:</strong> Fastlæggelse af den sandsynlighed vi har defineret i konfidensintervallet som den acceptable usikkerhed (standard <span class="math inline">\(0,05 = 5\%\)</span>)</li>
-<li><strong>Beregning af teststatistik</strong>: Anvendelse af passende statistisk test til at beregne teststatistikken baseret på stikprøvedataene (dette gør R for jer)</li>
-<li><strong>Afgørelse</strong>: Sammenligning af teststatistikken med en kritisk værdi eller p-værdi for at afgøre, om man skal afvise nulhypotesen.</li>
+<li><strong>Valg af signifikansniveau:</strong> Fastlæggelse af den sandsynlighed I har defineret i konfidensintervallet som den acceptable usikkerhed (standard <span class="math inline">\(0,05 = 5\%\)</span>)</li>
+<li><strong>Beregning af teststatistik</strong>: Anvendelse af passende statistisk test til at beregne teststatistikken baseret på stikprøvedataene (I vælger test, R udregner den for jer)</li>
+<li><strong>Afgørelse</strong>: Brug p-værdien til at afgøre, om I skal afvise nulhypotesen.</li>
 </ol>
 </section>
 <section class="slide level0">
 
-<h1>Statistisk signifikans</h1>
+<h1>Fejltyper i hypotesetest</h1>
+<p>Når man tester statistiske hypoteser, kan man begå to typer af fejl:</p>
 <ul>
-<li><p>Signifikans er et ultra-vigtigt begreb i hypotesetests, og relaterer sig tilbage til statistisk usikkerhed.</p></li>
-<li><p>Før en hypotesetest fastsættes det acceptable niveau af statistisk usikkerhed, nemlig sandsynligheden for at afvise nulhypotesen, hvis den er sand (type I fejl).</p></li>
-<li><p>Man arbejder typisk med 𝛼=0,05 dvs. 5 % sandsynlighed for at begå type I fejl</p></li>
+<li><strong>Type I</strong>: Fejlagtigt forkaste <span class="math inline">\(H_0\)</span>, når <span class="math inline">\(H_0\)</span> faktisk er sand.</li>
+<li><strong>Type II</strong>: Fejlagtigt acceptere <span class="math inline">\(H_0\)</span>, når <span class="math inline">\(H_1\)</span> faktisk er sand.</li>
 </ul>
+<p><u><strong>Definitioner</strong>:</u></p>
+<ul>
+<li><span class="math inline">\(P(\text{fejl af Type I}) = \alpha\)</span>: Sandsynligheden for at begå en type I-fejl (signifikansniveauet).</li>
+<li><span class="math inline">\(P(\text{fejl af Type II}) = \beta\)</span>: Sandsynligheden for at begå en type II-fejl.</li>
+</ul>
+<p><em>Bemærk: Lav</em> <span class="math inline">\(\alpha\)</span> reducerer risikoen for Type I-fejl, men kan øge risikoen for Type II-fejl</p>
+</section>
+<section class="slide level0">
+
+<h1>Nulhypotese og alternativ hypotese:</h1>
+<p>En mand stilles for en dommer, anklaget for noget kriminelt.</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: Manden er <strong>ikke skyldig</strong>.</li>
+<li><span class="math inline">\(H_1\)</span>: Manden <strong>er skyldig</strong>.</li>
+</ul>
+<p><u>Mulige fejltyper:</u></p>
+<ul>
+<li><p><strong>Type I</strong>: Manden er uskyldig, men dømmes skyldig <em>(Sandsynlighed:</em> <span class="math inline">\(p = \alpha\)</span>)</p></li>
+<li><p><strong>Type II</strong>: Manden er skyldig, men frikendes<em>(Sandsynlighed:</em> <span class="math inline">\(p = \beta\)</span>)</p></li>
+</ul>
+<p><strong>Bemærk</strong>:<br>
+<span class="math inline">\(\alpha\)</span> er signifikansniveauet – altså den sandsynlighed, vi har defineret som den acceptable risiko for fejlagtigt at forkaste <span class="math inline">\(H_0\)</span>.</p>
+</section>
+<section class="slide level0">
+
+<h1>P-værdier og signifikans</h1>
+<p>I praksis bruges p-værdier til at konkludere på hypotesetests:</p>
+<ul>
+<li><p>En <span class="math inline">\(p\)</span>-værdi er sandsynligheden for at få en teststatistik, der er <em>lige så ekstrem eller mere ekstrem</em> end den observerede, givet at nulhypotesen H0 er sand.</p></li>
+<li><p>Man sammenligner <span class="math inline">\(p\)</span> -værdien med signifikansniveauet <span class="math inline">\(\alpha\)</span> (fx <span class="math inline">\(0,05\)</span>):</p>
+<ul>
+<li><p>Hvis <span class="math inline">\(p &lt; \alpha\)</span>, afvises H0 (statistisk signifikant).</p></li>
+<li><p>Hvis <span class="math inline">\(p \geq \alpha\)</span>, kan H0 ikke afvises (ikke statistisk signifikant)</p></li>
+</ul></li>
+</ul>
+<p>Hvis vores signifikansniveau er sat til <span class="math inline">\(5%\)</span>% afviser vi nulhypotesen, hvis vores <span class="math inline">\(p&lt;0,05\)</span>. Hvis <span class="math inline">\(p≥0,05\)</span> kan vi ikke afvise nulhypotesen.</p>
 </section>
 <section class="slide level0">
 
@@ -522,7 +567,7 @@
 <p><br></p>
 <p>Statistisk signifikant betyder, at vi - <em>med det acceptable niveau af usikkerhed, som vi har fastlagt før testen (typisk 0,05 = 5 %)</em> - kan konkludere, at den forskel vi har estimeret med udgangspunkt i stikprøven også er tilstede i populationen.</p>
 <p><br></p>
-<p>Hvordan? Vi udregner med udgangspunkt i stikprøven, at det er tilstrækkeligt usandsynligt at trække en stikprøve med denne forskel, hvis den ikke faktisk findes i populationen.</p>
+<p><strong>Hvordan?</strong> Vi udregner med udgangspunkt i stikprøven, at det er tilstrækkeligt usandsynligt at trække en stikprøve med denne forskel, hvis den ikke faktisk findes i populationen.</p>
 </section>
 <section class="slide level0">
 
@@ -615,7 +660,7 @@
 <div class="column" style="width:50%;">
 <p><strong>Øvelse 5 minutter</strong>: diskutér hvad der karakteriserer hvert måleniveau og giv eksempler på variable for hvert måleniveau</p>
 </div><div class="column" style="width:50%;">
-<p><img data-src="images/clipboard-450512089.png"></p>
+<p><img data-src="images/måleniveauer.png"></p>
 </div></div>
 </section>
 <section class="slide level0">
@@ -722,7 +767,7 @@ $ alder                  &lt;dbl&gt; 26, 65, 74, 64, 54, 20, 71, 41, 62, 65, 67,
 <section class="slide level0">
 
 <h1>Mød <code>groupby()</code> og <code>summarise()</code></h1>
-<p>Datasæt før groupby():</p>
+<p>Datasæt før <code>groupby()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">head</span>(df_ESS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

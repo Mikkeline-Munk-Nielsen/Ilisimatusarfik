@@ -18,7 +18,7 @@ df <- gapminder
 Datasættet indeholder følgende variable:
 
 | Variabel | Måler |
-|----|----|
+|------------------------------------|------------------------------------|
 | country | Land |
 | continent | Kontinent |
 | year | År for dataindsamling |
@@ -59,7 +59,7 @@ Datasættet indeholder følgende variable:
 
 8.  Find den **gennemsnitlige** levealder for hvert land (brug `groupby()` )
 
-9.  Opsummer den gennemsnitlige BNP pr. indbygger for hver `livsforventningskategori`.
+9.  Opsummer den **gennemsnitlige** BNP pr. indbygger for hver `livsforventningskategori`.
 
 <br>
 
