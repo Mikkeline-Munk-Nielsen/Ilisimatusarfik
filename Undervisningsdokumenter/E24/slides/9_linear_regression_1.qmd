@@ -7,6 +7,7 @@ format:
     logo: css_etc/ilisimatusarfik.png
     highlight: true
     highlight-style: github-dark
+    self-contained: false
 editor: visual
 ---
 
