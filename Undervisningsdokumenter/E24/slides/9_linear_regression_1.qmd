@@ -1,0 +1,867 @@
+---
+format: 
+  revealjs:
+    theme: css_etc/custom-theme-ilisimatusarfik.css
+    slide-level: 0
+    incremental: false 
+    logo: css_etc/ilisimatusarfik.png
+    highlight: true
+    highlight-style: github-dark
+editor: visual
+---
+
+::: center
+# Lineær regression 1
+
+### Statistik E24 (15 ECTS)
+
+### ved Mikkeline Munk Nielsen
+:::
+
+------------------------------------------------------------------------
+
+## Fra uni- til bi- til multivariat
+
+<br>
+
+**Univariat analyse**: analyser af fordelingen på én variabel
+
+**Bivariat analyse**: analyse af sammenhængen mellem to variable
+
+**Multivariat analyse**: analyser af sammenhænge mellem to eller flere variable
+
+<br>
+
+Lineær regression hører under multivariat analyse.
+
+------------------------------------------------------------------------
+
+## Hvad var nu bivariat analyse?
+
+Vi har ofte formodninger om bivariate sammenhænge, f.eks. at uddannelsesniveau hænger sammen med indkomst. Med den bivariate analyse kan vi afgøre:
+
+-   Hvor sikker sammenhængen kan siges at være
+
+-   Om sammenhængen er reel eller tilfældig
+
+-   Sammenhængens styrke og retning
+
+------------------------------------------------------------------------
+
+## To sider af bivariat analyse
+
+<br>
+
+-   **Den deskriptive (beskrivende) del**: at beskrive din stikprøve.
+    -   Fordelinger og fortolkning af krydstabeller/grafer mellem to variable.
+
+    -   Korrelationskoefficienter – sammenhængens styrke, retning og linearitet.
+
+<br>
+
+-   **Den analytiske del (inferens)**: at slutte fra stikprøve til population.
+    -   Hypotesetest – fokus på om forskelle mellem to grupper er tilfældig eller sand.
+
+------------------------------------------------------------------------
+
+## Korrelationer
+
+Korrelationer er et centralt begreb i statistik. De er et udtryk for samvariationen mellem to variable, dvs. hvordan bevæger den ene variabel sig, når den anden bevæger sig.
+
+::::: two-column-layout
+::: left-column
+![](images/korrelationer.png)
+:::
+
+::: right-column
+-   Positiv korrelation: Når den ene variabel stiger, stiger den anden også.
+
+    <br>
+
+-   Negativ korrelation: Når den ene variabel stiger, falder den anden.
+
+    <br>
+
+-   Ikke lineær sammenhæng.
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Korrelationskoefficienter
+
+Konkret arbejder man med korrelationskoefficienter, som er et mål for korrelation:
+
+-   Standardiseret mål for styrken af en sammenhæng.
+-   Beskriver den lineære sammenhæng imellem dem.
+-   Den ligger altid mellem $+1$ og $-1$ – dog ikke for nominal skala.
+-   Sammenhængen er stærkere, jo højere numerisk værdi den har.
+-   Når den er 0, er der ingen sammenhæng.
+-   $+/- 0.15$ betragtes som grænsen for fortolkning.
+
+------------------------------------------------------------------------
+
+## Fra bi- til multivariat analyse
+
+-   Korrelationskoefficienter fortæller os, ***om*** to variable samvarierer, ***styrken*** af sammenhængen og ***retningen*** af sammenhængen (positiv / negativ)
+
+-   **Begrænsning**: bivariate korrelationsstudier kan ikke tage højde for mere end to variable
+
+-   **Konsekvenser**: potentiel over-/undervurdering af sammenhængens styrke
+
+------------------------------------------------------------------------
+
+## Fra bi- til multivariat analyse
+
+Multivariat analyse spørger til:
+
+-   ***Er der faktisk er en sammenhæng*** mellem to variable, når vi tager højde for andre faktorer, som kan spille ind i korrelationen mellem dem?
+
+-   ***Hvor stærk*** er den isolerede (kausale) sammenhæng mellem de to variable
+
+-   ***Hvilke*** andre faktorer spiller en rolle
+
+Endelig definerer vi variablenes indbyrdes forhold, dvs. **hvilken variabel påvirker den anden**
+
+------------------------------------------------------------------------
+
+## Variable i lineær regression
+
+-   I lineær regressionsanalyse er vi som udgangspunkt stadig interesserede i at undersøge sammenhængen mellem to variable, f.eks. uddannelse og indkomst
+
+-   Disse to variable hedder henholdsvis den **afhængige** og **uafhængige** variabel
+
+-   Den afhængige variabel er den, som påvirkes (”afhænger”) af den uafhængige:
+
+::: center
+![](images/reg3.png){width="743"}
+:::
+
+------------------------------------------------------------------------
+
+## Variable i lineær regression
+
+-   Vi har altså en hypotese om, at ***der er en sammenhæng*** mellem uddannelse og indkomst
+
+-   Og vi har en teoretisk funderet hypotese om ***retningen*** på denne sammenhæng: des flere års uddannelse du har, desto mere tjener du
+
+::: center
+![](images/reg3.png){width="743"}
+:::
+
+------------------------------------------------------------------------
+
+## Hvorfor lineær regression?
+
+-   Vi har altså en hypotese om, at ***der er en sammenhæng*** mellem uddannelse og indkomst
+
+-   Og vi har en teoretisk funderet hypotese om ***retningen*** på denne sammenhæng: des flere års uddannelse du har, desto mere tjener du
+
+::: center
+![](images/reg2.png){width="743"}
+:::
+
+Men hvad hvis en del af indkomstforskelle mellem højt/lavere uddannede skyldes, at dem der har lange uddannelser er ældre og dermed har mere erfaring og anciennitet på arbejdsmarkedet?
+
+------------------------------------------------------------------------
+
+## Hvorfor lineær regression?
+
+-   Hvis alder korrelerer med både antal års uddannelse og indkomst, er alder en **confounding variable**
+
+-   Det betyder, at en del af forskellen i indkomst mellem folk høj/lavere uddannelse skyldes forskelle i alder - ikke uddannelse!
+
+::: center
+![](images/reg2.png){width="743"}
+:::
+
+------------------------------------------------------------------------
+
+## Hvorfor lineær regression?
+
+Hvis vi ikke tager højde for, at noget af forskellen skyldes forskelle i alder, vil vi komme til at overvurdere (eller i andre tilfælde undervurdere) sammenhængen mellem uddannelse og indkomst.
+
+::: center
+![](images/reg2.png){width="743"}
+:::
+
+------------------------------------------------------------------------
+
+## Hvorfor lineær regression?
+
+-   Vores spørgsmål er i udgangspunktet, om uddannelse betyder noget for vores indkomstniveau
+-   Men med lineær regression kan vi også spørge: hvor stærk er sammenhængen mellem uddannelse og indkomst, når vi samtidig tager højde for forskelle i alder?
+-   Her inddrager vi en tredje variabel, en ***kontrolvariabel***, der kontrollerer for denne tredje faktor
+
+::: center
+![](images/reg4.png){width="743"}
+:::
+
+------------------------------------------------------------------------
+
+## Hvorfor lineær regression?
+
+-   At inddrage en kontrolvariabel svarer til kun at sammenligne observationer, der har samme værdi på kontrolvariablen
+-   Dvs. man f.eks. estimerer sammenhængen mellem uddannelse og indkomst, mens man kun sammenligner observationer, der har samme alder.
+-   Hvis der stadig er en sammenhæng mellem den afhængige og uafhængige variabel, kan det altså ikke skyldes forskelle i kontrolvariablen (for den holdes konstant)
+
+::: center
+![](images/reg4.png){width="743"}
+:::
+
+------------------------------------------------------------------------
+
+## Hvorfor lineær regression?
+
+-   Man kan altså estimere, hvor meget ens indkomst stiger, når ens uddannelse stiger, "renset" for påvirkningen af alder
+-   Samtidig estimeres, hvor meget indkomst forventes at stige, når alder stiger, "renset" for påvirkningen af uddannelse
+
+::: center
+![](images/reg4.png){width="743"}
+:::
+
+------------------------------------------------------------------------
+
+## Variable i lineær regression
+
+-   Man kan inkludere mange kontrolvariable i vores regressionsanalyse på en gang
+-   Dermed kan man undersøge, om sammenhængen mellem den afhængige og uafhængige variabel består, selv når vi har kontrolleret for andre faktorer, som kunne tænkes at forklare den sammenhængen
+
+::: center
+![](images/reg5.png){width="743"}
+:::
+
+------------------------------------------------------------------------
+
+## Diskussion
+
+<br>
+
+**5 min**: diskutér hvilke andre kontrolvariable, der kunne være relevante i eksemplet med uddannelse og indkomst. Hvad karakteriserer en relevant kontrolvariabel?
+
+---
+
+## Hvordan
+
+Grundlæggende estimerer regressionsanalysen på korrelationen mellem variable
+
+```{r echo=F, eval=T, message=F, warning=FALSE}
+library(tidyverse)
+
+ESS <- readRDS("Data/ESS.rds")
+df <- ESS %>% filter(land=="DK") %>% 
+  select(net_indkomst, udd_aar, alder, fagforeningsmedlem) %>% 
+  na.omit()
+```
+
+::: panel-tabset
+### Korrelationsplot
+
+```{r echo=F, fig.width=6, fig.height=3}
+library(ggplot2)
+
+ggplot(df) +
+  aes(x = udd_aar, y = net_indkomst) +
+  geom_point() +
+  labs(
+    x = "Års uddannelse",
+    y = "Indkomst (netto)"
+  ) + ylim(0, 50000) +
+  theme_minimal()
+
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+ggplot(df) +
+  aes(x = udd_aar, y = net_indkomst) +
+  geom_point() +
+  labs(
+    x = "Års uddannelse",
+    y = "Indkomst (netto)"
+  ) + ylim(0, 50000) +
+  theme_minimal()
+```
+:::
+
+------------------------------------------------------------------------
+
+## Hvordan
+
+Der "fittes" så en linje, der minimerer den samlede afstand til alle punkter (mere om det senere). Hældningen på denne linje, er udtryk for sammenhængens styrke.
+
+::: panel-tabset
+### Fittet linje
+
+```{r echo=F, fig.width=6, fig.height=3}
+library(ggplot2)
+
+ggplot(df) +
+  aes(x = udd_aar, y = net_indkomst) +
+  geom_point() +
+  labs(
+    x = "Års uddannelse",
+    y = "Indkomst (netto)"
+  ) + ylim(0, 50000) +
+  theme_minimal() +
+  geom_smooth(method = "lm", color = "blue", se = FALSE)
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+ggplot(df) +
+  aes(x = udd_aar, y = net_indkomst) +
+  geom_point() +
+  labs(
+    x = "Års uddannelse",
+    y = "Indkomst (netto)"
+  ) + ylim(0, 50000) +
+  theme_minimal() +
+  geom_smooth(method = "lm", color = "blue", se = FALSE)
+```
+:::
+
+------------------------------------------------------------------------
+
+## Hvordan
+
+Lineær regression er en parametrisk metode, hvor man **antager**, at dataene kan beskrives med en bestemt formel, og hvor vi estimerer nogle faste **parametre** ud fra data.
+
+-   I lineær regression antager vi, at der er en **lineær sammenhæng** mellem vores variable
+
+-   Disse sammenhænge estimeres i form af parametre i en regressionsmodel
+
+------------------------------------------------------------------------
+
+## Eksempel
+
+<br>
+
+Lad os prøve at tage gennemgå, hvordan en lineær regressionsmodel skrives op og fortolkes med eksemplet fra Karlson (2017) teksten om lineær regression i Survey bogen...
+
+------------------------------------------------------------------------
+
+## Simpel lineær regression
+
+Simpel lineær regression betragter vi kun sammenhængen mellem en afhængig variabel $Y$ og en uafhængig variabel $X$
+
+\
+$Y=\alpha + \beta*X+\epsilon$
+
+<br>
+
+Denne model er simpel, fordi der kun er én variabel på højde side af lighedstegnet. I eksemplet med indkomst og uddannelse skrives det således:
+
+<br>
+
+$Indkomst = \alpha+\beta*uddannelse+\epsilon$
+
+------------------------------------------------------------------------
+
+## Simpel lineær regression
+
+Modellen har to parametre, $\alpha$ (alpha) og $\beta$ (beta)\
+<br>
+
+$Indkomst = \alpha+\beta*uddannelse+\epsilon$
+
+<br>
+
+-   $\alpha$ kaldes konstantleddet og fortolkes som den gennemsnitlige værdi af $Y$ (indkomst) når $X$ (uddannelse) er lig med 0.
+
+-   Hvis man kan have mellem 0 og 20 års uddannelse, vil 𝛼 repræsentere den gennemsnitlige indkomst for dem, der har 0 års uddannelse.
+
+------------------------------------------------------------------------
+
+## Simpel lineær regression
+
+Modellen har to parametre, $\alpha$ (alpha) og $\beta$ (beta)\
+<br>
+
+$Indkomst = \alpha+\beta*uddannelse+\epsilon$
+
+<br>
+
+-   $\beta$ kaldes hældningskoefficienten og fortolkes som den gennemsnitlige ændring i Y (indkomst), for én enhedsændring i (X) uddannelse.
+
+-   $\beta$ repræsenterer i dette eksempel den forventede/gennemsnitlige ændring i indkomst, når man får ét års uddannelse mere.
+
+-   $\beta$ er altså et estimat for sammenhængen mellem den afhængige variabel $Y$ og den uafhængige variabel $uddannelse$ som $\beta$ tilhører
+
+------------------------------------------------------------------------
+
+## Simpel lineær regression
+
+Det sidste tegn $\epsilon$ (epsilon) er fejlleddet eller residualet:
+
+<br>
+
+$Indkomst = \alpha+\beta*uddannelse+\epsilon$
+
+<br>
+
+-   Fejlleddet er en variabel (ikke et parameter), som indeholder hver respondents afvigelse mellem respondenternes observerede indkomst og den indkomst, som regressionsmodellen forudsiger, at respondenten har, på baggrund af 𝛼 og 𝛽.
+
+-   $\epsilon$ opsummerer med andre ord den variation i Y (indkomst), som ikke kan forklares af X (uddannelse).
+
+------------------------------------------------------------------------
+
+## Simpel lineær regression
+
+::::: two-column-layout
+::: left-column
+![](images/reg6.png)
+:::
+
+::: right-column
+-   Parametre og fejlled kan fremstilles grafisk
+
+-   Pointen med lineær regression er at lægge en lige linje gennem alle respondenters koordinater
+
+-   Linjen estimeres således, at der er mindst mulig afstand til hver af datapunkterne
+
+-   Denne afstand opfanges af $\epsilon$
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Simpel lineær regression
+
+::::: two-column-layout
+::: left-column
+![](images/reg6.png)
+:::
+
+::: right-column
+-   $\beta$ er hældningen på linjen, netop derfor kaldes den for *hældningskoefficienten*
+
+-   $\beta$ repræsenterer stigningen på Y-aksen, når 𝑋 stiger med 1
+
+-   Stigningen aflæses altså på y-aksen
+:::
+:::::
+
+------------------------------------------------------------------------
+
+## Multipel lineær regression
+
+I den simple lineære regression er $\beta$-koefficienten udtryk for en ubetinget eller ”ikke-kontrolleret” lineær sammenhæng mellem $X$ og $Y$
+
+<br>
+
+$Indkomst = \alpha+\beta*uddannelse+\epsilon$
+
+<br>
+
+I multipel lineær regression introducerer vi en tredje variabel (kontrolvariabel) $Z$, som placeres på højre side af lighedstegnet:
+
+$Indkomst = \alpha+\beta*uddannelse+\delta Z+\epsilon$
+
+------------------------------------------------------------------------
+
+## Multipel lineær regression
+
+$Indkomst = \alpha+\beta*uddannelse+\delta*Z+\epsilon$
+
+<br>
+
+-   Konstantleddet $\alpha$ fortolkes nu som den gennemsnitlige værdi af $Y$ når både $X$ og $Z$ er lig med 0 <br>
+-   Fejlledet $\epsilon$ fortolkes som den del af variationen i $Y$ som ikke kan forklares af både $𝑋$ og $𝑍$
+
+------------------------------------------------------------------------
+
+## Multipel lineær regression
+
+-   I simpel lineær regression er $\beta$ en ”ubetinget” lineær sammenhæng mellem $𝑋$ og $Y$:
+
+$Y = \alpha+\beta*X+\epsilon$
+
+-   Men i den multiple regressionsmodel er $\beta$ den ”betingede/partielle” sammenhæng mellem $𝑋$ og $Y$ når vi kontrollerer for $𝑍$
+
+$Y = \alpha+\beta*X+\delta*Z+\epsilon$
+
+-   At ”kontrollere for $𝑍$” betyder, at vi kun sammenligner folk, men samme værdi på variablen $𝑍$.
+
+-   Her er $\beta$ altså den forventede ændring i $Y$ for en enhedsændring i $𝑋$, når man sammenligner folk, men samme værdi på $𝑍$
+
+------------------------------------------------------------------------
+
+## Multipel lineær regression
+
+Delta 𝛿 fortolkes ligesom $\beta$
+
+$Y = \alpha+\beta*X+\delta*Z+\epsilon$
+
+<br>
+
+-   Koefficienten $\delta$ er bare den ”betingede/partielle” sammenhæng mellem $Z$ og $Y$ når vi kontrollerer for $X$
+
+-   At ”kontrollere for $X$” betyder, at vi kun sammenligner folk, men samme værdi på variablen $X$.
+
+-   Her er $\delta$ altså den forventede ændring i $Y$ for en enhedsændring i $Z$, når man sammenligner folk, men samme værdi på $X$
+
+------------------------------------------------------------------------
+
+## Multipel lineær regression
+
+Lad os sige, at:
+
+-   $Y$ måler indkomst i DKK
+
+-   $X$ måler uddannelse i år
+
+-   $Z$ måler alder
+
+$Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
+
+------------------------------------------------------------------------
+
+## Multipel lineær regression
+
+$Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
+
+<br>
+
+Så vil:
+
+-   $\alpha$ være den gennemsnitlige indkomst for en person med 0 års uddannelse og en alder på 0 år
+
+-   $\beta$ være den forventede ændring i indkomst, hver gang uddannelse stiger med 1 (år), når vi sørger for kun at sammenligne folk der er lige gamle, og dermed tager højde for effekten af alder
+
+-   $\delta$ være den forventede ændring i indkomst, hver gang alder stiger med 1 (år), når vi kontrollerer for uddannelse
+
+-   $\epsilon$ være den del af variationen i 𝑌 som ikke kan forklares af både $X$ og $X$
+
+------------------------------------------------------------------------
+
+## Multipel lineær regression
+
+I dette eksempel vil variablene have følgende roller:
+
+![](images/reg7.png){fig-align="center" width="515"}
+
+-   Variable er dem vi specificerer i vores regression i R
+
+-   Koefficienterne er de tal, som vi aflæser som resultater
+
+------------------------------------------------------------------------
+
+## Multipel lineær regression
+
+-   Pointen med at indføre kontrolvariable er, at vi kan få den ”rene” sammenhæng mellem to variable (f.eks. Uddannelse og indkomst), renset for effekten af confounding variables (såsom alder)
+
+![](images/reg8.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Hypotesetest i lineær regression
+
+Når vi tester, om der er en sammenhæng mellem 𝑋 og 𝑌 i lineær regression, laver vi faktisk bare en t-test på den tilhørende koefficient 𝛽:
+
+<br>
+
+**H0**: 𝛽 (hældningen) er lig med 0
+
+**H1**: 𝛽 (hældningen) er ikke lig med nul
+
+<br>
+
+-   Vi bruger som altid p-værdien til at afgøre, om vi kan forkaste nulhypotesen! Hvis p-værdien er under 0,05 siger vi, at der er en statistisk signifikant sammenhæng mellem 𝑋 og 𝑌 (selv når vi kontrollerer for 𝑍).
+
+-   Vi laver i princippet præcis samme test for 𝛿, for at teste, om der er en statistisk signifikant sammenhæng mellem 𝑍 og 𝑌 (selv når vi kontrollerer for 𝑋).
+
+------------------------------------------------------------------------
+
+## Lineær regression i R
+
+I skal bruge funktionen `lm()` til at estimere regressionsmodeller. Syntaksen er som følgende med *k* antal kontrolvariable:
+
+```{r echo=TRUE, eval=F, message=F, warning=FALSE}
+model <- lm(afhængig_variabel ~ uafhængig_variabel +
+            kontrol_variabel_1 + kontrol_variabel_2 ...
+            kontrol_variabel_k, 
+            data=df)
+```
+
+Resultatet af regressionsanalysen gemmes i objektet *model*. Brug `texreg::screenreg()` til at printe resultaterne i consollen:
+
+```{r echo=TRUE, eval=F, message=F, warning=FALSE}
+(texreg::screenreg(list(model), include.ci = F))
+```
+
+------------------------------------------------------------------------
+
+## Lineær regression i R
+
+Eks. $Indkomst = \alpha+\beta*uddannelse+\epsilon$
+
+::: panel-tabset
+### output
+
+```{r echo=F, fig.width=6, fig.height=3}
+model1 <- lm(net_indkomst ~ udd_aar, data = df)
+
+library(texreg)
+(texreg::screenreg(list(model1), include.ci=F))
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+model1 <- lm(net_indkomst ~ udd_aar, data = df)
+
+library(texreg)
+(texreg::screenreg(list(model1), include.ci=F))
+```
+:::
+
+***Intercept***: parameterestimatet for konstantleddet $\alpha=10754,2$ . Dette er den forventede værdi på den afhængige variabel indkomst, når værdien på den uafhængige variabel *antal års uddannelse* = 0. Altså den forventede indkomst for en person med 0 års udddannelse.
+
+------------------------------------------------------------------------
+
+## Lineær regression i R
+
+Eks. $Indkomst = \alpha+\beta * uddannelse+\epsilon$
+
+::: panel-tabset
+### output
+
+```{r echo=F, fig.width=6, fig.height=3}
+model1 <- lm(net_indkomst ~ udd_aar, data = df)
+
+library(texreg)
+(texreg::screenreg(list(model1), include.ci=F))
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+model1 <- lm(net_indkomst ~ udd_aar, data = df)
+
+library(texreg)
+(texreg::screenreg(list(model1), include.ci=F))
+```
+:::
+
+***udd_aar***: parameterstimatet for $\beta=380,33$. Dette er den forventede stigning i den afhængige variabel (indkomst*)* for hver gang den uafhængige variabel (antal års uddannelse)stiger med 1. Altså den forventede stigning i indkomst hver gang en person har 1 års uddannelse mere.
+
+------------------------------------------------------------------------
+
+## Lineær regression i R
+
+`texreg` printer stjerner som indikatorer for, om parameterestimater er signifikante. Forklaringen i bunden af tabellen viser, at:
+
+<br>
+
+**\*\*\*** betyder, at p-værdien for parameterestimatet er mindre end 0,001
+
+**\*\*** betyder, at p-værdien for parameterestimatet er mindre end 0,01
+
+**\*** betyder, at p-værdien for parameterestimatet er mindre end 0,05
+
+<br>
+
+Det fremgår altså af tabellen, at der er en signifikant sammenhæng mellem den afhængige variabel, *indkomst*, og uafhængige variabel *antal års uddannelse* $(p < 0,001)$.
+
+------------------------------------------------------------------------
+
+## Lineær regression i R
+
+Eks. $Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
+
+::: panel-tabset
+### output
+
+```{r echo=F, fig.width=6, fig.height=3}
+model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
+
+(texreg::screenreg(list(model1, model2), include.ci=F))
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
+
+(texreg::screenreg(list(model1, model2), include.ci=F))
+```
+:::
+
+Vi kan nu se parameterestimater fra både model 1 og model 2
+
+------------------------------------------------------------------------
+
+## Lineær regression i R
+
+Eks. $Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
+
+::: panel-tabset
+### output
+
+```{r echo=F, fig.width=6, fig.height=3}
+model2 <- lm(net_indkomst ~ udd_aar + alder, data = df) 
+
+(texreg::screenreg(list(model1, model2), include.ci=F))
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
+
+(texreg::screenreg(list(model1, model2), include.ci=F))
+```
+:::
+
+***Intercept***: parameterestimatet for konstantleddet har nu ændret sig til $\alpha=9767$ . Dette er den forventede værdi på den afhængige variabel indkomst, når værdien på den uafhængige variabel *antal års uddannelse* = 0 og kontrolvariablen *alder = 0*. Altså den forventede indkomst for en person med 0 års udddannelse på 0 år.
+
+------------------------------------------------------------------------
+
+## Lineær regression i R
+
+Eks. $Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
+
+::: panel-tabset
+### output
+
+```{r echo=F, fig.width=6, fig.height=3}
+model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
+
+(texreg::screenreg(list(model1, model2), include.ci=F))
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
+
+(texreg::screenreg(list(model1, model2), include.ci=F))
+```
+:::
+
+***udd_aar***: parameterstimatet for $\beta=387,68$. Dette er stadig den forventede stigning i den afhængige variabel (indkomst*)* for hver gang den uafhængige variabel (antal års uddannelse) stiger med 1. Men nu er det den estimerede stigning, når vi HAR taget højde for alder.
+
+------------------------------------------------------------------------
+
+## Lineær regression i R
+
+Eks. $Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
+
+::: panel-tabset
+### output
+
+```{r echo=F, fig.width=6, fig.height=3}
+model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
+
+(texreg::screenreg(list(model1, model2), include.ci=F))
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
+
+(texreg::screenreg(list(model1, model2), include.ci=F))
+```
+:::
+
+***alder***: parameterstimatet for $\delta=17,76$. Dette er - ligesom estimatet for $\beta$ - den forventede stigning i den afhængige variabel (indkomst*)* for hver gang den kontrolvariablen (alder) stiger med 1. Det er tilmed den estimerede stigning, når vi HAR taget højde for *uddannelse*. Ingen stjerner betyder, at estimatet er insignifikant.
+
+------------------------------------------------------------------------
+
+## Hvad kigger vi efter?
+
+Vi har nu testet både den rå og den kontrollerede sammenhæng mellem indkomst og uddannelse. Det vi kigger efter er:
+
+-   Var der en statistisk signifikant sammenhæng mellem uddannelse og indkomst (aflæses i $\beta$ **før** vi inkluderede kontrolvariablen?
+
+-   Ændrede sammenhængen ( størrelsen på $\beta$) sig, **efter** vi inkluderede kontrolvariablen?
+
+-   Blev samenhængen ($\beta$) insignifikant, da vi inkluderede kontrolvariablen.
+
+-   Skal kontrolvariablen indgå i modellen, eller er den insignifikant (irrelevant)?
+
+Fremgangsmåden kaldes *forlæns modelsøgning*, hvilket vi skal lave i næste uge.
+
+------------------------------------------------------------------------
+
+## Forventede værdier
+
+Når modellens parametre er estimeret, kan man anvende modellens formel til at udregne ***forventede værdier*** på den afhængige variabel, for forskellige niveauer på de uafhængige variable:
+
+1\) $Indkomst = \alpha+\beta*uddannelse+\epsilon$
+
+2\) $Indkomst = 9767 +387*uddannelse+\epsilon$
+
+<br>
+
+Dermed kan man f.eks. udregne den forventede indkomst for en person med 15 års uddannelse:
+
+3\) $Indkomst = 9767 +387*15= \underline{\underline{15.572}}$
+
+------------------------------------------------------------------------
+
+## Forventede værdier
+
+5 min: prøv med udgangspunkt i nedenstående at udregne den forventede indkomst for en person med 18 års uddannelse:
+
+$Indkomst = \alpha+\beta * uddannelse+\epsilon$
+
+::: panel-tabset
+### output
+
+```{r echo=F, fig.width=6, fig.height=3}
+model1 <- lm(net_indkomst ~ udd_aar, data = df)  
+
+(texreg::screenreg(list(model1), include.ci=F))
+```
+
+### Kode
+
+```{r echo=T, eval=F}
+model1 <- lm(net_indkomst ~ udd_aar, data = df)  
+
+(texreg::screenreg(list(model1), include.ci=F))
+```
+:::
+
+---
+
+## Lineær regressionsanalyse kan anvendes...
+
+<br>
+
+-   **Deskriptivt/beskrivende** til at beskrive sammenhænge mellem flere variable
+
+-   **Forklarende** ved at teste, om sammenhænge mellem to variable består, når der kontrolleres for andre faktorer samtidig
+
+-   **Forudsigende** på baggrund af data og model (f.eks. hvor meget kan jeg forvente at tjene, givet mit uddannelsesniveau og alder)
+
+------------------------------------------------------------------------
+
+## Hvorfor lineær regression?
+
+Der findes andre typer af regressionsanalyse, så hvorfor skal vi lære lineær?
+
+-   Det er den mest anvendte
+
+-   Metoden er sindssygt robust og kan anvendes til mange forskellige spørgsmål
+
+-   Det er et godt udgangspunkt for at lære mere avanceret statistik.
+
+---
+
+## Øvelse
+
+Gå ind i kodebogen og installér den nødvendige pakke `texreg` (se under afsnittet *Multivariat analyse*).
+
+<br>
+
+Download datasættet `ESS` fra lectio og prøv at genskabe regressionsmodellerne fra de to modeller:
+
+Model 1: $Indkomst = \alpha+\beta*uddannelse+\epsilon$
+
+Model 2: $Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$

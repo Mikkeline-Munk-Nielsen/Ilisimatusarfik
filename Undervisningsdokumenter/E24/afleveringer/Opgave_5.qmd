@@ -1,29 +1,44 @@
 ---
-title: "Opgave 5"
-format: html
-editor: visual
-author: [dit navn]
+title: "Aflevering 4: forslag til besvarelse"
+format:
+  html:
+    css: css_etc/custom-theme-ilisimatusarfik-doc.css
+    fontfamily: Calibri
+    include-before-body: ../../home-button.html
+  pdf:
+    keep-md: true 
 ---
 
-## Introduktion og data
+*Følgende er et forslag til besvarelse af den tredje ud af de seks obligatoriske afleveringer i faget.* *Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.*
 
-I denne øvelse skal I arbejde videre med European Social Survey. I skal derfor ikke downloade et nyt datasæt.
+## Data
 
--   *Skriv dit navn øverst i desnne fil der hvor der står “\[dit navn\]”.*
+Download datasættet ***ESS*** på lectio.
 
--   *Nedenfor er en række spørgsmål. Sæt dit svar ind der hvor der står “\[dit svar\]”.*
+I denne øvelse skal I prøve kræfter med et udsnit af European Social Survey (ESS), der gennemføres i 20 forskellige EU lande. European Social Survey er et samfundsvidenskabeligt forsøg på at kortlægge holdninger, overbevisninger og adfærdsmønstre hos forskellige befolkninger i Europa. Der findes mange runder med forskellige temaer, men alle spørger ind til grundlæggende socioøkonomiske variable.
 
--   *Når du er færdig med besvarelsen skal du klikke på ‘Render’ og uploade .html filen på Lectio under ‘Opgaver’.*
+## Opret et script
+
+Start med at åbne RStudio ved at klikke på dit R-project. Opret dernæst et nyt script og gem det i samme mappe, som dit R-project. Du kan f.eks. kalde scriptet *Aflevering_4*.
+
+-   Brug `getwd()` til at sikre dig, at du arbejder i den rigtige mappe på computeren
+
+-   Indlæs det indbyggede datasæt i et objekt, f.eks. kaldet `df`
 
 ## Indlæs data
 
 -   Start med at check, at både dette dokument og ESS datasættet ligger i samme mappe som dit R-project. Indlæs det med funktionen `readRDS`:
 
-```{r warning=F}
+```{r warning=F, message=F, eval=F, include=T}
+getwd()
+df <- readRDS("ESS.rds")
+```
 
-getwd() # Denne kommando fortæller dig, hvilken mappe du arbejder i lige nu.
+```{r warning=F, include=F}
 
-df <- readRDS("Data/ESS.rds") # Her hentes datasættet 
+getwd()
+
+df <- readRDS("C:/Users/mmn/Dropbox/Ilisimatusarfik/R/Ilisimatusarfik_Statistik_EO_F24/Data/ESS.rds") # Her hentes datasættet 
 ```
 
 -   Brug `filter()` funktionen til at gemme et nyt datasæt, der kun indeholder besvarelser fra DK.
@@ -39,251 +54,166 @@ df <- filter(df, land=="DK")
 
 ```{r}
 
-df <- df %>% select(net_indkomst, koen, udd_aar, ansaettelse_type) %>% na.omit()
+df <- df %>% select(net_indkomst, antal_timer_arb, udd_aar) %>% na.omit()
 ```
 
-## Sammenhæng mellem køn og indkomst
+# Sammenhæng mellem indkomst og uddannelse
 
-Over de næste opgaver skal I undersøge sammenhængen mellem køn og indkomst.
+Over de næste opgaver skal I undersøge sammenhængen mellem indkomst og uddannelse.
 
-### Opgave 1: simpel lineær regression
+## 1 Korrelationer
 
--   Start med at lav en tabel over variablen koen (køn).
+**a) Start med at definér måleniveauerne for variablene `net_indkomst` og `udd_aar`**
 
-```{r warning=F, message=F}
+Begge variable kan betragtes som intervalskalerede, da afstanden mellem værdierne på variablene er konstant og meningsfuld. Det giver også mening at tale om decimaler på begge variable.
 
-library(janitor)
+**b) Lav et bivariat scatterplot for variablene `net_indkomst` og `udd_aar`. Ser der ud til at være en sammenhæng mellem de to variable?**
 
+```{r warning=F, message=F, echo=T}
+library(ggplot2)
+
+ggplot(df) +
+  aes(x = udd_aar, y = net_indkomst) +
+  geom_point() +
+  labs(
+    title = "Sammenhæng mellem antal års uddannelse og indkomst",
+    x = "Antal års uddannelse",
+    y = "Indkomst DKK (netto)"
+  ) +
+  theme_minimal()
 ```
 
--   Skriv med ord, hvilket måleniveau du mener, at variablen koen bør være på
+Scatterplottet viser, at der er en tendens til at folk har en højere indkomst, desto flere års uddannelse de har, da prikkerne lægger sig i diagonalen mellem akserne (tyder på positiv korrelation).
 
-    \[dit svar\]
+**c) Udregn den passende korrelationskoefficient for variablene `net_indkomst` og `udd_aar`, givet deres måleniveau. Er der en sammenhæng mellem de to variabl? Hvilken retning, og hvor stærk?**
 
--   Brug `glimpse()` funktionen til at undersøge, hvilken typen variablen koen er. Den skal være en factor for at R behandler dens kategorier som dummy variable.
-
-```{r warning=F, message=F}
-
-
-```
-
-I skal nu undersøge sammenhængen mellem køn og indkomst med lineær regressionsanalyse.
-
--   Kig på den nedenståene formel. Skriv med ord, hvilken variabel der er den afhængige, og hvilken variabel, der er den uafhængige:
-
-    $Indkomst = \alpha+\beta*Kvinde+\epsilon$
-
-\[dit svar\]
-
--   Du skal nu estimere modellen for at teste, om der er en signifikant forskel på gennemsnitsindkomsten for mænd og kvinder i stikprøven. Start med at opstille hypoteser for hældningen på regressionskoefficienten beta:
-
-    \[dit svar\]
-
--   Indlæs pakken "broom". Brug så `lm()` funktionen til at estimere modellen og `tidy()` eller `summary()` til at printe resultaterne.
-
-```{r warning=F, message=F}
-library(broom)
-
-model1 <- lm(net_indkomst ~ koen, data = df)
-
-tidy(model1)
-#summary(model1)
-```
-
--   Hvad er fortolkningen af værdien for konstantleddet (alpha)?
-
-\[dit svar\]
-
--   Hvad er fortolkningen af værdien på koefficienten for "kvinde" (beta)?
-
-\[dit svar\]
-
--   Er der en statistisk signifikant sammenhæng mellem køn og indkomst?
-
-\[dit svar\]
-
-Nu skal du sætte koefficienterne fra dit resultat ind i formlen for regressionsmodellen for at udregne følgende:
-
--   Hvad er den forventede indkomst for en mand?
-
-\[dit svar\]
-
--   Hvad er den forventede indkomst for en kvinde?
-
-\[dit svar\]
-
-Prøv at udfør en t-test for at teste, om der er forskel på gennemsnitsindkomsten mellem mænd og kvinder.
-
-```{r warning=F, message=FALSE}
-
-t.test(net_indkomst ~ koen, data=df)
-
-```
-
--   Sammenlign t-værdien og gennemsnit med den t-værdi du fik for koefficienten for kvinde i regressionen. Det er de præis samme resultater... hvorfor?
-
-    \[dit svar\]
-
-### Opgave 2: multipel lineær regression (forlæns modelsøgning)
-
-I har nu undersøgt sammenhængen mellem køn og indkomst i en simpel regressionsmodel. Nu skal i undersøge, om sammenhængen i virkeligheden kan forklares af andre forhold.
-
-Nogle påstår, at lønforskellen på mænd og kvinder skyldes, at mænd gennemsnitligt set har mere uddannelse end kvinder. I skal derfor indføre variablen "udd_aar" som kontrolvariabel i jeres regressionsmodel for at teste, om sammenhængen mellem køn og indkomst kan forklares af, at mænd gennemsnitligt tager flere års uddannelse end kvinder.
-
--   Variablen "udd_aar" måler, hvor mange års uddannelse respondenterne har. Skriv med ord, hvilket måleniveau du mener, at variablen bør have
-
-    \[dit svar\]
-
--   Brug `glimpse()` funktionen til at undersøge, hvilken type variablen er.
-
-```{r warning=F, message=F}
-
-
-```
-
-I skal nu undersøge, om sammenhængen mellem køn og indkomst kan forklares af forskelle i antal års uddannelse.
-
-$Indkomst = \alpha+\beta*Kvinde+\delta * Antal års uddannelse +\epsilon$
-
--   Brug `lm()` funktionen til at estimere modellen MED kontrolvariablen og `tidy()` eller `summary()` til at printe resultaterne.
-
-```{r warning=F, message=F}
-
-model2 <- lm(net_indkomst ~ koen + udd_aar, data = df)
-
-tidy(model2)
-#summary(model2)
-```
-
--   Beskriv med ord, hvad fortolkningen af værdien på konstantleddet er nu
-
-    \[dit svar\]
-
--   Beskriv med ord, hvad fortolkningen af værdien på koefficienten for "udd_aar" er
-
-    \[dit svar\]
-
--   Er der en signifikant sammenhæng mellem antal års uddannelse og indkomst?
-
-    \[dit svar\]
-
-Er der fortsat en signifikant forskel mellem koen og indkomst, selv når der kontrolleres for antal aars uddannelse?
-
-\[dit svar\]
-
-Andre påstår, at lønforskellen på mænd og kvinder skyldes, at mænd har andre typer af ansættelse end kvinder har. I skal derfor indføre variablen "ansaettelse_type" som endnu en kontrolvariabel i jeres regressionsmodel for at teste, om sammenhængen mellem køn og indkomst kan forklares af forskelle i *ansættelsestyper*.
-
--   Lav en tabel over variablen "ansættelse_type" for at undersøge, hvilke ansættelsestyper variablen indeholder.
-
-```{r warning=F, message=F}
-
-
-```
-
--   Skriv med ord, hvilket måleniveau du mener, at variablen ansaettelse_type bør være på
-
-\[dit svar\]
-
--   Brug `glimpse()` funktionen til at undersøge, hvilken typen variablen er. Den skal være en factor for at R behandler dens kategorier som dummy variable.
-
-```{r warning=F, message=F}
-
-
-```
-
--   I skal nu undersøge om sammenhængen mellem køn og indkomst kan forklares af antal års uddannelse eller ansættelsestype. Kig på formlen nedenfor. Hvilken ansættelsestype ligger i referencekategorien?
-
-$Indkomst = \alpha+\beta*Kvinde+\delta * Antal års uddannelse +\gamma_1 * Selvstændig + \gamma_2 * Familie + \epsilon$
-
--   Brug `lm()` funktionen til at estimere modellen med kontrolvariablerne aar_udd og ansaettelse_type. Brug så `tidy()` eller `summary()` til at printe resultaterne.
-
-```{r warning=F, message=F}
-
-model3 <- lm(net_indkomst ~ koen + udd_aar + ansaettelse_type, data = df)
-
-tidy(model3)
-#summary(model3)
-```
-
--   Beskriv med ord, hvad fortolkningen af værdien på konstantleddet er nu
-
-    \[dit svar\]
-
--   Beskriv med ord, hvad fortolkningen af værdien på koefficienten for ansættelsestypen "Selvstændig" er
-
-    \[dit svar\]
-
--   Beskriv med ord, hvad fortolkningen af værdien på koefficienten for ansættelsestypen "Familie" er
-
-    \[dit svar\]
-
--   Hvad betyder det, at koefficienten for ansættelsestypen *Familie* er signifikant, men at koefficienten for ansættelsestypen *Selvstændig* ikke er? Skriv med ord.\
-    \
-    \[dit svar\]
-
--   Er der fortsat en signifikant forskel mellem koen og indkomst, selv når der kontrolleres for antal års uddannelse OG ansættelsestype? Skriv med ord.
-
-    \[dit svar\]
-
-### Opgave 3: forklaringskraft
-
-I har nu undersøgt sammenhængen mellem køn og indkomst via. forlæns modelsøgning. I har estimeret tre forskelige modeller:
-
-*Model 1: simpel model kun med afhængigh og uafhængig variabel (indkomst og køn)*
-
-*Model 2: multipel model med én kontrolvariabel (indkomst, køn og antal års uddannelse)*
-
-*Model 3: multipel model med to kontrolvariable (indkomst, køn, antal års uddannelse og ansættelsestype).*
-
-I skal nu sammenligne de tre modeller for at afgøre, hvilken en der har den største forklaringskraft ved at sammenligne de tre modellers R\^2 værdi.
-
--   Skriv med ord, hvad R\^2 værdien fortæller os
-
-    \[dit svar\]
-
--   Sammenlign dine modellers R\^2 værdi med `glance()` funktionen og aflæs R\^2 værdien
-
-```{r warning=F, message=F}
-
-glance(model1)
-```
-
-```{r warning=F, message=F}
-glance(model2)
-```
-
-```{r warning=F, message=F}
-
-glance(model3)
-```
-
--   Skriv med ord, hvilken model der har den højeste forklaringskraft?
-
-    \[dit svar\]
-
--   Skriv med ord, hvor stor en del af variationen i indkomst den bedste model kan forklare?
-
-    \[dit svar\]
-
-### Opgave 4: F-test for to modeller
-
-Man kan få en idé om, hvilke modeller der er bedst, ved at sammenligne deres forklaringskraft (R\^2 værdi). Men der skal en hypotesetest til at afgøre, om én model forklarer signifikant mere end en anden.
-
-Når man sammenligner to modellers forklaringskraft, hvor der er mere end ét parameterestimat til forskel – som her hvor model 2 og 3 har både parameterestimatet for ansættelsestypen "familie" og ansættelsestypen "selvstændig" til forskel – skal man altid benytte F-testen. F-testen kan nemlig teste, om den forklaringskraft, som flere variable tilsammen tilføjer, er signifikant forskellig fra 0.
-
--   Opstil hypoteserne for F-testen mellem mellem model 2 og model 3 med ord:\
-    \
-    \[dit svar\]
-
--   Kør en F-test mellem model 2 og model 3 med følgende kode:
+Den passende korrelationskoefficient er pearsons $r$ for to intervalskalerede variable:
 
 ```{r}
-
-f_test <- anova(model2, model3)
-
-print(f_test)
+cor.test(df$udd_aar, df$net_indkomst)
 ```
 
--   Konkludér på testen. Forklarer model 3 signifikant mere end model 2?
+Korrelationskoefficienten på 0.26 indikerer, at der er en moderat/kraftig positiv sammenhæng mellem antal arbejdstimer og indkomst. Desto mere du arbejder, desto højere indkomst.
 
-    \[dit svar\]
+## 2 Simpel regressionsmodel
+
+**a) Lav et bivariat scatterplot for variablene `net_indkomst` og `udd_aar`, men tilføj nu med en regressionslinje. Kommentér på plottet - forventer du at regressionen finder en sammenhæng mellem variablene? Hvorfor?**
+
+```{r warning=F, message=F, echo=T}
+ggplot(df) +
+  aes(x = udd_aar, y = net_indkomst) +
+  geom_point() +
+  labs(
+    title = "Sammenhæng mellem antal års uddannelse og indkomst",
+    x = "Antal års uddannelse",
+    y = "Indkomst DKK (netto)"
+  ) +
+  theme_minimal() +
+  geom_smooth(method = "lm", color = "blue", se = FALSE)
+```
+
+Linjens hældning antyder, at der er den positive sammenhæng, som korrelationskoefficienten også viste. En flad linje uden hældning ville indikere, at der ikke var en sammenhæng.
+
+**b) Betragt følgende regressionsmodel; hvilken variabel er den afhængige, og hvilken er den uafhængige?**
+
+$Indkomst = \alpha+\beta_1*udd\_aar+\epsilon$
+
+Indkomst er den afhængige variabel. Antal års uddannelse er den uafhængige variabel, som påvirker den afhængige variabel.
+
+**c) Estimér regressionsmodellen i R**
+
+```{r warning=F, message=F, echo=T}
+library(texreg)
+
+model1 <- lm(net_indkomst ~ udd_aar, data = df)
+
+(texreg::screenreg(list(model1), include.ci=F))
+```
+
+**d) Hvad er fortolkningen af værdien for konstantleddet** $\alpha$
+
+Fortolkningen af $\alpha$ er den forventede værdi på $Y$, når modellens uafhængige variable er lig 0. Dvs. den forventede indkomst for en person med 0 års uddannelse.
+
+**e) Hvad er fortolkningen af værdien på** $\beta_1$ **koefficienten for `udd_aar`**
+
+Fortolkningen af $\beta_1$ er den forventede stigning i den afhængige variabel, når den tilhørende uafhængige variabel (antal års uddannelse) stiger med 1. Dvs. den forventede stigning i indkomst for hvert års ekstra uddannelse.
+
+**f) Er der en statistisk signifikant sammenhæng mellem uddannelse og indkomst?**
+
+De tre stjerner indikerer en $p–værdi < 0.001$. På et $5\%$ signifikansniveau er der altså en signifikant sammenhæng mellem antal års uddannelse og indkomst.
+
+**g) Hvad er den forventede indkomst for en person med 15 års uddannelse?**
+
+$Indkomst = \alpha+\beta_1*udd\_aar+\epsilon$
+
+$Indkomst = 10650.70+395.24*udd\_aar+\epsilon$
+
+$Indkomst = 10650.70+395.24*15$
+
+```{r warning=F, message=F, echo=T}
+10650.70 + 395.24*15
+```
+
+## 3 Multipel lineær regression
+
+I har nu undersøgt sammenhængen mellem antal års uddannelse og indkomst i en simpel regressionsmodel. Nu skal i undersøge, om sammenhængen i virkeligheden kan forklares af andre forhold.
+
+Djævlens advokat kunne påstå, at indkomstforskelle mellem folk med lange og kortere uddannelser primært skyldes, at folk med længe uddannelser arbejder flere timer (og derfor får udbetalt mere). I skal derfor indføre variablen "**antal_timer_arb**" som kontrolvariabel i jeres regressionsmodel for at teste, om sammenhængen mellem uddannelse og indkomst kan forklares af, at højtuddannede folk bare arbejder flere timer.
+
+**a) Variablen "*antal_timer_arb*" måler, hvor mange timer respondenterne arbejder ugentligt. Skriv med ord, hvilket måleniveau du mener, at variablen bør have**
+
+Variablen kan betragtes som intervalskaleret, da afstanden mellem værdierne på variablen er konstant og meningsfuld. Det giver også mening at tale om decimaler variablen.
+
+**b) Estimér følgende regressionsmodel:** $Indkomst = \alpha+\beta_1*udd\_aar+\beta_2*antal\_timer\_arb+\epsilon$
+
+```{r warning=F, message=F, echo=T}
+model2 <- lm(net_indkomst ~ udd_aar +antal_timer_arb, data = df)
+
+(texreg::screenreg(list(model1, model2), include.ci=F))
+```
+
+**c) Beskriv med ord, hvad fortolkningen af værdien på konstantleddet** $\alpha$ **er nu**
+
+Fortolkningen af $\alpha$ er den forventede værdi på $Y$, når alle modellens uafhængige variable (dvs. også kontrolvariable) er lig 0. Dvs. den forventede indkomst for en person med 0 års uddannelse, der arbejder 0 timer ugentligt.
+
+**d) Beskriv med ord, hvad fortolkningen af værdien på** $\beta_1$ **koefficienten for "udd_aar" er**
+
+Fortolkningen af $\beta_1$ er den forventede stigning i den afhængige variabel, når den tilhørende uafhængige variabel (antal års uddannelse) stiger med 1, når der kontrolleres for antal timers arbejde. Dvs. den forventede stigning i indkomst for hvert års ekstra uddannelse, når der tages højde for, hvor mange timer man arbejder ugentligt.
+
+**e) Er der fortsat en signifikant forskel mellem antal års uddannelse og indkomst, selv når der kontrolleres for antal arbejdstimer?**
+
+De tre stjerner indikerer en $p–værdi < 0.001$. På et $5\%$ signifikansniveau er der altså stadig en signifikant sammenhæng mellem antal års uddannelse og indkomst, når der kontrolleres for antal arbejdstimer.
+
+**f) Beskriv med ord, hvad fortolkningen af værdien på** $\beta_2$ **koefficienten for "antal_timer_arb" er**
+
+Fortolkningen af $\beta_2$ er den forventede stigning i den afhængige variabel, når den tilhørende uafhængige variabel (antal arbejdstimer) stiger med 1, når der kontrolleres for antal års uddannelse. Dvs. den forventede stigning i indkomst for timers ekstra arbejde ugentligt, når der kontrolleres for års uddannelse.
+
+**g) Er der en signifikant forskel mellem antal års indkomst og antal arbejdstimer, når der kontrolleres for antal års uddannelse?**
+
+De tre stjerner indikerer en $p–værdi < 0.001$. På et $5\%$ signifikansniveau er der altså en signifikant sammenhæng mellem antal arbejdstimer og indkomst, når der kontrolleres for antal års uddannelse.
+
+## 4 Forudsagte værdier
+
+**a) Beregn den forventede indkomst for en person med 13 års uddannelse, der arbejder 40 timer ugentligt**
+
+$Indkomst = \alpha+\beta_1*udd\_aar+\beta_2*antal\_timer\_arb+\epsilon$
+
+$Indkomst = 2057.61+362.01*udd\_aar+251.75*antal\_timer\_arb+\epsilon$
+
+$Indkomst = 2057.61+362.01*13+251.75*40$
+
+```{r warning=F, message=F, echo=T}
+2057.61+(362.01*13)+(251.75*40)
+```
+
+**b) Beregn den forventede indkomst for en person med 18 års uddannelse, der arbejder 40 timer ugentligt**
+
+$Indkomst = \alpha+\beta_1*udd\_aar+\beta_2*antal\_timer\_arb+\epsilon$
+
+$Indkomst = 2057.61+362.01*udd\_aar+251.75*antal\_timer\_arb+\epsilon$
+
+$Indkomst = 2057.61+362.01*18+251.75*40$
+
+```{r warning=F, message=F, echo=T}
+2057.61+(362.01*18)+(251.75*40)
+```

@@ -332,7 +332,7 @@ $s_2$: standardafvigelsen i den anden stikprøve (altså f.eks. blandt mændene)
 
 *Vores teststatistik er approksimativt standardnormalfordelt, hvis* $n$ *er stor.*
 
----
+------------------------------------------------------------------------
 
 ## Forskelle på to middelværdier: t-test
 
@@ -344,7 +344,7 @@ t.test(net_indkomst ~ koen, data=ESS)
 
 -   Siden p-værdien er mindre end 0,05 afviser vi nulhypotesen og konkluderer, at der ER en statistisk signifikant forskel på gennemsnitsindkomsten for mænd og kvinder.
 
----
+------------------------------------------------------------------------
 
 ## Summeøvelse
 
@@ -352,7 +352,7 @@ t.test(net_indkomst ~ koen, data=ESS)
 
 Giv et eksempel på, hvornår denne test kan være brugbar i dit fag (med hypoteser)
 
----
+------------------------------------------------------------------------
 
 ## $\chi^2$-test for uafhængighed
 
@@ -362,7 +362,7 @@ Giv et eksempel på, hvornår denne test kan være brugbar i dit fag (med hypote
 
 -   Her vil vi som oftest have afhængige variable med tre eller flere kategorier (fx uddannelsesniveauer)
 
----
+------------------------------------------------------------------------
 
 ## $\chi^2$-test for uafhængighed
 
@@ -376,7 +376,7 @@ $\chi^2$-testen tager udgangspunkt i en krydstabel. Ideen er, at man sammenligne
 
 **H1**: Der er en sammenhæng mellem de to variabler
 
----
+------------------------------------------------------------------------
 
 ## $\chi^2$-test for uafhængighed
 
@@ -388,7 +388,7 @@ Når man udregner en chi² test, så gør man tre ting:
 
 Hvis forskellen mellem de to fordelinger er stor, så afviser vi at de to variable er uafhængige (forkaste nulhypotesen).
 
----
+------------------------------------------------------------------------
 
 ## $\chi^2$-test for uafhængighed
 
@@ -404,7 +404,7 @@ For at drage konklusioner om en chi²-test har man principielt brug for to værd
 
 Det er lettere i R... Her kan vi som sædvanlig bare kigge på p-værdien. Nemt!
 
----
+------------------------------------------------------------------------
 
 ## $\chi^2$-test for uafhængighed
 
@@ -421,7 +421,7 @@ chisq.test()
 
 $\chi^2$-testen returnerer en p-værdi på 0,2. Da det er over grænsen på 0,05 kan vi ikke forkaste nulhypotesen. Vi kan ikke afvise, at der ikke er nogen sammenhæng mellem de to variable, med udgangspunkt i denne stikprøve.
 
----
+------------------------------------------------------------------------
 
 ## Summeøvelse
 
@@ -429,7 +429,7 @@ $\chi^2$-testen returnerer en p-værdi på 0,2. Da det er over grænsen på 0,05
 
 Giv et eksempel på, hvornår denne test kan være brugbar i dit fag (med hypoteser)
 
----
+------------------------------------------------------------------------
 
 ## Korrelation er ikke kausalitet...
 
@@ -457,7 +457,7 @@ Hvad skyldes spuriøse sammenhænge?
 
 ![](images/clipboard-651949315.png){fig-align="center" width="403"}
 
----
+------------------------------------------------------------------------
 
 ## Korrelation er ikke kausalitet...
 
