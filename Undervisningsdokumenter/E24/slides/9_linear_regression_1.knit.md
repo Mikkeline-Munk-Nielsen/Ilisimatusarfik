@@ -12,6 +12,8 @@ format:
 editor: visual
 ---
 
+
+
 ::: center
 # Lineær regression 1
 
@@ -247,35 +249,34 @@ Hvis vi ikke tager højde for, at noget af forskellen skyldes forskelle i alder,
 
 Grundlæggende estimerer regressionsanalysen på korrelationen mellem variable
 
-```{r echo=F, eval=T, message=F, warning=FALSE}
-library(tidyverse)
 
-ESS <- readRDS("Data/ESS.rds")
-df <- ESS %>% filter(land=="DK") %>% 
-  select(net_indkomst, udd_aar, alder, fagforeningsmedlem) %>% 
-  na.omit()
-```
+
+::: {.cell}
+
+:::
+
+
 
 ::: panel-tabset
 ### Korrelationsplot
 
-```{r echo=F, fig.width=6, fig.height=3}
-library(ggplot2)
 
-ggplot(df) +
-  aes(x = udd_aar, y = net_indkomst) +
-  geom_point() +
-  labs(
-    x = "Års uddannelse",
-    y = "Indkomst (netto)"
-  ) + ylim(0, 50000) +
-  theme_minimal()
 
-```
+::: {.cell}
+::: {.cell-output-display}
+![](9_linear_regression_1_files/figure-revealjs/unnamed-chunk-2-1.png){width=576}
+:::
+:::
+
+
 
 ### Kode
 
-```{r echo=T, eval=F}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 ggplot(df) +
   aes(x = udd_aar, y = net_indkomst) +
   geom_point() +
@@ -287,6 +288,9 @@ ggplot(df) +
 ```
 :::
 
+
+:::
+
 ------------------------------------------------------------------------
 
 ## Hvordan
@@ -296,23 +300,23 @@ Der "fittes" så en linje, der minimerer den samlede afstand til alle punkter (m
 ::: panel-tabset
 ### Fittet linje
 
-```{r echo=F, fig.width=6, fig.height=3}
-library(ggplot2)
 
-ggplot(df) +
-  aes(x = udd_aar, y = net_indkomst) +
-  geom_point() +
-  labs(
-    x = "Års uddannelse",
-    y = "Indkomst (netto)"
-  ) + ylim(0, 50000) +
-  theme_minimal() +
-  geom_smooth(method = "lm", color = "blue", se = FALSE)
-```
+
+::: {.cell}
+::: {.cell-output-display}
+![](9_linear_regression_1_files/figure-revealjs/unnamed-chunk-4-1.png){width=576}
+:::
+:::
+
+
 
 ### Kode
 
-```{r echo=T, eval=F}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 ggplot(df) +
   aes(x = udd_aar, y = net_indkomst) +
   geom_point() +
@@ -323,6 +327,9 @@ ggplot(df) +
   theme_minimal() +
   geom_smooth(method = "lm", color = "blue", se = FALSE)
 ```
+:::
+
+
 :::
 
 ------------------------------------------------------------------------
@@ -581,18 +588,32 @@ Når vi tester, om der er en sammenhæng mellem 𝑋 og 𝑌 i lineær regressio
 
 I skal bruge funktionen `lm()` til at estimere regressionsmodeller. Syntaksen er som følgende med *k* antal kontrolvariable:
 
-```{r echo=TRUE, eval=F, message=F, warning=FALSE}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 model <- lm(afhængig_variabel ~ uafhængig_variabel +
             kontrol_variabel_1 + kontrol_variabel_2 ...
             kontrol_variabel_k, 
             data=df)
 ```
+:::
+
+
 
 Resultatet af regressionsanalysen gemmes i objektet *model*. Brug `texreg::screenreg()` til at printe resultaterne i consollen:
 
-```{r echo=TRUE, eval=F, message=F, warning=FALSE}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 (texreg::screenreg(list(model), include.ci = F))
 ```
+:::
+
+
 
 ------------------------------------------------------------------------
 
@@ -603,21 +624,49 @@ Eks. $Indkomst = \alpha+\beta*uddannelse+\epsilon$
 ::: panel-tabset
 ### output
 
-```{r echo=F, fig.width=6, fig.height=3}
-model1 <- lm(net_indkomst ~ udd_aar, data = df)
 
-library(texreg)
-(texreg::screenreg(list(model1), include.ci=F))
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
 ```
+
+=========================
+             Model 1     
+-------------------------
+(Intercept)  10754.20 ***
+              (611.99)   
+udd_aar        380.33 ***
+               (40.98)   
+-------------------------
+R^2              0.07    
+Adj. R^2         0.07    
+Num. obs.     1201       
+=========================
+*** p < 0.001; ** p < 0.01; * p < 0.05
+```
+
+
+:::
+:::
+
+
 
 ### Kode
 
-```{r echo=T, eval=F}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 model1 <- lm(net_indkomst ~ udd_aar, data = df)
 
 library(texreg)
 (texreg::screenreg(list(model1), include.ci=F))
 ```
+:::
+
+
 :::
 
 ***Intercept***: parameterestimatet for konstantleddet $\alpha=10754,2$ . Dette er den forventede værdi på den afhængige variabel indkomst, når værdien på den uafhængige variabel *antal års uddannelse* = 0. Altså den forventede indkomst for en person med 0 års udddannelse.
@@ -631,21 +680,49 @@ Eks. $Indkomst = \alpha+\beta * uddannelse+\epsilon$
 ::: panel-tabset
 ### output
 
-```{r echo=F, fig.width=6, fig.height=3}
-model1 <- lm(net_indkomst ~ udd_aar, data = df)
 
-library(texreg)
-(texreg::screenreg(list(model1), include.ci=F))
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
 ```
+
+=========================
+             Model 1     
+-------------------------
+(Intercept)  10754.20 ***
+              (611.99)   
+udd_aar        380.33 ***
+               (40.98)   
+-------------------------
+R^2              0.07    
+Adj. R^2         0.07    
+Num. obs.     1201       
+=========================
+*** p < 0.001; ** p < 0.01; * p < 0.05
+```
+
+
+:::
+:::
+
+
 
 ### Kode
 
-```{r echo=T, eval=F}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 model1 <- lm(net_indkomst ~ udd_aar, data = df)
 
 library(texreg)
 (texreg::screenreg(list(model1), include.ci=F))
 ```
+:::
+
+
 :::
 
 ***udd_aar***: parameterstimatet for $\beta=380,33$. Dette er den forventede stigning i den afhængige variabel (indkomst*)* for hver gang den uafhængige variabel (antal års uddannelse)stiger med 1. Altså den forventede stigning i indkomst hver gang en person har 1 års uddannelse mere.
@@ -677,19 +754,50 @@ Eks. $Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
 ::: panel-tabset
 ### output
 
-```{r echo=F, fig.width=6, fig.height=3}
-model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
 
-(texreg::screenreg(list(model1, model2), include.ci=F))
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
 ```
+
+======================================
+             Model 1       Model 2    
+--------------------------------------
+(Intercept)  10754.20 ***  9767.01 ***
+              (611.99)     (928.99)   
+udd_aar        380.33 ***   387.68 ***
+               (40.98)      (41.29)   
+alder                        17.76    
+                            (12.58)   
+--------------------------------------
+R^2              0.07         0.07    
+Adj. R^2         0.07         0.07    
+Num. obs.     1201         1201       
+======================================
+*** p < 0.001; ** p < 0.01; * p < 0.05
+```
+
+
+:::
+:::
+
+
 
 ### Kode
 
-```{r echo=T, eval=F}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
 
 (texreg::screenreg(list(model1, model2), include.ci=F))
 ```
+:::
+
+
 :::
 
 Vi kan nu se parameterestimater fra både model 1 og model 2
@@ -703,19 +811,50 @@ Eks. $Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
 ::: panel-tabset
 ### output
 
-```{r echo=F, fig.width=6, fig.height=3}
-model2 <- lm(net_indkomst ~ udd_aar + alder, data = df) 
 
-(texreg::screenreg(list(model1, model2), include.ci=F))
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
 ```
+
+======================================
+             Model 1       Model 2    
+--------------------------------------
+(Intercept)  10754.20 ***  9767.01 ***
+              (611.99)     (928.99)   
+udd_aar        380.33 ***   387.68 ***
+               (40.98)      (41.29)   
+alder                        17.76    
+                            (12.58)   
+--------------------------------------
+R^2              0.07         0.07    
+Adj. R^2         0.07         0.07    
+Num. obs.     1201         1201       
+======================================
+*** p < 0.001; ** p < 0.01; * p < 0.05
+```
+
+
+:::
+:::
+
+
 
 ### Kode
 
-```{r echo=T, eval=F}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
 
 (texreg::screenreg(list(model1, model2), include.ci=F))
 ```
+:::
+
+
 :::
 
 ***Intercept***: parameterestimatet for konstantleddet har nu ændret sig til $\alpha=9767$ . Dette er den forventede værdi på den afhængige variabel indkomst, når værdien på den uafhængige variabel *antal års uddannelse* = 0 og kontrolvariablen *alder = 0*. Altså den forventede indkomst for en person med 0 års udddannelse på 0 år.
@@ -729,19 +868,50 @@ Eks. $Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
 ::: panel-tabset
 ### output
 
-```{r echo=F, fig.width=6, fig.height=3}
-model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
 
-(texreg::screenreg(list(model1, model2), include.ci=F))
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
 ```
+
+======================================
+             Model 1       Model 2    
+--------------------------------------
+(Intercept)  10754.20 ***  9767.01 ***
+              (611.99)     (928.99)   
+udd_aar        380.33 ***   387.68 ***
+               (40.98)      (41.29)   
+alder                        17.76    
+                            (12.58)   
+--------------------------------------
+R^2              0.07         0.07    
+Adj. R^2         0.07         0.07    
+Num. obs.     1201         1201       
+======================================
+*** p < 0.001; ** p < 0.01; * p < 0.05
+```
+
+
+:::
+:::
+
+
 
 ### Kode
 
-```{r echo=T, eval=F}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
 
 (texreg::screenreg(list(model1, model2), include.ci=F))
 ```
+:::
+
+
 :::
 
 ***udd_aar***: parameterstimatet for $\beta=387,68$. Dette er stadig den forventede stigning i den afhængige variabel (indkomst*)* for hver gang den uafhængige variabel (antal års uddannelse) stiger med 1. Men nu er det den estimerede stigning, når vi HAR taget højde for alder.
@@ -755,19 +925,50 @@ Eks. $Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
 ::: panel-tabset
 ### output
 
-```{r echo=F, fig.width=6, fig.height=3}
-model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
 
-(texreg::screenreg(list(model1, model2), include.ci=F))
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
 ```
+
+======================================
+             Model 1       Model 2    
+--------------------------------------
+(Intercept)  10754.20 ***  9767.01 ***
+              (611.99)     (928.99)   
+udd_aar        380.33 ***   387.68 ***
+               (40.98)      (41.29)   
+alder                        17.76    
+                            (12.58)   
+--------------------------------------
+R^2              0.07         0.07    
+Adj. R^2         0.07         0.07    
+Num. obs.     1201         1201       
+======================================
+*** p < 0.001; ** p < 0.01; * p < 0.05
+```
+
+
+:::
+:::
+
+
 
 ### Kode
 
-```{r echo=T, eval=F}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 model2 <- lm(net_indkomst ~ udd_aar + alder, data = df)
 
 (texreg::screenreg(list(model1, model2), include.ci=F))
 ```
+:::
+
+
 :::
 
 ***alder***: parameterstimatet for $\delta=17,76$. Dette er - ligesom estimatet for $\beta$ - den forventede stigning i den afhængige variabel (indkomst*)* for hver gang den kontrolvariablen (alder) stiger med 1. Det er tilmed den estimerede stigning, når vi HAR taget højde for *uddannelse*. Ingen stjerner betyder, at estimatet er insignifikant.
@@ -815,19 +1016,48 @@ $Indkomst = \alpha+\beta * uddannelse+\epsilon$
 ::: panel-tabset
 ### output
 
-```{r echo=F, fig.width=6, fig.height=3}
-model1 <- lm(net_indkomst ~ udd_aar, data = df)  
 
-(texreg::screenreg(list(model1), include.ci=F))
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
 ```
+
+=========================
+             Model 1     
+-------------------------
+(Intercept)  10754.20 ***
+              (611.99)   
+udd_aar        380.33 ***
+               (40.98)   
+-------------------------
+R^2              0.07    
+Adj. R^2         0.07    
+Num. obs.     1201       
+=========================
+*** p < 0.001; ** p < 0.01; * p < 0.05
+```
+
+
+:::
+:::
+
+
 
 ### Kode
 
-```{r echo=T, eval=F}
+
+
+::: {.cell}
+
+```{.r .cell-code}
 model1 <- lm(net_indkomst ~ udd_aar, data = df)  
 
 (texreg::screenreg(list(model1), include.ci=F))
 ```
+:::
+
+
 :::
 
 ---
@@ -867,3 +1097,4 @@ Download datasættet `ESS` fra lectio og prøv at genskabe regressionsmodellerne
 Model 1: $Indkomst = \alpha+\beta*uddannelse+\epsilon$
 
 Model 2: $Indkomst = \alpha+\beta*uddannelse+\delta*alder+\epsilon$
+
