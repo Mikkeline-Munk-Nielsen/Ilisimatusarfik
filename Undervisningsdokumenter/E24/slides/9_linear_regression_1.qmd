@@ -7,6 +7,7 @@ format:
     logo: css_etc/ilisimatusarfik.png
     highlight: true
     highlight-style: github-dark
+    autoStretch: true
     self-contained: false
     preload-iframes: true
 editor: visual
@@ -136,7 +137,7 @@ Endelig definerer vi variablenes indbyrdes forhold, dvs. **hvilken variabel påv
 -   Den afhængige variabel er den, som påvirkes (”afhænger”) af den uafhængige:
 
 ::: center
-![](images/korrelationer.png)
+![](images/reg3.png){width="743"}
 :::
 
 ------------------------------------------------------------------------
