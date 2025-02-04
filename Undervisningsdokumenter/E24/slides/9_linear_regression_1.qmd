@@ -136,7 +136,7 @@ Endelig definerer vi variablenes indbyrdes forhold, dvs. **hvilken variabel påv
 -   Den afhængige variabel er den, som påvirkes (”afhænger”) af den uafhængige:
 
 ::: center
-![](images/reg3.png){width=70%}
+![](images/reg3.png){width="250}
 :::
 
 ------------------------------------------------------------------------
