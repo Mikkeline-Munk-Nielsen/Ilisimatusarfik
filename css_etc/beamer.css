@@ -1,0 +1,47 @@
+/*-- scss:defaults --*/
+/* Default variables */
+$primary-color: #003366; /* Dark blue for headings */
+$background-color: white;
+$font-family: "Times New Roman", serif;
+$font-size: 20px;
+
+/*-- scss:rules --*/
+/* General styling */
+.reveal {
+  background-color: $background-color;
+}
+
+.reveal .slides {
+  font-family: $font-family;
+  font-size: $font-size;
+}
+
+/* Header styles */
+.reveal h1, .reveal h2, .reveal h3 {
+  color: $primary-color;
+  font-weight: bold;
+}
+
+.reveal p {
+  color: black;
+}
+
+/* Custom navigation symbols */
+.reveal .controls {
+  display: none; /* Hide navigation controls */
+}
+
+/*-- scss:mixins --*/
+/* Add custom text in top right corner */
+.reveal .slides::after {
+  content: "Statistik for erhvervsøkonomi\nIlisimatusarfik";
+  white-space: pre-line; /* Ensure line breaks are respected */
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  font-size: 14px;
+  font-family: $font-family;
+  color: $primary-color;
+  text-align: right;
+  z-index: 9999;
+}

@@ -1,0 +1,2 @@
+"Mean Estimate","Statistic","P-Value","Degrees of Freedom","Confidence Interval Lower (95%)","Confidence Interval Upper (95%)","method","alternative"
+45.6348684210526,16.2287156347863,1.84311839574454e-49,607,44.4084211602254,46.8613156818799,"One Sample t-test","two.sided"
