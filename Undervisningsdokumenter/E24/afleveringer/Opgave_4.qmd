@@ -1,256 +1,219 @@
 ---
-title: "Øvelse 4"
-subtitle: "Kvantitativ metode og statistik"
-author: "dit navn"
-format: html
-editor: visual
+title: "Aflevering 4: forslag til besvarelse"
+format:
+  html:
+    css: css_etc/custom-theme-ilisimatusarfik-doc.css
+    fontfamily: Calibri
+    include-before-body: ../../home-button.html
+  pdf:
+    keep-md: true 
 ---
 
-## Introduktion og data
+*Følgende er et forslag til besvarelse af den fjerde ud af de seks obligatoriske afleveringer i faget.* *Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.*
 
-I denne øvelse skal I prøve kræfter med et udsnit af European Social Survey (ESS), der gennemføres i 20 forskellige EU lande. European Social Survey er et samfundsvidenskabeligt forsøg på at kortlægge holdninger, overbevisninger og adfærdsmønstre hos forskellige befolkninger i Europa. Der findes mange runder med forskellige temaer, men alle spørger ind til grundlæggende socioøkonomiske variable: [European Social Survey](https://www.europeansocialsurvey.org/about-ess). I dag arbejder vi med land, køn, alder, uddannelse, indkomst og fagforeningsmedlemskab.
+## Data
 
-*Der er flere variable i datasættet end du skal brug til at besvare øvelsen.*
+Download datasættet ***ESS*** på lectio.
 
--   *Skriv dit navn øverst i denne fil der hvor der står “\[dit navn\]”.*
+I denne øvelse skal I prøve kræfter med et udsnit af European Social Survey (ESS), der gennemføres i 20 forskellige EU lande. European Social Survey er et samfundsvidenskabeligt forsøg på at kortlægge holdninger, overbevisninger og adfærdsmønstre hos forskellige befolkninger i Europa. Der findes mange runder med forskellige temaer, men alle spørger ind til grundlæggende socioøkonomiske variable.
 
--   *Nedenfor er en række spørgsmål til forskellige variable i datasættet. Sæt dit svar ind der hvor der står “\[dit svar\]”.*
+## Opret et script
 
--   *Når du er færdig med besvarelsen skal du klikke på ‘Render’ og uploade .html filen på Lectio under ‘Opgaver’.*
+Start med at åbne RStudio ved at klikke på dit R-project. Opret dernæst et nyt script og gem det i samme mappe, som dit R-project. Du kan f.eks. kalde scriptet *Aflevering_4*.
 
-------------------------------------------------------------------------
+-   Brug `getwd()` til at sikre dig, at du arbejder i den rigtige mappe på computeren
+
+-   Indlæs det indbyggede datasæt i et objekt, f.eks. kaldet `df`
 
 ## Indlæs data
 
-Start med at download datasættet `ESS.rds` fra lectio og gem det sammen med denne fil i samme mappe som dit R projekt. Åben så opgaven her igen!
+-   Start med at check, at både dette dokument og ESS datasættet ligger i samme mappe som dit R-project. Indlæs det med funktionen `readRDS`:
 
-Datasættet er i R-format. Indlæs det med funktionen `readRDS`:
-
-```{r warning=F}
-df <- readRDS("ESS.rds") # Her hentes datasættet
+```{r warning=F, message=F, eval=F, include=T}
+getwd()
+df <- readRDS("ESS.rds")
 ```
 
-------------------------------------------------------------------------
+```{r warning=F, include=F}
 
-## Dataoverblik
+getwd()
 
--   Brug `View()` til at få et overblik over datasættet og se hvilke spørgsmål variablene indeholder svar på.
--   Datasættet indeholder surveydata fra flere forskellige lande. Lav en frekvenstabel over variablen "land" for at se hvilke.
-
-\[dit svar\]
-
-```{r warning=FALSE, message=FALSE}
-library(janitor)
-
-
+df <- readRDS("C:/Users/mmn/Dropbox/Ilisimatusarfik/R/Ilisimatusarfik_Statistik_EO_F24/Data/ESS.rds") # Her hentes datasættet 
 ```
 
--   I denne omgang arbejder vi kun med Danmark. Brug `filter()` funktionen til at udvælge besvarelser fra DK. Brug derefter `select()` funktionen til at udvælge og gemme variablene *land,* *koen, alder, udd_aar, udd, net_indkomst,* og *mindske_ekon_ulig* i samme datasæt.
+-   Brug `filter()` funktionen til at gemme et nyt datasæt, der kun indeholder besvarelser fra DK.
 
-\[dit svar\]
+```{r warning=F, message=F}
+library(tidyverse)
 
-```{r warning=FALSE, message=FALSE}
-library(dplyr)
+df <- filter(df, land=="DK")
 
 ```
 
-------------------------------------------------------------------------
+-   I skal arbejde med variablene *net_indkomst*, *koen*, *udd_aar* og *ansaettelse_type*. Kør nedenstående kode for at udvælge variablene og fjerne observationer med missingværdier (NA). Vi skal fjerne missing værdier på alle de variable, som vi skal bruge for at undgå at antallet af observationer svinger fra analyse til analyse.
 
-## Uddannelse
+```{r}
 
--   Variablen *udd* måler respondentens uddannelse i fire niveauer. Hvilket måleniveau har denne variabel? Begrund din besvarelse.
-
-\[dit svar\]
-
--   Kan man beregne median og middelværdi af denne variabel? Begrund din besvarelse.
-
-\[dit svar\]
-
--   Lav en frekvenstabel med procent over uddannelsesvariablen. Hvilken kategori er den største?
-
-\[dit svar\]
-
-```{r warning=FALSE, message=FALSE}
-
+df <- df %>% select(net_indkomst, antal_timer_arb, udd_aar) %>% na.omit()
 ```
 
--   Visualisér uddannelsesniveauerne med et søjlediagram. Prøv om du kan sætte titler på x-aksen og y-aksen, og om du kan rotere teksten på x-aksen, så kategorierne ikke overlapper.
+# Sammenhæng mellem indkomst og uddannelse
 
-\[dit svar\]
+Over de næste opgaver skal I undersøge sammenhængen mellem indkomst og uddannelse.
 
-```{r warning=FALSE, message=FALSE}
+## 1 Korrelationer
+
+**a) Start med at definér måleniveauerne for variablene `net_indkomst` og `udd_aar`**
+
+Begge variable kan betragtes som intervalskalerede, da afstanden mellem værdierne på variablene er konstant og meningsfuld. Det giver også mening at tale om decimaler på begge variable.
+
+**b) Lav et bivariat scatterplot for variablene `net_indkomst` og `udd_aar`. Ser der ud til at være en sammenhæng mellem de to variable?**
+
+```{r warning=F, message=F, echo=T}
 library(ggplot2)
+
+ggplot(df) +
+  aes(x = udd_aar, y = net_indkomst) +
+  geom_point() +
+  labs(
+    title = "Sammenhæng mellem antal års uddannelse og indkomst",
+    x = "Antal års uddannelse",
+    y = "Indkomst DKK (netto)"
+  ) +
+  theme_minimal()
 ```
 
-------------------------------------------------------------------------
+Scatterplottet viser, at der er en tendens til at folk har en højere indkomst, desto flere års uddannelse de har, da prikkerne lægger sig opadgående i diagonalen mellem akserne (positiv korrelation).
 
-## Indkomst
+**c) Udregn den passende korrelationskoefficient for variablene `net_indkomst` og `udd_aar`, givet deres måleniveau. Er der en sammenhæng mellem de to variable? Hvilken retning, og hvor stærk?**
 
--   Variablen net_indkomst måler respondenternes (netto) indkomst. Hvilket måleniveau har denne variabel?
-
-\[dit svar\]
-
--   Beregn middelværdien for indkomst i stikprøven
-
-\[dit svar\]
-
--   Find median indkomsten samt minimum og maximum værdi
-
-\[dit svar\]
-
-```{r warning=FALSE, message=FALSE}
-summary(df$net_indkomst)
-```
-
--   Forklar forskellen på middelværdien og medianen.
-
-\[dit svar\]
-
--   Hvad vil det sige, at der ikke er særlig stor forskel på middelværdi og median?
-
-\[dit svar\]
-
--   Beregn varians og standardafvigelsen. Forklar, hvad de to mål fortæller, og hvad forskellen er.
-
-\[dit svar\]
-
-```{r warning=FALSE, message=FALSE}
-
-```
-
--   Udregn konfidensintervaller for middelværdien på indkomstvariablen. Hvad fortæller konfidensintervallerne?
-
-\[dit svar\]
-
-```{r warning=FALSE, message=FALSE}
-
-```
-
-Den gennemsnitlige nettoindkomst i Danmark var i 2019 ca. 20.000 DKK om måneden. Du skal nu udføre en t-test for at teste, om middelværdien i denne stikprøve er signifikant anderledes end denne forventede værdi (20.000 DKK).
-
--   Opstil null-hypotese og alternativ hypotese for t-testen
-
-\[dit svar\]
-
--   Udfør t-testen i R og konkludér på den. Er middelværdien i stikprøven signifikant anderledes fra gennemsnitsindkomsten i populationen i 2019?
-
-\[dit svar\]
+Den passende korrelationskoefficient er pearsons $r$ for to intervalskalerede variable:
 
 ```{r}
-
+cor.test(df$udd_aar, df$net_indkomst)
 ```
 
-------------------------------------------------------------------------
+Korrelationskoefficienten på 0.26 indikerer, at der er en moderat/kraftig positiv sammenhæng mellem antal arbejdstimer og indkomst. Desto mere du arbejder, desto højere indkomst.
 
-## Fair indkomst?
+## 2 Simpel regressionsmodel
 
-Variablen *unfair_indkomst* måler, hvorvidt respondenterne mener, at deres indkomst er uretfærdigt lav, retfærdig, eller uretfærdig høj.
+**a) Lav et bivariat scatterplot for variablene `net_indkomst` og `udd_aar`, men tilføj nu med en regressionslinje. Kommentér på plottet - forventer du at regressionen finder en sammenhæng mellem variablene? Hvorfor?**
 
--   Lav en frekvenstabel over variablen. Er respondenterne overordnet set tilfredse med deres løn?
-
-\[dit svar\]
-
-```{r}
-
-df %>% tabyl(unfair_indkomst)
+```{r warning=F, message=F, echo=T}
+ggplot(df) +
+  aes(x = udd_aar, y = net_indkomst) +
+  geom_point() +
+  labs(
+    title = "Sammenhæng mellem antal års uddannelse og indkomst",
+    x = "Antal års uddannelse",
+    y = "Indkomst DKK (netto)"
+  ) +
+  theme_minimal() +
+  geom_smooth(method = "lm", color = "blue", se = FALSE)
 ```
 
-Du skal nu teste, om der er en ligelig fordeling af respondenter i hver svarkategori med en chi\^2 *goodness of fit* test.
+Linjens hældning antyder, at der er den positive sammenhæng, som korrelationskoefficienten også viste. En flad linje uden hældning ville indikere, at der ikke var en sammenhæng.
 
--   Hvad er null-hypotesen og alternativ hypotesen?
+**b) Betragt følgende regressionsmodel; hvilken variabel er den afhængige, og hvilken er den uafhængige?**
 
-\[dit svar\]\
+$Indkomst = \alpha+\beta_1*udd\_aar+\epsilon$
 
--   Udfør testen i R og konkludér på testen. Er der en ligelig fordeling af respondenter i hver svarkategori? Forklar hvorfor du konkluderer, som du gør.
+Indkomst er den afhængige variabel. Antal års uddannelse er den uafhængige variabel, som påvirker den afhængige variabel.
 
-\[dit svar\]
+**c) Estimér regressionsmodellen i R**
 
-```{r}
+```{r warning=F, message=F, echo=T}
+library(texreg)
 
+model1 <- lm(net_indkomst ~ udd_aar, data = df)
 
+(texreg::screenreg(list(model1), include.ci=F))
 ```
 
-------------------------------------------------------------------------
+**d) Hvad er fortolkningen af værdien for konstantleddet** $\alpha$
 
-## Holdningen til økonomisk ulighed
+Fortolkningen af $\alpha$ er den forventede værdi på $Y$, når modellens uafhængige variable er lig 0. Dvs. den forventede indkomst for en person med 0 års uddannelse.
 
-Variablen *mindske_ekon_ulig* måler, hvor enig respondenten er i, at regeringen (i DK) burde gøre tiltag for at mindske den økonomiske ulighed i landet (på en fem-punkt likert skala: *meget uenig* til *meget enig*).
+**e) Hvad er fortolkningen af værdien på** $\beta_1$ **koefficienten for `udd_aar`**
 
--   Hvilket måleniveau er variablen? Begrund dit svar.
+Fortolkningen af $\beta_1$ er den forventede stigning i den afhængige variabel, når den tilhørende uafhængige variabel (antal års uddannelse) stiger med 1. Dvs. den forventede stigning i indkomst for hvert års ekstra uddannelse.
 
-\[dit svar\]
+**f) Er der en statistisk signifikant sammenhæng mellem uddannelse og indkomst?**
 
--   Lav en frekvenstabel over variablen. Mener danskerne, at regeringen bør gøre noget ved den økonomiske ulighed?
+De tre stjerner indikerer en $p–værdi < 0.001$. På et $5\%$ signifikansniveau er der altså en signifikant sammenhæng mellem antal års uddannelse og indkomst.
 
-\[dit svar\]
+**g) Hvad er den forventede indkomst for en person med 15 års uddannelse?**
 
-```{r warning=FALSE, message=FALSE}
+$Indkomst = \alpha+\beta_1*udd\_aar+\epsilon$
 
+$Indkomst = 10650.70+395.24*udd\_aar+\epsilon$
+
+$Indkomst = 10650.70+395.24*15$
+
+```{r warning=F, message=F, echo=T}
+10650.70 + 395.24*15
 ```
 
-------------------------------------------------------------------------
+## 3 Multipel lineær regression
 
-## Korrelation
+I har nu undersøgt sammenhængen mellem antal års uddannelse og indkomst i en simpel regressionsmodel. Nu skal i undersøge, om sammenhængen i virkeligheden kan forklares af andre forhold.
 
--   Hvad vil det sige at der er en korrelation mellem to variable?
+Djævlens advokat kunne påstå, at indkomstforskelle mellem folk med længere og kortere uddannelser primært skyldes, at folk med længere uddannelser arbejder flere timer (og derfor får udbetalt mere). I skal derfor indføre variablen "**antal_timer_arb**" som kontrolvariabel i jeres regressionsmodel for at teste, om sammenhængen mellem uddannelse og indkomst kan forklares af, at højtuddannede folk bare arbejder flere timer.
 
-\[dit svar\]
+**a) Variablen "*antal_timer_arb*" måler, hvor mange timer respondenterne arbejder ugentligt. Skriv med ord, hvilket måleniveau du mener, at variablen bør have**
 
-------------------------------------------------------------------------
+Variablen kan betragtes som intervalskaleret, da afstanden mellem værdierne på variablen er konstant og meningsfuld. Det giver også mening at tale om decimaler variablen.
 
-## Uddannelse og økonomisk ulighed
+**b) Estimér følgende regressionsmodel:** $Indkomst = \alpha+\beta_1*udd\_aar+\beta_2*antal\_timer\_arb+\epsilon$
 
-Variablene *udd* og *fair_ekon_ulighed* er begge ordinalskalerede.
+```{r warning=F, message=F, echo=T}
+model2 <- lm(net_indkomst ~ udd_aar +antal_timer_arb, data = df)
 
--   Lav en krydstabel over de to variable. Ser der ud til at være forskel i holdningen til økonomisk ulighed blandt folk med forskellige uddannelsesniveauer?
-
-\[dit svar\]
-
-```{r warning=FALSE, message=FALSE}
-
+(texreg::screenreg(list(model1, model2), include.ci=F))
 ```
 
--   Tilføj totaler til din krydstabel (både rækker og kolonner)
+**c) Beskriv med ord, hvad fortolkningen af værdien på konstantleddet** $\alpha$ **er nu**
 
-\[dit svar\]
+Fortolkningen af $\alpha$ er den forventede værdi på $Y$, når alle modellens uafhængige variable (dvs. også kontrolvariable) er lig 0. Dvs. den forventede indkomst for en person med 0 års uddannelse, der arbejder 0 timer ugentligt.
 
-```{r warning=FALSE, message=FALSE}
+**d) Beskriv med ord, hvad fortolkningen af værdien på** $\beta_1$ **koefficienten for "udd_aar" er**
 
+Fortolkningen af $\beta_1$ er den forventede stigning i den afhængige variabel, når den tilhørende uafhængige variabel (antal års uddannelse) stiger med 1, når der kontrolleres for antal timers arbejde. Dvs. den forventede stigning i indkomst for hvert års ekstra uddannelse, når der tages højde for, hvor mange timer man arbejder ugentligt.
+
+**e) Er der fortsat en signifikant forskel mellem antal års uddannelse og indkomst, selv når der kontrolleres for antal arbejdstimer?**
+
+De tre stjerner indikerer en $p–værdi < 0.001$. På et $5\%$ signifikansniveau er der altså stadig en signifikant sammenhæng mellem antal års uddannelse og indkomst, når der kontrolleres for antal arbejdstimer.
+
+**f) Beskriv med ord, hvad fortolkningen af værdien på** $\beta_2$ **koefficienten for "antal_timer_arb" er**
+
+Fortolkningen af $\beta_2$ er den forventede stigning i den afhængige variabel, når den tilhørende uafhængige variabel (antal arbejdstimer) stiger med 1, når der kontrolleres for antal års uddannelse. Dvs. den forventede stigning i indkomst for timers ekstra arbejde ugentligt, når der kontrolleres for års uddannelse.
+
+**g) Er der en signifikant sammenhæng mellem indkomst og antal arbejdstimer, når der kontrolleres for antal års uddannelse?**
+
+De tre stjerner indikerer en $p–værdi < 0.001$. På et $5\%$ signifikansniveau er der altså en signifikant sammenhæng mellem antal arbejdstimer og indkomst, når der kontrolleres for antal års uddannelse.
+
+## 4 Forudsagte værdier
+
+**a) Beregn den forventede indkomst for en person med 13 års uddannelse, der arbejder 40 timer ugentligt**
+
+$Indkomst = \alpha+\beta_1*udd\_aar+\beta_2*antal\_timer\_arb+\epsilon$
+
+$Indkomst = 2057.61+362.01*udd\_aar+251.75*antal\_timer\_arb+\epsilon$
+
+$Indkomst = 2057.61+362.01*13+251.75*40$
+
+```{r warning=F, message=F, echo=T}
+2057.61+(362.01*13)+(251.75*40)
 ```
 
--   Nogle gange er det lettere at fortolke tabeller med procenter fremfor frekvenser. Tilføj procenter til din krydstabel. Fortolk tabellen igen. Ser der ud til at være en sammenhæng mellem uddannelsesniveau og holdningen til økonomisk ulighed?
+**b) Beregn den forventede indkomst for en person med 18 års uddannelse, der arbejder 40 timer ugentligt**
 
-\[dit svar\]
+$Indkomst = \alpha+\beta_1*udd\_aar+\beta_2*antal\_timer\_arb+\epsilon$
 
-```{r warning=FALSE, message=FALSE}
+$Indkomst = 2057.61+362.01*udd\_aar+251.75*antal\_timer\_arb+\epsilon$
 
-```
+$Indkomst = 2057.61+362.01*18+251.75*40$
 
--   Udregn en passened korrelationskoeficient mellem uddannelse og holdningen til økonomisk ulighed. Hvilken koeficient passer til variablenes måleniveauer?
-
-```{r warning=FALSE, message=FALSE}
-
-```
-
--   Hvad fortæller korrelationskoefficienten dig? Ser der ud til at være en sammenhæng mellem de to variable? Og er den i så fald positiv eller negativ?
-
-\[dit svar\]
-
--   Du skal nu lave en chi i anden-test for uafhængighed for formelt at teste, om der er en sammenhæng. Hvad nulhypotesen og alternativ hypotesen i en chi\^2 test for uafhængighed?
-
-\[dit svar\]
-
--   Gennemfør og konkludér på testen. Er der en signifikant sammenhæng mellem uddannelsesniveau og holdningen til økonomisk ulighed?
-
-\[dit svar\]
-
-EKSTRAOPGAVE TIL DE R-ENTUSIASTISKE
-
-------------------------------------------------------------------------
-
--   Lav et søjlediagram til at visualisere fordelingen mellem uddannelsesniveau og holdningen til økonomisk ulighed. Tilføj `geom_bar(position = "fill")` for at få procenter i stedet for frekvenser på y-aksen.
-
-```{r warning=FALSE, message=FALSE}
-
-
+```{r warning=F, message=F, echo=T}
+2057.61+(362.01*18)+(251.75*40)
 ```

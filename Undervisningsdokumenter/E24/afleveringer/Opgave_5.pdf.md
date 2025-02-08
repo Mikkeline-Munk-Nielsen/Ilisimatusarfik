@@ -13,7 +13,7 @@ format:
 
 
 
-*Følgende er et forslag til besvarelse af den tredje ud af de seks obligatoriske afleveringer i faget.* *Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.*
+*Følgende er et forslag til besvarelse af den fjerde ud af de seks obligatoriske afleveringer i faget.* *Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.*
 
 ## Data
 
@@ -120,9 +120,9 @@ ggplot(df) +
 
 
 
-Scatterplottet viser, at der er en tendens til at folk har en højere indkomst, desto flere års uddannelse de har, da prikkerne lægger sig i diagonalen mellem akserne (tyder på positiv korrelation).
+Scatterplottet viser, at der er en tendens til at folk har en højere indkomst, desto flere års uddannelse de har, da prikkerne lægger sig opadgående i diagonalen mellem akserne (positiv korrelation).
 
-**c) Udregn den passende korrelationskoefficient for variablene `net_indkomst` og `udd_aar`, givet deres måleniveau. Er der en sammenhæng mellem de to variabl? Hvilken retning, og hvor stærk?**
+**c) Udregn den passende korrelationskoefficient for variablene `net_indkomst` og `udd_aar`, givet deres måleniveau. Er der en sammenhæng mellem de to variable? Hvilken retning, og hvor stærk?**
 
 Den passende korrelationskoefficient er pearsons $r$ for to intervalskalerede variable:
 
@@ -285,7 +285,7 @@ $Indkomst = 10650.70+395.24*15$
 
 I har nu undersøgt sammenhængen mellem antal års uddannelse og indkomst i en simpel regressionsmodel. Nu skal i undersøge, om sammenhængen i virkeligheden kan forklares af andre forhold.
 
-Djævlens advokat kunne påstå, at indkomstforskelle mellem folk med lange og kortere uddannelser primært skyldes, at folk med længe uddannelser arbejder flere timer (og derfor får udbetalt mere). I skal derfor indføre variablen "**antal_timer_arb**" som kontrolvariabel i jeres regressionsmodel for at teste, om sammenhængen mellem uddannelse og indkomst kan forklares af, at højtuddannede folk bare arbejder flere timer.
+Djævlens advokat kunne påstå, at indkomstforskelle mellem folk med længere og kortere uddannelser primært skyldes, at folk med længere uddannelser arbejder flere timer (og derfor får udbetalt mere). I skal derfor indføre variablen "**antal_timer_arb**" som kontrolvariabel i jeres regressionsmodel for at teste, om sammenhængen mellem uddannelse og indkomst kan forklares af, at højtuddannede folk bare arbejder flere timer.
 
 **a) Variablen "*antal_timer_arb*" måler, hvor mange timer respondenterne arbejder ugentligt. Skriv med ord, hvilket måleniveau du mener, at variablen bør have**
 

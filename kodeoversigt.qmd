@@ -247,9 +247,9 @@ df <- df %>%
 
 ```{r echo=T}
 df <- df %>%
-  mutate(alder_kategori = case_when(
-    between(alder, 15, 35) ~ "15-35 år", 
-    between(alder, 36, 55) ~ "36-55år ",
+  mutate(alder_kategori = case_when( # Erstat alder_kategori navnet på den nye variabel
+    between(alder, 15, 35) ~ "15-35 år", # Erstat alder med navnet på variablen
+    between(alder, 36, 55) ~ "36-55 år ",
     between(alder, 56, 75) ~ "56-75 år",
     alder > 75 ~ "75 +"
   ))
@@ -379,8 +379,8 @@ Variablen **cyl** (antal cylindre), som er en kategorisk variabel, kan visualise
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(mtcars) +
-  aes(x = factor(cyl)) +  # Omform cyl til en kategorisk variabel
+ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = factor(cyl)) +  # Omform cyl til en kategorisk variabel. Erstat cyl med din variabel
   geom_bar(fill = "#003366") +
   labs(
     title = "Antal biler pr. antal cylindere",
@@ -397,8 +397,8 @@ Variablen **mpg** (miles per gallon), som er en numerisk, kan visualiseres via. 
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(mtcars) +
-  aes(x = mpg) +
+ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = mpg) + # Erstat mpq med din variabel
   geom_histogram(fill = "#003366") +
   labs(
     title = "Histogram af brændstoføkonomi",
@@ -413,8 +413,8 @@ ggplot(mtcars) +
 Variablen **mpg** (miles per gallon), som er en numerisk, kan også visualiseres via. et boksplot:
 
 ```{r echo=TRUE}
-ggplot(mtcars) +
-  aes(x = "", y = mpg) +  # "" for at undgå en x-akse kategori, og y for at angive mpg
+ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = "", y = mpg) +  # Erstat mpq med navnet på din variabel. 
   geom_boxplot(fill = "#003366", color = "black") +  # Ændring af farver
   labs(
     title = "Boksplot af brændstoføkonomi",
@@ -431,8 +431,8 @@ Vi kan visualisere sammenhængen mellem variablene **cyl** (antal cylindre) og *
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(mtcars) +
-  aes(x = factor(cyl), fill = factor(gear)) +
+ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = factor(cyl), fill = factor(gear)) + # Erstat cyl og gear med dine variable
   geom_bar(position = "dodge") +
   labs(
     title = "Fordeling af biler pr. cylinder og gear",
@@ -450,8 +450,8 @@ Vi kan også visualisere sammenhængen mellem **cyl** (antal cylindre) og **gear
 ```{r echo=T}
 library(ggplot2)
 
-ggplot(mtcars) +
-  aes(x = factor(cyl), y = factor(gear)) +
+ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = factor(cyl), y = factor(gear)) + # Erstat cyl og gear med dine variable
   geom_jitter(width = 0.2, height = 0.2) +
   labs(
     title = "Spredning af biler mellem cylinder og gear",
@@ -467,8 +467,8 @@ Vi kan bruge et boksplot til at se fordelingen af variablene **mpg** (nummerisk)
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(mtcars) +
-  aes(x = factor(cyl), y = mpg) +
+ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = factor(cyl), y = mpg) + # Erstat cyl og mpg med dine variable
   geom_boxplot() +
   labs(
     title = "Brændstoføkonomi pr. cylinder",
@@ -485,8 +485,8 @@ Og vi kan bruge et scatterplot til at se sammenhængen mellem variablene **wt** 
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(mtcars) +
-  aes(x = wt, y = mpg) +
+ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point() +
   labs(
     title = "Sammenhæng mellem vægt og brændstoføkonomi",
@@ -503,8 +503,8 @@ Det er også muligt at lægge flere plots ovenpå hinanden med ggplot. F.eks. ka
 ```{r echo=TRUE, message=F}
 library(ggplot2)
 
-ggplot(mtcars) +
-  aes(x = wt, y = mpg) +
+ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point() +
   geom_smooth(method = "lm", color = "blue", se = FALSE) +  # Tilføjer en lineær regressionslinje
   labs(
@@ -522,8 +522,8 @@ ggplots kan nemt ændres ved at tilføje elementer til graferne (ligesom LEGO-kl
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(data = mtcars) +
-  aes(x = wt, y = mpg) +
+ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point()
 ```
 
@@ -532,8 +532,8 @@ Man kan bruge funktionen `labs()` til at tilføje titel og asketitler:
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(data = mtcars) +
-  aes(x = wt, y = mpg) +
+ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point() +
   labs(
     title = "Relationship between Weight and Fuel Efficiency",
@@ -547,8 +547,8 @@ Man kan ændre dine plots visuelle udseende med `themes()`. Man kan f.eks. ændr
 ```{r echo=T}
 library(ggplot2)
 
-ggplot(data = mtcars) +
-  aes(x = wt, y = mpg) +
+ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point() +
   labs(
     title = "Relationship between Weight and Fuel Efficiency",
@@ -570,8 +570,8 @@ Det er ofte nødvendigt at skrue på værdierne på akserne. Afhængigt af hvilk
 ```{r echo=T}
 library(ggplot2)
 
-ggplot(data = mtcars) +
-  aes(x = wt, y = mpg) +
+ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point() +
   labs(
     title = "Relationship between Weight and Fuel Efficiency",
@@ -587,8 +587,8 @@ Man kan også ændre farver på sine ggplots. Afhængigt af hvilken type geometr
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(data = mtcars) +
-  aes(x = wt, y = mpg) +
+ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point(color="purple") +
   labs(
     title = "Relationship between Weight and Fuel Efficiency",
@@ -604,8 +604,8 @@ Man kan ændre tekst-størrelsen på plottets elementer med `theme()`:
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(data = mtcars) +
-  aes(x = wt, y = mpg) +
+ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point(color="purple") +
   labs(
     title = "Relationship between Weight and Fuel Efficiency",
@@ -627,8 +627,8 @@ Nogle gange kan det også være nyttigt at rotere sit plot med `coord_flip()`:
 
 ```{r echo=TRUE}
 library(ggplot2)
-ggplot(data = mtcars) +
-  aes(x = wt, y = mpg) +
+ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point(color="purple") +
   labs(
     title = "Relationship between Weight and Fuel Efficiency",
@@ -652,7 +652,9 @@ ggplot(data = mtcars) +
 Standardmetoden til at gemme ggplot-grafer er ved hjælp af `ggsave()` funktionen. Først gemmes dit plot som et objekt, dernæst bruges `ggsave()` med følgende syntaks:
 
 ```{r echo=T, eval=F}
-ggsave("mit_plot.jpeg", plot = mit_ggplot_objekt, width = 10, height = 8)
+ggsave("mit_plot.jpeg", # Erstat med navnet du vil gemme .jpeg filen som
+       plot = mit_ggplot_objekt, # Erstat mit_ggplot_objekt med navnet på det objekt, du har gemt dit plot i
+       width = 10, height = 8)
 ```
 
 -   `mit_ggplot_objekt` er navnet på det objekt, du har gemt dit plot i
@@ -695,7 +697,8 @@ titanic <- titanic_df[rep(seq_len(nrow(titanic_df)), titanic_df$Freq), 1:4]
 ```{r echo=TRUE}
 library(janitor)
 
-tabyl(titanic, Class, Survived)
+tabyl(titanic, Class, Survived) 
+# Erstat titanic med navnet på dit datasæt, og class og survived med navnene på dine variable
 ```
 
 Tilføj totaler (både rækker og kolonner) med `adorn_totals()`:
@@ -703,6 +706,7 @@ Tilføj totaler (både rækker og kolonner) med `adorn_totals()`:
 ```{r echo=TRUE}
 library(janitor)
 tabyl(titanic, Class, Survived) %>% adorn_totals(where = c("row", "col"))
+# Erstat titanic med navnet på dit datasæt, og class og survived med navnene på dine variable
 ```
 
 Tilføj procenter med `adorn_percentages()` og bestem antal decimaler med `adorn_pct_formatting()`:
@@ -714,6 +718,8 @@ tabyl(titanic, Class, Survived) %>%
   adorn_totals(where = c("row", "col")) %>% 
   adorn_percentages() %>% 
   adorn_pct_formatting(digits = 1)
+
+# Erstat titanic med navnet på dit datasæt, og class og survived med navnene på dine variable
 ```
 
 ## Gem din tabel som excel-fil
@@ -745,7 +751,8 @@ Vi kan bruge `Mode()` funktionen fra pakken `DescTools` til at finde typetallet.
 
 ```{r echo=TRUE}
 library(DescTools)
-Mode(df$udd, na.rm = TRUE)
+Mode(df$udd, na.rm = TRUE) 
+# df er navnet på objektet med datasættet, udd er navnet på variablen
 ```
 
 `Mode()` fortæller os at modus på variablen **uddannelse** er *Ungdoms-/erhvervsuddannelse*, og at det optræder 4501 gange i datasættet.
@@ -756,7 +763,8 @@ Du kan finde middelværdien af en intervalskaleret variabel med funktionen `Mean
 
 ```{r echo=TRUE}
 library(DescTools)
-Mean(df$alder, na.rm = T)
+Mean(df$alder, na.rm = T) 
+# df er navnet på objektet med datasættet, alder er navnet på variablen
 ```
 
 ### Median
@@ -766,6 +774,7 @@ Du kan finde medianen på en ordinal- eller intervalskaleret variabel med funkti
 ```{r echo=TRUE}
 library(DescTools)
 Median(df$alder, na.rm=T)
+# df er navnet på objektet med datasættet, alder er navnet på variablen
 ```
 
 ## Fraktiler
@@ -774,6 +783,7 @@ Hvis du er interesseret i andre fraktiler kan du bruge funktionen quantile(). Hv
 
 ```{r echo=TRUE}
 quantile(df$alder, probs = c(0.25, 0.5, 0.75), na.rm = TRUE)
+# df er navnet på objektet med datasættet, alder er navnet på variablen
 ```
 
 ### All-in-one summary
@@ -782,6 +792,7 @@ En god funktion er `summary()` som viser: minimum (`Min.`), første kvartil (`1s
 
 ```{r echo=TRUE}
 summary(df$alder)
+# df er navnet på objektet med datasættet, alder er navnet på variablen
 ```
 
 ## Spredningsmål
@@ -792,12 +803,14 @@ Du kan finde variansen på en variabel med funktionen `Var()`:
 
 ```{r echo=TRUE}
 Var(df$alder, na.rm = TRUE)
+# df er navnet på objektet med datasættet, alder er navnet på variablen
 ```
 
 Eller standardafvigelsen med funktionen `sd()`:
 
 ```{r echo=TRUE}
 sd(df$alder, na.rm = TRUE)
+# df er navnet på objektet med datasættet, alder er navnet på variablen
 ```
 
 ## Konfidensintervaller
@@ -806,6 +819,7 @@ Man kan bruge funktionen `t.test()` til at udregne konfidensintervaller (95 % ko
 
 ```{r echo=TRUE}
 t.test(df$alder)
+# df er navnet på objektet med datasættet, alder er navnet på variablen
 ```
 
 Konfidensintervallerne fortæller os, at populationsgennemsnittet $\mu$ med 95% sandsynlighed ligger i intervallet $50,47$ og $51,1$ år.
@@ -821,6 +835,7 @@ Vi kan f.eks. teste om gennemsnitsalderen i stikprøven ($\bar{x}$) er signifika
 
 ```{r echo=TRUE}
 ttest_resultat_univariat <- t.test(df$alder, mu = 42.8)
+# df er navnet på objektet med datasættet, alder er navnet på variablen
 
 # Opret en data frame med de ønskede metrics i rækker
 (ttest_tabel_univariat <- data.frame(
@@ -848,6 +863,7 @@ Du kan samle outputtet fra t-testen i en lidt pænere tabel og eksportere den, v
 ```{r echo=T, eval=F}
 library(writexl) 
 write.csv(ttest_tabel_univariat, "t_test_resultat_univariat.csv", row.names = FALSE)
+# ttest_resultat_univariat er navnet på objektet med tabellen med t-test resultatet
 ```
 
 ## $\chi^2$-test for univariat analyse (goodness of fit)
@@ -903,6 +919,7 @@ Du kan som altid eksportere tabellen med dine resultater fra testen til excel me
 ```{r echo=TRUE}
 library(writexl) 
 write.csv(chi_tabel_univariat, "chi_test_univariat.csv", row.names = FALSE)
+# chi_tabel_univariat er navnet på objektet med tabellen med chi-test resultatet
 ```
 
 # Bivariat analyse
@@ -913,7 +930,7 @@ write.csv(chi_tabel_univariat, "chi_test_univariat.csv", row.names = FALSE)
 library(dplyr)
  ESS <- readRDS("C:/Users/mmn/Dropbox/Ilisimatusarfik/R/Ilisimatusarfik_Statistik_EO_F24/Data/ESS.rds")
  
- ESS <- filter(ESS, land=="DK")
+ ESS <- filter(ESS, land=="DK") 
 ```
 
 ### Cramers v
@@ -923,8 +940,9 @@ Når der indgår en nominalskala variabel anbefales det at bruge korrelationsmå
 *Eksempel med køn og ansættelsestype fra European Social Survey:*
 
 ```{r echo=TRUE, message=F, warning=FALSE}
-krydstabel <- table(as.character(ESS$koen),                     
+krydstabel <- table(as.character(ESS$koen), 
                     as.character(ESS$ansaettelse_type)) 
+# Erstat ESS med navnet på dit datasæt og koen og ansaettelse_type med dine variable
 
 library(DescTools) 
 CramerV(krydstabel)
@@ -943,6 +961,8 @@ Eks: Eget uddannelsesniveau og partners uddannelsesniveau:
 cor.test(as.numeric(ESS$udd),
          as.numeric(ESS$udd_partner),
          method = "spearman")
+
+# Erstat ESS med navnet på dit datasæt og udd og udd_partner med dine variable
 ```
 
 -   $rho=0.5$
@@ -957,6 +977,7 @@ Eks. Indkomst og antal års uddannelse.
 
 ```{r echo=TRUE, message=F, warning=FALSE}
 cor.test(ESS$udd_aar, ESS$net_indkomst)
+# Erstat ESS med navnet på dit datasæt og udd_aar og net_indkomst med dine variable
 ```
 
 -   $Pearsons=0.26$
@@ -1008,7 +1029,7 @@ Du kan som altid eksportere tabellen med dine resultater fra testen til excel me
 ```{r echo=TRUE, message=F, warning=FALSE}
 library(writexl) 
 write.csv(ttest_tabel_bivariat, "t_test_resultat_bivariat.csv", row.names = FALSE)
-
+# ttest_tabel_bivariat er navnet på objektet med tabellen med t-test resultatet
 ```
 
 ## $\chi^2$-test for uafhængighed
@@ -1053,6 +1074,7 @@ Du kan som altid eksportere tabellen med dine resultater fra testen til excel me
 ```{r echo=TRUE, eval=F, message=F, warning=FALSE}
 library(writexl) 
 write.csv(chi_tabel_bivariat, "chi_resultat_bivariat.csv", row.names = FALSE)
+# chi_tabel_bivariat er navnet på objektet med tabellen med chi-test resultatet
 ```
 
 # Multivariat analyse (lineær regression)
@@ -1076,7 +1098,7 @@ model <- lm(afhængig_variabel ~ uafhængig_variabel + kontrol_variabel_1 + kont
 Resultatet af regressionsanalysen gemmes i objektet *model*. Brug `texreg::screenreg()` til at printe resultaterne i consollen:
 
 ```{r echo=TRUE, eval=F, message=F, warning=FALSE}
-(texreg::screenreg(list(model), include.ci = F))
+(texreg::screenreg(list(model), include.ci = F)) # Erstat model med navnet på objektet med den rette model
 ```
 
 ```{r echo=F, eval=T, message=F, warning=FALSE}

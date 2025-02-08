@@ -23,19 +23,17 @@ editor: visual
 
 ------------------------------------------------------------------------
 
-## Fra uni- til bi- til multivariat
+## Program
 
 <br>
 
-**Univariat analyse**: analyser af fordelingen på én variabel
+-   Gennemgang af opgave 4
 
-**Bivariat analyse**: analyse af sammenhængen mellem to variable
+-   Diskrete variable i regressionsanalyse
 
-**Multivariat analyse**: analyser af sammenhænge mellem to eller flere variable
+-   Forlæns modelsøgning
 
 <br>
-
-Lineær regression hører under multivariat analyse.
 
 ------------------------------------------------------------------------
 
@@ -242,7 +240,7 @@ Hvis vi ikke tager højde for, at noget af forskellen skyldes forskelle i alder,
 
 **5 min**: diskutér hvilke andre kontrolvariable, der kunne være relevante i eksemplet med uddannelse og indkomst. Hvad karakteriserer en relevant kontrolvariabel?
 
----
+------------------------------------------------------------------------
 
 ## Hvordan
 
@@ -831,7 +829,7 @@ model1 <- lm(net_indkomst ~ udd_aar, data = df)
 ```
 :::
 
----
+------------------------------------------------------------------------
 
 ## Lineær regressionsanalyse kan anvendes...
 
@@ -855,7 +853,7 @@ Der findes andre typer af regressionsanalyse, så hvorfor skal vi lære lineær?
 
 -   Det er et godt udgangspunkt for at lære mere avanceret statistik.
 
----
+------------------------------------------------------------------------
 
 ## Øvelse
 
