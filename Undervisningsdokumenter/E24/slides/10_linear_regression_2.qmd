@@ -44,7 +44,7 @@ $$Y=\alpha + \beta*X+\epsilon$$
 
 Og en multiple lineær regressionsmodel, hvor vi tilføjede en kontrolvariabel 𝑍:
 
-$$Indkomst = \alpha+\beta*X+\delta* Z+\epsilon$$
+$$Y= \alpha+\beta*X+\delta* Z+\epsilon$$
 
 ------------------------------------------------------------------------
 
@@ -57,7 +57,7 @@ $$Y=\alpha + \beta*X+\epsilon$$
 
 I den multiple lineær regressionsmodel undersøger vi om sammenhængen mellem 𝑌 og 𝑋 består, når vi tager højde for et tredje forhold 𝑍.
 
-$$Indkomst = \alpha+\beta*X+\delta* Z+\epsilon$$
+$$Y= \alpha+\beta*X+\delta* Z+\epsilon$$
 
 Parameteret 𝛽 beskriver nu den betingede lineære sammenhæng mellem dem 𝑌 og 𝑋, når vi kontrollerer for 𝑍.
 
@@ -356,7 +356,7 @@ library(texreg)
 I lineær regressionsanalyse har vi derfor typisk én hovedsammenhæng, som vi fokuserer på. Sammenhængen mellem ét enkelt 𝑋 og et 𝑌
 
 \
-$$Y=\alpha + \beta*X+\epsilon$$
+$$Y=\alpha + \beta_1*X_1+\epsilon$$
 
 Herefter tilføjer vi gradvist kontrolvariable for at forsøge at forklare den simple lineære sammenhæng mellem 𝑋 og 𝑌:
 
@@ -364,10 +364,10 @@ $Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon$
 
 $Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4+\epsilon$
 
-Denne metode kaldes forlæns modelsøgning. Pointen er, at fokusere på ændringer i \
+Denne metode kaldes forlæns modelsøgning. Pointen er, at fokusere på ændringer i\
 koefficienten for $\beta_1$ fra model til model.
 
----
+------------------------------------------------------------------------
 
 ## Forlæns modelsøgning
 
@@ -403,7 +403,7 @@ $$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon$$
 
 -   Ændringen i POI $X_1$ kan tilskrives den del af sammenhængen mellem POI $X_1$ og $Y$ som forklares af $X_2$. Det samme gælder for $X_3$ og $X_4$ osv.
 
----
+------------------------------------------------------------------------
 
 ## Forlæns modelsøgning
 
