@@ -71,11 +71,11 @@ Summeøvelse 10 min: hvad er fortolkningen af følgende parametre (og fejlledet)
 
 $\alpha$:
 
-$\beta$:
+$\beta$**:**
 
-$\delta$:
+$\delta$**:**
 
-$\epsilon$:
+$\epsilon$**:**
 
 ------------------------------------------------------------------------
 
@@ -85,13 +85,13 @@ $$Indkomst = \alpha+\beta*uddannelse+\delta* alder+\epsilon$$
 
 Summeøvelse 10 min: hvad er fortolkningen af følgende parametre (og fejlledet)?
 
-$\alpha$: Den gennemsnitlige indkomst, når antal års uddannelse = 0 og alder = 0
+$\alpha$**:** Den gennemsnitlige indkomst, når antal års uddannelse = 0 og alder = 0
 
-$\beta$: den gennemsnitlige ændring i indkomst, hver gang antal års uddannelse stiger med 1 (kontrolleret for alder)
+$\beta$**:** den gennemsnitlige ændring i indkomst, hver gang antal års uddannelse stiger med 1 (kontrolleret for alder)
 
-$\delta$: den gennemsnitlige ændring i indkomst, hver gang alder stiger med 1 (kontrolleret for antal års uddannelse)
+$\delta$**:** den gennemsnitlige ændring i indkomst, hver gang alder stiger med 1 (kontrolleret for antal års uddannelse)
 
-$\epsilon$: den gennemsnitlige afvigelse mellem respondenternes observerede indkomst og den indkomst, som regressionsmodellen forudsiger, at respondenten har, på baggrund af 𝛼 og 𝛽
+$\epsilon$**:** den gennemsnitlige afvigelse mellem respondenternes observerede indkomst og den indkomst, som regressionsmodellen forudsiger, at respondenten har, på baggrund af 𝛼 og 𝛽
 
 ------------------------------------------------------------------------
 
@@ -135,13 +135,17 @@ Vi kan dermed regne os frem til den forventede indkomst for hhv. mænd og kvinde
 
 $Indkomst= \alpha+\beta*Kvinde+\epsilon$
 
-Mænd:
+<br>
+
+[Mænd:]{.underline}
 
 $Indkomst_{mand}= \alpha+\beta*0+\epsilon$
 
 $Indkomst_{mand}= \alpha+\epsilon$
 
-Kvinder:\
+<br>
+
+[Kvinder:]{.underline}\
 $Indkomst_{kvinde}= \alpha+\beta*1+\epsilon$
 
 $Indkomst_{kvinde}= \alpha+\beta+\epsilon$
@@ -150,7 +154,7 @@ $Indkomst_{kvinde}= \alpha+\beta+\epsilon$
 
 ## Måleniveauer i lineær regression
 
-Med andre ord vil konstantleddet 𝛼 repræsentere den forventede værdi på Y, når dummy variablen = 0.
+Med andre ord vil konstantleddet 𝛼 repræsentere den forventede værdi på Y, når dummy variablen tager værdien 0.
 
 $$Indkomst= \alpha+\beta*Kvinde+\epsilon$$
 
@@ -163,6 +167,8 @@ Det er præcis ligesom med kontinuerte variable. Konstantleddet 𝛼 repræsente
 -   For diskrete variable med mere end to kategorier kodes hver kategori også til sin egen dummy variabel
 
 -   Tag f.eks. en nominel variabel der måler ens persons ansættelsestype i tre kategorier, lønmodtager, selvstændig eller hjemmegående (familie):
+
+    <br>
 
     $$
     \Omega{=Lønmodtager, selvstændig, familie}
@@ -186,7 +192,7 @@ $$
 
 -   I praksis betyder dette, at man er nød til at udelade en af kategorierne/dummierne fra sin regressionsmodel. Ellers kommer man i problemer med noget der hedder multikollinaritet! Det vender vi tilbage til...
 
--   Af samme årsag kan man heller ikke både have en mand og en kvinde dummy i samme model.
+-   Af samme årsag kan man heller ikke både have en "mande" og en "kvinde" dummy i samme model.
 
 ------------------------------------------------------------------------
 
@@ -248,6 +254,8 @@ HVIS I gør det... Så smider R selv en kategori ud.
 
 ## Kodning af dummy-variable
 
+<br>
+
 Princippet med dummier er, at man konstruerer en binær variabel for hver kategori på en disktret variabel. Disse binære variable tager enten værdien 0 eller 1. En variabel for køn med to kategorier, Mand og Kvinde, kodes til to nye variable:
 
 -   Mand
@@ -275,11 +283,13 @@ library(janitor)
 tabyl(df$koen)
 ```
 
+Variablen har to kategorier, “Mand” og “Kvinde”. Vi konstruerer derfor to nye variable - én for hver kategori på den oprindelige variabel - og tilføjer dem til datasættet.
+
 ------------------------------------------------------------------------
 
 ## Kodning af dummy-variable
 
-Variablen har to kategorier, “Mand” og “Kvinde”. Vi konstruerer derfor to nye variable - én for hver kategori på den oprindelige variabel - og tilføjer dem til datasættet. Vi bruger funktionerne `mutate()` og `ifelse()` til omkode og/eller at skabe nye variable og tilføje dem til datasættet.
+Vi bruger funktionerne `mutate()` og `ifelse()` til omkode og/eller at skabe nye variable og tilføje dem til datasættet.
 
 ```{r echo=TRUE, warning=F, message=F}
 library(dplyr)
@@ -300,7 +310,7 @@ df %>% select(koen, mand, kvinde) %>% head
 
 Åben ESS datasættet og kod dummy-variable for variablen `udd`
 
-```{r}
+```{r echo=TRUE, warning=F, message=F}
 tabyl(df$udd)
 ```
 
@@ -318,17 +328,17 @@ Giv fortolkning på parametrene: $\alpha, \beta_1, \beta_2,\beta_3$
 
 ## Øvelse i dummy-variable
 
-```{r echo=F, warning=F, message=F}
-library(tidyverse)
-
+```{r echo=T, warning=F, message=F}
 df <- df %>% mutate(
 grundskole = ifelse(udd=="Grundskole",1,0),
 ung_erhv = ifelse(udd=="Ungdoms-/erhvervsuddannelse",1,0),
 ml_vid = ifelse(udd=="Mellemlang videregående",1,0),
 lang_vid = ifelse(udd=="Lang videregående",1,0))
+
+df %>% select(udd, grundskole, ung_erhv, ml_vid, lang_vid) %>% head()
 ```
 
----
+------------------------------------------------------------------------
 
 ## Øvelse i dummy-variable
 
@@ -339,7 +349,7 @@ library(texreg)
 (texreg::screenreg(list(model), include.ci=F))
 ```
 
----
+------------------------------------------------------------------------
 
 ## Forlæns modelsøgning
 
@@ -350,23 +360,66 @@ $$Y=\alpha + \beta*X+\epsilon$$
 
 Herefter tilføjer vi gradvist kontrolvariable for at forsøge at forklare den simple lineære sammenhæng mellem 𝑋 og 𝑌:
 
-$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3\epsilon$
+$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon$
 
-$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon$
+$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4+\epsilon$
 
-Denne metode kaldes forlæns modelsøgning. Pointen er, at fokusere på ændringer i koefficienten for $\beta_1$ fra model til model.
+Denne metode kaldes forlæns modelsøgning. Pointen er, at fokusere på ændringer i \
+koefficienten for $\beta_1$ fra model til model.
+
+---
+
+## Forlæns modelsøgning
+
+<br>
+
+I denne type af modelsøgning kalder man det parameter, som man hovedsageligt er interesseret i for **POI** **(parameter of interest)**
+
+<br>
+
+$Indkomst = \alpha+\beta_1X_1+\epsilon$
+
+$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\epsilon$
+
+$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon$
+
+<br>
+
+I dette eksempel ville $\beta_1$ tilhørende $X_1$ være POI, mens de øvrige parametre og uafhængige variable vil indtage rollen som kontrolvariable.
 
 ------------------------------------------------------------------------
 
 ## Forlæns modelsøgning
 
+<br>
+
 $$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon$$
 
 <br>
 
--   Hvis der er en sammenhæng mellem $X_1$ og kontrolvariabel $X_2$, så vil koefficienten af $X_1$ ændre sig, når $X_2$ inkluderes i modellen.
+-   Hvis der er en sammenhæng mellem POI $X_1$ og kontrolvariabel $X_2$, og $X_2$ og den afhængige variabel $Y$, så vil koefficienten af POI $X_1$ ændre sig, når $X_2$ inkluderes i modellen.
 
--   Ændringen i $X_1$ kan tilskrives den del af sammenhængen mellem $X_1$ og $Y$ som forklares af $X_2$. Det samme gælder for $X_3$ og $X_4$ osv.
+<br>
+
+-   Ændringen i POI $X_1$ kan tilskrives den del af sammenhængen mellem POI $X_1$ og $Y$ som forklares af $X_2$. Det samme gælder for $X_3$ og $X_4$ osv.
+
+---
+
+## Forlæns modelsøgning
+
+Hvornår er en kontrolvariabel så vigtig at have med i sin model?
+
+<br>
+
+**1)** **Når dens parameterestimat er signifikant**: dvs. den forklarer noget af variationen i $Y$
+
+eller
+
+**2)** **Når den er signifikant og ændrer parameterestimatet for POI**: dvs. den er en aktiv confounder i sammenhængen mellem POI og $Y$
+
+<br>
+
+Hvis den er signifikant, men ikke ændrer parameterestimatet for POI, kan det stadig være relevant at medtage variablen af hensyn til at bygge en regressionsmodel, der kan bruges til forudsigelse fremfor forklaring.
 
 ------------------------------------------------------------------------
 
@@ -376,9 +429,9 @@ $$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon$$
 
 -   Når vi har afprøvet flere forskellige modeller vil vi gerne kunne sige noget om, hvilken model der er bedst.
 
--   I lineær regressionsanalyser bruger man determinationskoefficienten 𝑅2 til at måle på en models ”forklaringskraft”
+-   I lineær regressionsanalyser bruger man determinationskoefficienten $R^2$ til at måle på en models ”forklaringskraft”
 
--   𝑅2 udtrykker andelen af variation i den afhængige variabel Y, der kan forklares af den eller de uafhænige variable Lad os lige gennemgå for forståelsens skyld, hvordan den udregnes...
+-   $R^2$ udtrykker andelen af variation i den afhængige variabel Y, der kan forklares af den eller de uafhænige variable Lad os lige gennemgå for forståelsens skyld, hvordan den udregnes...
 
 ------------------------------------------------------------------------
 
@@ -421,7 +474,7 @@ Man skelner mellem:
 :::
 :::::
 
----
+------------------------------------------------------------------------
 
 ## Forklaringskraft
 
@@ -433,19 +486,19 @@ Man skelner mellem:
 
 -   **Residual sum of squares (RSS):** *den uforklarede del af variansen på Y*
 
----
+------------------------------------------------------------------------
 
 ## Forklaringskraft
 
 <br>
 
--   Som sagt udtrykke 𝑅2 værdien andelen af variation i den afhængige variabel Y, der kan forklares af modellens uafhængige variable
+-   Som sagt udtrykke $R^2$ værdien andelen af variation i den afhængige variabel Y, der kan forklares af modellens uafhængige variable
 
 -   Den er givet ved: $$R^2 = ESS/TSS$$
 
 -   Den uforklarede del ligger i fejlledene og opsummeres af RSS
 
----
+------------------------------------------------------------------------
 
 ## Forklaringskraft
 
@@ -462,7 +515,7 @@ library(texreg)
 
 $𝑅^2$ værdien på 0,31 betyder, at de uafhængige variable kan forklare ca. 31 % af variationen på den afhængige variabel
 
----
+------------------------------------------------------------------------
 
 ## Forklaringskraft
 
@@ -478,9 +531,9 @@ Model 3: $Indkomst=\alpha+\beta_1*kvinde+\beta_2*antal\_arbejdstimer+\beta_3*ung
 
 Men I kan også teste, om en model forklarer signifikant mere, end en anden model!
 
----
+------------------------------------------------------------------------
 
-## Test til sammenligning af modeller 
+## Test til sammenligning af modeller
 
 Når man skal sammenligne to modeller med kun ét parameter til forskel, så er det nok at kigge på t-testen for det pågældende parameter (aflæse p-værdien eller stjerner\*\*\* for parametret)
 
@@ -494,9 +547,9 @@ Hvis $\beta_2$ er signifikant vil model 2 forklare signifikant mere end model 1,
 
 Antal års uddannelse ser altså ud til at forklare noget af variationen i indkomst!
 
----
+------------------------------------------------------------------------
 
-## Test til sammenligning af modeller 
+## Test til sammenligning af modeller
 
 Hvis der er mere end et enkelt parameter til forskel på to modeller, kan I ikke nøjes med t-testen på de nye parametre.
 
@@ -513,7 +566,7 @@ $Indkomst=\alpha+\beta_1*kvinde+\beta_2*antal\_arbejdstimer+\beta_3*ung\_erhv+\b
 
 I stedet skal I lave en F-test for at teste, om den forklaringskraft, som flere variable tilsammen tilføjer, er signifikant forskellig fra 0. Dette er særligt relevant med dummy variable, hvor hver kategori jo har hvert sit parameter!
 
----
+------------------------------------------------------------------------
 
 ## F-test for to modeller
 
@@ -531,7 +584,7 @@ Hvis p-værdien er under 0,05 forkastes nulhypotesen, og vi konkluderer, at mode
 
 Hvis p-værdien er over 0,05, kan vi ikke med 95 % sikkerhed sige, at forklaringskraften i model 3 er bedre end i model 2.
 
----
+------------------------------------------------------------------------
 
 ## F-test for to modeller
 

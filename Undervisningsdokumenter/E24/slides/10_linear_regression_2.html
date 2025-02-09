@@ -433,19 +433,19 @@
 <p><span class="math display">\[Indkomst = \alpha+\beta*uddannelse+\delta* alder+\epsilon\]</span></p>
 <p>Summeøvelse 10 min: hvad er fortolkningen af følgende parametre (og fejlledet)?</p>
 <p><span class="math inline">\(\alpha\)</span>:</p>
-<p><span class="math inline">\(\beta\)</span>:</p>
-<p><span class="math inline">\(\delta\)</span>:</p>
-<p><span class="math inline">\(\epsilon\)</span>:</p>
+<p><span class="math inline">\(\beta\)</span><strong>:</strong></p>
+<p><span class="math inline">\(\delta\)</span><strong>:</strong></p>
+<p><span class="math inline">\(\epsilon\)</span><strong>:</strong></p>
 </section>
 <section class="slide level0">
 
 <h2>Lineær regression recap</h2>
 <p><span class="math display">\[Indkomst = \alpha+\beta*uddannelse+\delta* alder+\epsilon\]</span></p>
 <p>Summeøvelse 10 min: hvad er fortolkningen af følgende parametre (og fejlledet)?</p>
-<p><span class="math inline">\(\alpha\)</span>: Den gennemsnitlige indkomst, når antal års uddannelse = 0 og alder = 0</p>
-<p><span class="math inline">\(\beta\)</span>: den gennemsnitlige ændring i indkomst, hver gang antal års uddannelse stiger med 1 (kontrolleret for alder)</p>
-<p><span class="math inline">\(\delta\)</span>: den gennemsnitlige ændring i indkomst, hver gang alder stiger med 1 (kontrolleret for antal års uddannelse)</p>
-<p><span class="math inline">\(\epsilon\)</span>: den gennemsnitlige afvigelse mellem respondenternes observerede indkomst og den indkomst, som regressionsmodellen forudsiger, at respondenten har, på baggrund af 𝛼 og 𝛽</p>
+<p><span class="math inline">\(\alpha\)</span><strong>:</strong> Den gennemsnitlige indkomst, når antal års uddannelse = 0 og alder = 0</p>
+<p><span class="math inline">\(\beta\)</span><strong>:</strong> den gennemsnitlige ændring i indkomst, hver gang antal års uddannelse stiger med 1 (kontrolleret for alder)</p>
+<p><span class="math inline">\(\delta\)</span><strong>:</strong> den gennemsnitlige ændring i indkomst, hver gang alder stiger med 1 (kontrolleret for antal års uddannelse)</p>
+<p><span class="math inline">\(\epsilon\)</span><strong>:</strong> den gennemsnitlige afvigelse mellem respondenternes observerede indkomst og den indkomst, som regressionsmodellen forudsiger, at respondenten har, på baggrund af 𝛼 og 𝛽</p>
 </section>
 <section class="slide level0">
 
@@ -477,17 +477,19 @@
 <h2>Måleniveauer i lineær regression</h2>
 <p>Vi kan dermed regne os frem til den forventede indkomst for hhv. mænd og kvinder:</p>
 <p><span class="math inline">\(Indkomst= \alpha+\beta*Kvinde+\epsilon\)</span></p>
-<p>Mænd:</p>
+<p><br></p>
+<p><u>Mænd:</u></p>
 <p><span class="math inline">\(Indkomst_{mand}= \alpha+\beta*0+\epsilon\)</span></p>
 <p><span class="math inline">\(Indkomst_{mand}= \alpha+\epsilon\)</span></p>
-<p>Kvinder:<br>
+<p><br></p>
+<p><u>Kvinder:</u><br>
 <span class="math inline">\(Indkomst_{kvinde}= \alpha+\beta*1+\epsilon\)</span></p>
 <p><span class="math inline">\(Indkomst_{kvinde}= \alpha+\beta+\epsilon\)</span></p>
 </section>
 <section class="slide level0">
 
 <h2>Måleniveauer i lineær regression</h2>
-<p>Med andre ord vil konstantleddet 𝛼 repræsentere den forventede værdi på Y, når dummy variablen = 0.</p>
+<p>Med andre ord vil konstantleddet 𝛼 repræsentere den forventede værdi på Y, når dummy variablen tager værdien 0.</p>
 <p><span class="math display">\[Indkomst= \alpha+\beta*Kvinde+\epsilon\]</span></p>
 <p>Det er præcis ligesom med kontinuerte variable. Konstantleddet 𝛼 repræsenterer altid den forventede værdi på den afhængige variabel Y, når alle uafhængige variable = 0.</p>
 </section>
@@ -497,6 +499,7 @@
 <ul>
 <li><p>For diskrete variable med mere end to kategorier kodes hver kategori også til sin egen dummy variabel</p></li>
 <li><p>Tag f.eks. en nominel variabel der måler ens persons ansættelsestype i tre kategorier, lønmodtager, selvstændig eller hjemmegående (familie):</p>
+<p><br></p>
 <p><span class="math display">\[
 \Omega{=Lønmodtager, selvstændig, familie}
 \]</span></p></li>
@@ -517,7 +520,7 @@ X_1 = lønmodtager, X_2=selvstændig, X_3 = familie
 \]</span></p>
 <ul>
 <li><p>I praksis betyder dette, at man er nød til at udelade en af kategorierne/dummierne fra sin regressionsmodel. Ellers kommer man i problemer med noget der hedder multikollinaritet! Det vender vi tilbage til…</p></li>
-<li><p>Af samme årsag kan man heller ikke både have en mand og en kvinde dummy i samme model.</p></li>
+<li><p>Af samme årsag kan man heller ikke både have en “mande” og en “kvinde” dummy i samme model.</p></li>
 </ul>
 </section>
 <section class="slide level0">
@@ -557,6 +560,7 @@ X_1 = lønmodtager, X_2=selvstændig, X_3 = familie
 <section class="slide level0">
 
 <h2>Kodning af dummy-variable</h2>
+<p><br></p>
 <p>Princippet med dummier er, at man konstruerer en binær variabel for hver kategori på en disktret variabel. Disse binære variable tager enten værdien 0 eller 1. En variabel for køn med to kategorier, Mand og Kvinde, kodes til to nye variable:</p>
 <ul>
 <li><p>Mand</p></li>
@@ -578,11 +582,12 @@ X_1 = lønmodtager, X_2=selvstændig, X_3 = familie
   Kvinde 569 0.4805743</code></pre>
 </div>
 </div>
+<p>Variablen har to kategorier, “Mand” og “Kvinde”. Vi konstruerer derfor to nye variable - én for hver kategori på den oprindelige variabel - og tilføjer dem til datasættet.</p>
 </section>
 <section class="slide level0">
 
 <h2>Kodning af dummy-variable</h2>
-<p>Variablen har to kategorier, “Mand” og “Kvinde”. Vi konstruerer derfor to nye variable - én for hver kategori på den oprindelige variabel - og tilføjer dem til datasættet. Vi bruger funktionerne <code>mutate()</code> og <code>ifelse()</code> til omkode og/eller at skabe nye variable og tilføje dem til datasættet.</p>
+<p>Vi bruger funktionerne <code>mutate()</code> og <code>ifelse()</code> til omkode og/eller at skabe nye variable og tilføje dem til datasættet.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb3-2"><a href=""></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
@@ -610,6 +615,7 @@ X_1 = lønmodtager, X_2=selvstændig, X_3 = familie
 <h2>Øvelse i dummy-variable</h2>
 <p>Åben ESS datasættet og kod dummy-variable for variablen <code>udd</code></p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">tabyl</span>(df<span class="sc">$</span>udd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                      df$udd   n   percent
                   Grundskole 213 0.1798986
@@ -627,15 +633,35 @@ X_1 = lønmodtager, X_2=selvstændig, X_3 = familie
 <section class="slide level0">
 
 <h2>Øvelse i dummy-variable</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb8-2"><a href=""></a><span class="at">grundskole =</span> <span class="fu">ifelse</span>(udd<span class="sc">==</span><span class="st">"Grundskole"</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb8-3"><a href=""></a><span class="at">ung_erhv =</span> <span class="fu">ifelse</span>(udd<span class="sc">==</span><span class="st">"Ungdoms-/erhvervsuddannelse"</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb8-4"><a href=""></a><span class="at">ml_vid =</span> <span class="fu">ifelse</span>(udd<span class="sc">==</span><span class="st">"Mellemlang videregående"</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb8-5"><a href=""></a><span class="at">lang_vid =</span> <span class="fu">ifelse</span>(udd<span class="sc">==</span><span class="st">"Lang videregående"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb8-6"><a href=""></a></span>
+<span id="cb8-7"><a href=""></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(udd, grundskole, ung_erhv, ml_vid, lang_vid) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  udd                         grundskole ung_erhv ml_vid lang_vid
+  &lt;ord&gt;                            &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+1 Grundskole                           1        0      0        0
+2 Mellemlang videregående              0        0      1        0
+3 Ungdoms-/erhvervsuddannelse          0        1      0        0
+4 Lang videregående                    0        0      0        1
+5 Mellemlang videregående              0        0      1        0
+6 Ungdoms-/erhvervsuddannelse          0        1      0        0</code></pre>
+</div>
+</div>
 </section>
 <section class="slide level0">
 
 <h2>Øvelse i dummy-variable</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> ung_erhv <span class="sc">+</span> ml_vid<span class="sc">+</span>lang_vid, <span class="at">data=</span>df)</span>
-<span id="cb7-2"><a href=""></a></span>
-<span id="cb7-3"><a href=""></a><span class="fu">library</span>(texreg)</span>
-<span id="cb7-4"><a href=""></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model), <span class="at">include.ci=</span>F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> ung_erhv <span class="sc">+</span> ml_vid<span class="sc">+</span>lang_vid, <span class="at">data=</span>df)</span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a><span class="fu">library</span>(texreg)</span>
+<span id="cb10-4"><a href=""></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model), <span class="at">include.ci=</span>F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 =========================
@@ -665,19 +691,47 @@ Num. obs.     1184
 <p><br>
 <span class="math display">\[Y=\alpha + \beta*X+\epsilon\]</span></p>
 <p>Herefter tilføjer vi gradvist kontrolvariable for at forsøge at forklare den simple lineære sammenhæng mellem 𝑋 og 𝑌:</p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3\epsilon\)</span></p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon\)</span></p>
-<p>Denne metode kaldes forlæns modelsøgning. Pointen er, at fokusere på ændringer i koefficienten for <span class="math inline">\(\beta_1\)</span> fra model til model.</p>
+<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon\)</span></p>
+<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4+\epsilon\)</span></p>
+<p>Denne metode kaldes forlæns modelsøgning. Pointen er, at fokusere på ændringer i<br>
+koefficienten for <span class="math inline">\(\beta_1\)</span> fra model til model.</p>
 </section>
 <section class="slide level0">
 
 <h2>Forlæns modelsøgning</h2>
+<p><br></p>
+<p>I denne type af modelsøgning kalder man det parameter, som man hovedsageligt er interesseret i for <strong>POI</strong> <strong>(parameter of interest)</strong></p>
+<p><br></p>
+<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\epsilon\)</span></p>
+<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\epsilon\)</span></p>
+<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon\)</span></p>
+<p><br></p>
+<p>I dette eksempel ville <span class="math inline">\(\beta_1\)</span> tilhørende <span class="math inline">\(X_1\)</span> være POI, mens de øvrige parametre og uafhængige variable vil indtage rollen som kontrolvariable.</p>
+</section>
+<section class="slide level0">
+
+<h2>Forlæns modelsøgning</h2>
+<p><br></p>
 <p><span class="math display">\[Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon\]</span></p>
 <p><br></p>
 <ul>
-<li><p>Hvis der er en sammenhæng mellem <span class="math inline">\(X_1\)</span> og kontrolvariabel <span class="math inline">\(X_2\)</span>, så vil koefficienten af <span class="math inline">\(X_1\)</span> ændre sig, når <span class="math inline">\(X_2\)</span> inkluderes i modellen.</p></li>
-<li><p>Ændringen i <span class="math inline">\(X_1\)</span> kan tilskrives den del af sammenhængen mellem <span class="math inline">\(X_1\)</span> og <span class="math inline">\(Y\)</span> som forklares af <span class="math inline">\(X_2\)</span>. Det samme gælder for <span class="math inline">\(X_3\)</span> og <span class="math inline">\(X_4\)</span> osv.</p></li>
+<li>Hvis der er en sammenhæng mellem POI <span class="math inline">\(X_1\)</span> og kontrolvariabel <span class="math inline">\(X_2\)</span>, og <span class="math inline">\(X_2\)</span> og den afhængige variabel <span class="math inline">\(Y\)</span>, så vil koefficienten af POI <span class="math inline">\(X_1\)</span> ændre sig, når <span class="math inline">\(X_2\)</span> inkluderes i modellen.</li>
 </ul>
+<p><br></p>
+<ul>
+<li>Ændringen i POI <span class="math inline">\(X_1\)</span> kan tilskrives den del af sammenhængen mellem POI <span class="math inline">\(X_1\)</span> og <span class="math inline">\(Y\)</span> som forklares af <span class="math inline">\(X_2\)</span>. Det samme gælder for <span class="math inline">\(X_3\)</span> og <span class="math inline">\(X_4\)</span> osv.</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Forlæns modelsøgning</h2>
+<p>Hvornår er en kontrolvariabel så vigtig at have med i sin model?</p>
+<p><br></p>
+<p><strong>1)</strong> <strong>Når dens parameterestimat er signifikant</strong>: dvs. den forklarer noget af variationen i <span class="math inline">\(Y\)</span></p>
+<p>eller</p>
+<p><strong>2)</strong> <strong>Når den er signifikant og ændrer parameterestimatet for POI</strong>: dvs. den er en aktiv confounder i sammenhængen mellem POI og <span class="math inline">\(Y\)</span></p>
+<p><br></p>
+<p>Hvis den er signifikant, men ikke ændrer parameterestimatet for POI, kan det stadig være relevant at medtage variablen af hensyn til at bygge en regressionsmodel, der kan bruges til forudsigelse fremfor forklaring.</p>
 </section>
 <section class="slide level0">
 
@@ -685,8 +739,8 @@ Num. obs.     1184
 <p><br></p>
 <ul>
 <li><p>Når vi har afprøvet flere forskellige modeller vil vi gerne kunne sige noget om, hvilken model der er bedst.</p></li>
-<li><p>I lineær regressionsanalyser bruger man determinationskoefficienten 𝑅2 til at måle på en models ”forklaringskraft”</p></li>
-<li><p>𝑅2 udtrykker andelen af variation i den afhængige variabel Y, der kan forklares af den eller de uafhænige variable Lad os lige gennemgå for forståelsens skyld, hvordan den udregnes…</p></li>
+<li><p>I lineær regressionsanalyser bruger man determinationskoefficienten <span class="math inline">\(R^2\)</span> til at måle på en models ”forklaringskraft”</p></li>
+<li><p><span class="math inline">\(R^2\)</span> udtrykker andelen af variation i den afhængige variabel Y, der kan forklares af den eller de uafhænige variable Lad os lige gennemgå for forståelsens skyld, hvordan den udregnes…</p></li>
 </ul>
 </section>
 <section class="slide level0">
@@ -738,7 +792,7 @@ Summen af afstanden fra de observerede værdier til de forudsagte værdier (summ
 <h2>Forklaringskraft</h2>
 <p><br></p>
 <ul>
-<li><p>Som sagt udtrykke 𝑅2 værdien andelen af variation i den afhængige variabel Y, der kan forklares af modellens uafhængige variable</p></li>
+<li><p>Som sagt udtrykke <span class="math inline">\(R^2\)</span> værdien andelen af variation i den afhængige variabel Y, der kan forklares af modellens uafhængige variable</p></li>
 <li><p>Den er givet ved: <span class="math display">\[R^2 = ESS/TSS\]</span></p></li>
 <li><p>Den uforklarede del ligger i fejlledene og opsummeres af RSS</p></li>
 </ul>
@@ -823,13 +877,13 @@ Num. obs.         1184         1184          1184
 <h2>F-test for to modeller</h2>
 <p>I R estimeres F-testen mellem to modeller via funktionen <code>anova()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>f_test <span class="ot">&lt;-</span> <span class="fu">anova</span>(model2, model3)</span>
-<span id="cb10-2"><a href=""></a></span>
-<span id="cb10-3"><a href=""></a>(f_test_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb10-4"><a href=""></a>  <span class="st">"Forskel i Frihedsgrader"</span> <span class="ot">=</span> f_test<span class="sc">$</span>Df[<span class="dv">2</span>],        <span class="co"># Forskel i frihedsgrader</span></span>
-<span id="cb10-5"><a href=""></a>  <span class="st">"F-statistik"</span> <span class="ot">=</span> f_test<span class="sc">$</span>F[<span class="dv">2</span>],                     <span class="co"># F-statistik</span></span>
-<span id="cb10-6"><a href=""></a>  <span class="st">"P-værdi"</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.4f"</span>, f_test<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">2</span>]), <span class="co"># P-værdi med 4 decimaler</span></span>
-<span id="cb10-7"><a href=""></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>f_test <span class="ot">&lt;-</span> <span class="fu">anova</span>(model2, model3)</span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a>(f_test_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb13-4"><a href=""></a>  <span class="st">"Forskel i Frihedsgrader"</span> <span class="ot">=</span> f_test<span class="sc">$</span>Df[<span class="dv">2</span>],        <span class="co"># Forskel i frihedsgrader</span></span>
+<span id="cb13-5"><a href=""></a>  <span class="st">"F-statistik"</span> <span class="ot">=</span> f_test<span class="sc">$</span>F[<span class="dv">2</span>],                     <span class="co"># F-statistik</span></span>
+<span id="cb13-6"><a href=""></a>  <span class="st">"P-værdi"</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.4f"</span>, f_test<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">2</span>]), <span class="co"># P-værdi med 4 decimaler</span></span>
+<span id="cb13-7"><a href=""></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Forskel i Frihedsgrader F-statistik P-værdi
 1                       3    94.60222  0.0000</code></pre>

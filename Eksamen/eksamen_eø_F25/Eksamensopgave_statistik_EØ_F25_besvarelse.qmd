@@ -1,0 +1,253 @@
+---
+title: "Eksamen i statistik 15 ECTS"
+subtitle: "Erhvervsøkonomi E24/F25"
+format: pdf
+editor: visual
+---
+
+```{r eval=T, include=F}
+setwd("C:/Users/mmn/Dropbox/Ilisimatusarfik/Eksamen/eksamen_eø_F25")
+```
+
+Indlæs datasæt:
+
+```{r warning=F, message=F, echo=T}
+df <- readRDS("Eksamensdata_EØ_F25.rds")
+```
+
+# 1 Populationer og stikprøver
+
+*Følgende opgave er teoretisk, dvs. I skal ikke bruge eksamensdatasættet til at besvare spørgsmålene.*
+
+Forestil dig, at du har fået til opgave at gennemføre en spørgeskemaundersøgelse om boligmarkedet i Grønland, blandt mennesker i alderen 18-75 år. Undersøgelsen skal afdække faktorer som købernes økonomiske situation, motivation for køb eller salg, udfordringer i boligmarkedet samt præferencer for boligtype og beliggenhed.
+
+A. Definér populationen for undersøgelsen
+
+B. Hvordan ville du udvælge stikprøven til denne undersøgelse?
+
+C. Hvad er problemet med en skæv stikprøve, og hvilken betydning vil det have for din undersøgelse hvis din stikprøve ikke bliver repræsentativ?
+
+D. Beskriv hvordan størrelsen på en stikprøve hænger sammen med den statistiske sikkerhed på de beregninger, man kan lave med stikprøven.
+
+# 2 Variable og måleniveauer
+
+*Følgende opgave er teoretisk, dvs. I skal ikke bruge eksamensdatasættet til at besvare spørgsmålene.*
+
+Skalaer opdeles i dikotome, nominale, ordinale og intervalskalaer. Definér måleniveauet for følgende (tænkte) variable:
+
+A. Salgspris
+
+B. Kommune
+
+C. Energiklasse på et hus (A= meget energieffektiv, B= Energieffektiv, C= Middel, D= Energikrævende, E= Meget energikrævende)
+
+D. Antal kvadratmeter
+
+E. Til salg / solgt
+
+# 3 Univariat analyse
+
+*I følgende opgave skal I bruge eksamensdatasættet til at beregne jeres svar.*
+
+Variablen *kvadratmeterpris* i eksamensdatasættet er intervalskaleret og måler kvadratmeterprisen for hvert enkelt hus.
+
+A. Beregn middelværdi og median median for variablen *kvadratmeterpris*. Sammenlign medianen med middelværdien og kommentér på, hvad dette fortæller om fordelingen af kvadratmeterpris i stikprøven.
+
+```{r warning=F, message=F, echo=T}
+library(DescTools)
+Mean(df$kvadratmeterpris, na.rm = T) 
+Median(df$kvadratmeterpris, na.rm=T)
+```
+
+B. Beregn standardafvigelsen for variablen *kvadratmeterpris* og beskriv, hvad standardafvigelsen måler.
+
+```{r warning=F, message=F, echo=T}
+sd(df$kvadratmeterpris, na.rm = TRUE)
+```
+
+C. Beregn et 95% konfidensinterval for variablens (*kvadratmeterpris* ) middelværdi. Beskriv resultatet og forklar, hvordan det kan fortolkes.
+
+```{r warning=F, message=F, echo=T}
+t.test(df$kvadratmeterpris)
+```
+
+Du skal nu undersøge fordelingen på variablen *energiklasse*, som måler husenes energiklasse (A,B,C,D, eller E).
+
+D. Lav et univariat barplot for variablen energiklasse. Kommentér på fordelingen - hvilke energiklassehuse er der flest af?
+
+```{r warning=F, message=F, echo=T}
+library(ggplot2)
+
+ggplot(df) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = factor(energiklasse)) +  #Erstat cyl med din variabel
+  geom_bar(fill = "#003366") +
+  labs(
+    x = "Energiklasse",
+    y = "Antal huse"
+  ) +
+  theme_minimal()
+```
+
+# 4 Bivariat analyse
+
+*I følgende opgaver skal I bruge eksamensdatasættet til at beregne jeres svar.*
+
+### Kvadratmeterpris og afstand til offentlig transport
+
+I denne opgave skal I undersøge, om der er en sammenhæng mellem kvadratmeterprisen på et hus og afstanden til nærmeste offentlige transport. Variablen *kvadratmeterpris* måler kvadratmeterpris i DKK og variablen *afstand_off_transport* måler afstanden fra hvert hus til nærmeste offentlige transport i meter.
+
+A. Beskriv med dine egne ord, hvad begrebet *korrelation* betyder
+
+B. Lav et bivariat scatterplot over variablene *kvadratmeterpris* og *afstand_off_transport.*
+
+```{r}
+library(ggplot2)
+
+ggplot(df) + # Erstat mtcars med navnet på objektet med dit datasæt
+  aes(x = afstand_off_transport, y = kvadratmeterpris) + # Erstat wt og mpg med dine variable
+  geom_point() +
+  labs(
+    x = "Afstand til offentlig transport i meter",
+    y = "Kvadratmeterpris"
+  ) +
+  theme_minimal()
+```
+
+C: På baggrund af plottet, mener du så, at der er korrelation mellem kvadratmeterpris og afstanden til offentlig transport? Og i så fald, er den så positiv eller negativ?
+
+B. Udregn den passende korrelationskoefficient mellem variablene *kvadratmeterpris* og *afstand_off_transport* givet deres måleniveauer.
+
+```{r warning=F, message=F, echo=T}
+cor.test(df$kvadratmeterpris, df$afstand_off_transport )
+```
+
+C. På baggrund af korrelationskoefficienten, mener du så, at der er en korrelation mellem kvadratmeterpris og afstanden til offentlig transport? Og i så fald, er den så positiv eller negativ?
+
+### Kvadratmeterpris og fjernvarme
+
+I skal nu teste, om der er forskel på den gennemsnitlige kvardratmeterpris på huse med og uden fjernvarme. Variablen *kvadratmeterpris* måler kvadratmeterpris i DKK og variablen *fjernvarme* måler, om der er indlagt fjernvarme i et hus (ja) eller ej (nej).
+
+D. Opstil hypoteser for en bivariat t-test for forskelle på to gennemsnit
+
+E. Gennemfør t-testen i R med variablene
+
+```{r warning=F, message=F, echo=T}
+# Udfør t-test
+ttest_resultat_bivariat <- t.test(kvadratmeterpris ~ fjernvarme, data = df)
+
+# Opret en tabel med resultaterne
+(ttest_tabel_bivariat <- data.frame(
+  Parameter = c("Gennemsnit Gruppe 1",        # Gennemsnit for første gruppe
+                "Gennemsnit Gruppe 2",        # Gennemsnit for anden gruppe
+                "Test-statistik",             # Teststatistikken (t-værdien)
+                "P-værdi",                    # P-værdien
+                "Nedre konfidensinterval",    # Nedre konfidensinterval
+                "Øvre konfidensinterval",     # Øvre konfidensinterval
+                "Frihedsgrader"),             # Frihedsgrader (df)
+  Værdi = c(
+    round(ttest_resultat_bivariat$estimate[1], 2),     # Gennemsnittet for første gruppe afrundet til 3 decimaler
+    round(ttest_resultat_bivariat$estimate[2], 2),     # Gennemsnittet for anden gruppe afrundet til 3 decimaler
+    round(ttest_resultat_bivariat$statistic, 3),       # Teststatistikken afrundet til 3 decimaler
+    sprintf("%.4f", ttest_resultat_bivariat$p.value),  # P-værdien med 4 decimaler
+    round(ttest_resultat_bivariat$conf.int[1], 3),     # Nedre konfidensinterval afrundet til 3 decimaler
+    round(ttest_resultat_bivariat$conf.int[2], 3),     # Øvre konfidensinterval afrundet til 3 decimaler
+    round(ttest_resultat_bivariat$parameter, 1)        # Frihedsgrader afrundet til 1 decimal
+  )
+))
+```
+
+F. Konkludér på testen. Er der en signifikant forskel på den gennemsnitlige kvadratmeterpris for huse, der har indlagt fjernvarme og huse, der ikke har?
+
+# 6 Lineær regressionsanalyse: kvadratmeterpris
+
+*I følgende opgaver skal I bruge eksamensdatasættet til at beregne jeres svar.*
+
+I denne opgave skal I undersøge sammenhængen mellem et hus' kvadratmeterpris og byggeår ved hjælp af forlæns modelsøgning. Vi har en hypotese om, at prisen på et hus vil være højere hvis det er bygget i 2015 end i 1966. Altså forventer vi en positiv korrelation mellem byggeår og kvadratmeterpris. I skal nu estimere denne sammenhæng og efterprøve, hvor stærk den er, når der tages højde for andre relevante faktorer, som spiller ind ift. et hus' kvadratmeterpris.
+
+### Simpel model
+
+I skal først estimere en simpel model med sammenhængen mellem kvadratmeterpris og byggeår. Variablen *kvadratmeterpris* er intervalskaleret og måler kvadratmeterpris i DKK. Variablen *byggeår* betragtes her også som intervalskaleret og måler det år, som huset er bygget i.
+
+A. Estimér følgende model (1): $kvadratmeterpris = \alpha+ \beta_1*byggeår+\epsilon$
+
+```{r warning=F, message=F, echo=T}
+model1 <- lm(kvadratmeterpris ~ byggeår, data = df)
+
+library(texreg)
+(texreg::screenreg(list(model1), include.ci=F))
+```
+
+B. Hvilken variabel er den afhængige variabel, og hvilken er den uafhængige variabel?
+
+C. Hvad er fortolkningen af parameterestimatet for konstantleddet $\alpha$ (Intercept) ?
+
+D. Hvad er fortolkningen af parameterestimatet for hældningskoefficienten $\beta_1$? Kommenter på om sammenhængen er statistisk signifikant.
+
+E. Beregn den forventede kvadratmeterpris for et hus fra 1995.
+
+### Multipel model: afstand til offentlig transport
+
+Sammenhængen mellem byggeår og kvadratmeterpris kan tænkes at være påvirket af andre bagvedliggende faktorer, der korrelerer med begge variable. Det kunne for eksempel tænkes, at afstanden til offentlig transport er en "confounding variable" i denne sammenhæng. I skal derfor indføre afstanden til offentlig transport som kontrolvariabel i modellen.
+
+F. Estimer følgende model (2): $kvadratmeterpris = \alpha+ \beta_1*byggeår+\beta_2*afstand\_off\_transport+\epsilon$
+
+```{r warning=F, message=F, echo=T}
+model2 <- lm(kvadratmeterpris ~ byggeår+afstand_off_transport, data = df)
+
+library(texreg)
+(texreg::screenreg(list(model1, model2), include.ci=F))
+
+```
+
+G. Hvad er fortolkningen af parameterestimatet for konstantleddet $\alpha$ (Intercept) nu?
+
+H. Kommentér igen på fortolkningen af parameterestimatet for $\beta_1$. Er der en statistisk signifikant sammenhæng mellem kvadratmeterpris og byggeår, når der kontrolleres for afstanden til offentlig transport?
+
+I. Hvad er fortolkningen af parameterestimatet for $\beta_2$? Kommenter på om sammenhængen er statistisk signifikant.
+
+J. Beregn den forventede kvadratmeterpris for et hus fra 1995 med 500 m til nærmeste offentlige transport.
+
+### Multipel model: afstand til offentlig transport og hustype
+
+Hustypen kan også tænkes at påvirke kvadratmeterpris. I skal derfor også indføre hustype i regressionsmodellen. Variablen *hustype* har tre kategorier: *lejlighed*, *rækkehus* og *villa*. Disse tre kategorier er allerede blevet omkodet til tre dummyvariable.
+
+I den nedenstående model skal I udelade dummy-variablen ***lejlighed*** som referencekategori.
+
+K. Estimér følgende model (3):
+
+$kvadratmeterpris = \alpha+ \beta_1*byggeår+\beta_2*afstand\_off\_transport+\beta_3*rækkehus+\beta_4*villa+\epsilon$
+
+```{r warning=F, message=F, echo=T}
+model3 <- lm(kvadratmeterpris ~ byggeår + afstand_off_transport + 
+             rækkehus + villa, data = df)
+
+library(texreg)
+(texreg::screenreg(list(model1, model2, model3), include.ci=F))
+
+```
+
+L. Kommentér igen på fortolkningen af parameterestimatet for $\beta_1$. Er der en statistisk signifikant sammenhæng mellem kvadratmeterpris og byggeår, når der kontrolleres for afstand til offentlig transport og hustype?
+
+M. Kommentér på fortolkningen af parameterestimaterne for $\beta_3$ og $\beta_4$. Er der en statistisk signifikant forskel på kvadratmeterprisen på hhv. lejligheder og rækkehuse , og lejligheder og villaer, når der kontrolleres for byggeår og afstand til offentlig transport?
+
+## Forklaringskraft
+
+*I følgende opgave skal I bruge eksamensdatasættet til at beregne jeres svar.*
+
+N. Sammenlign $R^2$ værdien for model 1-3. Kommentér på hvilken model, der har den højeste forklaringskraft, og hvad dette betyder.
+
+For at afgøre om forklaringskraften i model 3 er signifikant højere end i model 2 er det nødvendigt med en F-test mellem de to modeller.
+
+O. Opstil hypoteser for en F-test mellem to modeller
+
+P. Gennemfør og konkludér på testen. Er forklaringskraften i model 3 signifikant bedre end i model 2?
+
+```{r warning=F, message=F, echo=T}
+f_test <- anova(model2, model3)
+
+(f_test_summary <- data.frame(
+  "Forskel i Frihedsgrader" = f_test$Df[2],        # Forskel i frihedsgrader
+  "F-statistik" = f_test$F[2],                     # F-statistik
+  "P-værdi" = sprintf("%.4f", f_test$`Pr(>F)`[2]), # P-værdi med 4 decimaler
+  check.names = FALSE))
+```
