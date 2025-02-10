@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="10_linear_regression_2_files/libs/clipboard/clipboard.min.js"></script>
-<script src="10_linear_regression_2_files/libs/quarto-html/tabby.min.js"></script>
-<script src="10_linear_regression_2_files/libs/quarto-html/popper.min.js"></script>
-<script src="10_linear_regression_2_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="10_linear_regression_2_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="10_linear_regression_2_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="10_linear_regression_2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="10_linear_regression_2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="11_lineær_regression_3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="11_lineær_regression_3_files/libs/quarto-html/tabby.min.js"></script>
+<script src="11_lineær_regression_3_files/libs/quarto-html/popper.min.js"></script>
+<script src="11_lineær_regression_3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="11_lineær_regression_3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="11_lineær_regression_3_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="11_lineær_regression_3_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="11_lineær_regression_3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
-  <title>linear_regression_2</title>
+  <title>lineær_regression_3</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="10_linear_regression_2_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="10_linear_regression_2_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="11_lineær_regression_3_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="11_lineær_regression_3_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -94,11 +94,11 @@
     code span.vs { color: #9ecbff; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="10_linear_regression_2_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="10_linear_regression_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="10_linear_regression_2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="10_linear_regression_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="10_linear_regression_2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="11_lineær_regression_3_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="11_lineær_regression_3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="11_lineær_regression_3_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="11_lineær_regression_3_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="11_lineær_regression_3_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -392,508 +392,407 @@
 
 <section class="slide level0">
 
-<section id="lineær-regression-2" class="center">
-<h1>Lineær regression 2</h1>
+<section id="lineær-regression-3" class="center">
+<h1>Lineær regression 3</h1>
 <h3 id="statistik-e24-15-ects">Statistik E24 (15 ECTS)</h3>
 <h3 id="ved-mikkeline-munk-nielsen">ved Mikkeline Munk Nielsen</h3>
 </section>
 </section>
 <section class="slide level0">
 
-<h2>Program</h2>
+<h1>Regressionsmodellens antagelser</h1>
 <p><br></p>
-<ul>
-<li><p>Diskrete variable i lineær regressionsanalyse</p></li>
-<li><p>Kodning af dummy-variable</p></li>
-<li><p>Forlæns modelsøgning</p></li>
-</ul>
-</section>
-<section class="slide level0">
-
-<h2>Lineær regression recap</h2>
-<p>Sidst arbejde vi med en simpel lineær regressionsmodel med en afhængig variabel 𝑌 og en uafhængig variabel 𝑋:</p>
-<p><br>
-<span class="math display">\[Y=\alpha + \beta*X+\epsilon\]</span></p>
-<p>Og en multiple lineær regressionsmodel, hvor vi tilføjede en kontrolvariabel 𝑍:</p>
-<p><span class="math display">\[Y= \alpha+\beta*X+\delta* Z+\epsilon\]</span></p>
-</section>
-<section class="slide level0">
-
-<h2>Lineær regression recap</h2>
-<p>I den simple lineær regressionsmodel undersøger vi sammenhængen mellem 𝑌 og 𝑋. Parameteret 𝛽 beskriver den ubetingede lineære sammenhæng mellem dem:</p>
-<p><br>
-<span class="math display">\[Y=\alpha + \beta*X+\epsilon\]</span></p>
-<p>I den multiple lineær regressionsmodel undersøger vi om sammenhængen mellem 𝑌 og 𝑋 består, når vi tager højde for et tredje forhold 𝑍.</p>
-<p><span class="math display">\[Y= \alpha+\beta*X+\delta* Z+\epsilon\]</span></p>
-<p>Parameteret 𝛽 beskriver nu den betingede lineære sammenhæng mellem dem 𝑌 og 𝑋, når vi kontrollerer for 𝑍.</p>
-</section>
-<section class="slide level0">
-
-<h2>Lineær regression recap</h2>
-<p><span class="math display">\[Indkomst = \alpha+\beta*uddannelse+\delta* alder+\epsilon\]</span></p>
-<p>Summeøvelse 10 min: hvad er fortolkningen af følgende parametre (og fejlledet)?</p>
-<p><span class="math inline">\(\alpha\)</span>:</p>
-<p><span class="math inline">\(\beta\)</span><strong>:</strong></p>
-<p><span class="math inline">\(\delta\)</span><strong>:</strong></p>
-<p><span class="math inline">\(\epsilon\)</span><strong>:</strong></p>
-</section>
-<section class="slide level0">
-
-<h2>Lineær regression recap</h2>
-<p><span class="math display">\[Indkomst = \alpha+\beta*uddannelse+\delta* alder+\epsilon\]</span></p>
-<p>Summeøvelse 10 min: hvad er fortolkningen af følgende parametre (og fejlledet)?</p>
-<p><span class="math inline">\(\alpha\)</span><strong>:</strong> Den gennemsnitlige indkomst, når antal års uddannelse = 0 og alder = 0</p>
-<p><span class="math inline">\(\beta\)</span><strong>:</strong> den gennemsnitlige ændring i indkomst, hver gang antal års uddannelse stiger med 1 (kontrolleret for alder)</p>
-<p><span class="math inline">\(\delta\)</span><strong>:</strong> den gennemsnitlige ændring i indkomst, hver gang alder stiger med 1 (kontrolleret for antal års uddannelse)</p>
-<p><span class="math inline">\(\epsilon\)</span><strong>:</strong> den gennemsnitlige afvigelse mellem respondenternes observerede indkomst og den indkomst, som regressionsmodellen forudsiger, at respondenten har, på baggrund af 𝛼 og 𝛽</p>
-</section>
-<section class="slide level0">
-
-<h2>Lineær regression recap</h2>
+<p>Antagelser er <strong><em>betingelser</em></strong> eller <strong><em>forudsætninger</em></strong>, som skal være opfyldt for, at resultaterne fra regressionen er pålidelige og gyldige</p>
 <p><br></p>
-<p>Indtil videre har vi slet ikke talt om variablenes måleniveau i lineær regression… Det laver vi om på nu!</p>
+<p>Her berør vi de mest centrale antagelser bag OLS for dette kursus</p>
 </section>
 <section class="slide level0">
 
-<h2>Måleniveauer i lineær regression</h2>
-<p>Den <strong><em>afhængige</em></strong> variabel 𝑌 er altid kontinuert (intervalskaleret)</p>
-<p><span class="math display">\[Y= \alpha+\beta*X+\delta* Z+\epsilon\]</span></p>
-<p><strong><em>Uafhængige</em></strong> variable (herunder kontrolvariable) kan både være kontinuerte og diskrete (altså både intervalskalerede, nominelle eller ordinale)</p>
-<p><br></p>
-<p>Principielt er der ingen forskel i fortolkningen af koefficienter for hhv. kontinuerte og diskrete variable. Koefficienter beskriver altid ændringen i 𝑌 for én enhedsændring i 𝑋. Men i praksis er der en forskel…</p>
+<h1>Regressionsmodellens antagelser</h1>
+<ol type="1">
+<li><p>Vores data kommer fra en simpel tilfældig stikprøve, der afspejler den population, som vi er interesserede i at undersøge (ellers kan vi ikke arbejde med inferens)</p></li>
+<li><p>Regressionsmodellen er lineær i parametrene og fejlleddet</p></li>
+<li><p>Ingen af de uafhængige variable må være en konstant eller lineær kombination af de andre uafhængige variable (dvs. ingen eksakt multikollinaritet)</p></li>
+<li><p>Residualerne skal være homogent fordelt (dvs. ingen heteroskedasticitet)</p></li>
+<li><p>Residualerne skal være uafhængigt fordelt (ingen autokorrelation)</p></li>
+<li><p>Modellen er korrekt specificeret (dvs. alle relevante variable er med (OVB) og ingen irrelevante variable er med</p></li>
+<li><p>Endogenitet</p></li>
+</ol>
 </section>
 <section class="slide level0">
 
-<h2>Måleniveauer i lineær regression</h2>
-<ul>
-<li><p>Diskrete variable kodes som binære ”dummy variable”, der kun kan tage værdien 0 eller 1</p></li>
-<li><p>En dummy for køn kan f.eks. laves til en ny variabel ”kvinde”, der antage værdien 1, hvis respondenten er en kvinde, og værdien 0, hvis respondenten er en mand.</p></li>
-</ul>
-<p><span class="math display">\[Y= \alpha+\beta*Kvinde+\epsilon\]</span></p>
-<p>Her vil 𝛽 beskrive ændringen i indkomst, hvis variablen ”kvinde” går fra 0 (mand) til kvinde (1).</p>
+<h1>Stikprøve</h1>
+<p><strong>1 Vores data kommer fra en simpel tilfældig stikprøve, der afspejler den population, som vi er interesserede i at undersøge (ellers kan vi ikke arbejde med inferens)</strong></p>
+<p><br></p>
+<p>I statistik drages der konklusioner om en population på baggrund af en stikprøve (inferens). Slutningen er baseret på:</p>
+<p><strong>I. Repræsentativitet</strong> (stikprøvens sammensætning ligner populationens mht. relevante karakteristika)</p>
+<p><strong>II. Tilfældighed</strong> <strong>af stikprøveudtræk</strong> (mindsker risiko for skævhed i stikprøven og er derved et middel til at forøge repræsentativitet)</p>
 </section>
 <section class="slide level0">
 
-<h2>Måleniveauer i lineær regression</h2>
-<p>Vi kan dermed regne os frem til den forventede indkomst for hhv. mænd og kvinder:</p>
-<p><span class="math inline">\(Indkomst= \alpha+\beta*Kvinde+\epsilon\)</span></p>
-<p><br></p>
-<p><u>Mænd:</u></p>
-<p><span class="math inline">\(Indkomst_{mand}= \alpha+\beta*0+\epsilon\)</span></p>
-<p><span class="math inline">\(Indkomst_{mand}= \alpha+\epsilon\)</span></p>
-<p><br></p>
-<p><u>Kvinder:</u><br>
-<span class="math inline">\(Indkomst_{kvinde}= \alpha+\beta*1+\epsilon\)</span></p>
-<p><span class="math inline">\(Indkomst_{kvinde}= \alpha+\beta+\epsilon\)</span></p>
-</section>
-<section class="slide level0">
-
-<h2>Måleniveauer i lineær regression</h2>
-<p>Med andre ord vil konstantleddet 𝛼 repræsentere den forventede værdi på Y, når dummy variablen tager værdien 0.</p>
-<p><span class="math display">\[Indkomst= \alpha+\beta*Kvinde+\epsilon\]</span></p>
-<p>Det er præcis ligesom med kontinuerte variable. Konstantleddet 𝛼 repræsenterer altid den forventede værdi på den afhængige variabel Y, når alle uafhængige variable = 0.</p>
-</section>
-<section class="slide level0">
-
-<h2>Måleniveauer i lineær regression</h2>
-<ul>
-<li><p>For diskrete variable med mere end to kategorier kodes hver kategori også til sin egen dummy variabel</p></li>
-<li><p>Tag f.eks. en nominel variabel der måler ens persons ansættelsestype i tre kategorier, lønmodtager, selvstændig eller hjemmegående (familie):</p>
-<p><br></p>
-<p><span class="math display">\[
-\Omega{=Lønmodtager, selvstændig, familie}
-\]</span></p></li>
-<li><p>Disse tre kategorier laves til hver sin dummy variabel</p></li>
-</ul>
-<p><span class="math display">\[
-X_1 = lønmodtager, X_2=selvstændig, X_3 = familie
-\]</span></p>
-</section>
-<section class="slide level0">
-
-<h2>Dummy fælden</h2>
-<ul>
-<li>Her opstår dog et problem! En respondent er enten lønmodtager, selvstændig eller arbejder i familien. Man kan altså kun have værdien 1 på èn af de tre variable.</li>
-</ul>
-<p><span class="math display">\[
-X_1 = lønmodtager, X_2=selvstændig, X_3 = familie
-\]</span></p>
-<ul>
-<li><p>I praksis betyder dette, at man er nød til at udelade en af kategorierne/dummierne fra sin regressionsmodel. Ellers kommer man i problemer med noget der hedder multikollinaritet! Det vender vi tilbage til…</p></li>
-<li><p>Af samme årsag kan man heller ikke både have en “mande” og en “kvinde” dummy i samme model.</p></li>
-</ul>
-</section>
-<section class="slide level0">
-
-<h2>Dummy fælden</h2>
-<p><span class="math inline">\(X_1 = lønmodtager, X_2=selvstændig, X_3 = familie\)</span></p>
-<p><br></p>
-<p>Regressionsmodellen kommer til at se således ud, når vi udelukker <span class="math inline">\(X_1 = lønmodtager\)</span></p>
-<p><span class="math inline">\(Y=\alpha+\beta_1*X_2+\beta_2*X_3+\epsilon\)</span></p>
-<p><span class="math inline">\(Y=\alpha+\beta_1*selvstændig+\beta_2*familie+\epsilon\)</span></p>
-<p><br></p>
-<p>I denne model vil den udeladte kategori <span class="math inline">\(X_1 = lønmodtager\)</span> ende med at ligge i konstantleddet <span class="math inline">\(\alpha\)</span></p>
-<p>Det giver mening, fordi 𝛼 altid måler den gennemsnitlige værdi på 𝑌, når værdien på alle 𝑋´er = 0. Hvis man har værdien 0 på både 𝑋1 (selvstændig) og 𝑋2 (familie), så er det fordi, at man har værdien 1 på den udeladte kategori 𝑋3 (lønmodtager).</p>
-</section>
-<section class="slide level0">
-
-<h2>Dummy fælden</h2>
-<p><span class="math inline">\(X_1 = lønmodtager, X_2=selvstændig, X_3 = familie\)</span></p>
-<p><br></p>
-<p>Regressionsmodellen kommer til at se således ud, når vi udelukker <span class="math inline">\(X_1 = lønmodtager\)</span></p>
-<p><span class="math inline">\(Y=\alpha+\beta_1*X_2+\beta_2*X_3+\epsilon\)</span></p>
-<p><span class="math inline">\(Y=\alpha+\beta_1*selvstændig+\beta_2*familie+\epsilon\)</span></p>
-<p><br></p>
-<p>Fortolkningen af parametrene i modellen er dermed:</p>
-<p><span class="math inline">\(\alpha\)</span>: den forventede indkomst for en lønmodtager (den udeladte kategori)</p>
-<p><span class="math inline">\(\beta_1\)</span>: forskellen i den forventede løn fra referencekategorien 𝛼 (lønmodtager) til selvstændige</p>
-<p><span class="math inline">\(\beta_2\)</span>: forskellen i den forventede løn fra referencekategorien 𝛼 (lønmodtager) til at arbejde i familien</p>
-</section>
-<section class="slide level0">
-
-<h2>Dummy fælden</h2>
-<p><br></p>
-<p>Hvis man glemmer at udelukke en kategori går man i den såkaldte ”dummy-fælde”.</p>
-<p><br></p>
-<p>HVIS I gør det… Så smider R selv en kategori ud.</p>
-</section>
-<section class="slide level0">
-
-<h2>Kodning af dummy-variable</h2>
-<p><br></p>
-<p>Princippet med dummier er, at man konstruerer en binær variabel for hver kategori på en disktret variabel. Disse binære variable tager enten værdien 0 eller 1. En variabel for køn med to kategorier, Mand og Kvinde, kodes til to nye variable:</p>
-<ul>
-<li><p>Mand</p></li>
-<li><p>Kvinde</p></li>
-</ul>
-<p>Respondenter med værdien “Kvinde” på den oprindelige variabel køn, tager værdien 1 på den nye variable Kvinde. Mænd tager værdien 0. Det omvendte gælder, på variablen Mand.</p>
-</section>
-<section class="slide level0">
-
-<h2>Kodning af dummy-variable</h2>
-<p>Før vi laver dummier af en diskret variabel, skal vi danne os et overblik over dens kategorier. Start derfor med at lave en tabel over kategorierne på variablen:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(janitor)</span>
-<span id="cb1-2"><a href=""></a></span>
-<span id="cb1-3"><a href=""></a><span class="fu">tabyl</span>(df<span class="sc">$</span>koen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> df$koen   n   percent
-    Mand 615 0.5194257
-  Kvinde 569 0.4805743</code></pre>
-</div>
-</div>
-<p>Variablen har to kategorier, “Mand” og “Kvinde”. Vi konstruerer derfor to nye variable - én for hver kategori på den oprindelige variabel - og tilføjer dem til datasættet.</p>
-</section>
-<section class="slide level0">
-
-<h2>Kodning af dummy-variable</h2>
-<p>Vi bruger funktionerne <code>mutate()</code> og <code>ifelse()</code> til omkode og/eller at skabe nye variable og tilføje dem til datasættet.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-2"><a href=""></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb3-3"><a href=""></a><span class="at">mand =</span> <span class="fu">ifelse</span>(koen<span class="sc">==</span><span class="st">"Mand"</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb3-4"><a href=""></a><span class="at">kvinde =</span> <span class="fu">ifelse</span>(koen<span class="sc">==</span><span class="st">"Kvinde"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Vi har nu tilføjet to dummy-variable til datasættet:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(koen, mand, kvinde) <span class="sc">%&gt;%</span> head</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
-  koen    mand kvinde
-  &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 Mand       1      0
-2 Mand       1      0
-3 Kvinde     0      1
-4 Mand       1      0
-5 Kvinde     0      1
-6 Mand       1      0</code></pre>
-</div>
-</div>
-</section>
-<section class="slide level0">
-
-<h2>Øvelse i dummy-variable</h2>
-<p>Åben ESS datasættet og kod dummy-variable for variablen <code>udd</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">tabyl</span>(df<span class="sc">$</span>udd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                      df$udd   n   percent
-                  Grundskole 213 0.1798986
- Ungdoms-/erhvervsuddannelse 401 0.3386824
-     Mellemlang videregående 427 0.3606419
-           Lang videregående 143 0.1207770</code></pre>
-</div>
-</div>
-<p><br></p>
-<p>Estimér derefter følgende regressionsmodel:</p>
-<p><span class="math inline">\(Indkomst=\alpha+\beta_1*{ungdoms\_erhvervsudd}+\beta_2*{ml\_videregående}+\beta_3*{lang\_videregående}+\epsilon\)</span></p>
-<p><br></p>
-<p>Giv fortolkning på parametrene: <span class="math inline">\(\alpha, \beta_1, \beta_2,\beta_3\)</span></p>
-</section>
-<section class="slide level0">
-
-<h2>Øvelse i dummy-variable</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb8-2"><a href=""></a></span>
-<span id="cb8-3"><a href=""></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(land<span class="sc">==</span><span class="st">"DK"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(koen, udd, net_indkomst, alder, antal_timer_arb) <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span>
-<span id="cb8-4"><a href=""></a></span>
-<span id="cb8-5"><a href=""></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb8-6"><a href=""></a><span class="at">grundskole =</span> <span class="fu">ifelse</span>(udd<span class="sc">==</span><span class="st">"Grundskole"</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb8-7"><a href=""></a><span class="at">ung_erhv =</span> <span class="fu">ifelse</span>(udd<span class="sc">==</span><span class="st">"Ungdoms-/erhvervsuddannelse"</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb8-8"><a href=""></a><span class="at">ml_vid =</span> <span class="fu">ifelse</span>(udd<span class="sc">==</span><span class="st">"Mellemlang videregående"</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb8-9"><a href=""></a><span class="at">lang_vid =</span> <span class="fu">ifelse</span>(udd<span class="sc">==</span><span class="st">"Lang videregående"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
-<span id="cb8-10"><a href=""></a></span>
-<span id="cb8-11"><a href=""></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(udd, grundskole, ung_erhv, ml_vid, lang_vid) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  udd                         grundskole ung_erhv ml_vid lang_vid
-  &lt;ord&gt;                            &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-1 Grundskole                           1        0      0        0
-2 Mellemlang videregående              0        0      1        0
-3 Ungdoms-/erhvervsuddannelse          0        1      0        0
-4 Lang videregående                    0        0      0        1
-5 Mellemlang videregående              0        0      1        0
-6 Ungdoms-/erhvervsuddannelse          0        1      0        0</code></pre>
-</div>
-</div>
-</section>
-<section class="slide level0">
-
-<h2>Øvelse i dummy-variable</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> ung_erhv <span class="sc">+</span> ml_vid<span class="sc">+</span>lang_vid, <span class="at">data=</span>df)</span>
-<span id="cb10-2"><a href=""></a></span>
-<span id="cb10-3"><a href=""></a><span class="fu">library</span>(texreg)</span>
-<span id="cb10-4"><a href=""></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model), <span class="at">include.ci=</span>F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-=========================
-             Model 1     
--------------------------
-(Intercept)  10975.65 ***
-              (504.65)   
-ung_erhv      3140.75 ***
-              (624.46)   
-ml_vid        7146.12 ***
-              (617.82)   
-lang_vid     12199.98 ***
-              (796.24)   
--------------------------
-R^2              0.20    
-Adj. R^2         0.20    
-Num. obs.     1184       
-=========================
-*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
-</div>
-</div>
-</section>
-<section class="slide level0">
-
-<h2>Forlæns modelsøgning</h2>
-<p>I lineær regressionsanalyse har vi derfor typisk én hovedsammenhæng, som vi fokuserer på. Sammenhængen mellem ét enkelt 𝑋 og et 𝑌</p>
-<p><br>
-<span class="math display">\[Y=\alpha + \beta_1*X_1+\epsilon\]</span></p>
-<p>Herefter tilføjer vi gradvist kontrolvariable for at forsøge at forklare den simple lineære sammenhæng mellem 𝑋 og 𝑌:</p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon\)</span></p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4+\epsilon\)</span></p>
-<p>Denne metode kaldes forlæns modelsøgning. Pointen er, at fokusere på ændringer i<br>
-koefficienten for <span class="math inline">\(\beta_1\)</span> fra model til model.</p>
-</section>
-<section class="slide level0">
-
-<h2>Forlæns modelsøgning</h2>
-<p><br></p>
-<p>I denne type af modelsøgning kalder man det parameter, som man hovedsageligt er interesseret i for <strong>POI</strong> <strong>(parameter of interest)</strong></p>
-<p><br></p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\epsilon\)</span></p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\epsilon\)</span></p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon\)</span></p>
-<p><br></p>
-<p>I dette eksempel ville <span class="math inline">\(\beta_1\)</span> tilhørende <span class="math inline">\(X_1\)</span> være POI, mens de øvrige parametre og uafhængige variable vil indtage rollen som kontrolvariable.</p>
-</section>
-<section class="slide level0">
-
-<h2>Forlæns modelsøgning</h2>
-<p><br></p>
-<p><span class="math display">\[Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon\]</span></p>
-<p><br></p>
-<ul>
-<li>Hvis der er en sammenhæng mellem POI <span class="math inline">\(X_1\)</span> og kontrolvariabel <span class="math inline">\(X_2\)</span>, og <span class="math inline">\(X_2\)</span> og den afhængige variabel <span class="math inline">\(Y\)</span>, så vil koefficienten af POI <span class="math inline">\(X_1\)</span> ændre sig, når <span class="math inline">\(X_2\)</span> inkluderes i modellen.</li>
-</ul>
-<p><br></p>
-<ul>
-<li>Ændringen i POI <span class="math inline">\(X_1\)</span> kan tilskrives den del af sammenhængen mellem POI <span class="math inline">\(X_1\)</span> og <span class="math inline">\(Y\)</span> som forklares af <span class="math inline">\(X_2\)</span>. Det samme gælder for <span class="math inline">\(X_3\)</span> og <span class="math inline">\(X_4\)</span> osv.</li>
-</ul>
-</section>
-<section class="slide level0">
-
-<h2>Forlæns modelsøgning</h2>
-<p>Hvornår er en kontrolvariabel så vigtig at have med i sin model?</p>
-<p><br></p>
-<p><strong>1)</strong> <strong>Når dens parameterestimat er signifikant</strong>: dvs. den forklarer noget af variationen i <span class="math inline">\(Y\)</span></p>
-<p>eller</p>
-<p><strong>2)</strong> <strong>Når den er signifikant og ændrer parameterestimatet for POI</strong>: dvs. den er en aktiv confounder i sammenhængen mellem POI og <span class="math inline">\(Y\)</span></p>
-<p><br></p>
-<p>Hvis den er signifikant, men ikke ændrer parameterestimatet for POI, kan det stadig være relevant at medtage variablen af hensyn til at bygge en regressionsmodel, der kan bruges til forudsigelse fremfor forklaring.</p>
-</section>
-<section class="slide level0">
-
-<h2>Sammenligning af modeller</h2>
-<p><br></p>
-<ul>
-<li><p>Når vi har afprøvet flere forskellige modeller vil vi gerne kunne sige noget om, hvilken model der er bedst.</p></li>
-<li><p>I lineær regressionsanalyser bruger man determinationskoefficienten <span class="math inline">\(R^2\)</span> til at måle på en models ”forklaringskraft”</p></li>
-<li><p><span class="math inline">\(R^2\)</span> udtrykker andelen af variation i den afhængige variabel Y, der kan forklares af den eller de uafhænige variable Lad os lige gennemgå for forståelsens skyld, hvordan den udregnes…</p></li>
-</ul>
-</section>
-<section class="slide level0">
-
-<h2>Forklaringskraft</h2>
-<div class="two-column-layout">
-<div class="left-column">
-<p>Lineær regression ”fitter” den linje, som minimerer den samlede afstand til datapunkterne</p>
-<p>På engelsk kaldes metoden ”OLS”. Det står for Ordinary Least Squares eller mindste kvadraters metode</p>
-<p>Det hedder mindste kvardraters metode, fordi linjes lægges der, hvor summen af de kvardrerede afstande til datapunkterne er mindst</p>
-</div>
-<div class="right-column">
-<p><img data-src="images/MSS.png"></p>
-</div>
-</div>
-</section>
-<section class="slide level0">
-
-<h2>Forklaringskraft</h2>
-<p>Man skelner mellem:</p>
+<h1>Linearitet</h1>
+<p><strong>2 Regressionsmodellen er lineær i parametrene og fejlleddet</strong></p>
 <div class="two-column-layout">
 <div class="left-column">
 <ul>
-<li><p><u>Total sum of squares (TSS):</u><br>
-Summen af afstanden fra de observerede værdier til middelværdien <span class="math inline">\(\sum(y_i-\bar{y})^2\)</span></p></li>
-<li><p><u>Estimated sum of squares (ESS):</u><br>
-Summen af afstanden fra de forudsagte værdier til middelværdien <span class="math inline">\(\sum(\hat{y}-\bar{y})^2\)</span></p></li>
-<li><p><u>Residual sum of squares (RSS)</u><br>
-Summen af afstanden fra de observerede værdier til de forudsagte værdier (summen af residualerne <span class="math inline">\(\sum(y_i-\hat{y})^2\)</span></p></li>
+<li><p>I lineær regression tegnes en lige linje, der beskriver sammenhængen mellem en afhængig variabel Y og en (eller flere) uafhængig variable X</p></li>
+<li><p>Hældningskoefficienterne for den uafhængige variabel, 𝛽, repræsenterer stigningen i Y, når X stiger med 1</p></li>
+<li><p>Vi antager, at for hver enhedsændring i, vil ændringen i Y være konstant og proportional til X, og dette forhold er lineært</p></li>
 </ul>
 </div>
 <div class="right-column">
-<p><img data-src="images/TSS.png"></p>
+<p><img data-src="images/hældning.png"></p>
 </div>
 </div>
 </section>
 <section class="slide level0">
 
-<h2>Forklaringskraft</h2>
+<h1>Multikollinaritet</h1>
+<p><strong>3 Ingen af de uafhængige variable må være en konstant eller lineær kombination af de andre uafhængige variable (dvs. ingen eksakt multikollinaritet)</strong></p>
 <p><br></p>
 <ul>
-<li><p><strong>Total sum of squares (TSS):</strong> <em>den totale varians på Y</em></p></li>
-<li><p><strong>Estimated sum of squares (ESS):</strong> <em>den forklarede del af variansen på Y</em></p></li>
-<li><p><strong>Residual sum of squares (RSS):</strong> <em>den uforklarede del af variansen på Y</em></p></li>
+<li>Multikollinaritet opstår, når der er stærk korrelation mellem uafhængige variable</li>
+</ul>
+<p><span class="math display">\[
+cov(X_1, X_2)
+\]</span></p>
+<ul>
+<li>Som udgangspunkt inkluderer vi kun flere uafhængige variable i vores model som kontrolvariable, fordi vi mistænker, at der er såkaldte ”confounders”. Dermed antager vi også, at de korrelerer</li>
 </ul>
 </section>
 <section class="slide level0">
 
-<h2>Forklaringskraft</h2>
+<h1>Multikollinaritet</h1>
+<p>Meget stærk korrelation mellem uafhængige variable giver dog problemer, da OLS-algoritmen kan have svært ved at adskille deres indflydelse på den afhængige variabel, hvilket kan føre til upålidelige og inkonsekvente parameterestimater:</p>
 <p><br></p>
 <ul>
-<li><p>Som sagt udtrykke <span class="math inline">\(R^2\)</span> værdien andelen af variation i den afhængige variabel Y, der kan forklares af modellens uafhængige variable</p></li>
-<li><p>Den er givet ved: <span class="math display">\[R^2 = ESS/TSS\]</span></p></li>
-<li><p>Den uforklarede del ligger i fejlledene og opsummeres af RSS</p></li>
+<li><p>Større standardfejl på parameterestimationerne</p></li>
+<li><p>Høj <span class="math inline">\(R^2\)</span> på trods af insignifikante parameterestimater</p></li>
+<li><p>Små ændringer i data giver store ændringer i parameterestimater</p></li>
+<li><p>Det bliver sværere at fastslå, hvad den enkelte variabel bidrager med til 𝑅2.</p></li>
 </ul>
 </section>
 <section class="slide level0">
 
-<h2>Forklaringskraft</h2>
-<p>texreg printer <span class="math inline">\(R^2\)</span> værdien for jer nederst i regressionstabellen:</p>
+<h1>Multikollinaritet</h1>
+<p><strong>Hvornår oplever man typisk multikollinaritet?</strong></p>
+<ul>
+<li><p>Nært beslægtede variable (f.eks. indkomst og skattebidrag)</p></li>
+<li><p>Polynomier</p></li>
+<li><p>Dummier – udelades der ikke en dummy-kategori til som referencekategori opstår perfekt multikollinaritet (R vil smide den skyldige variabel ud af modellen)</p></li>
+</ul>
+<p><br></p>
+<p><strong>Hvad afslører multikollinaritet?</strong></p>
+<ul>
+<li><p>Underlige parameterestimater</p></li>
+<li><p>Høj <span class="math inline">\(R^2\)</span> på trods af insignifikante t-værdier</p></li>
+<li><p>Omvendte fortegn på parameterestimaterne i forhold til hvad vi teoretisk forventede</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Multikollinaritet</h1>
+<p><br></p>
+<p>Hvad kan vi gøre ved multikollinaritet?</p>
+<p><br></p>
+<ol type="1">
+<li><p><strong>Dummier</strong>: forhold dig til din referencekategori! Hvilken kategori vil du sammenligne de andre med</p></li>
+<li><p><strong>Lav en korrelationsmatrice</strong> over variablene i modellen for at afsløre, hvilke variable der er problemet</p></li>
+<li><p><strong>Overvej</strong> om det er meningsfuldt at inkludere variablene på en anden måde (f.eks. som dummier)</p></li>
+<li><p><strong>Ekskludér</strong> en variabel fra modellen…</p></li>
+</ol>
+</section>
+<section class="slide level0">
+
+<h1>Multikollinaritet</h1>
+<p>Korrelationsmatrice af korrelationskoefficienter mellem variablene net_indomst, kvinde, mand, udd_aar og alder:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href=""></a>corr_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb1-3"><a href=""></a>  <span class="at">mand =</span> <span class="fu">ifelse</span>(koen<span class="sc">==</span><span class="st">"Mand"</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb1-4"><a href=""></a>  <span class="at">kvinde =</span> <span class="fu">ifelse</span>(koen<span class="sc">==</span><span class="st">"Kvinde"</span>,<span class="dv">1</span>,<span class="dv">0</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href=""></a>    <span class="fu">select</span>(net_indkomst, kvinde, mand, udd_aar, alder) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href=""></a>    <span class="fu">na.omit</span>()</span>
+<span id="cb1-7"><a href=""></a></span>
+<span id="cb1-8"><a href=""></a>(corr <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">cor</span>(corr_df), <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             net_indkomst kvinde mand udd_aar alder
+net_indkomst          1.0   -0.2  0.2     0.2  -0.1
+kvinde               -0.2    1.0 -1.0     0.0  -0.1
+mand                  0.2   -1.0  1.0     0.0   0.1
+udd_aar               0.2    0.0  0.0     1.0  -0.1
+alder                -0.1   -0.1  0.1    -0.1   1.0</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Multikollinaritet</h1>
+<p>Plot af korrelationsmatrice (Stærkere farver indikerer stærkere korrelationer)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(ggcorrplot)</span>
+<span id="cb3-2"><a href=""></a></span>
+<span id="cb3-3"><a href=""></a><span class="fu">ggcorrplot</span>(corr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="11_lineær_regression_3_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section class="slide level0">
+
+<h1>Heteroskedasticitet</h1>
+<p><strong>4 Residualerne skal være homogent fordelt (dvs. ingen heteroskedasticitet)</strong></p>
+<ul>
+<li>Heteroskedasticitet opstår, når der ikke er konstant varians i fejlleddet:</li>
+</ul>
+<p><span class="math display">\[
+Homoskedasticitet: var(u_i)=\sigma^2
+\]</span></p>
+<p><span class="math display">\[
+Heteroskedasticitet: var(u_i)=\sigma^2
+_i\]</span></p>
+<ul>
+<li><p>Med andre ord beskriver det en situation, hvor variansen på fejlleddet er forskellig over forskellige værdier på de uafhængige variable</p></li>
+<li><p>Man kunne f.eks. forestille sig, at der var større variation i indkomst blandt folk mellem 18-28 end blandt folk mellem 38-48</p></li>
+<li><p>Medfører at parameterestimaters standardafvigelser bliver upålidelige, og dermed bliver konfidensintervaller og signifikanstest forfejlede. Det betyder, at vi ikke kan stole på vores p-værdier.</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Heteroskedasticitet</h1>
+<div class="two-column-layout">
+<div class="left-column">
+<ul>
+<li><p><span class="math inline">\(\epsilon\)</span> repræsenterer fejlleddet eller residualet</p></li>
+<li><p>Fejlleddet er en variabel (ikke et parameter), som indeholder hver respondents afvigelse mellem respondenternes observerede værdi på <span class="math inline">\(Y\)</span> og den værdi, som regressionsmodellen forudsiger, at respondenten har, på baggrund af <span class="math inline">\(\alpha\)</span> og <span class="math inline">\(\beta\)</span></p></li>
+<li><p><span class="math inline">\(\epsilon\)</span> opsummerer med andre ord den variation i <span class="math inline">\(Y\)</span> (indkomst), som ikke kan forklares af <span class="math inline">\(X\)</span> (uddannelse)</p></li>
+</ul>
+</div>
+<div class="right-column">
+<p><img data-src="images/reg6.png"></p>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Heteroskedasticitet</h1>
+<p><br></p>
+<ul>
+<li>Man kan inspicere sin model for heteroskedasticitet ved lave et plot, der viser, om residualerne ligger jævnt fordelt over de uafhængige variable.</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Fordi den forudsagte værdi af den afhængige variabel 𝑌er en funktion af de uafhængige variable, plotter man tit residualerne mod de forudsagte værdier som en genvej til at plotte residualerne mod hver enkel uafhængig variabel</li>
+</ul>
+<p><br></p>
+<ul>
+<li>Og hvordan aflæser man så sådan et plot?</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Heteroskedasticitet</h1>
+
+<img data-src="images/HS.png" class="quarto-figure quarto-figure-center r-stretch"><p>Kilde: <a href="https://corporatefinanceinstitute.com/resources/data-science/heteroskedasticity/" class="uri">https://corporatefinanceinstitute.com/resources/data-science/heteroskedasticity/</a></p>
+</section>
+<section class="slide level0">
+
+<h1>Heteroskedasticitet</h1>
+<p><span class="math inline">\(\hat{indkomst}=\alpha+\beta_1 udd\_aar+\beta_2 antal\_arb\_timer+\epsilon\)</span></p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Scatterplot</a></li><li><a href="#tabset-1-2">Kode</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="11_lineær_regression_3_files/figure-revealjs/unnamed-chunk-4-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href=""></a></span>
+<span id="cb4-3"><a href=""></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(net_indkomst <span class="sc">~</span> udd_aar<span class="sc">+</span>antal_timer_arb, <span class="at">data=</span>df)</span>
+<span id="cb4-4"><a href=""></a></span>
+<span id="cb4-5"><a href=""></a><span class="co"># Beregn forudsagte værdier</span></span>
+<span id="cb4-6"><a href=""></a>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model)</span>
+<span id="cb4-7"><a href=""></a></span>
+<span id="cb4-8"><a href=""></a><span class="co"># Beregn residualer</span></span>
+<span id="cb4-9"><a href=""></a>residuals <span class="ot">&lt;-</span> <span class="fu">resid</span>(model)</span>
+<span id="cb4-10"><a href=""></a></span>
+<span id="cb4-11"><a href=""></a><span class="co"># Lav plot dataframe</span></span>
+<span id="cb4-12"><a href=""></a>plot_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">predicted =</span> predicted, <span class="at">residuals =</span> residuals)</span>
+<span id="cb4-13"><a href=""></a></span>
+<span id="cb4-14"><a href=""></a><span class="co"># Opret et plot for heteroskedasticitet</span></span>
+<span id="cb4-15"><a href=""></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> predicted, <span class="at">y =</span> residuals)) <span class="sc">+</span></span>
+<span id="cb4-16"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">20</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="co"># Sæt punktform og farve (runde, sorte punkter)</span></span>
+<span id="cb4-17"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-18"><a href=""></a>    <span class="at">x =</span> <span class="st">"Forudsagte værdier"</span>,            <span class="co"># Navn til x-aksen</span></span>
+<span id="cb4-19"><a href=""></a>    <span class="at">y =</span> <span class="st">"Residualer"</span>,                    <span class="co"># Navn til y-aksen</span></span>
+<span id="cb4-20"><a href=""></a>    <span class="at">title =</span> <span class="st">"Plot for heteroskedasticitet"</span> <span class="co"># Titel til plottet</span></span>
+<span id="cb4-21"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb4-22"><a href=""></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>                      <span class="co"># Brug et minimalistisk tema</span></span>
+<span id="cb4-23"><a href=""></a>  <span class="fu">theme</span>(</span>
+<span id="cb4-24"><a href=""></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="co"># Centrér titlen vandret (hjust = 0.5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Heteroskedasticitet</h1>
+<ul>
+<li><p>Man kan heldigvis nemt korrigere på sine standardfejl, så de bliver robuste overfor heteroskedasticitet (det er standardfejlen der bruges til at beregne p-værdien)</p></li>
+<li><p>Brug f.eks. Bare funktionen <code>lm_robust()</code> i R, der fungerer ligesom <code>lm()</code></p></li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Model</a></li><li><a href="#tabset-2-2">Kode</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-========================================================
-                 Model 1       Model 2      Model 3     
---------------------------------------------------------
-(Intercept)      16962.02 ***  7186.80 ***   4908.52 ***
-                  (329.89)     (790.29)      (790.31)   
-koenKvinde       -1814.46 ***  -687.94      -1609.12 ***
-                  (475.87)     (451.30)      (412.51)   
-antal_timer_arb                 256.56 ***    208.95 ***
-                                (19.11)       (17.44)   
-ung_erhv                                     2349.16 ***
-                                             (583.92)   
-ml_vid                                       6385.80 ***
-                                             (582.88)   
-lang_vid                                    11060.19 ***
-                                             (748.72)   
---------------------------------------------------------
-R^2                  0.01         0.14          0.31    
-Adj. R^2             0.01         0.14          0.31    
-Num. obs.         1184         1184          1184       
-========================================================
+==================================
+                      Model 1     
+----------------------------------
+Konstantled            6254.22 ***
+                      (1536.98)   
+Antal års uddannelse    274.14 ***
+                        (58.60)   
+Antal arbejdstimer      212.04 ***
+                        (34.31)   
+----------------------------------
+R^2                       0.12    
+Adj. R^2                  0.11    
+Num. obs.               642       
+RMSE                   7545.00    
+==================================
 *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(𝑅^2\)</span> værdien på 0,31 betyder, at de uafhængige variable kan forklare ca. 31 % af variationen på den afhængige variabel</p>
-</section>
-<section class="slide level0">
-
-<h2>Forklaringskraft</h2>
-<p>I kan bruge <span class="math inline">\(𝑅^2\)</span> til at sammenligne modeller i forlæns modelsøgning for at se, hvilken model der ser ud til at forklare mest af variationen i Y:</p>
-<p>Model 1: <span class="math inline">\(Indkomst=\alpha+\beta_1*kvinde+\epsilon\)</span></p>
-<p>Model 2: <span class="math inline">\(Indkomst=\alpha+\beta_1*kvinde+\beta_2*antal\_arbejdstimer+\epsilon\)</span></p>
-<p>Model 3: <span class="math inline">\(Indkomst=\alpha+\beta_1*kvinde+\beta_2*antal\_arbejdstimer+\beta_3*ung\_erhv+\beta_4*ml\_vid+\beta_5*lang\_vid+\epsilon\)</span></p>
-<p><br></p>
-<p>Men I kan også teste, om en model forklarer signifikant mere, end en anden model!</p>
-</section>
-<section class="slide level0">
-
-<h2>Test til sammenligning af modeller</h2>
-<p>Når man skal sammenligne to modeller med kun ét parameter til forskel, så er det nok at kigge på t-testen for det pågældende parameter (aflæse p-værdien eller stjerner*** for parametret)</p>
-<p>Model 1: <span class="math inline">\(Indkomst=\alpha+\beta_1*kvinde+\epsilon\)</span></p>
-<p>Model 2: <span class="math inline">\(Indkomst=\alpha+\beta_1*kvinde+\beta_2*antal\_arbejdstimer+\epsilon\)</span></p>
-<p><br></p>
-<p>Hvis <span class="math inline">\(\beta_2\)</span> er signifikant vil model 2 forklare signifikant mere end model 1, fordi der er en signifikant sammenhæng mellem indkomst og antal års uddannelse.</p>
-<p>Antal års uddannelse ser altså ud til at forklare noget af variationen i indkomst!</p>
-</section>
-<section class="slide level0">
-
-<h2>Test til sammenligning af modeller</h2>
-<p>Hvis der er mere end et enkelt parameter til forskel på to modeller, kan I ikke nøjes med t-testen på de nye parametre.</p>
-<p><br></p>
-<p><u>Model 2:</u><br>
-<span class="math inline">\(Indkomst=\alpha+\beta_1*kvinde+\beta_2*antal\_arbejdstimer+\epsilon\)</span></p>
-<p><u>Model 3:</u></p>
-<p><span class="math inline">\(Indkomst=\alpha+\beta_1*kvinde+\beta_2*antal\_arbejdstimer+\beta_3*ung\_erhv+\beta_4*ml\_vid+\beta_5*lang\_vid+\epsilon\)</span></p>
-<p><br></p>
-<p>I stedet skal I lave en F-test for at teste, om den forklaringskraft, som flere variable tilsammen tilføjer, er signifikant forskellig fra 0. Dette er særligt relevant med dummy variable, hvor hver kategori jo har hvert sit parameter!</p>
-</section>
-<section class="slide level0">
-
-<h2>F-test for to modeller</h2>
-<p><br></p>
-<p><u>Hypoteserne i F-testen er:</u></p>
-<p><strong>H0</strong>: Forklaringskraften i model 3 er ikke højere end i model</p>
-<p><strong>H1</strong>: Forklaringskraften i model 3 er højere end i model</p>
-<p><br></p>
-<p>Hvis p-værdien er under 0,05 forkastes nulhypotesen, og vi konkluderer, at model 3 har en signifikant højere forklaringskraft model 2.</p>
-<p>Hvis p-værdien er over 0,05, kan vi ikke med 95 % sikkerhed sige, at forklaringskraften i model 3 er bedre end i model 2.</p>
-</section>
-<section class="slide level0">
-
-<h2>F-test for to modeller</h2>
-<p>I R estimeres F-testen mellem to modeller via funktionen <code>anova()</code></p>
+</div>
+<div id="tabset-2-2">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>f_test <span class="ot">&lt;-</span> <span class="fu">anova</span>(model2, model3)</span>
-<span id="cb13-2"><a href=""></a></span>
-<span id="cb13-3"><a href=""></a>(f_test_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb13-4"><a href=""></a>  <span class="st">"Forskel i Frihedsgrader"</span> <span class="ot">=</span> f_test<span class="sc">$</span>Df[<span class="dv">2</span>],        <span class="co"># Forskel i frihedsgrader</span></span>
-<span id="cb13-5"><a href=""></a>  <span class="st">"F-statistik"</span> <span class="ot">=</span> f_test<span class="sc">$</span>F[<span class="dv">2</span>],                     <span class="co"># F-statistik</span></span>
-<span id="cb13-6"><a href=""></a>  <span class="st">"P-værdi"</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.4f"</span>, f_test<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">2</span>]), <span class="co"># P-værdi med 4 decimaler</span></span>
-<span id="cb13-7"><a href=""></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">library</span>(estimatr)</span>
+<span id="cb6-2"><a href=""></a></span>
+<span id="cb6-3"><a href=""></a>model_robust <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(net_indkomst <span class="sc">~</span> udd_aar <span class="sc">+</span> antal_timer_arb, <span class="at">data =</span> df)</span>
+<span id="cb6-4"><a href=""></a></span>
+<span id="cb6-5"><a href=""></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model_robust), <span class="at">include.ci=</span>F,</span>
+<span id="cb6-6"><a href=""></a>                <span class="at">custom.coef.names =</span> <span class="fu">c</span>(<span class="st">"Konstantled"</span>,</span>
+<span id="cb6-7"><a href=""></a>                                        <span class="st">"Antal års uddannelse"</span>,</span>
+<span id="cb6-8"><a href=""></a>                                        <span class="st">"Antal arbejdstimer"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Heteroskedasticitet</h1>
+<p>Man kan formelt teste for heteroskedasticitet med <strong><em>Breush Pagan Testen</em></strong>. Den tager udgangspunkt i en regressionsmodel:<br>
+<span class="math display">\[y_i=\beta_0+\beta_1X_{i1}+\beta_2X_{i2}+\dots+\beta_kX_{ik}+u_i\]</span></p>
+<p>Testen undersøger, om variansen af <span class="math inline">\(u_i\)</span>​ afhænger systematisk af de uafhængige variabler. Dette gøres ved at estimere en hjælpe-regression:</p>
+<p><span class="math display">\[u_i^2=\gamma_0+\gamma_1X_{i1}+\gamma_2X_{i2}+\dots+\gamma_kX_{ik}+v_i\]</span></p>
+<p>hvor vi tester, om koefficienterne <span class="math inline">\(\gamma_1, \gamma_2, ..., \gamma_k\)</span>​ samlet set er signifikant forskellige fra nul.</p>
+</section>
+<section class="slide level0">
+
+<h1>Heteroskedasticitet</h1>
+<p>Hypoteserne er som følgende:</p>
+<p><strong>H0</strong>: Der er <em>ingen</em> heteroskedasticitet</p>
+<p><strong>H1</strong>: Der <em>er</em> heteroskedasticitet</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a>bptest_result <span class="ot">&lt;-</span> <span class="fu">bptest</span>(model)</span>
+<span id="cb7-4"><a href=""></a></span>
+<span id="cb7-5"><a href=""></a>(bptest_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-6"><a href=""></a>  <span class="st">`</span><span class="at">Teststatistik</span><span class="st">`</span> <span class="ot">=</span> bptest_result<span class="sc">$</span>statistic,       <span class="co"># Teststatistik</span></span>
+<span id="cb7-7"><a href=""></a>  <span class="st">`</span><span class="at">Frihedsgrader</span><span class="st">`</span> <span class="ot">=</span> bptest_result<span class="sc">$</span>parameter,       <span class="co"># Frihedsgrader</span></span>
+<span id="cb7-8"><a href=""></a>  <span class="st">`</span><span class="at">P-værdi</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.4f"</span>, bptest_result<span class="sc">$</span>p.value) <span class="co"># P-værdi med 4 decimaler</span></span>
+<span id="cb7-9"><a href=""></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Forskel i Frihedsgrader F-statistik P-værdi
-1                       3    94.60222  0.0000</code></pre>
+<pre><code>   Teststatistik Frihedsgrader P.værdi
+BP      22.12243             2  0.0000</code></pre>
 </div>
 </div>
-<p>P-værdien bruges som altid til at konkludere, om nulhypotesen kan forkastes</p>
+<p>P-værdien på mindre end 0,0000 viser, at vi kan afvise nulhypotesen og accepterer H1. Der er altså heteroskedasticitet tilstede.</p>
+</section>
+<section class="slide level0">
+
+<h1>Autokorrelation</h1>
+<p><strong>5 Residualerne skal være uafhængigt fordelt (ingen autokorrelation)</strong></p>
+<p><br></p>
+<ul>
+<li><p>Autokorrelation beskriver en situation, hvor residualerne for forskellige observationer ikke er uafhængige</p></li>
+<li><p>Dette kan f.eks. ske, hvis man laver klyngebaseret udvælgelse til sin stikprøve på husholdsningsniveau blandt alle husholdniner i Grønland. Her opstår den udfordring, fordi folk i samme husstand typisk vil ligne hinanden på f.eks. hvor mange børn de har…</p></li>
+<li><p>Afstanden mellem deres observerede indkomst og modellen forudsagte værdier kan derfor tænkes at korrelere… de er ikke længere uafhængige.</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Autokorrelation</h1>
+<p><br></p>
+<ul>
+<li><p>Resultatet kan være, at man kommer til at undervurdere den statistiske usikkerhed</p></li>
+<li><p>Det kan heldigvis let korrigeres i R ved at specificere sine clustre og lave ”clustrede standardfejl”</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>model_robust <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(net_indkomst <span class="sc">~</span> udd_aar <span class="sc">+</span> antal_timer_arb, </span>
+<span id="cb9-2"><a href=""></a>                          <span class="at">data =</span> df,</span>
+<span id="cb9-3"><a href=""></a>                          <span class="at">clusters =</span> husstand)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level0">
+
+<h1>Omitted variable bias (OVB)</h1>
+<p><strong>6 Modellen er korrekt specificeret (dvs. alle relevante variable er med (OVB) og ingen irrelevante variable er med</strong></p>
+<p><br></p>
+<ul>
+<li><p>Omitted variable bias eller udeladt variabel bias betyder, at vi har udeladt relevante variable i vores regressionsmodel</p></li>
+<li><p>Prøv at tænk tilbage… hvorfor laver vi overhovedet lineær regression fremfor univariat eller bivariat analyse? Det er fordi vi gerne vil forsøge at forklare hvorfor vi ser forskelle i f.eks. Indkomst, eller undersøge om bestemte faktorer såsom mere uddannelse har en effekt på indkomst!</p></li>
+<li><p>Problemet med at bruge simpel bivariat analyse som t-test eller chi-i-anden test er, at vi ikke kan kontrollere for andre forhold, som kan spille ind samtidig… men i regression kan vi bruge kontrolvariable!</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Omitted variable bias (OVB)</h1>
+<p>Kontrolvariable indføres i modellen, fordi vi mistænker, at de kan være ”counfounders” der kan forstyrre sammenhængen mellem den afhængige variabel og den uafhængige variabel, som vi gerne vil måle</p>
+
+<img data-src="images/reg5.png" class="r-stretch"></section>
+<section class="slide level0">
+
+<h1>Omitted variable bias (OVB)</h1>
+<p>Hvis vi lykkedes med at inkludere ALLE counfounders som kontrolvariable, så har vi i princippet en kausal sammenhæng tilbage mellem vores afhængige og uafhængige variabel</p>
+
+<img data-src="images/reg5.png" class="r-stretch"><p>Det ville nemlig betyde, at vi har isoleret den uforstyrrede sammenhæng mellem X og Y</p>
+</section>
+<section class="slide level0">
+
+<h1>Omitted variable bias (OVB)</h1>
+<ul>
+<li><p>Dette er dog en <strong>meget streng antagelse</strong> at gøre sig</p></li>
+<li><p>Det er så <strong>godt som umuligt</strong> at tage højde for alt med kontrolvariable, da ikke alt kan observeres og måles perfekt… hvad med personlighed? Karakter? Gener? Grundlæggende formning gennem barndommen?</p></li>
+<li><p><strong>OVB er derfor snarere et vilkår</strong> i den type af regressionsanalyse, som vi laver. Vi kan sjældent påstå at have taget højde for alt</p></li>
+<li><p><strong>Konsekvensen</strong> er, at vi sandsynligvis over- eller undervurderer vores koefficienter</p></li>
+<li><p>Vi kan stort set kun komme OVB til livs ved at arbejde med quasi-eksperimentelle metoder, hvor vi gør os en hel række andre antagelser…</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h1>Endogenitet</h1>
+<p><strong>7 Endogenitet</strong></p>
+<ul>
+<li><p>OVB er tæt knyttet til antagelsen om endogenitet</p></li>
+<li><p>Endogenitet betyder, at vi antager, at den uafhængige variabel (forklaringsvariablen) ikke er korreleret med fejlleddet i modellen</p></li>
+<li><p>Dette betyder, at den variabel, som vi vil undersøge virkningen af, ikke påvirkes af andre faktorer, som ikke er inkluderet i modellen.</p></li>
+<li><p>Hvis en uafhængig variabel korrelerer med fejlledet, så korrellerer den med noget ”uforklaret”</p></li>
+<li><p>I bund og grund handler endogenitetsantagelsen i OLS om at sikre, at den uafhængige variabel er uafhængig af ukontrollerede faktorer for at opnå pålidelige estimater af variablens virkning på den afhængige variabel</p></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <p><img src="css_etc/ilisimatusarfik.png" class="slide-logo"></p>
 <div class="footer footer-default">
@@ -905,19 +804,19 @@ Num. obs.         1184         1184          1184
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="10_linear_regression_2_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="11_lineær_regression_3_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="10_linear_regression_2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="10_linear_regression_2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="10_linear_regression_2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="10_linear_regression_2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="10_linear_regression_2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="11_lineær_regression_3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="11_lineær_regression_3_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="11_lineær_regression_3_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="11_lineær_regression_3_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="11_lineær_regression_3_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="10_linear_regression_2_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="10_linear_regression_2_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="10_linear_regression_2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="10_linear_regression_2_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="11_lineær_regression_3_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="11_lineær_regression_3_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="11_lineær_regression_3_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="11_lineær_regression_3_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1023,7 +922,7 @@ Num. obs.         1184         1184          1184
         autoPlayMedia: null,
 
         // Global override for preloading lazy-loaded iframes (null/true/false)
-        preloadIframes: true,
+        preloadIframes: null,
 
         // Number of milliseconds between automatically proceeding to the
         // next slide, disabled when set to 0, this value can be overwritten

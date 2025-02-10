@@ -14,7 +14,7 @@ editor: visual
 ---
 
 ::: center
-# Lineær regression
+# Lineær regression 2
 
 ### Statistik E24 (15 ECTS)
 
@@ -274,7 +274,7 @@ Før vi laver dummier af en diskret variabel, skal vi danne os et overblik over 
 df <- readRDS("C:/Users/mmn/Dropbox/Ilisimatusarfik/Undervisningsdokumenter/E24/slides/data/ESS.rds") 
 
 library(tidyverse)
-df <- df %>% filter(land=="DK") %>% select(koen, udd, net_indkomst, alder, antal_timer_arb) %>% na.omit()
+df <- df %>% filter(land=="DK") %>% select(koen, udd, net_indkomst, alder, antal_timer_arb, land) %>% na.omit()
 ```
 
 ```{r echo=TRUE, warning=F, message=F}
@@ -329,6 +329,10 @@ Giv fortolkning på parametrene: $\alpha, \beta_1, \beta_2,\beta_3$
 ## Øvelse i dummy-variable
 
 ```{r echo=T, warning=F, message=F}
+library(tidyverse)
+
+df <- df %>% filter(land=="DK") %>% select(koen, udd, net_indkomst, alder, antal_timer_arb) %>% na.omit()
+
 df <- df %>% mutate(
 grundskole = ifelse(udd=="Grundskole",1,0),
 ung_erhv = ifelse(udd=="Ungdoms-/erhvervsuddannelse",1,0),
