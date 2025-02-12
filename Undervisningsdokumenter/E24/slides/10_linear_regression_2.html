@@ -695,8 +695,8 @@ Num. obs.     1184
 <p><br>
 <span class="math display">\[Y=\alpha + \beta_1*X_1+\epsilon\]</span></p>
 <p>Herefter tilføjer vi gradvist kontrolvariable for at forsøge at forklare den simple lineære sammenhæng mellem 𝑋 og 𝑌:</p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon\)</span></p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4+\epsilon\)</span></p>
+<p><span class="math inline">\(Y= \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon\)</span></p>
+<p><span class="math inline">\(Y= \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4+\epsilon\)</span></p>
 <p>Denne metode kaldes forlæns modelsøgning. Pointen er, at fokusere på ændringer i<br>
 koefficienten for <span class="math inline">\(\beta_1\)</span> fra model til model.</p>
 </section>
@@ -706,9 +706,9 @@ koefficienten for <span class="math inline">\(\beta_1\)</span> fra model til mod
 <p><br></p>
 <p>I denne type af modelsøgning kalder man det parameter, som man hovedsageligt er interesseret i for <strong>POI</strong> <strong>(parameter of interest)</strong></p>
 <p><br></p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\epsilon\)</span></p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\epsilon\)</span></p>
-<p><span class="math inline">\(Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon\)</span></p>
+<p><span class="math inline">\(Y= \alpha+\beta_1X_1+\epsilon\)</span></p>
+<p><span class="math inline">\(Y= \alpha+\beta_1X_1+\beta_2X_2+\epsilon\)</span></p>
+<p><span class="math inline">\(Y= \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon\)</span></p>
 <p><br></p>
 <p>I dette eksempel ville <span class="math inline">\(\beta_1\)</span> tilhørende <span class="math inline">\(X_1\)</span> være POI, mens de øvrige parametre og uafhængige variable vil indtage rollen som kontrolvariable.</p>
 </section>
@@ -716,7 +716,7 @@ koefficienten for <span class="math inline">\(\beta_1\)</span> fra model til mod
 
 <h2>Forlæns modelsøgning</h2>
 <p><br></p>
-<p><span class="math display">\[Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon\]</span></p>
+<p><span class="math display">\[Y= \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon\]</span></p>
 <p><br></p>
 <ul>
 <li>Hvis der er en sammenhæng mellem POI <span class="math inline">\(X_1\)</span> og kontrolvariabel <span class="math inline">\(X_2\)</span>, og <span class="math inline">\(X_2\)</span> og den afhængige variabel <span class="math inline">\(Y\)</span>, så vil koefficienten af POI <span class="math inline">\(X_1\)</span> ændre sig, når <span class="math inline">\(X_2\)</span> inkluderes i modellen.</li>
@@ -870,8 +870,8 @@ Num. obs.         1184         1184          1184
 <h2>F-test for to modeller</h2>
 <p><br></p>
 <p><u>Hypoteserne i F-testen er:</u></p>
-<p><strong>H0</strong>: Forklaringskraften i model 3 er ikke højere end i model</p>
-<p><strong>H1</strong>: Forklaringskraften i model 3 er højere end i model</p>
+<p><strong>H0</strong>: Forklaringskraften i model 3 er ikke højere end i model 2</p>
+<p><strong>H1</strong>: Forklaringskraften i model 3 er højere end i model 2</p>
 <p><br></p>
 <p>Hvis p-værdien er under 0,05 forkastes nulhypotesen, og vi konkluderer, at model 3 har en signifikant højere forklaringskraft model 2.</p>
 <p>Hvis p-værdien er over 0,05, kan vi ikke med 95 % sikkerhed sige, at forklaringskraften i model 3 er bedre end i model 2.</p>

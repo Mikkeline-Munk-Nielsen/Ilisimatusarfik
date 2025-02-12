@@ -364,9 +364,9 @@ $$Y=\alpha + \beta_1*X_1+\epsilon$$
 
 Herefter tilføjer vi gradvist kontrolvariable for at forsøge at forklare den simple lineære sammenhæng mellem 𝑋 og 𝑌:
 
-$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon$
+$Y= \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon$
 
-$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4+\epsilon$
+$Y= \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4+\epsilon$
 
 Denne metode kaldes forlæns modelsøgning. Pointen er, at fokusere på ændringer i\
 koefficienten for $\beta_1$ fra model til model.
@@ -381,11 +381,11 @@ I denne type af modelsøgning kalder man det parameter, som man hovedsageligt er
 
 <br>
 
-$Indkomst = \alpha+\beta_1X_1+\epsilon$
+$Y= \alpha+\beta_1X_1+\epsilon$
 
-$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\epsilon$
+$Y= \alpha+\beta_1X_1+\beta_2X_2+\epsilon$
 
-$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon$
+$Y= \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\epsilon$
 
 <br>
 
@@ -397,7 +397,7 @@ I dette eksempel ville $\beta_1$ tilhørende $X_1$ være POI, mens de øvrige pa
 
 <br>
 
-$$Indkomst = \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon$$
+$$Y= \alpha+\beta_1X_1+\beta_2X_2+\beta_3X_3+\beta_4X_4\epsilon$$
 
 <br>
 
@@ -578,9 +578,9 @@ I stedet skal I lave en F-test for at teste, om den forklaringskraft, som flere 
 
 [Hypoteserne i F-testen er:]{.underline}
 
-**H0**: Forklaringskraften i model 3 er ikke højere end i model
+**H0**: Forklaringskraften i model 3 er ikke højere end i model 2
 
-**H1**: Forklaringskraften i model 3 er højere end i model
+**H1**: Forklaringskraften i model 3 er højere end i model 2
 
 <br>
 
