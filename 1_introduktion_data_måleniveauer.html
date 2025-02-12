@@ -1,0 +1,2427 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="1_introduktion_data_måleniveauer_files/libs/clipboard/clipboard.min.js"></script>
+<script src="1_introduktion_data_måleniveauer_files/libs/quarto-html/tabby.min.js"></script>
+<script src="1_introduktion_data_måleniveauer_files/libs/quarto-html/popper.min.js"></script>
+<script src="1_introduktion_data_måleniveauer_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="1_introduktion_data_måleniveauer_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="1_introduktion_data_måleniveauer_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="1_introduktion_data_måleniveauer_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="1_introduktion_data_måleniveauer_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.5.57">
+
+  <title>introduktion_data_måleniveauer</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="1_introduktion_data_måleniveauer_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="1_introduktion_data_måleniveauer_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="1_introduktion_data_måleniveauer_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section class="slide level0">
+
+<section id="introduktion" class="center">
+<h1>Introduktion</h1>
+<h3 id="statistik-e24-15-ects">Statistik E24 (15 ECTS)</h3>
+<h3 id="ved-mikkeline-munk-nielsen">ved Mikkeline Munk Nielsen</h3>
+</section>
+</section>
+<section class="slide level0">
+
+<h2>Indhold</h2>
+<p><br></p>
+<ul>
+<li>Introduktion til kursus og læringsmål</li>
+<li>Hvad er statistik og kvantitativ data?</li>
+<li>Kort om forskningsdesign og data i kvantitative undersøgelser</li>
+<li>Måleniveauer i kvantitativ data</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Introduktion</h2>
+<h3 id="formål">Formål</h3>
+<p>Formålet med modulet i statistik er at opøve de studerendes kompetencer til statistiske analyser af kvantitative data.</p>
+<p><br></p>
+<h3 id="læringsmål">Læringsmål</h3>
+<p>Den studerende skal:</p>
+<ul>
+<li><p>opnå viden om forskellige statistiske metoder, deres begrænsninger, muligheder og anvendelse</p></li>
+<li><p>kunne anvende forskellige statistiske metoder til at drage konklusioner om kvantitative data og</p></li>
+<li><p>kunne anvende IT-værktøjer i arbejdet med statistiske metoder (mere specifikt R)</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Undervisningsplan</h2>
+<p>Kurset strækker sig over 3. og 4. semester, tilsammen <strong>15 ECTS</strong> point. Helt kort:</p>
+<ul>
+<li><p>Efterår: grundlæggende statistik, uni- og (lidt) bivariat analyse</p></li>
+<li><p>Forår: bivariat analyse, multivariat analyse (lineær regression)</p></li>
+</ul>
+<p><br></p>
+<h4 id="eksamen-forår-2025">Eksamen forår 2025</h4>
+<ul>
+<li><p>Individuel 4 timers skriftlig eksamen med hjælpemidler. Karakter efter GGS-skalaen. Ekstern censur.</p></li>
+<li><p>For at blive indstillet til eksamen skal man aflevere <strong>tre opgaver</strong> i efterårssemester og <strong>tre opgaver</strong> i forårssemester (i alt seks), der skal godkendes af underviseren.</p></li>
+<li><p>Vi arbejder på opgaverne i undervisningen, men de færdiggøres evt. hjemme.</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Undervisningsplan</h2>
+<p><br></p>
+<p><strong>Uge 42</strong>: mandag, torsdag</p>
+<p><strong>Uge 43</strong>: mandag, onsdag</p>
+<p><br></p>
+<p><strong>Uge 44, 45</strong>: pause</p>
+<p><br></p>
+<p><strong>Uge 46</strong>: onsdag (online)</p>
+<p><br></p>
+<p><strong>Uge 47</strong>: mandag, onsdag (hele mandag)</p>
+<p><strong>Uge 48</strong>: mandag, onsdag (hele mandag)</p>
+</section>
+<section class="slide level0">
+
+<h2>Undervisning og læsning</h2>
+<ul>
+<li><p>Forelæsningsrække</p></li>
+<li><p>Diskussioner og øvelser i undervisningen</p></li>
+<li><p>Lærings- og læsestrategier:</p>
+<ul>
+<li><p>De forskellige bøger/tekster/materialer tilbyder forskellige måder at læse på</p></li>
+<li><p>Læs når/som det passer dig bedst</p></li>
+<li><p>Prioritér at deltage i undervisningen - det her er et praksisfag!</p></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Hvad er statistik?</h2>
+<p><br> <em>“Statistik er at bruge tal til at forstå verden. Man samler data, analyserer dem og bruger resultaterne til at træffe beslutninger eller forudsige fremtiden. Det hjælper med at se mønstre og tendenser i alt fra økonomi til samfundsforhold.”</em></p>
+<p><linebreak> - ChatGPT 4o Oktober 2024.</linebreak></p>
+</section>
+<section class="slide level0">
+
+<h2>Hvad skal vi bruge statistik til?</h2>
+<ul>
+<li><p>Skabe overblik over tendenser</p></li>
+<li><p>Finde mønstre</p></li>
+<li><p>Undersøge sammenhænge og forskellighed</p></li>
+<li><p>Teste teorier</p></li>
+<li><p>Udvikle forklaringer og forudsigelser <img data-src="images/business_economy.png" class="right-align-image" width="600"></p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Summeøvelse</h2>
+<dl>
+<dt><br></dt>
+<dd>
+<p><em>Hvornår møder I statistik i jeres studier/arbejde/hverdagsliv?</em></p>
+</dd>
+</dl>
+</section>
+<section class="slide level0">
+
+<h2>Konkrete eksempler i erhvervsøkonomi:</h2>
+<ul>
+<li><p>Evaluere performance gennem f.eks. salgstal eller kundetilfredshedsundersøgelser</p></li>
+<li><p>Udføre markedsanalyser for at forstå kundegrundlag og præferencer</p></li>
+<li><p>Forudsige trends på baggrund af data</p></li>
+<li><p>Samarbejde med andre firmaer og organisationer, der præsenterer relevante nøgletal i form af statistisk analyse</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Case</h2>
+<dl>
+<dt>Markedsundersøglese</dt>
+<dd>
+<p><em>En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter</em> <em>til at analysere mulighederne. De har brug for at kende efterspørslen efter den type af tøj, som de producerer, for at kunne vurdere, om det vil være rentabelt at starte salg og markedsføring.</em></p>
+</dd>
+</dl>
+</section>
+<section class="slide level0">
+
+<h2>Forskningshjulet</h2>
+<div class="center">
+<p><img src="images/forskningshjulet.png" height="500px"></p>
+</div>
+
+<aside><div>
+<p>Andersen, Hansen &amp; Klemmensen (2012:67)</p>
+</div></aside></section>
+<section class="slide level0">
+
+<h2>Forskningsspørgsmål</h2>
+<p>Videnskabelig undersøgelse tager altid udgangspunkt i et forskningsspørgsmål: <strong><em>hvad vil du gerne vide?</em></strong></p>
+<p><br></p>
+<p><u><strong>Beskrivende spørgsmål:</strong></u></p>
+<ul>
+<li><p><strong>Hvad</strong> karakteriserer køberne på et givent produkt?</p></li>
+<li><p><strong>Hvordan</strong> ser kapitaludviklingen det seneste årti ud for grøndlandske virksomheder?</p></li>
+<li><p><strong>Hvornår</strong> overstiger udgifter indtæger?</p></li>
+</ul>
+<p><u><strong>Forklarende spørgsmål:</strong></u></p>
+<ul>
+<li><strong>Hvorfor</strong> tjener mænd gennemsnitligt mere end kvinder?</li>
+<li><strong>Påvirker</strong> afgifter forbrug?</li>
+<li><strong>Øges chancerne</strong> for lønforhøjelse ved fagforeningsmedlemsskab?</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Case</h2>
+<dl>
+<dt>Markedsundersøglese</dt>
+<dd>
+<p><em>En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.</em></p>
+</dd>
+</dl>
+<p><br></p>
+<p><strong>Summeøvelse</strong>: Hvilken type(r) spørgsmål er relevant for den canadiske tøjproducent?</p>
+</section>
+<section class="slide level0">
+
+<h2>Forsknings- og undersøgelsesdesign</h2>
+<p>Når vi kender vores spørgsmål kan vi beslutte, hvilken type af undersøgelse, der svarer bedst på vores spørgsmål.</p>
+<p><br></p>
+<ul>
+<li><p><strong>Beskrivende</strong>: én variabel (hvad, hvordan, hvornår?)</p></li>
+<li><p><strong>Sammenhængsundersøgelser</strong>: hænger <span class="math inline">\(X\)</span> sammen med <span class="math inline">\(Y\)</span>?</p></li>
+<li><p><strong>Kausalstudier</strong>: påvirker <span class="math inline">\(X \rightarrow Y\)</span>? Hvad er <em>effekten</em> af <span class="math inline">\(X\)</span> på <span class="math inline">\(Y\)</span>?</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Slutningsformer</h2>
+<p>En anden vigtig distinktion mellem undersøgelser kan drages mellem den slutningsform, som benyttes til at drage konklusioner. Her skelnes mellem <strong><em>induktion</em></strong> og <strong><em>deduktion</em></strong></p>
+<p><u><strong>Induktion</strong></u></p>
+<ul>
+<li><p>Åben eksplorativ tilgang</p></li>
+<li><p>Tager udgangspunkt i empiri (data) med henblik på at udvikle teori</p></li>
+<li><p>Overvejende beskrivende/eksplorative studier</p></li>
+</ul>
+<p><u><strong>Deduktion</strong></u></p>
+<ul>
+<li><p>Tager udgangspunkt i hypoteser baseret på teori</p></li>
+<li><p>Hypotesetests</p></li>
+<li><p>Kausalstudier (forklarende)</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Forskningskriterier</h2>
+<p>Kvalitetsstandarder for videnskabelige undersøgelser (kritisk rationalistisk videnskabsteoretisk udgangspunkt):</p>
+<ul>
+<li><p>Gentagelighed (eksplicitere procedure/fremgangsmåde for andre mennesker)</p></li>
+<li><p>Validitet</p></li>
+<li><p>Reliabilitet</p></li>
+<li><p>Generalisérbarhed</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Forskningskriterier: gentagelighed</h2>
+<p>Formålet med en videnskabelig tilgang er systematisk frembringelse af viden. Derfor er det vigtigt at sikre <strong><em>gentagelighed</em></strong> ved at:</p>
+<ul>
+<li><p>anvende videnskabeligt anerkendte og velbegrundende procedurer</p></li>
+<li><p>eksplicitere de skridt vi tager til en grad, hvor andre kan replicére vores undersøgelse for at efterprøve vores konklusioner og bygge videre på vores fund</p></li>
+</ul>
+<p><strong>Hvordan?</strong></p>
+<ul>
+<li><p>Beskrive valg (og fravalg)</p></li>
+<li><p>Lave præcise definitioner</p></li>
+<li><p>Udførlige beskrivelser af spørgsmål, begreber, hypoteser, datagrundlag, analysestrategi</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Forskningskriterier: validitet</h2>
+<p>Validitet referer gyldigheden af undersøgelsens konklusioner:</p>
+<ul>
+<li><p><strong>Målevaliditet</strong>: måler vi faktisk det, som vi gerne vil måle? Er der overensstemmelse mellem den teoretiske og empiriske definition af et begreb (operationalisering)?</p></li>
+<li><p><strong>Intern validitet</strong>: gyldigheden af kausale slutninger. Har vores analyse ført til gyldige resultater? Er vores analysemodeller og antagelserne bag dem tilstrækkelige?</p></li>
+<li><p><strong>Ekstern validitet</strong>: er vores fund gyldige i andre kontekster uden for dette specifikke studie? Kan vi generalisere på baggrund af vores analyse?</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Forskningskriterier: reliabilitet</h2>
+<p>Reliabilitet betyder <strong><em>pålidelighed</em></strong> eller <strong><em>konsistens</em></strong>, og henviser til målingens nøjagtighed.</p>
+<ul>
+<li><p>Stabilitet: kan vi gentage målingen og få samme resultat?</p></li>
+<li><p>Er målingen af et begreb pålidelig? Rammer vi ca. det samme, hver gang vi måler?</p></li>
+<li><p>Reliabilitetsproblemer giver tilfældige fejl mens validitetsproblemer giver systematiske fejl…</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Forskningskriterier</h2>
+<div class="center">
+<p><img src="images/validitet_reliabilitet.png" height="500px"></p>
+</div>
+
+<aside><div>
+<p>Andersen, Hansen &amp; Klemmensen (2012:103)</p>
+</div></aside></section>
+<section class="slide level0">
+
+<h2>Forskningskriterier: generalisérbarhed</h2>
+<p>Formålet med generalisérbarhed er at kunne drage slutninger fra noget undersøgt til noget ikke-undersøgt. Vi vil gerne kunne generalisere vores fund til en bredere kontekst!</p>
+<p><br></p>
+<ul>
+<li><p>Statistisk generalisérbarhed: kan vi sige noget gyldigt om en population (f.eks. den grønlandske population) på baggrund af en stikprøve?</p>
+<ul>
+<li><p>Udvælgelsesmekanisme <span class="math inline">\(\rightarrow\)</span> tilfældighed (sandsynlighedsbaseret teknik)</p></li>
+<li><p>Repræsentativitet</p></li>
+</ul></li>
+<li><p>Statistisk inferens: at regne på, hvorvidt ens resultater (under antagelser) kan generaliseres til en større population</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Datagrundlag</h2>
+<p>Vores forskningsdesign er afgørende for, hvilke typer af data, vi har brug for at besvare vores forskningsspørgsmål. Statistiske analyser baseres på kvantitative data, der er kendetegnet ved:</p>
+<div class="text-over-image">
+<ul>
+<li><p>De kan tælles eller måles og opsummeres i fx procenter, andele eller gennemsnit</p></li>
+<li><p>Mange enheder/observationer</p></li>
+<li><p>Generalisering</p></li>
+</ul>
+</div>
+<p><br></p>
+
+<img data-src="images/udtraek.png" class="right-align-image r-stretch" width="20"></section>
+<section class="slide level0">
+
+<h2>Enheder og cases</h2>
+<p>En central del af overvejelserne ift at definere en undersøgelses datagrundlag består i at beslutte, <strong><em>hvem</em></strong> og <strong><em>hvordan</em></strong> vi gerne vil måle:</p>
+<ul>
+<li><p>Hvem/hvad vil vi gerne måle på?</p></li>
+<li><p>Hvilket niveau skal vi måle på?</p></li>
+<li><p>Hvordan skal vi udvælge?</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Enheder og cases</h2>
+<p>Udgangspunktet for at udvælge enheder cases er, at vi gerne vil maksimere casenes informationsindhold ift. teorien</p>
+<ul>
+<li><p>Populationsundersøgelse: alle enheder i en population (f.eks. alle borgere i Grønland over 18 år)</p></li>
+<li><p>Stikprøveundersøgelse: et mindre antal enheder der udgør et udsnit af en større population</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data</h2>
+<p>Man sondrer typisk mellem primær og sekundær data:</p>
+<p><br></p>
+<p><u>Primær data</u></p>
+<ul>
+<li><p>Indsamlet af forskeren (jer) selv til formålet</p></li>
+<li><p>Kontrol med dataindsamling - hvornår, hvordan, hvem skal spørges?</p></li>
+<li><p>Kontrol over validitet og reliabilitet</p></li>
+<li><p>Ressourcekrævende</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data</h2>
+<p>Man sondrer typisk mellem primær og sekundær data:</p>
+<p><br></p>
+<p><u>Sekundær data</u></p>
+<ul>
+<li><p>Indsamlet til andre formål</p></li>
+<li><p>Ingen kontrol over dataindsamling</p></li>
+<li><p>Typisk mindre ressourcekrævende</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data</h2>
+<p>Typiske typer af kvantitativ data:</p>
+<p><br></p>
+<ul>
+<li><p><strong>Registerdata</strong>: hele populationen, typisk oplysninger fra offentlige administrative registre</p></li>
+<li><p><strong>Spørgeskemadata</strong>: mindre udsnit af populationen, baseret på spørgeskema eller struktureret interview klassise spørgeskemaer, vignetbaseret, spørgeskema-eksperimenter</p></li>
+<li><p><strong>Big data/flow data</strong>: forbrugsbaseret, inhouse, webscraping</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data: registerdata</h2>
+<p>Fuld population: mulighed for totalundersøgelse (at undgå bortfald)</p>
+<ul>
+<li><p>Mulighed for tidsserier/paneler: sammenligninger over tid – dog ændrer kategoriseringer/definitioner sig bl.a. med socialpolitiske ændringer</p></li>
+<li><p>Mulighed for totalundersøgelse (at undgå bortfald)</p></li>
+<li><p>Afspejler organisationens prioriteringer og registreringspraksis</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data: registerdata</h2>
+<ul>
+<li><p>Centrale problemer:</p>
+<ul>
+<li><p>Man kan mangle indsigt i datatilvirkningen</p></li>
+<li><p>Validitetsproblemer (manglende variable ifht problemstillingen)</p></li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><p>Centrale spørgsmål:</p>
+<ul>
+<li>Dækning: Hvilke år er tilgængelige?</li>
+<li>Hvilken kategorisering er anvendt?</li>
+<li>Hvordan er data i registrene produceret? (hvilken registreringspraksis afspejler de og i hvilket omfang er de et validt udtryk for det fænomen som registreres)</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data: registerdata</h2>
+<ul>
+<li><p>Sociale indsatser (fx anbringelser, støtte til udsatte børn og unge)</p></li>
+<li><p>Kriminalitet (fx sigtelser, strafferetlige afgørelser, straftyper)</p></li>
+<li><p>Demografi (fx familietype, børn, civilstatus)</p></li>
+<li><p>Arbejdsmarked (fx indkomst, overførselsindkomst, stilling, branche)</p></li>
+<li><p>Uddannelse (fx uddannelse, folkeskolekarakter)</p></li>
+<li><p>Sundhed (fx diagnoser, behandlinger, køb af receptpligtig medicin)</p></li>
+<li><p>Virksomheder (fx regnskabsstatistik)</p></li>
+<li><p>Gældsoplysninger</p></li>
+<li><p>Andet (fx dødsårsager, boligoplysninger)</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data: registerdata</h2>
+<p><br></p>
+<ul>
+<li><p>Mikrodata (personniveau) er ikke tilgængeligt for offentligheden (personfølsomhed, anonymitet)</p></li>
+<li><p>Aggregeret data offentligt tilgængeligt hos Grønlands Statistik: <a href="https://bank.stat.gl/" class="uri">https://bank.stat.gl/</a></p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data: spørgeskema/survey</h2>
+<ul>
+<li><p>Mindre (typisk tilfældigt) udtræk fra en population <span class="math inline">\(\rightarrow\)</span> repræsentativitet og generalisérbarhed</p></li>
+<li><p>Standardiseret dataindsamling: samme information fra alle informanter/analyseenheder</p></li>
+<li><p>Selvrapport (reducerer mørketal f.eks. ift. registerdata om sort arbejde)</p></li>
+<li><p>Mulighed for høj validitet</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data: spørgeskema/survey</h2>
+<p>Surveys er rigtig gode til:</p>
+<p><br></p>
+<ul>
+<li><p>Måle holdninger og værdier (fx rundspørger, meningsmålinger, værdiundersøgelsen, tryghedsmålinger)</p></li>
+<li><p>Måle adfærd (fx selvrapporteret kriminalitet, offerundersøgelser og personlighed)</p></li>
+<li><p>Inkludere præcise mål, som ikke er tilgængelige i registre</p></li>
+<li><p>Vignet / valghandlingseksperimenter</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data: spørgeskema/survey</h2>
+<p>Surveys kan have problemer med:</p>
+<p><br></p>
+<ul>
+<li><p>Bortfald: for få deltager/bortfaldet er systematisk</p></li>
+<li><p>Udtræk og sammensætning af stikprøven: stikprøven er ikke repræsentativ</p></li>
+<li><p>Svarene er ikke valide (operationalisering af teoretiske begreber, forståelighed af spørgsmål)</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Data: big data/flowdata</h2>
+<p>Big data eller <em>flow data</em> kendetegnes ved:</p>
+<ul>
+<li><p>Biprodukt af forbrug</p></li>
+<li><p>F.eks. facebookdata, streaming data, online forbrug etc.</p></li>
+<li><p>Produceres når forbrugere efterlader “aftryk”</p></li>
+<li><p>Ofte eget af private firmaer og derfor utilgængeligt for udefrakommende</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Case</h2>
+<dl>
+<dt>Markedsundersøglese</dt>
+<dd>
+<p><em>En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.</em></p>
+</dd>
+</dl>
+<p><br></p>
+<p><strong>Summeøvelse</strong>: Hvilken typer af data kunne man bruge til markedsundersøgelsen?</p>
+</section>
+<section class="slide level0">
+
+<h2>Begrebsdannelse</h2>
+<p>Før man kan starte en undersøgelse er man nødt til at gøre det klart for sig selv, hvordan man definerer de centrale begreber i sit forskningsspørgsmål. Det hjælper os til at:</p>
+<ul>
+<li><p>Gøre det klar, hvad vi gerne vil måle</p></li>
+<li><p>Gøre begreber målbare (udvælge indikatorer)</p></li>
+<li><p>Sikre målevaliditet (at vi måler det rigtige)</p></li>
+<li><p>Begrunde vores valg undervejs i processen samt overfor arbejdsgiver/kunde</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Begrebsdannelse</h2>
+<dl>
+<dt>Markedsundersøglese</dt>
+<dd>
+<p><em>En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.</em></p>
+</dd>
+</dl>
+<ul>
+<li>Hvad menes f.eks. med kundegrundlag?</li>
+<li>Hvordan definerer vi det grønlandske marked?</li>
+<li>Hvad er et tilstrækkeligt kundegrundlag?</li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Begrebsdannelse</h2>
+<p>Ofte arbejder vi med abstrakte begreber, der ikke lige umiddelbart lader sig måle. I begrebsdannelse skelnes mellem</p>
+<ul>
+<li><p><strong>Intension</strong>: et begrebs indre betydning (hvilke egenskaber knytter sig til det)</p></li>
+<li><p><strong>Ekstension</strong>: hvad begrebet referer til (hvilke enheder i verden har disse egenskaber? Meget konkret = færre egenskaber, meget abstrakt = mange egenskaber).</p></li>
+</ul>
+<p><br></p>
+<p>Den centrale pointe ift. at definere klare begreber er, at begreber skal være forskellige fra alt andet end netop det, som de måler.</p>
+</section>
+<section class="slide level0">
+
+<h2>Indikatorer</h2>
+<p>Efter at have defineret et begreb teoretisk er næste skridt at finde ud af, hvordan vi måler det i praksis. Dette kaldes <strong><em>operationalisering</em></strong>.</p>
+<ul>
+<li><p>Operationalisering: udvælge indikatorer for om et fænomen er tilstede eller ej</p></li>
+<li><p>Indikator: empirisk mål for et teoretisk begreb</p></li>
+</ul>
+<p>Vi kan ikke gå ud og finde et “kundegrundlag” og rapportere tilbage til virksomheden, om det er der eller ej. Men vi kan godt måle, om det er folk i den rette <strong>alder</strong>, i de rette <strong>køn</strong>, med <strong>interesse for</strong> f.eks. <strong>sportstøj</strong>, og <strong>præferencer for bæredygtighed</strong></p>
+</section>
+<section class="slide level0">
+
+<h2>Case</h2>
+<dl>
+<dt>Markedsundersøglese</dt>
+<dd>
+<p><em>En canadisk tøjproducent overvejer at gå ind på det grønlandske marked og har derfor sat eksterne konsulenter til at analysere mulighederne. De har brug for at vide, om der er et tilstrækkeligt kundegrundlag for den type af tøj, som de producerer.</em></p>
+</dd>
+</dl>
+<p>Hvordan kan vi operationalisere begrebet “kundegrundlag” således, at vi kan måle det med data?</p>
+</section>
+<section class="slide level0">
+
+<h2>Indikatorer</h2>
+<p>Når man har konkretiseret sine teoretiske begreber til målbare indikatorer, er det næste skridt at anvende indikatorerne til at <strong>tilskrive værdier til de cases</strong>, som vi inddrager i analysen. Med andre ord:</p>
+<ul>
+<li>Hvilke <strong>variable</strong> skal indgå i vores analyse?</li>
+<li>Hvilke <strong>skala</strong> skal vi måle vores indikatorer på?</li>
+</ul>
+<p>Variable er byggestenene i statistiske analyser - det er dem, I kommer til at arbejde med som kolonner i jeres datasæt!</p>
+</section>
+<section class="slide level0">
+
+<h2>Kontinuerte og diskrete variable</h2>
+<p>Variable inddeles først i to typer baseret på deres skala:</p>
+<ul>
+<li><p><strong>Diskrete variable</strong>: kan antage et endeligt antal værdier, f.eks. antal varer solgt i en butik. (tællevariable)</p></li>
+<li><p><strong>Kontinuerte variable</strong>: kan antage uendeligt mange værdier inden for en given range, f.eks. pris</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Måleniveauer</h2>
+<p>Dernæst kategoriseres variable i <strong><em>måleniveauer</em></strong>, afhængigt af hvilken skala vi måler variablen på. Måleniveauer beskriver, hvordan data kan klassificeres og behandles i statistiske analyser. De angiver:</p>
+<p><br></p>
+<ul>
+<li><p>Hvilken type information en variabel indeholder</p></li>
+<li><p>Hvilke matematiske operationer og statistiske tests der kan anvendes på den</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Måleniveauer</h2>
+
+<img data-src="images/tabel_måleniveau.png" class="r-stretch"></section>
+<section class="slide level0">
+
+<h2>Måleniveauer</h2>
+<div class="two-column-layout">
+<div class="left-column">
+<ul>
+<li>Vi får mere information og flere muligheder, når vi går op i måleniveau.</li>
+<li>Man kan altid gå ned, ved at omkode sine variable (f.eks. alder til alderskategorier eller indkomst til indkomstkvartiler), men man kan ikke gå op.</li>
+<li>Binære/dikotome variable, der enten kan tage værdien 0 eller 1 er særlige og kan behandles som alle måleniveauer.</li>
+</ul>
+</div>
+<div class="right-column">
+<p><img data-src="images/måleniveauer.png"></p>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h2>Måleniveauer</h2>
+<p>Summeøvelse: hvilke måleniveauer har følgende variable?</p>
+<div class="two-column-layout">
+<div class="left-column">
+<ul>
+<li><p>Køn</p></li>
+<li><p>Alder</p></li>
+<li><p>Netto-overskud i virksomhed</p></li>
+<li><p>Uddannelsesniveau</p></li>
+<li><p>Produkttype</p></li>
+<li><p>Pris</p></li>
+<li><p>Lagerbeholdning</p></li>
+<li><p>Markedsandel</p></li>
+<li><p>Jobtitel</p></li>
+</ul>
+</div>
+<div class="right-column">
+<p><img data-src="images/måleniveauer.png"></p>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h2>Datasæt</h2>
+<p>Resten af kurset skal vi bruge variable i vores statistiske analyser. De vil indgå i jeres datasæt som kolonner, for eksempel:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>          navn   industri ansatte omsaetning     tilfredshed
+1       Firm 1     Finans    2766  801603.40  Meget tilfreds
+2       Firm 2     Finans     962   53875.27 Meget utilfreds
+3       Firm 3    Sundhed    4453  493462.09 Meget utilfreds
+4       Firm 4    Sundhed    1026  765705.75       Utilfreds
+5       Firm 5     Finans    2022  239915.70         Neutral
+6       Firm 6 Produktion    2897  338635.58        Tilfreds
+7       Firm 7     Detail    2576  254677.01  Meget tilfreds
+8       Firm 8  Teknologi    1459  168516.02  Meget tilfreds
+9       Firm 9    Sundhed    1799  432109.95         Neutral
+10     Firm 10     Finans    4316  431312.60 Meget utilfreds
+11     Firm 11     Finans    2766  801603.40  Meget tilfreds
+12     Firm 12     Finans     962   53875.27 Meget utilfreds
+13     Firm 13    Sundhed    4453  493462.09 Meget utilfreds
+14     Firm 14    Sundhed    1026  765705.75       Utilfreds
+15     Firm 15     Finans    2022  239915.70         Neutral
+16     Firm 16 Produktion    2897  338635.58        Tilfreds
+17     Firm 17     Detail    2576  254677.01  Meget tilfreds
+18     Firm 18  Teknologi    1459  168516.02  Meget tilfreds
+19     Firm 19    Sundhed    1799  432109.95         Neutral
+20     Firm 20     Finans    4316  431312.60 Meget utilfreds
+21     Firm 21     Finans    2766  801603.40  Meget tilfreds
+22     Firm 22     Finans     962   53875.27 Meget utilfreds
+23     Firm 23    Sundhed    4453  493462.09 Meget utilfreds
+24     Firm 24    Sundhed    1026  765705.75       Utilfreds
+25     Firm 25     Finans    2022  239915.70         Neutral
+26     Firm 26 Produktion    2897  338635.58        Tilfreds
+27     Firm 27     Detail    2576  254677.01  Meget tilfreds
+28     Firm 28  Teknologi    1459  168516.02  Meget tilfreds
+29     Firm 29    Sundhed    1799  432109.95         Neutral
+30     Firm 30     Finans    4316  431312.60 Meget utilfreds
+31     Firm 31     Finans    2766  801603.40  Meget tilfreds
+32     Firm 32     Finans     962   53875.27 Meget utilfreds
+33     Firm 33    Sundhed    4453  493462.09 Meget utilfreds
+34     Firm 34    Sundhed    1026  765705.75       Utilfreds
+35     Firm 35     Finans    2022  239915.70         Neutral
+36     Firm 36 Produktion    2897  338635.58        Tilfreds
+37     Firm 37     Detail    2576  254677.01  Meget tilfreds
+38     Firm 38  Teknologi    1459  168516.02  Meget tilfreds
+39     Firm 39    Sundhed    1799  432109.95         Neutral
+40     Firm 40     Finans    4316  431312.60 Meget utilfreds
+41     Firm 41     Finans    2766  801603.40  Meget tilfreds
+42     Firm 42     Finans     962   53875.27 Meget utilfreds
+43     Firm 43    Sundhed    4453  493462.09 Meget utilfreds
+44     Firm 44    Sundhed    1026  765705.75       Utilfreds
+45     Firm 45     Finans    2022  239915.70         Neutral
+46     Firm 46 Produktion    2897  338635.58        Tilfreds
+47     Firm 47     Detail    2576  254677.01  Meget tilfreds
+48     Firm 48  Teknologi    1459  168516.02  Meget tilfreds
+49     Firm 49    Sundhed    1799  432109.95         Neutral
+50     Firm 50     Finans    4316  431312.60 Meget utilfreds
+51     Firm 51     Finans    2766  801603.40  Meget tilfreds
+52     Firm 52     Finans     962   53875.27 Meget utilfreds
+53     Firm 53    Sundhed    4453  493462.09 Meget utilfreds
+54     Firm 54    Sundhed    1026  765705.75       Utilfreds
+55     Firm 55     Finans    2022  239915.70         Neutral
+56     Firm 56 Produktion    2897  338635.58        Tilfreds
+57     Firm 57     Detail    2576  254677.01  Meget tilfreds
+58     Firm 58  Teknologi    1459  168516.02  Meget tilfreds
+59     Firm 59    Sundhed    1799  432109.95         Neutral
+60     Firm 60     Finans    4316  431312.60 Meget utilfreds
+61     Firm 61     Finans    2766  801603.40  Meget tilfreds
+62     Firm 62     Finans     962   53875.27 Meget utilfreds
+63     Firm 63    Sundhed    4453  493462.09 Meget utilfreds
+64     Firm 64    Sundhed    1026  765705.75       Utilfreds
+65     Firm 65     Finans    2022  239915.70         Neutral
+66     Firm 66 Produktion    2897  338635.58        Tilfreds
+67     Firm 67     Detail    2576  254677.01  Meget tilfreds
+68     Firm 68  Teknologi    1459  168516.02  Meget tilfreds
+69     Firm 69    Sundhed    1799  432109.95         Neutral
+70     Firm 70     Finans    4316  431312.60 Meget utilfreds
+71     Firm 71     Finans    2766  801603.40  Meget tilfreds
+72     Firm 72     Finans     962   53875.27 Meget utilfreds
+73     Firm 73    Sundhed    4453  493462.09 Meget utilfreds
+74     Firm 74    Sundhed    1026  765705.75       Utilfreds
+75     Firm 75     Finans    2022  239915.70         Neutral
+76     Firm 76 Produktion    2897  338635.58        Tilfreds
+77     Firm 77     Detail    2576  254677.01  Meget tilfreds
+78     Firm 78  Teknologi    1459  168516.02  Meget tilfreds
+79     Firm 79    Sundhed    1799  432109.95         Neutral
+80     Firm 80     Finans    4316  431312.60 Meget utilfreds
+81     Firm 81     Finans    2766  801603.40  Meget tilfreds
+82     Firm 82     Finans     962   53875.27 Meget utilfreds
+83     Firm 83    Sundhed    4453  493462.09 Meget utilfreds
+84     Firm 84    Sundhed    1026  765705.75       Utilfreds
+85     Firm 85     Finans    2022  239915.70         Neutral
+86     Firm 86 Produktion    2897  338635.58        Tilfreds
+87     Firm 87     Detail    2576  254677.01  Meget tilfreds
+88     Firm 88  Teknologi    1459  168516.02  Meget tilfreds
+89     Firm 89    Sundhed    1799  432109.95         Neutral
+90     Firm 90     Finans    4316  431312.60 Meget utilfreds
+91     Firm 91     Finans    2766  801603.40  Meget tilfreds
+92     Firm 92     Finans     962   53875.27 Meget utilfreds
+93     Firm 93    Sundhed    4453  493462.09 Meget utilfreds
+94     Firm 94    Sundhed    1026  765705.75       Utilfreds
+95     Firm 95     Finans    2022  239915.70         Neutral
+96     Firm 96 Produktion    2897  338635.58        Tilfreds
+97     Firm 97     Detail    2576  254677.01  Meget tilfreds
+98     Firm 98  Teknologi    1459  168516.02  Meget tilfreds
+99     Firm 99    Sundhed    1799  432109.95         Neutral
+100   Firm 100     Finans    4316  431312.60 Meget utilfreds
+101   Firm 101     Finans    2766  801603.40  Meget tilfreds
+102   Firm 102     Finans     962   53875.27 Meget utilfreds
+103   Firm 103    Sundhed    4453  493462.09 Meget utilfreds
+104   Firm 104    Sundhed    1026  765705.75       Utilfreds
+105   Firm 105     Finans    2022  239915.70         Neutral
+106   Firm 106 Produktion    2897  338635.58        Tilfreds
+107   Firm 107     Detail    2576  254677.01  Meget tilfreds
+108   Firm 108  Teknologi    1459  168516.02  Meget tilfreds
+109   Firm 109    Sundhed    1799  432109.95         Neutral
+110   Firm 110     Finans    4316  431312.60 Meget utilfreds
+111   Firm 111     Finans    2766  801603.40  Meget tilfreds
+112   Firm 112     Finans     962   53875.27 Meget utilfreds
+113   Firm 113    Sundhed    4453  493462.09 Meget utilfreds
+114   Firm 114    Sundhed    1026  765705.75       Utilfreds
+115   Firm 115     Finans    2022  239915.70         Neutral
+116   Firm 116 Produktion    2897  338635.58        Tilfreds
+117   Firm 117     Detail    2576  254677.01  Meget tilfreds
+118   Firm 118  Teknologi    1459  168516.02  Meget tilfreds
+119   Firm 119    Sundhed    1799  432109.95         Neutral
+120   Firm 120     Finans    4316  431312.60 Meget utilfreds
+121   Firm 121     Finans    2766  801603.40  Meget tilfreds
+122   Firm 122     Finans     962   53875.27 Meget utilfreds
+123   Firm 123    Sundhed    4453  493462.09 Meget utilfreds
+124   Firm 124    Sundhed    1026  765705.75       Utilfreds
+125   Firm 125     Finans    2022  239915.70         Neutral
+126   Firm 126 Produktion    2897  338635.58        Tilfreds
+127   Firm 127     Detail    2576  254677.01  Meget tilfreds
+128   Firm 128  Teknologi    1459  168516.02  Meget tilfreds
+129   Firm 129    Sundhed    1799  432109.95         Neutral
+130   Firm 130     Finans    4316  431312.60 Meget utilfreds
+131   Firm 131     Finans    2766  801603.40  Meget tilfreds
+132   Firm 132     Finans     962   53875.27 Meget utilfreds
+133   Firm 133    Sundhed    4453  493462.09 Meget utilfreds
+134   Firm 134    Sundhed    1026  765705.75       Utilfreds
+135   Firm 135     Finans    2022  239915.70         Neutral
+136   Firm 136 Produktion    2897  338635.58        Tilfreds
+137   Firm 137     Detail    2576  254677.01  Meget tilfreds
+138   Firm 138  Teknologi    1459  168516.02  Meget tilfreds
+139   Firm 139    Sundhed    1799  432109.95         Neutral
+140   Firm 140     Finans    4316  431312.60 Meget utilfreds
+141   Firm 141     Finans    2766  801603.40  Meget tilfreds
+142   Firm 142     Finans     962   53875.27 Meget utilfreds
+143   Firm 143    Sundhed    4453  493462.09 Meget utilfreds
+144   Firm 144    Sundhed    1026  765705.75       Utilfreds
+145   Firm 145     Finans    2022  239915.70         Neutral
+146   Firm 146 Produktion    2897  338635.58        Tilfreds
+147   Firm 147     Detail    2576  254677.01  Meget tilfreds
+148   Firm 148  Teknologi    1459  168516.02  Meget tilfreds
+149   Firm 149    Sundhed    1799  432109.95         Neutral
+150   Firm 150     Finans    4316  431312.60 Meget utilfreds
+151   Firm 151     Finans    2766  801603.40  Meget tilfreds
+152   Firm 152     Finans     962   53875.27 Meget utilfreds
+153   Firm 153    Sundhed    4453  493462.09 Meget utilfreds
+154   Firm 154    Sundhed    1026  765705.75       Utilfreds
+155   Firm 155     Finans    2022  239915.70         Neutral
+156   Firm 156 Produktion    2897  338635.58        Tilfreds
+157   Firm 157     Detail    2576  254677.01  Meget tilfreds
+158   Firm 158  Teknologi    1459  168516.02  Meget tilfreds
+159   Firm 159    Sundhed    1799  432109.95         Neutral
+160   Firm 160     Finans    4316  431312.60 Meget utilfreds
+161   Firm 161     Finans    2766  801603.40  Meget tilfreds
+162   Firm 162     Finans     962   53875.27 Meget utilfreds
+163   Firm 163    Sundhed    4453  493462.09 Meget utilfreds
+164   Firm 164    Sundhed    1026  765705.75       Utilfreds
+165   Firm 165     Finans    2022  239915.70         Neutral
+166   Firm 166 Produktion    2897  338635.58        Tilfreds
+167   Firm 167     Detail    2576  254677.01  Meget tilfreds
+168   Firm 168  Teknologi    1459  168516.02  Meget tilfreds
+169   Firm 169    Sundhed    1799  432109.95         Neutral
+170   Firm 170     Finans    4316  431312.60 Meget utilfreds
+171   Firm 171     Finans    2766  801603.40  Meget tilfreds
+172   Firm 172     Finans     962   53875.27 Meget utilfreds
+173   Firm 173    Sundhed    4453  493462.09 Meget utilfreds
+174   Firm 174    Sundhed    1026  765705.75       Utilfreds
+175   Firm 175     Finans    2022  239915.70         Neutral
+176   Firm 176 Produktion    2897  338635.58        Tilfreds
+177   Firm 177     Detail    2576  254677.01  Meget tilfreds
+178   Firm 178  Teknologi    1459  168516.02  Meget tilfreds
+179   Firm 179    Sundhed    1799  432109.95         Neutral
+180   Firm 180     Finans    4316  431312.60 Meget utilfreds
+181   Firm 181     Finans    2766  801603.40  Meget tilfreds
+182   Firm 182     Finans     962   53875.27 Meget utilfreds
+183   Firm 183    Sundhed    4453  493462.09 Meget utilfreds
+184   Firm 184    Sundhed    1026  765705.75       Utilfreds
+185   Firm 185     Finans    2022  239915.70         Neutral
+186   Firm 186 Produktion    2897  338635.58        Tilfreds
+187   Firm 187     Detail    2576  254677.01  Meget tilfreds
+188   Firm 188  Teknologi    1459  168516.02  Meget tilfreds
+189   Firm 189    Sundhed    1799  432109.95         Neutral
+190   Firm 190     Finans    4316  431312.60 Meget utilfreds
+191   Firm 191     Finans    2766  801603.40  Meget tilfreds
+192   Firm 192     Finans     962   53875.27 Meget utilfreds
+193   Firm 193    Sundhed    4453  493462.09 Meget utilfreds
+194   Firm 194    Sundhed    1026  765705.75       Utilfreds
+195   Firm 195     Finans    2022  239915.70         Neutral
+196   Firm 196 Produktion    2897  338635.58        Tilfreds
+197   Firm 197     Detail    2576  254677.01  Meget tilfreds
+198   Firm 198  Teknologi    1459  168516.02  Meget tilfreds
+199   Firm 199    Sundhed    1799  432109.95         Neutral
+200   Firm 200     Finans    4316  431312.60 Meget utilfreds
+201   Firm 201     Finans    2766  801603.40  Meget tilfreds
+202   Firm 202     Finans     962   53875.27 Meget utilfreds
+203   Firm 203    Sundhed    4453  493462.09 Meget utilfreds
+204   Firm 204    Sundhed    1026  765705.75       Utilfreds
+205   Firm 205     Finans    2022  239915.70         Neutral
+206   Firm 206 Produktion    2897  338635.58        Tilfreds
+207   Firm 207     Detail    2576  254677.01  Meget tilfreds
+208   Firm 208  Teknologi    1459  168516.02  Meget tilfreds
+209   Firm 209    Sundhed    1799  432109.95         Neutral
+210   Firm 210     Finans    4316  431312.60 Meget utilfreds
+211   Firm 211     Finans    2766  801603.40  Meget tilfreds
+212   Firm 212     Finans     962   53875.27 Meget utilfreds
+213   Firm 213    Sundhed    4453  493462.09 Meget utilfreds
+214   Firm 214    Sundhed    1026  765705.75       Utilfreds
+215   Firm 215     Finans    2022  239915.70         Neutral
+216   Firm 216 Produktion    2897  338635.58        Tilfreds
+217   Firm 217     Detail    2576  254677.01  Meget tilfreds
+218   Firm 218  Teknologi    1459  168516.02  Meget tilfreds
+219   Firm 219    Sundhed    1799  432109.95         Neutral
+220   Firm 220     Finans    4316  431312.60 Meget utilfreds
+221   Firm 221     Finans    2766  801603.40  Meget tilfreds
+222   Firm 222     Finans     962   53875.27 Meget utilfreds
+223   Firm 223    Sundhed    4453  493462.09 Meget utilfreds
+224   Firm 224    Sundhed    1026  765705.75       Utilfreds
+225   Firm 225     Finans    2022  239915.70         Neutral
+226   Firm 226 Produktion    2897  338635.58        Tilfreds
+227   Firm 227     Detail    2576  254677.01  Meget tilfreds
+228   Firm 228  Teknologi    1459  168516.02  Meget tilfreds
+229   Firm 229    Sundhed    1799  432109.95         Neutral
+230   Firm 230     Finans    4316  431312.60 Meget utilfreds
+231   Firm 231     Finans    2766  801603.40  Meget tilfreds
+232   Firm 232     Finans     962   53875.27 Meget utilfreds
+233   Firm 233    Sundhed    4453  493462.09 Meget utilfreds
+234   Firm 234    Sundhed    1026  765705.75       Utilfreds
+235   Firm 235     Finans    2022  239915.70         Neutral
+236   Firm 236 Produktion    2897  338635.58        Tilfreds
+237   Firm 237     Detail    2576  254677.01  Meget tilfreds
+238   Firm 238  Teknologi    1459  168516.02  Meget tilfreds
+239   Firm 239    Sundhed    1799  432109.95         Neutral
+240   Firm 240     Finans    4316  431312.60 Meget utilfreds
+241   Firm 241     Finans    2766  801603.40  Meget tilfreds
+242   Firm 242     Finans     962   53875.27 Meget utilfreds
+243   Firm 243    Sundhed    4453  493462.09 Meget utilfreds
+244   Firm 244    Sundhed    1026  765705.75       Utilfreds
+245   Firm 245     Finans    2022  239915.70         Neutral
+246   Firm 246 Produktion    2897  338635.58        Tilfreds
+247   Firm 247     Detail    2576  254677.01  Meget tilfreds
+248   Firm 248  Teknologi    1459  168516.02  Meget tilfreds
+249   Firm 249    Sundhed    1799  432109.95         Neutral
+250   Firm 250     Finans    4316  431312.60 Meget utilfreds
+251   Firm 251     Finans    2766  801603.40  Meget tilfreds
+252   Firm 252     Finans     962   53875.27 Meget utilfreds
+253   Firm 253    Sundhed    4453  493462.09 Meget utilfreds
+254   Firm 254    Sundhed    1026  765705.75       Utilfreds
+255   Firm 255     Finans    2022  239915.70         Neutral
+256   Firm 256 Produktion    2897  338635.58        Tilfreds
+257   Firm 257     Detail    2576  254677.01  Meget tilfreds
+258   Firm 258  Teknologi    1459  168516.02  Meget tilfreds
+259   Firm 259    Sundhed    1799  432109.95         Neutral
+260   Firm 260     Finans    4316  431312.60 Meget utilfreds
+261   Firm 261     Finans    2766  801603.40  Meget tilfreds
+262   Firm 262     Finans     962   53875.27 Meget utilfreds
+263   Firm 263    Sundhed    4453  493462.09 Meget utilfreds
+264   Firm 264    Sundhed    1026  765705.75       Utilfreds
+265   Firm 265     Finans    2022  239915.70         Neutral
+266   Firm 266 Produktion    2897  338635.58        Tilfreds
+267   Firm 267     Detail    2576  254677.01  Meget tilfreds
+268   Firm 268  Teknologi    1459  168516.02  Meget tilfreds
+269   Firm 269    Sundhed    1799  432109.95         Neutral
+270   Firm 270     Finans    4316  431312.60 Meget utilfreds
+271   Firm 271     Finans    2766  801603.40  Meget tilfreds
+272   Firm 272     Finans     962   53875.27 Meget utilfreds
+273   Firm 273    Sundhed    4453  493462.09 Meget utilfreds
+274   Firm 274    Sundhed    1026  765705.75       Utilfreds
+275   Firm 275     Finans    2022  239915.70         Neutral
+276   Firm 276 Produktion    2897  338635.58        Tilfreds
+277   Firm 277     Detail    2576  254677.01  Meget tilfreds
+278   Firm 278  Teknologi    1459  168516.02  Meget tilfreds
+279   Firm 279    Sundhed    1799  432109.95         Neutral
+280   Firm 280     Finans    4316  431312.60 Meget utilfreds
+281   Firm 281     Finans    2766  801603.40  Meget tilfreds
+282   Firm 282     Finans     962   53875.27 Meget utilfreds
+283   Firm 283    Sundhed    4453  493462.09 Meget utilfreds
+284   Firm 284    Sundhed    1026  765705.75       Utilfreds
+285   Firm 285     Finans    2022  239915.70         Neutral
+286   Firm 286 Produktion    2897  338635.58        Tilfreds
+287   Firm 287     Detail    2576  254677.01  Meget tilfreds
+288   Firm 288  Teknologi    1459  168516.02  Meget tilfreds
+289   Firm 289    Sundhed    1799  432109.95         Neutral
+290   Firm 290     Finans    4316  431312.60 Meget utilfreds
+291   Firm 291     Finans    2766  801603.40  Meget tilfreds
+292   Firm 292     Finans     962   53875.27 Meget utilfreds
+293   Firm 293    Sundhed    4453  493462.09 Meget utilfreds
+294   Firm 294    Sundhed    1026  765705.75       Utilfreds
+295   Firm 295     Finans    2022  239915.70         Neutral
+296   Firm 296 Produktion    2897  338635.58        Tilfreds
+297   Firm 297     Detail    2576  254677.01  Meget tilfreds
+298   Firm 298  Teknologi    1459  168516.02  Meget tilfreds
+299   Firm 299    Sundhed    1799  432109.95         Neutral
+300   Firm 300     Finans    4316  431312.60 Meget utilfreds
+301   Firm 301     Finans    2766  801603.40  Meget tilfreds
+302   Firm 302     Finans     962   53875.27 Meget utilfreds
+303   Firm 303    Sundhed    4453  493462.09 Meget utilfreds
+304   Firm 304    Sundhed    1026  765705.75       Utilfreds
+305   Firm 305     Finans    2022  239915.70         Neutral
+306   Firm 306 Produktion    2897  338635.58        Tilfreds
+307   Firm 307     Detail    2576  254677.01  Meget tilfreds
+308   Firm 308  Teknologi    1459  168516.02  Meget tilfreds
+309   Firm 309    Sundhed    1799  432109.95         Neutral
+310   Firm 310     Finans    4316  431312.60 Meget utilfreds
+311   Firm 311     Finans    2766  801603.40  Meget tilfreds
+312   Firm 312     Finans     962   53875.27 Meget utilfreds
+313   Firm 313    Sundhed    4453  493462.09 Meget utilfreds
+314   Firm 314    Sundhed    1026  765705.75       Utilfreds
+315   Firm 315     Finans    2022  239915.70         Neutral
+316   Firm 316 Produktion    2897  338635.58        Tilfreds
+317   Firm 317     Detail    2576  254677.01  Meget tilfreds
+318   Firm 318  Teknologi    1459  168516.02  Meget tilfreds
+319   Firm 319    Sundhed    1799  432109.95         Neutral
+320   Firm 320     Finans    4316  431312.60 Meget utilfreds
+321   Firm 321     Finans    2766  801603.40  Meget tilfreds
+322   Firm 322     Finans     962   53875.27 Meget utilfreds
+323   Firm 323    Sundhed    4453  493462.09 Meget utilfreds
+324   Firm 324    Sundhed    1026  765705.75       Utilfreds
+325   Firm 325     Finans    2022  239915.70         Neutral
+326   Firm 326 Produktion    2897  338635.58        Tilfreds
+327   Firm 327     Detail    2576  254677.01  Meget tilfreds
+328   Firm 328  Teknologi    1459  168516.02  Meget tilfreds
+329   Firm 329    Sundhed    1799  432109.95         Neutral
+330   Firm 330     Finans    4316  431312.60 Meget utilfreds
+331   Firm 331     Finans    2766  801603.40  Meget tilfreds
+332   Firm 332     Finans     962   53875.27 Meget utilfreds
+333   Firm 333    Sundhed    4453  493462.09 Meget utilfreds
+334   Firm 334    Sundhed    1026  765705.75       Utilfreds
+335   Firm 335     Finans    2022  239915.70         Neutral
+336   Firm 336 Produktion    2897  338635.58        Tilfreds
+337   Firm 337     Detail    2576  254677.01  Meget tilfreds
+338   Firm 338  Teknologi    1459  168516.02  Meget tilfreds
+339   Firm 339    Sundhed    1799  432109.95         Neutral
+340   Firm 340     Finans    4316  431312.60 Meget utilfreds
+341   Firm 341     Finans    2766  801603.40  Meget tilfreds
+342   Firm 342     Finans     962   53875.27 Meget utilfreds
+343   Firm 343    Sundhed    4453  493462.09 Meget utilfreds
+344   Firm 344    Sundhed    1026  765705.75       Utilfreds
+345   Firm 345     Finans    2022  239915.70         Neutral
+346   Firm 346 Produktion    2897  338635.58        Tilfreds
+347   Firm 347     Detail    2576  254677.01  Meget tilfreds
+348   Firm 348  Teknologi    1459  168516.02  Meget tilfreds
+349   Firm 349    Sundhed    1799  432109.95         Neutral
+350   Firm 350     Finans    4316  431312.60 Meget utilfreds
+351   Firm 351     Finans    2766  801603.40  Meget tilfreds
+352   Firm 352     Finans     962   53875.27 Meget utilfreds
+353   Firm 353    Sundhed    4453  493462.09 Meget utilfreds
+354   Firm 354    Sundhed    1026  765705.75       Utilfreds
+355   Firm 355     Finans    2022  239915.70         Neutral
+356   Firm 356 Produktion    2897  338635.58        Tilfreds
+357   Firm 357     Detail    2576  254677.01  Meget tilfreds
+358   Firm 358  Teknologi    1459  168516.02  Meget tilfreds
+359   Firm 359    Sundhed    1799  432109.95         Neutral
+360   Firm 360     Finans    4316  431312.60 Meget utilfreds
+361   Firm 361     Finans    2766  801603.40  Meget tilfreds
+362   Firm 362     Finans     962   53875.27 Meget utilfreds
+363   Firm 363    Sundhed    4453  493462.09 Meget utilfreds
+364   Firm 364    Sundhed    1026  765705.75       Utilfreds
+365   Firm 365     Finans    2022  239915.70         Neutral
+366   Firm 366 Produktion    2897  338635.58        Tilfreds
+367   Firm 367     Detail    2576  254677.01  Meget tilfreds
+368   Firm 368  Teknologi    1459  168516.02  Meget tilfreds
+369   Firm 369    Sundhed    1799  432109.95         Neutral
+370   Firm 370     Finans    4316  431312.60 Meget utilfreds
+371   Firm 371     Finans    2766  801603.40  Meget tilfreds
+372   Firm 372     Finans     962   53875.27 Meget utilfreds
+373   Firm 373    Sundhed    4453  493462.09 Meget utilfreds
+374   Firm 374    Sundhed    1026  765705.75       Utilfreds
+375   Firm 375     Finans    2022  239915.70         Neutral
+376   Firm 376 Produktion    2897  338635.58        Tilfreds
+377   Firm 377     Detail    2576  254677.01  Meget tilfreds
+378   Firm 378  Teknologi    1459  168516.02  Meget tilfreds
+379   Firm 379    Sundhed    1799  432109.95         Neutral
+380   Firm 380     Finans    4316  431312.60 Meget utilfreds
+381   Firm 381     Finans    2766  801603.40  Meget tilfreds
+382   Firm 382     Finans     962   53875.27 Meget utilfreds
+383   Firm 383    Sundhed    4453  493462.09 Meget utilfreds
+384   Firm 384    Sundhed    1026  765705.75       Utilfreds
+385   Firm 385     Finans    2022  239915.70         Neutral
+386   Firm 386 Produktion    2897  338635.58        Tilfreds
+387   Firm 387     Detail    2576  254677.01  Meget tilfreds
+388   Firm 388  Teknologi    1459  168516.02  Meget tilfreds
+389   Firm 389    Sundhed    1799  432109.95         Neutral
+390   Firm 390     Finans    4316  431312.60 Meget utilfreds
+391   Firm 391     Finans    2766  801603.40  Meget tilfreds
+392   Firm 392     Finans     962   53875.27 Meget utilfreds
+393   Firm 393    Sundhed    4453  493462.09 Meget utilfreds
+394   Firm 394    Sundhed    1026  765705.75       Utilfreds
+395   Firm 395     Finans    2022  239915.70         Neutral
+396   Firm 396 Produktion    2897  338635.58        Tilfreds
+397   Firm 397     Detail    2576  254677.01  Meget tilfreds
+398   Firm 398  Teknologi    1459  168516.02  Meget tilfreds
+399   Firm 399    Sundhed    1799  432109.95         Neutral
+400   Firm 400     Finans    4316  431312.60 Meget utilfreds
+401   Firm 401     Finans    2766  801603.40  Meget tilfreds
+402   Firm 402     Finans     962   53875.27 Meget utilfreds
+403   Firm 403    Sundhed    4453  493462.09 Meget utilfreds
+404   Firm 404    Sundhed    1026  765705.75       Utilfreds
+405   Firm 405     Finans    2022  239915.70         Neutral
+406   Firm 406 Produktion    2897  338635.58        Tilfreds
+407   Firm 407     Detail    2576  254677.01  Meget tilfreds
+408   Firm 408  Teknologi    1459  168516.02  Meget tilfreds
+409   Firm 409    Sundhed    1799  432109.95         Neutral
+410   Firm 410     Finans    4316  431312.60 Meget utilfreds
+411   Firm 411     Finans    2766  801603.40  Meget tilfreds
+412   Firm 412     Finans     962   53875.27 Meget utilfreds
+413   Firm 413    Sundhed    4453  493462.09 Meget utilfreds
+414   Firm 414    Sundhed    1026  765705.75       Utilfreds
+415   Firm 415     Finans    2022  239915.70         Neutral
+416   Firm 416 Produktion    2897  338635.58        Tilfreds
+417   Firm 417     Detail    2576  254677.01  Meget tilfreds
+418   Firm 418  Teknologi    1459  168516.02  Meget tilfreds
+419   Firm 419    Sundhed    1799  432109.95         Neutral
+420   Firm 420     Finans    4316  431312.60 Meget utilfreds
+421   Firm 421     Finans    2766  801603.40  Meget tilfreds
+422   Firm 422     Finans     962   53875.27 Meget utilfreds
+423   Firm 423    Sundhed    4453  493462.09 Meget utilfreds
+424   Firm 424    Sundhed    1026  765705.75       Utilfreds
+425   Firm 425     Finans    2022  239915.70         Neutral
+426   Firm 426 Produktion    2897  338635.58        Tilfreds
+427   Firm 427     Detail    2576  254677.01  Meget tilfreds
+428   Firm 428  Teknologi    1459  168516.02  Meget tilfreds
+429   Firm 429    Sundhed    1799  432109.95         Neutral
+430   Firm 430     Finans    4316  431312.60 Meget utilfreds
+431   Firm 431     Finans    2766  801603.40  Meget tilfreds
+432   Firm 432     Finans     962   53875.27 Meget utilfreds
+433   Firm 433    Sundhed    4453  493462.09 Meget utilfreds
+434   Firm 434    Sundhed    1026  765705.75       Utilfreds
+435   Firm 435     Finans    2022  239915.70         Neutral
+436   Firm 436 Produktion    2897  338635.58        Tilfreds
+437   Firm 437     Detail    2576  254677.01  Meget tilfreds
+438   Firm 438  Teknologi    1459  168516.02  Meget tilfreds
+439   Firm 439    Sundhed    1799  432109.95         Neutral
+440   Firm 440     Finans    4316  431312.60 Meget utilfreds
+441   Firm 441     Finans    2766  801603.40  Meget tilfreds
+442   Firm 442     Finans     962   53875.27 Meget utilfreds
+443   Firm 443    Sundhed    4453  493462.09 Meget utilfreds
+444   Firm 444    Sundhed    1026  765705.75       Utilfreds
+445   Firm 445     Finans    2022  239915.70         Neutral
+446   Firm 446 Produktion    2897  338635.58        Tilfreds
+447   Firm 447     Detail    2576  254677.01  Meget tilfreds
+448   Firm 448  Teknologi    1459  168516.02  Meget tilfreds
+449   Firm 449    Sundhed    1799  432109.95         Neutral
+450   Firm 450     Finans    4316  431312.60 Meget utilfreds
+451   Firm 451     Finans    2766  801603.40  Meget tilfreds
+452   Firm 452     Finans     962   53875.27 Meget utilfreds
+453   Firm 453    Sundhed    4453  493462.09 Meget utilfreds
+454   Firm 454    Sundhed    1026  765705.75       Utilfreds
+455   Firm 455     Finans    2022  239915.70         Neutral
+456   Firm 456 Produktion    2897  338635.58        Tilfreds
+457   Firm 457     Detail    2576  254677.01  Meget tilfreds
+458   Firm 458  Teknologi    1459  168516.02  Meget tilfreds
+459   Firm 459    Sundhed    1799  432109.95         Neutral
+460   Firm 460     Finans    4316  431312.60 Meget utilfreds
+461   Firm 461     Finans    2766  801603.40  Meget tilfreds
+462   Firm 462     Finans     962   53875.27 Meget utilfreds
+463   Firm 463    Sundhed    4453  493462.09 Meget utilfreds
+464   Firm 464    Sundhed    1026  765705.75       Utilfreds
+465   Firm 465     Finans    2022  239915.70         Neutral
+466   Firm 466 Produktion    2897  338635.58        Tilfreds
+467   Firm 467     Detail    2576  254677.01  Meget tilfreds
+468   Firm 468  Teknologi    1459  168516.02  Meget tilfreds
+469   Firm 469    Sundhed    1799  432109.95         Neutral
+470   Firm 470     Finans    4316  431312.60 Meget utilfreds
+471   Firm 471     Finans    2766  801603.40  Meget tilfreds
+472   Firm 472     Finans     962   53875.27 Meget utilfreds
+473   Firm 473    Sundhed    4453  493462.09 Meget utilfreds
+474   Firm 474    Sundhed    1026  765705.75       Utilfreds
+475   Firm 475     Finans    2022  239915.70         Neutral
+476   Firm 476 Produktion    2897  338635.58        Tilfreds
+477   Firm 477     Detail    2576  254677.01  Meget tilfreds
+478   Firm 478  Teknologi    1459  168516.02  Meget tilfreds
+479   Firm 479    Sundhed    1799  432109.95         Neutral
+480   Firm 480     Finans    4316  431312.60 Meget utilfreds
+481   Firm 481     Finans    2766  801603.40  Meget tilfreds
+482   Firm 482     Finans     962   53875.27 Meget utilfreds
+483   Firm 483    Sundhed    4453  493462.09 Meget utilfreds
+484   Firm 484    Sundhed    1026  765705.75       Utilfreds
+485   Firm 485     Finans    2022  239915.70         Neutral
+486   Firm 486 Produktion    2897  338635.58        Tilfreds
+487   Firm 487     Detail    2576  254677.01  Meget tilfreds
+488   Firm 488  Teknologi    1459  168516.02  Meget tilfreds
+489   Firm 489    Sundhed    1799  432109.95         Neutral
+490   Firm 490     Finans    4316  431312.60 Meget utilfreds
+491   Firm 491     Finans    2766  801603.40  Meget tilfreds
+492   Firm 492     Finans     962   53875.27 Meget utilfreds
+493   Firm 493    Sundhed    4453  493462.09 Meget utilfreds
+494   Firm 494    Sundhed    1026  765705.75       Utilfreds
+495   Firm 495     Finans    2022  239915.70         Neutral
+496   Firm 496 Produktion    2897  338635.58        Tilfreds
+497   Firm 497     Detail    2576  254677.01  Meget tilfreds
+498   Firm 498  Teknologi    1459  168516.02  Meget tilfreds
+499   Firm 499    Sundhed    1799  432109.95         Neutral
+500   Firm 500     Finans    4316  431312.60 Meget utilfreds
+501   Firm 501     Finans    2766  801603.40  Meget tilfreds
+502   Firm 502     Finans     962   53875.27 Meget utilfreds
+503   Firm 503    Sundhed    4453  493462.09 Meget utilfreds
+504   Firm 504    Sundhed    1026  765705.75       Utilfreds
+505   Firm 505     Finans    2022  239915.70         Neutral
+506   Firm 506 Produktion    2897  338635.58        Tilfreds
+507   Firm 507     Detail    2576  254677.01  Meget tilfreds
+508   Firm 508  Teknologi    1459  168516.02  Meget tilfreds
+509   Firm 509    Sundhed    1799  432109.95         Neutral
+510   Firm 510     Finans    4316  431312.60 Meget utilfreds
+511   Firm 511     Finans    2766  801603.40  Meget tilfreds
+512   Firm 512     Finans     962   53875.27 Meget utilfreds
+513   Firm 513    Sundhed    4453  493462.09 Meget utilfreds
+514   Firm 514    Sundhed    1026  765705.75       Utilfreds
+515   Firm 515     Finans    2022  239915.70         Neutral
+516   Firm 516 Produktion    2897  338635.58        Tilfreds
+517   Firm 517     Detail    2576  254677.01  Meget tilfreds
+518   Firm 518  Teknologi    1459  168516.02  Meget tilfreds
+519   Firm 519    Sundhed    1799  432109.95         Neutral
+520   Firm 520     Finans    4316  431312.60 Meget utilfreds
+521   Firm 521     Finans    2766  801603.40  Meget tilfreds
+522   Firm 522     Finans     962   53875.27 Meget utilfreds
+523   Firm 523    Sundhed    4453  493462.09 Meget utilfreds
+524   Firm 524    Sundhed    1026  765705.75       Utilfreds
+525   Firm 525     Finans    2022  239915.70         Neutral
+526   Firm 526 Produktion    2897  338635.58        Tilfreds
+527   Firm 527     Detail    2576  254677.01  Meget tilfreds
+528   Firm 528  Teknologi    1459  168516.02  Meget tilfreds
+529   Firm 529    Sundhed    1799  432109.95         Neutral
+530   Firm 530     Finans    4316  431312.60 Meget utilfreds
+531   Firm 531     Finans    2766  801603.40  Meget tilfreds
+532   Firm 532     Finans     962   53875.27 Meget utilfreds
+533   Firm 533    Sundhed    4453  493462.09 Meget utilfreds
+534   Firm 534    Sundhed    1026  765705.75       Utilfreds
+535   Firm 535     Finans    2022  239915.70         Neutral
+536   Firm 536 Produktion    2897  338635.58        Tilfreds
+537   Firm 537     Detail    2576  254677.01  Meget tilfreds
+538   Firm 538  Teknologi    1459  168516.02  Meget tilfreds
+539   Firm 539    Sundhed    1799  432109.95         Neutral
+540   Firm 540     Finans    4316  431312.60 Meget utilfreds
+541   Firm 541     Finans    2766  801603.40  Meget tilfreds
+542   Firm 542     Finans     962   53875.27 Meget utilfreds
+543   Firm 543    Sundhed    4453  493462.09 Meget utilfreds
+544   Firm 544    Sundhed    1026  765705.75       Utilfreds
+545   Firm 545     Finans    2022  239915.70         Neutral
+546   Firm 546 Produktion    2897  338635.58        Tilfreds
+547   Firm 547     Detail    2576  254677.01  Meget tilfreds
+548   Firm 548  Teknologi    1459  168516.02  Meget tilfreds
+549   Firm 549    Sundhed    1799  432109.95         Neutral
+550   Firm 550     Finans    4316  431312.60 Meget utilfreds
+551   Firm 551     Finans    2766  801603.40  Meget tilfreds
+552   Firm 552     Finans     962   53875.27 Meget utilfreds
+553   Firm 553    Sundhed    4453  493462.09 Meget utilfreds
+554   Firm 554    Sundhed    1026  765705.75       Utilfreds
+555   Firm 555     Finans    2022  239915.70         Neutral
+556   Firm 556 Produktion    2897  338635.58        Tilfreds
+557   Firm 557     Detail    2576  254677.01  Meget tilfreds
+558   Firm 558  Teknologi    1459  168516.02  Meget tilfreds
+559   Firm 559    Sundhed    1799  432109.95         Neutral
+560   Firm 560     Finans    4316  431312.60 Meget utilfreds
+561   Firm 561     Finans    2766  801603.40  Meget tilfreds
+562   Firm 562     Finans     962   53875.27 Meget utilfreds
+563   Firm 563    Sundhed    4453  493462.09 Meget utilfreds
+564   Firm 564    Sundhed    1026  765705.75       Utilfreds
+565   Firm 565     Finans    2022  239915.70         Neutral
+566   Firm 566 Produktion    2897  338635.58        Tilfreds
+567   Firm 567     Detail    2576  254677.01  Meget tilfreds
+568   Firm 568  Teknologi    1459  168516.02  Meget tilfreds
+569   Firm 569    Sundhed    1799  432109.95         Neutral
+570   Firm 570     Finans    4316  431312.60 Meget utilfreds
+571   Firm 571     Finans    2766  801603.40  Meget tilfreds
+572   Firm 572     Finans     962   53875.27 Meget utilfreds
+573   Firm 573    Sundhed    4453  493462.09 Meget utilfreds
+574   Firm 574    Sundhed    1026  765705.75       Utilfreds
+575   Firm 575     Finans    2022  239915.70         Neutral
+576   Firm 576 Produktion    2897  338635.58        Tilfreds
+577   Firm 577     Detail    2576  254677.01  Meget tilfreds
+578   Firm 578  Teknologi    1459  168516.02  Meget tilfreds
+579   Firm 579    Sundhed    1799  432109.95         Neutral
+580   Firm 580     Finans    4316  431312.60 Meget utilfreds
+581   Firm 581     Finans    2766  801603.40  Meget tilfreds
+582   Firm 582     Finans     962   53875.27 Meget utilfreds
+583   Firm 583    Sundhed    4453  493462.09 Meget utilfreds
+584   Firm 584    Sundhed    1026  765705.75       Utilfreds
+585   Firm 585     Finans    2022  239915.70         Neutral
+586   Firm 586 Produktion    2897  338635.58        Tilfreds
+587   Firm 587     Detail    2576  254677.01  Meget tilfreds
+588   Firm 588  Teknologi    1459  168516.02  Meget tilfreds
+589   Firm 589    Sundhed    1799  432109.95         Neutral
+590   Firm 590     Finans    4316  431312.60 Meget utilfreds
+591   Firm 591     Finans    2766  801603.40  Meget tilfreds
+592   Firm 592     Finans     962   53875.27 Meget utilfreds
+593   Firm 593    Sundhed    4453  493462.09 Meget utilfreds
+594   Firm 594    Sundhed    1026  765705.75       Utilfreds
+595   Firm 595     Finans    2022  239915.70         Neutral
+596   Firm 596 Produktion    2897  338635.58        Tilfreds
+597   Firm 597     Detail    2576  254677.01  Meget tilfreds
+598   Firm 598  Teknologi    1459  168516.02  Meget tilfreds
+599   Firm 599    Sundhed    1799  432109.95         Neutral
+600   Firm 600     Finans    4316  431312.60 Meget utilfreds
+601   Firm 601     Finans    2766  801603.40  Meget tilfreds
+602   Firm 602     Finans     962   53875.27 Meget utilfreds
+603   Firm 603    Sundhed    4453  493462.09 Meget utilfreds
+604   Firm 604    Sundhed    1026  765705.75       Utilfreds
+605   Firm 605     Finans    2022  239915.70         Neutral
+606   Firm 606 Produktion    2897  338635.58        Tilfreds
+607   Firm 607     Detail    2576  254677.01  Meget tilfreds
+608   Firm 608  Teknologi    1459  168516.02  Meget tilfreds
+609   Firm 609    Sundhed    1799  432109.95         Neutral
+610   Firm 610     Finans    4316  431312.60 Meget utilfreds
+611   Firm 611     Finans    2766  801603.40  Meget tilfreds
+612   Firm 612     Finans     962   53875.27 Meget utilfreds
+613   Firm 613    Sundhed    4453  493462.09 Meget utilfreds
+614   Firm 614    Sundhed    1026  765705.75       Utilfreds
+615   Firm 615     Finans    2022  239915.70         Neutral
+616   Firm 616 Produktion    2897  338635.58        Tilfreds
+617   Firm 617     Detail    2576  254677.01  Meget tilfreds
+618   Firm 618  Teknologi    1459  168516.02  Meget tilfreds
+619   Firm 619    Sundhed    1799  432109.95         Neutral
+620   Firm 620     Finans    4316  431312.60 Meget utilfreds
+621   Firm 621     Finans    2766  801603.40  Meget tilfreds
+622   Firm 622     Finans     962   53875.27 Meget utilfreds
+623   Firm 623    Sundhed    4453  493462.09 Meget utilfreds
+624   Firm 624    Sundhed    1026  765705.75       Utilfreds
+625   Firm 625     Finans    2022  239915.70         Neutral
+626   Firm 626 Produktion    2897  338635.58        Tilfreds
+627   Firm 627     Detail    2576  254677.01  Meget tilfreds
+628   Firm 628  Teknologi    1459  168516.02  Meget tilfreds
+629   Firm 629    Sundhed    1799  432109.95         Neutral
+630   Firm 630     Finans    4316  431312.60 Meget utilfreds
+631   Firm 631     Finans    2766  801603.40  Meget tilfreds
+632   Firm 632     Finans     962   53875.27 Meget utilfreds
+633   Firm 633    Sundhed    4453  493462.09 Meget utilfreds
+634   Firm 634    Sundhed    1026  765705.75       Utilfreds
+635   Firm 635     Finans    2022  239915.70         Neutral
+636   Firm 636 Produktion    2897  338635.58        Tilfreds
+637   Firm 637     Detail    2576  254677.01  Meget tilfreds
+638   Firm 638  Teknologi    1459  168516.02  Meget tilfreds
+639   Firm 639    Sundhed    1799  432109.95         Neutral
+640   Firm 640     Finans    4316  431312.60 Meget utilfreds
+641   Firm 641     Finans    2766  801603.40  Meget tilfreds
+642   Firm 642     Finans     962   53875.27 Meget utilfreds
+643   Firm 643    Sundhed    4453  493462.09 Meget utilfreds
+644   Firm 644    Sundhed    1026  765705.75       Utilfreds
+645   Firm 645     Finans    2022  239915.70         Neutral
+646   Firm 646 Produktion    2897  338635.58        Tilfreds
+647   Firm 647     Detail    2576  254677.01  Meget tilfreds
+648   Firm 648  Teknologi    1459  168516.02  Meget tilfreds
+649   Firm 649    Sundhed    1799  432109.95         Neutral
+650   Firm 650     Finans    4316  431312.60 Meget utilfreds
+651   Firm 651     Finans    2766  801603.40  Meget tilfreds
+652   Firm 652     Finans     962   53875.27 Meget utilfreds
+653   Firm 653    Sundhed    4453  493462.09 Meget utilfreds
+654   Firm 654    Sundhed    1026  765705.75       Utilfreds
+655   Firm 655     Finans    2022  239915.70         Neutral
+656   Firm 656 Produktion    2897  338635.58        Tilfreds
+657   Firm 657     Detail    2576  254677.01  Meget tilfreds
+658   Firm 658  Teknologi    1459  168516.02  Meget tilfreds
+659   Firm 659    Sundhed    1799  432109.95         Neutral
+660   Firm 660     Finans    4316  431312.60 Meget utilfreds
+661   Firm 661     Finans    2766  801603.40  Meget tilfreds
+662   Firm 662     Finans     962   53875.27 Meget utilfreds
+663   Firm 663    Sundhed    4453  493462.09 Meget utilfreds
+664   Firm 664    Sundhed    1026  765705.75       Utilfreds
+665   Firm 665     Finans    2022  239915.70         Neutral
+666   Firm 666 Produktion    2897  338635.58        Tilfreds
+667   Firm 667     Detail    2576  254677.01  Meget tilfreds
+668   Firm 668  Teknologi    1459  168516.02  Meget tilfreds
+669   Firm 669    Sundhed    1799  432109.95         Neutral
+670   Firm 670     Finans    4316  431312.60 Meget utilfreds
+671   Firm 671     Finans    2766  801603.40  Meget tilfreds
+672   Firm 672     Finans     962   53875.27 Meget utilfreds
+673   Firm 673    Sundhed    4453  493462.09 Meget utilfreds
+674   Firm 674    Sundhed    1026  765705.75       Utilfreds
+675   Firm 675     Finans    2022  239915.70         Neutral
+676   Firm 676 Produktion    2897  338635.58        Tilfreds
+677   Firm 677     Detail    2576  254677.01  Meget tilfreds
+678   Firm 678  Teknologi    1459  168516.02  Meget tilfreds
+679   Firm 679    Sundhed    1799  432109.95         Neutral
+680   Firm 680     Finans    4316  431312.60 Meget utilfreds
+681   Firm 681     Finans    2766  801603.40  Meget tilfreds
+682   Firm 682     Finans     962   53875.27 Meget utilfreds
+683   Firm 683    Sundhed    4453  493462.09 Meget utilfreds
+684   Firm 684    Sundhed    1026  765705.75       Utilfreds
+685   Firm 685     Finans    2022  239915.70         Neutral
+686   Firm 686 Produktion    2897  338635.58        Tilfreds
+687   Firm 687     Detail    2576  254677.01  Meget tilfreds
+688   Firm 688  Teknologi    1459  168516.02  Meget tilfreds
+689   Firm 689    Sundhed    1799  432109.95         Neutral
+690   Firm 690     Finans    4316  431312.60 Meget utilfreds
+691   Firm 691     Finans    2766  801603.40  Meget tilfreds
+692   Firm 692     Finans     962   53875.27 Meget utilfreds
+693   Firm 693    Sundhed    4453  493462.09 Meget utilfreds
+694   Firm 694    Sundhed    1026  765705.75       Utilfreds
+695   Firm 695     Finans    2022  239915.70         Neutral
+696   Firm 696 Produktion    2897  338635.58        Tilfreds
+697   Firm 697     Detail    2576  254677.01  Meget tilfreds
+698   Firm 698  Teknologi    1459  168516.02  Meget tilfreds
+699   Firm 699    Sundhed    1799  432109.95         Neutral
+700   Firm 700     Finans    4316  431312.60 Meget utilfreds
+701   Firm 701     Finans    2766  801603.40  Meget tilfreds
+702   Firm 702     Finans     962   53875.27 Meget utilfreds
+703   Firm 703    Sundhed    4453  493462.09 Meget utilfreds
+704   Firm 704    Sundhed    1026  765705.75       Utilfreds
+705   Firm 705     Finans    2022  239915.70         Neutral
+706   Firm 706 Produktion    2897  338635.58        Tilfreds
+707   Firm 707     Detail    2576  254677.01  Meget tilfreds
+708   Firm 708  Teknologi    1459  168516.02  Meget tilfreds
+709   Firm 709    Sundhed    1799  432109.95         Neutral
+710   Firm 710     Finans    4316  431312.60 Meget utilfreds
+711   Firm 711     Finans    2766  801603.40  Meget tilfreds
+712   Firm 712     Finans     962   53875.27 Meget utilfreds
+713   Firm 713    Sundhed    4453  493462.09 Meget utilfreds
+714   Firm 714    Sundhed    1026  765705.75       Utilfreds
+715   Firm 715     Finans    2022  239915.70         Neutral
+716   Firm 716 Produktion    2897  338635.58        Tilfreds
+717   Firm 717     Detail    2576  254677.01  Meget tilfreds
+718   Firm 718  Teknologi    1459  168516.02  Meget tilfreds
+719   Firm 719    Sundhed    1799  432109.95         Neutral
+720   Firm 720     Finans    4316  431312.60 Meget utilfreds
+721   Firm 721     Finans    2766  801603.40  Meget tilfreds
+722   Firm 722     Finans     962   53875.27 Meget utilfreds
+723   Firm 723    Sundhed    4453  493462.09 Meget utilfreds
+724   Firm 724    Sundhed    1026  765705.75       Utilfreds
+725   Firm 725     Finans    2022  239915.70         Neutral
+726   Firm 726 Produktion    2897  338635.58        Tilfreds
+727   Firm 727     Detail    2576  254677.01  Meget tilfreds
+728   Firm 728  Teknologi    1459  168516.02  Meget tilfreds
+729   Firm 729    Sundhed    1799  432109.95         Neutral
+730   Firm 730     Finans    4316  431312.60 Meget utilfreds
+731   Firm 731     Finans    2766  801603.40  Meget tilfreds
+732   Firm 732     Finans     962   53875.27 Meget utilfreds
+733   Firm 733    Sundhed    4453  493462.09 Meget utilfreds
+734   Firm 734    Sundhed    1026  765705.75       Utilfreds
+735   Firm 735     Finans    2022  239915.70         Neutral
+736   Firm 736 Produktion    2897  338635.58        Tilfreds
+737   Firm 737     Detail    2576  254677.01  Meget tilfreds
+738   Firm 738  Teknologi    1459  168516.02  Meget tilfreds
+739   Firm 739    Sundhed    1799  432109.95         Neutral
+740   Firm 740     Finans    4316  431312.60 Meget utilfreds
+741   Firm 741     Finans    2766  801603.40  Meget tilfreds
+742   Firm 742     Finans     962   53875.27 Meget utilfreds
+743   Firm 743    Sundhed    4453  493462.09 Meget utilfreds
+744   Firm 744    Sundhed    1026  765705.75       Utilfreds
+745   Firm 745     Finans    2022  239915.70         Neutral
+746   Firm 746 Produktion    2897  338635.58        Tilfreds
+747   Firm 747     Detail    2576  254677.01  Meget tilfreds
+748   Firm 748  Teknologi    1459  168516.02  Meget tilfreds
+749   Firm 749    Sundhed    1799  432109.95         Neutral
+750   Firm 750     Finans    4316  431312.60 Meget utilfreds
+751   Firm 751     Finans    2766  801603.40  Meget tilfreds
+752   Firm 752     Finans     962   53875.27 Meget utilfreds
+753   Firm 753    Sundhed    4453  493462.09 Meget utilfreds
+754   Firm 754    Sundhed    1026  765705.75       Utilfreds
+755   Firm 755     Finans    2022  239915.70         Neutral
+756   Firm 756 Produktion    2897  338635.58        Tilfreds
+757   Firm 757     Detail    2576  254677.01  Meget tilfreds
+758   Firm 758  Teknologi    1459  168516.02  Meget tilfreds
+759   Firm 759    Sundhed    1799  432109.95         Neutral
+760   Firm 760     Finans    4316  431312.60 Meget utilfreds
+761   Firm 761     Finans    2766  801603.40  Meget tilfreds
+762   Firm 762     Finans     962   53875.27 Meget utilfreds
+763   Firm 763    Sundhed    4453  493462.09 Meget utilfreds
+764   Firm 764    Sundhed    1026  765705.75       Utilfreds
+765   Firm 765     Finans    2022  239915.70         Neutral
+766   Firm 766 Produktion    2897  338635.58        Tilfreds
+767   Firm 767     Detail    2576  254677.01  Meget tilfreds
+768   Firm 768  Teknologi    1459  168516.02  Meget tilfreds
+769   Firm 769    Sundhed    1799  432109.95         Neutral
+770   Firm 770     Finans    4316  431312.60 Meget utilfreds
+771   Firm 771     Finans    2766  801603.40  Meget tilfreds
+772   Firm 772     Finans     962   53875.27 Meget utilfreds
+773   Firm 773    Sundhed    4453  493462.09 Meget utilfreds
+774   Firm 774    Sundhed    1026  765705.75       Utilfreds
+775   Firm 775     Finans    2022  239915.70         Neutral
+776   Firm 776 Produktion    2897  338635.58        Tilfreds
+777   Firm 777     Detail    2576  254677.01  Meget tilfreds
+778   Firm 778  Teknologi    1459  168516.02  Meget tilfreds
+779   Firm 779    Sundhed    1799  432109.95         Neutral
+780   Firm 780     Finans    4316  431312.60 Meget utilfreds
+781   Firm 781     Finans    2766  801603.40  Meget tilfreds
+782   Firm 782     Finans     962   53875.27 Meget utilfreds
+783   Firm 783    Sundhed    4453  493462.09 Meget utilfreds
+784   Firm 784    Sundhed    1026  765705.75       Utilfreds
+785   Firm 785     Finans    2022  239915.70         Neutral
+786   Firm 786 Produktion    2897  338635.58        Tilfreds
+787   Firm 787     Detail    2576  254677.01  Meget tilfreds
+788   Firm 788  Teknologi    1459  168516.02  Meget tilfreds
+789   Firm 789    Sundhed    1799  432109.95         Neutral
+790   Firm 790     Finans    4316  431312.60 Meget utilfreds
+791   Firm 791     Finans    2766  801603.40  Meget tilfreds
+792   Firm 792     Finans     962   53875.27 Meget utilfreds
+793   Firm 793    Sundhed    4453  493462.09 Meget utilfreds
+794   Firm 794    Sundhed    1026  765705.75       Utilfreds
+795   Firm 795     Finans    2022  239915.70         Neutral
+796   Firm 796 Produktion    2897  338635.58        Tilfreds
+797   Firm 797     Detail    2576  254677.01  Meget tilfreds
+798   Firm 798  Teknologi    1459  168516.02  Meget tilfreds
+799   Firm 799    Sundhed    1799  432109.95         Neutral
+800   Firm 800     Finans    4316  431312.60 Meget utilfreds
+801   Firm 801     Finans    2766  801603.40  Meget tilfreds
+802   Firm 802     Finans     962   53875.27 Meget utilfreds
+803   Firm 803    Sundhed    4453  493462.09 Meget utilfreds
+804   Firm 804    Sundhed    1026  765705.75       Utilfreds
+805   Firm 805     Finans    2022  239915.70         Neutral
+806   Firm 806 Produktion    2897  338635.58        Tilfreds
+807   Firm 807     Detail    2576  254677.01  Meget tilfreds
+808   Firm 808  Teknologi    1459  168516.02  Meget tilfreds
+809   Firm 809    Sundhed    1799  432109.95         Neutral
+810   Firm 810     Finans    4316  431312.60 Meget utilfreds
+811   Firm 811     Finans    2766  801603.40  Meget tilfreds
+812   Firm 812     Finans     962   53875.27 Meget utilfreds
+813   Firm 813    Sundhed    4453  493462.09 Meget utilfreds
+814   Firm 814    Sundhed    1026  765705.75       Utilfreds
+815   Firm 815     Finans    2022  239915.70         Neutral
+816   Firm 816 Produktion    2897  338635.58        Tilfreds
+817   Firm 817     Detail    2576  254677.01  Meget tilfreds
+818   Firm 818  Teknologi    1459  168516.02  Meget tilfreds
+819   Firm 819    Sundhed    1799  432109.95         Neutral
+820   Firm 820     Finans    4316  431312.60 Meget utilfreds
+821   Firm 821     Finans    2766  801603.40  Meget tilfreds
+822   Firm 822     Finans     962   53875.27 Meget utilfreds
+823   Firm 823    Sundhed    4453  493462.09 Meget utilfreds
+824   Firm 824    Sundhed    1026  765705.75       Utilfreds
+825   Firm 825     Finans    2022  239915.70         Neutral
+826   Firm 826 Produktion    2897  338635.58        Tilfreds
+827   Firm 827     Detail    2576  254677.01  Meget tilfreds
+828   Firm 828  Teknologi    1459  168516.02  Meget tilfreds
+829   Firm 829    Sundhed    1799  432109.95         Neutral
+830   Firm 830     Finans    4316  431312.60 Meget utilfreds
+831   Firm 831     Finans    2766  801603.40  Meget tilfreds
+832   Firm 832     Finans     962   53875.27 Meget utilfreds
+833   Firm 833    Sundhed    4453  493462.09 Meget utilfreds
+834   Firm 834    Sundhed    1026  765705.75       Utilfreds
+835   Firm 835     Finans    2022  239915.70         Neutral
+836   Firm 836 Produktion    2897  338635.58        Tilfreds
+837   Firm 837     Detail    2576  254677.01  Meget tilfreds
+838   Firm 838  Teknologi    1459  168516.02  Meget tilfreds
+839   Firm 839    Sundhed    1799  432109.95         Neutral
+840   Firm 840     Finans    4316  431312.60 Meget utilfreds
+841   Firm 841     Finans    2766  801603.40  Meget tilfreds
+842   Firm 842     Finans     962   53875.27 Meget utilfreds
+843   Firm 843    Sundhed    4453  493462.09 Meget utilfreds
+844   Firm 844    Sundhed    1026  765705.75       Utilfreds
+845   Firm 845     Finans    2022  239915.70         Neutral
+846   Firm 846 Produktion    2897  338635.58        Tilfreds
+847   Firm 847     Detail    2576  254677.01  Meget tilfreds
+848   Firm 848  Teknologi    1459  168516.02  Meget tilfreds
+849   Firm 849    Sundhed    1799  432109.95         Neutral
+850   Firm 850     Finans    4316  431312.60 Meget utilfreds
+851   Firm 851     Finans    2766  801603.40  Meget tilfreds
+852   Firm 852     Finans     962   53875.27 Meget utilfreds
+853   Firm 853    Sundhed    4453  493462.09 Meget utilfreds
+854   Firm 854    Sundhed    1026  765705.75       Utilfreds
+855   Firm 855     Finans    2022  239915.70         Neutral
+856   Firm 856 Produktion    2897  338635.58        Tilfreds
+857   Firm 857     Detail    2576  254677.01  Meget tilfreds
+858   Firm 858  Teknologi    1459  168516.02  Meget tilfreds
+859   Firm 859    Sundhed    1799  432109.95         Neutral
+860   Firm 860     Finans    4316  431312.60 Meget utilfreds
+861   Firm 861     Finans    2766  801603.40  Meget tilfreds
+862   Firm 862     Finans     962   53875.27 Meget utilfreds
+863   Firm 863    Sundhed    4453  493462.09 Meget utilfreds
+864   Firm 864    Sundhed    1026  765705.75       Utilfreds
+865   Firm 865     Finans    2022  239915.70         Neutral
+866   Firm 866 Produktion    2897  338635.58        Tilfreds
+867   Firm 867     Detail    2576  254677.01  Meget tilfreds
+868   Firm 868  Teknologi    1459  168516.02  Meget tilfreds
+869   Firm 869    Sundhed    1799  432109.95         Neutral
+870   Firm 870     Finans    4316  431312.60 Meget utilfreds
+871   Firm 871     Finans    2766  801603.40  Meget tilfreds
+872   Firm 872     Finans     962   53875.27 Meget utilfreds
+873   Firm 873    Sundhed    4453  493462.09 Meget utilfreds
+874   Firm 874    Sundhed    1026  765705.75       Utilfreds
+875   Firm 875     Finans    2022  239915.70         Neutral
+876   Firm 876 Produktion    2897  338635.58        Tilfreds
+877   Firm 877     Detail    2576  254677.01  Meget tilfreds
+878   Firm 878  Teknologi    1459  168516.02  Meget tilfreds
+879   Firm 879    Sundhed    1799  432109.95         Neutral
+880   Firm 880     Finans    4316  431312.60 Meget utilfreds
+881   Firm 881     Finans    2766  801603.40  Meget tilfreds
+882   Firm 882     Finans     962   53875.27 Meget utilfreds
+883   Firm 883    Sundhed    4453  493462.09 Meget utilfreds
+884   Firm 884    Sundhed    1026  765705.75       Utilfreds
+885   Firm 885     Finans    2022  239915.70         Neutral
+886   Firm 886 Produktion    2897  338635.58        Tilfreds
+887   Firm 887     Detail    2576  254677.01  Meget tilfreds
+888   Firm 888  Teknologi    1459  168516.02  Meget tilfreds
+889   Firm 889    Sundhed    1799  432109.95         Neutral
+890   Firm 890     Finans    4316  431312.60 Meget utilfreds
+891   Firm 891     Finans    2766  801603.40  Meget tilfreds
+892   Firm 892     Finans     962   53875.27 Meget utilfreds
+893   Firm 893    Sundhed    4453  493462.09 Meget utilfreds
+894   Firm 894    Sundhed    1026  765705.75       Utilfreds
+895   Firm 895     Finans    2022  239915.70         Neutral
+896   Firm 896 Produktion    2897  338635.58        Tilfreds
+897   Firm 897     Detail    2576  254677.01  Meget tilfreds
+898   Firm 898  Teknologi    1459  168516.02  Meget tilfreds
+899   Firm 899    Sundhed    1799  432109.95         Neutral
+900   Firm 900     Finans    4316  431312.60 Meget utilfreds
+901   Firm 901     Finans    2766  801603.40  Meget tilfreds
+902   Firm 902     Finans     962   53875.27 Meget utilfreds
+903   Firm 903    Sundhed    4453  493462.09 Meget utilfreds
+904   Firm 904    Sundhed    1026  765705.75       Utilfreds
+905   Firm 905     Finans    2022  239915.70         Neutral
+906   Firm 906 Produktion    2897  338635.58        Tilfreds
+907   Firm 907     Detail    2576  254677.01  Meget tilfreds
+908   Firm 908  Teknologi    1459  168516.02  Meget tilfreds
+909   Firm 909    Sundhed    1799  432109.95         Neutral
+910   Firm 910     Finans    4316  431312.60 Meget utilfreds
+911   Firm 911     Finans    2766  801603.40  Meget tilfreds
+912   Firm 912     Finans     962   53875.27 Meget utilfreds
+913   Firm 913    Sundhed    4453  493462.09 Meget utilfreds
+914   Firm 914    Sundhed    1026  765705.75       Utilfreds
+915   Firm 915     Finans    2022  239915.70         Neutral
+916   Firm 916 Produktion    2897  338635.58        Tilfreds
+917   Firm 917     Detail    2576  254677.01  Meget tilfreds
+918   Firm 918  Teknologi    1459  168516.02  Meget tilfreds
+919   Firm 919    Sundhed    1799  432109.95         Neutral
+920   Firm 920     Finans    4316  431312.60 Meget utilfreds
+921   Firm 921     Finans    2766  801603.40  Meget tilfreds
+922   Firm 922     Finans     962   53875.27 Meget utilfreds
+923   Firm 923    Sundhed    4453  493462.09 Meget utilfreds
+924   Firm 924    Sundhed    1026  765705.75       Utilfreds
+925   Firm 925     Finans    2022  239915.70         Neutral
+926   Firm 926 Produktion    2897  338635.58        Tilfreds
+927   Firm 927     Detail    2576  254677.01  Meget tilfreds
+928   Firm 928  Teknologi    1459  168516.02  Meget tilfreds
+929   Firm 929    Sundhed    1799  432109.95         Neutral
+930   Firm 930     Finans    4316  431312.60 Meget utilfreds
+931   Firm 931     Finans    2766  801603.40  Meget tilfreds
+932   Firm 932     Finans     962   53875.27 Meget utilfreds
+933   Firm 933    Sundhed    4453  493462.09 Meget utilfreds
+934   Firm 934    Sundhed    1026  765705.75       Utilfreds
+935   Firm 935     Finans    2022  239915.70         Neutral
+936   Firm 936 Produktion    2897  338635.58        Tilfreds
+937   Firm 937     Detail    2576  254677.01  Meget tilfreds
+938   Firm 938  Teknologi    1459  168516.02  Meget tilfreds
+939   Firm 939    Sundhed    1799  432109.95         Neutral
+940   Firm 940     Finans    4316  431312.60 Meget utilfreds
+941   Firm 941     Finans    2766  801603.40  Meget tilfreds
+942   Firm 942     Finans     962   53875.27 Meget utilfreds
+943   Firm 943    Sundhed    4453  493462.09 Meget utilfreds
+944   Firm 944    Sundhed    1026  765705.75       Utilfreds
+945   Firm 945     Finans    2022  239915.70         Neutral
+946   Firm 946 Produktion    2897  338635.58        Tilfreds
+947   Firm 947     Detail    2576  254677.01  Meget tilfreds
+948   Firm 948  Teknologi    1459  168516.02  Meget tilfreds
+949   Firm 949    Sundhed    1799  432109.95         Neutral
+950   Firm 950     Finans    4316  431312.60 Meget utilfreds
+951   Firm 951     Finans    2766  801603.40  Meget tilfreds
+952   Firm 952     Finans     962   53875.27 Meget utilfreds
+953   Firm 953    Sundhed    4453  493462.09 Meget utilfreds
+954   Firm 954    Sundhed    1026  765705.75       Utilfreds
+955   Firm 955     Finans    2022  239915.70         Neutral
+956   Firm 956 Produktion    2897  338635.58        Tilfreds
+957   Firm 957     Detail    2576  254677.01  Meget tilfreds
+958   Firm 958  Teknologi    1459  168516.02  Meget tilfreds
+959   Firm 959    Sundhed    1799  432109.95         Neutral
+960   Firm 960     Finans    4316  431312.60 Meget utilfreds
+961   Firm 961     Finans    2766  801603.40  Meget tilfreds
+962   Firm 962     Finans     962   53875.27 Meget utilfreds
+963   Firm 963    Sundhed    4453  493462.09 Meget utilfreds
+964   Firm 964    Sundhed    1026  765705.75       Utilfreds
+965   Firm 965     Finans    2022  239915.70         Neutral
+966   Firm 966 Produktion    2897  338635.58        Tilfreds
+967   Firm 967     Detail    2576  254677.01  Meget tilfreds
+968   Firm 968  Teknologi    1459  168516.02  Meget tilfreds
+969   Firm 969    Sundhed    1799  432109.95         Neutral
+970   Firm 970     Finans    4316  431312.60 Meget utilfreds
+971   Firm 971     Finans    2766  801603.40  Meget tilfreds
+972   Firm 972     Finans     962   53875.27 Meget utilfreds
+973   Firm 973    Sundhed    4453  493462.09 Meget utilfreds
+974   Firm 974    Sundhed    1026  765705.75       Utilfreds
+975   Firm 975     Finans    2022  239915.70         Neutral
+976   Firm 976 Produktion    2897  338635.58        Tilfreds
+977   Firm 977     Detail    2576  254677.01  Meget tilfreds
+978   Firm 978  Teknologi    1459  168516.02  Meget tilfreds
+979   Firm 979    Sundhed    1799  432109.95         Neutral
+980   Firm 980     Finans    4316  431312.60 Meget utilfreds
+981   Firm 981     Finans    2766  801603.40  Meget tilfreds
+982   Firm 982     Finans     962   53875.27 Meget utilfreds
+983   Firm 983    Sundhed    4453  493462.09 Meget utilfreds
+984   Firm 984    Sundhed    1026  765705.75       Utilfreds
+985   Firm 985     Finans    2022  239915.70         Neutral
+986   Firm 986 Produktion    2897  338635.58        Tilfreds
+987   Firm 987     Detail    2576  254677.01  Meget tilfreds
+988   Firm 988  Teknologi    1459  168516.02  Meget tilfreds
+989   Firm 989    Sundhed    1799  432109.95         Neutral
+990   Firm 990     Finans    4316  431312.60 Meget utilfreds
+991   Firm 991     Finans    2766  801603.40  Meget tilfreds
+992   Firm 992     Finans     962   53875.27 Meget utilfreds
+993   Firm 993    Sundhed    4453  493462.09 Meget utilfreds
+994   Firm 994    Sundhed    1026  765705.75       Utilfreds
+995   Firm 995     Finans    2022  239915.70         Neutral
+996   Firm 996 Produktion    2897  338635.58        Tilfreds
+997   Firm 997     Detail    2576  254677.01  Meget tilfreds
+998   Firm 998  Teknologi    1459  168516.02  Meget tilfreds
+999   Firm 999    Sundhed    1799  432109.95         Neutral
+1000 Firm 1000     Finans    4316  431312.60 Meget utilfreds</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level0">
+
+<h2>Opsamling</h2>
+<p><br></p>
+<ul>
+<li><p>Statistiske analyser kan skabe overblik over tendenser,, finde mønstre, undersøge sammenhænge og forskellighed, teste teorier, udvikle forklaringer og lave forudsigelser</p></li>
+<li><p>Undersøgelser bør altid tage udgangspunkt i et <strong><em>forskningsspørgsmål</em></strong></p></li>
+<li><p>Forskningsspørgsmålet afgør, hvilket <strong><em>forskningsdesign</em></strong> vi skal bruge (beskrivende vs.&nbsp;forklarende)</p></li>
+<li><p>Statistiske undersøgelser skal (såvel som andre) leve op til en række <strong><em>kvalitetskriterier</em></strong> for videnskabelig praksis: gentagelighed, validitet, reliabilitet og generalisérbarhed</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Opsamling</h2>
+<p><br></p>
+<ul>
+<li><p><strong>Data</strong> udvælges (ideelt set) på baggrund af forskningsningsspørgsmål, f.eks. registerdata, surveydata, flowdata eller andet. Vores datagrundlag og udvælgelsesmekanisme er afgørende for, hvorvidt undersøgelsen lever op til kvalitetskriterierne!</p></li>
+<li><p>Toeretiske begreber skal defineres og <strong><em>operationaliseres</em></strong> således at vi faktisk kan måle dem med tal</p></li>
+<li><p>Når vi udvikler indikatorer skal vi tage højde for deres <strong><em>måleniveauer</em></strong>, da det er afgørende for, hvilke analyser vi kan lave på vores data</p></li>
+</ul>
+</section>
+<section class="slide level0">
+
+<h2>Næste gang…</h2>
+<div class="two-column-layout">
+<div class="left-column">
+<ul>
+<li><p>Husk computer</p></li>
+<li><p>Vigtigt med deltagelse</p></li>
+</ul>
+</div>
+<div class="right-column">
+<p><img data-src="images/Rlogo.png"></p>
+</div>
+</div>
+<div class="quarto-auto-generated-content">
+<p><img src="css_etc/ilisimatusarfik.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="1_introduktion_data_måleniveauer_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="1_introduktion_data_måleniveauer_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
