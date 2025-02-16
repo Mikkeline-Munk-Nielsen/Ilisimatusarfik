@@ -1,0 +1,248 @@
+---
+title: "Aflevering 6"
+format: html
+editor: visual
+---
+
+## 
+
+Følgende opgavesæt indeholder spørgsmål af både teoretisk og praktisk karakter. Nogle spørgsmål skal kun besvares teoretisk, mens andre skal besvares ved hjælp af det tilhørende datasæt. Indsæt dine svar og kode i dette dokument og aflever i PDF-format.
+
+I denne opgave skal I analysere online forbrugeradfærd med udgangspunkt i et nyt datasæt. I skal analysere, hvor mange penge folk bruger på at handle på nettet, og hvilke baggrundskarakteristika der siger noget om, hvor stort et forbrug for har.
+
+## Data
+
+Download datasættet ***online_shopping.rds*** fra lectio og gem det på din computer i samme mappe som den r-fil, som du bruger til at besvare spørgsmålene. Datasættet er simuleret og indeholder data på 2000 respondenters onlineforbrug og baggrundsinformation. Datasættet indeholder følgende variable:
+
+| Variabel | Måler |
+|------------------|------------------------------------------------------|
+| forbrug | Forbrug i DKK på online indkøb (afhængig variabel) |
+| alder | Respondentens alder (i år) |
+| køn | Køn (mand eller kvinde) |
+| indkomst | Respondentens indkomstniveau (i DKK) |
+| leveringstid | Gennemsnitlig leveringstid på forbrugerens adresse (1-2 uger, 2-4 uger, 4+ uger) |
+| levering_1_2_uger | Dummy-variabel for leveringstid 1-2 uger (1 = ja, 0 = nej) |
+| levering_2_4_uger | Dummy-variabel for leveringstid 2-4 uger (1 = ja, 0 = nej) |
+| levering_4_uger_plus | Dummy-variabel for leveringstid 4+ uger (1 = ja, 0 = nej) |
+
+Indlæs datasættet til et objekt kalder ”df” med følgende kode:
+
+```{r include=F, message=F, warning=F}
+getwd() # Denne kommando fortæller dig, hvilken mappe du arbejder i lige nu.
+setwd("C:/Users/mmn/Dropbox/Ilisimatusarfik/Undervisningsdokumenter/E24/afleveringer")
+```
+
+```{r echo=T, message=F, warning=F}
+df <- readRDS("online_shopping.rds")
+```
+
+## 1 Variable og måleniveauer
+
+*Følgende opgave er teoretisk, dvs. du skal [ikke]{.underline} bruge datasættet til at besvare spørgsmålet.*
+
+Definér måleniveauet for følgende variable:
+
+A. Årlige forbrug i DKK på online indkøb.
+
+B. Leveringstid (1-2, 2-4 eller 4+ uger).
+
+C. Respondentens alder
+
+D. En (tænkt) variabel der angiver, om en respondent har brugt mere end 5000 DKK på online indkøb.
+
+## **2 Univariat analyse**
+
+*I følgende opgaver [skal]{.underline} du bruge datasættet til at beregne nogle af dine svar.*
+
+Variablen *forbrug* er intervalskaleret og måler respondenternes forbrug online det seneste år i DKK.
+
+A. Beregn middelværdi og median for variablen forbrug. Sammenlign og kommentér på, hvad det siger om fordelingen.
+
+```{r echo=T, message=F, warning=F}
+library(DescTools)
+Mean(df$alder, na.rm = T) 
+Median(df$alder, na.rm = T) 
+```
+
+B. Beregn standardafvigelsen for forbrug og forklar, hvad standardafvigelsen måler.
+
+```{r echo=T, message=F, warning=F}
+sd(df$forbrug, na.rm = TRUE)
+```
+
+C. Beregn et 95% konfidensinterval for middelværdien af forbrug og forklar fortolkningen.
+
+```{r}
+t.test(df$forbrug)
+```
+
+D. Lav et univariat barplot for variablen leveringstid. Hvilken leveringstid er mest almindelig?
+
+```{r echo=T, message=F, warning=F}
+library(ggplot2)
+
+ggplot(df) + 
+  aes(x = factor(leveringstid)) +  
+  geom_bar(fill = "#003366") +
+  labs(
+    x = "Leveringstid",
+    y = "Antal"
+  ) +
+  theme_minimal()
+```
+
+## **3 Bivariat analyse**
+
+*I følgende opgaver [skal]{.underline} du bruge datasættet til at beregne nogle af dine svar.*
+
+Du skal nu bruge en t-test til at teste, om der er forskel på, hvor mange penge mænd og kvinder gennemsnitligt handler for på nettet. Du skal bruge variablene ***forbrug*** og ***køn***. Variablen *forbrug* er intervalskaleret og måler respondenternes forbrug online det seneste år i DKK. Variablen køn er en nominal/og eller dikotom variabel, der måler respondenternes køn som enten mand eller kvinde.
+
+A. Opstil hypoteser for en bivariat t-test for forskellen i gennemsnitligt forbrug mellem mænd og kvinder
+
+B. Gennemfør og konkludér på t-testen. Er der en signifikant forskel på det gennemsnitlige forbrug for mænd og kvinder?
+
+```{r echo=T, message=F, warning=F}
+
+# Udfør t-test
+ttest_resultat_bivariat <- t.test(forbrug ~ køn, data = df)
+
+# Opret en tabel med resultaterne
+(ttest_tabel_bivariat <- data.frame(
+  Parameter = c("Gennemsnit Gruppe 1",        # Gennemsnit for første gruppe
+                "Gennemsnit Gruppe 2",        # Gennemsnit for anden gruppe
+                "Test-statistik",             # Teststatistikken (t-værdien)
+                "P-værdi",                    # P-værdien
+                "Nedre konfidensinterval",    # Nedre konfidensinterval
+                "Øvre konfidensinterval",     # Øvre konfidensinterval
+                "Frihedsgrader"),             # Frihedsgrader (df)
+  Værdi = c(
+    round(ttest_resultat_bivariat$estimate[1], 2),     # Gennemsnittet for første gruppe afrundet til 3 decimaler
+    round(ttest_resultat_bivariat$estimate[2], 2),     # Gennemsnittet for anden gruppe afrundet til 3 decimaler
+    round(ttest_resultat_bivariat$statistic, 3),       # Teststatistikken afrundet til 3 decimaler
+    sprintf("%.4f", ttest_resultat_bivariat$p.value),  # P-værdien med 4 decimaler
+    round(ttest_resultat_bivariat$conf.int[1], 3),     # Nedre konfidensinterval afrundet til 3 decimaler
+    round(ttest_resultat_bivariat$conf.int[2], 3),     # Øvre konfidensinterval afrundet til 3 decimaler
+    round(ttest_resultat_bivariat$parameter, 1)        # Frihedsgrader afrundet til 1 decimal
+  )
+))
+```
+
+## Lineær regressionsanalyse
+
+*I følgende opgaver [skal]{.underline} du bruge datasættet til at beregne dine svar.*
+
+I denne opgave skal du undersøge sammenhængen mellem forbrug og alder ved hjælp af forlæns modelsøgning. Du har en hypotese om, at yngre mennesker handler mere online end ældre. Altså forventer du en negativ korrelation mellem forbrug og alder. Du skal nu estimere denne sammenhæng og efterprøve, hvor stærk den er, når der tages højde for andre relevante faktorer, som spiller ind ift. online forbrug.
+
+### Simpel model
+
+Du skal først estimere en simpel model med sammenhængen mellem forbrug og alder. Variablen *forbrug* er intervalskaleret og måler respondenternes forbrug online det seneste år i DKK. Variablen *alder* betragtes også som intervalskaleret og måler respondenternes alder i år.
+
+A. Estimér følgende model 1: $forbrug=\alpha+\beta_1*alder+\epsilon$
+
+```{r echo=T, message=F, warning=F}
+model1 <- lm(forbrug ~ alder, data = df)
+
+library(texreg)
+(texreg::screenreg(list(model1), include.ci=F))
+```
+
+B. Hvilken variabel er den afhængige, og hvilken er den uafhængige?
+
+C. Hvad er fortolkningen af parameterestimatet for konstantleddet $\alpha$ (intercept)?
+
+D. Hvad er fortolkningen af parameterestimatet for $\beta_1$ ? Kommenter på om sammenhængen er statistisk signifikant.
+
+E. Beregn den forventede forbrug for en person på 30 år.
+
+### **Multipel model: Indkomst som kontrolvariabel**
+
+Sammenhængen mellem forbrug og alder kan tænkes at være påvirket af andre bagvedliggende faktorer, der korrelerer med begge variable. Det kunne for eksempel tænkes, at indkomst er en "confounding variable" i denne sammenhæng. Du skal derfor indføre *indkomst* som kontrolvariabel i modellen. Læg mærke til at variablen indkomst måler indkomst i 1000 DKK.
+
+**F. Estimér følgende model 2:** $forbrug=\alpha+\beta_1*alder+\beta_2*indkomst+\epsilon$
+
+```{r echo=T, message=F, warning=F}
+model2 <- lm(forbrug ~ alder+indkomst, data = df)
+
+library(texreg)
+(texreg::screenreg(list(model1, model2), include.ci=F))
+
+```
+
+**G. Hvad er fortolkningen af parameterestimatet for konstantleddet  (Intercept) nu?\
+** *dit svar\
+\
+*
+
+**H. Kommentér igen på fortolkningen af parameterestimatet for . Er der en statistisk signifikant \
+sammenhæng mellem forbrug og alder, når der kontrolleres for indkomst?\
+** *dit svar\
+\
+*
+
+**I. Hvad er fortolkningen af parameterestimatet for ? Kommenter på om sammenhængen er statistisk signifikant.\
+** *dit svar\
+\
+*
+
+J. **Beregn det forventede forbrug for en person på 30 år med en månedlig indkomst på 30.000 DKK**.
+
+*dit svar*
+
+### **Multipel model: Indkomst og leveringstid**
+
+Leveringstiden på varer, der hvor man bor, kan også tænkes at påvirke ens forbrug online. Du skal derfor også indføre leveringstid som kontrolvariabel i regressionsmodellen. Variablen *leveringstid* har tre kategorier: *1-2 uger, 2-4 uger og 4+ uger*. Disse tre kategorier er allerede blevet omkodet til tre dummyvariable i datasættet.
+
+I den nedenstående model skal du udelade dummy-variablen ***levering_1_2_uger*** som referencekategori.
+
+**K. Estimér følgende model 3:** $forbrug=\alpha+\beta_1*alder+\beta_2*indkomst+\beta_3*levering\_2\_4\_uger+\beta_4*levering\_4\_uger\_plus+\epsilon$
+
+```{r echo=T, message=F, warning=F}
+model3 <- lm(forbrug ~ alder+indkomst+
+               levering_2_4_uger+
+               levering_4_uger_plus, data = df)
+
+library(texreg)
+(texreg::screenreg(list(model1, model2, model3), include.ci=F))
+
+```
+
+**L. Kommentér igen på fortolkningen af parameterestimatet for . Er der en statistisk signifikant sammenhæng mellem forbrug og alder, når der kontrolleres for indkomst og leveringstid?\
+** *dit svar\
+\
+*
+
+**M. Kommentér på fortolkningen af parameterestimaterne for  og . Er der en statistisk signifikant forskel på forbruget mellem dem der har hhv. 2-4 ugers og 1-2 ugers leveringstid, og dem der har 4+ uger og 1-2 ugers leveringstid, når der kontrolleres for alder og indkomst?\
+** *dit svar*
+
+## **5 Forklaringskraft og modelvalg**
+
+*I følgende opgaver [skal]{.underline} du bruge datasættet til at beregne nogle af dine svar.*
+
+**A. Sammenlign** $R^2$ **værdien for model 1, 2 og 3. Kommentér på, hvilken model der har den højeste forklaringskraft, og hvad dette betyder.\
+** *dit svar*
+
+```{r echo=T, message=F, warning=F}
+(texreg::screenreg(list(model1, model2, model3), include.ci=F))
+
+```
+
+For at afgøre om forklaringskraften i model 3 er signifikant højere end i model 2 er det nødvendigt med en F-test mellem de to modeller.\
+\
+
+**B.Opstil hypoteser for en F-test mellem to modeller**
+
+*dit svar*
+
+**C. Gennemfør og konkludér på testen. Er forklaringskraften i model 3 signifikant højere end i model 2?\
+\
+**
+
+```{r echo=T, message=F, warning=F}
+f_test <- anova(model2, model3)
+
+(f_test_summary <- data.frame(
+  "Forskel i Frihedsgrader" = f_test$Df[2],        # Forskel i frihedsgrader
+  "F-statistik" = f_test$F[2],                     # F-statistik
+  "P-værdi" = sprintf("%.4f", f_test$`Pr(>F)`[2]), # P-værdi med 4 decimaler
+  check.names = FALSE))
+```
