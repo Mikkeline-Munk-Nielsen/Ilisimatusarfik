@@ -372,7 +372,7 @@ $$u_i^2=\gamma_0+\gamma_1X_{i1}+\gamma_2X_{i2}+\dots+\gamma_kX_{ik}+v_i$$
 
 hvor vi tester, om koefficienterne $\gamma_1, \gamma_2, ..., \gamma_k$​ samlet set er signifikant forskellige fra nul.
 
----
+------------------------------------------------------------------------
 
 # Heteroskedasticitet
 
@@ -396,7 +396,7 @@ bptest_result <- bptest(model)
 
 P-værdien på mindre end 0,0000 viser, at vi kan afvise nulhypotesen og accepterer H1. Der er altså heteroskedasticitet tilstede.
 
----
+------------------------------------------------------------------------
 
 # Autokorrelation
 

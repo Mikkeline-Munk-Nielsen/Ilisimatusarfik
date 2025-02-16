@@ -9,16 +9,17 @@ n <- 2500
 # Hustype (kun Lejlighed, Rækkehus, Villa)
 hustype <- sample(c("Lejlighed", "Rækkehus", "Villa"), size = n, replace = TRUE, prob = c(0.4, 0.35, 0.25))
 
-# Byggeår (nyere huse er dyrere)
+# Byggeår og husets alder
 byggeår <- round(2025 - abs(rnorm(n, mean = 20, sd = 15)))  # Normalfordelt mod nyere boliger
 byggeår <- pmax(byggeår, 1950)  # Ingen byggeår før 1950
+husets_alder <- 2025 - byggeår  # Husets alder i år
 
 # Afstand til offentlig transport (i meter, realistisk fordelt)
 afstand_off_transport <- round(rlnorm(n, meanlog = 6, sdlog = 0.5))
 afstand_off_transport <- pmin(afstand_off_transport, 5000)  # Ingen ekstreme outliers
 
 # Fjernvarme (Mest sandsynligt i nyere boliger og i lejligheder/rækkehuse)
-fjernvarme <- ifelse(runif(n) < (0.7 - (2025 - byggeår) / 150), 1, 0)
+fjernvarme <- ifelse(runif(n) < (0.7 - husets_alder / 150), 1, 0)
 fjernvarme <- factor(fjernvarme, levels = c(0,1), labels = c("Nej", "Ja"))
 
 # Energiklasse som simpel kategorisk variabel (ikke dummier)
@@ -46,7 +47,7 @@ kvadratmeterpris <- pmax(kvadratmeterpris, 20000)  # Sikrer realistisk minimum
 boligdata_nuuk <- data.frame(
   kvadratmeterpris,
   afstand_off_transport,
-  byggeår,
+  husets_alder,
   hustype = factor(hustype, levels = c("Lejlighed", "Rækkehus", "Villa")),
   energiklasse = factor(energiklasse, levels = c("A", "B", "C", "D", "E")),  # Bevarer ordnede kategorier
   fjernvarme
@@ -62,5 +63,12 @@ boligdata_nuuk <- boligdata_nuuk %>% mutate(
   rækkehus = ifelse(hustype=="Rækkehus",1,0),
   villa = ifelse(hustype=="Villa",1,0))
 
+# Rækkefølge på variable
+library(dplyr)
+
+boligdata_nuuk <- boligdata_nuuk[, c("kvadratmeterpris", "energiklasse", "afstand_off_transport",
+                                     "fjernvarme", "husets_alder", "hustype", "lejlighed", "rækkehus", "villa")]
+
 # Gem datasættet som en RDS-fil
 saveRDS(boligdata_nuuk, "C:/Users/mmn/Dropbox/Ilisimatusarfik/Eksamen/eksamen_eø_F25/Eksamensdata_EØ_F25.rds")
+

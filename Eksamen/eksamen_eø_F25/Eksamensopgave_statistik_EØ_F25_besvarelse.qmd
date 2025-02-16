@@ -171,7 +171,7 @@ I skal først estimere en simpel model med sammenhængen mellem kvadratmeterpris
 A. Estimér følgende model (1): $kvadratmeterpris = \alpha+ \beta_1*byggeår+\epsilon$
 
 ```{r warning=F, message=F, echo=T}
-model1 <- lm(kvadratmeterpris ~ byggeår, data = df)
+model1 <- lm(kvadratmeterpris ~ husets_alder, data = df)
 
 library(texreg)
 (texreg::screenreg(list(model1), include.ci=F))
@@ -192,7 +192,7 @@ Sammenhængen mellem byggeår og kvadratmeterpris kan tænkes at være påvirket
 F. Estimer følgende model (2): $kvadratmeterpris = \alpha+ \beta_1*byggeår+\beta_2*afstand\_off\_transport+\epsilon$
 
 ```{r warning=F, message=F, echo=T}
-model2 <- lm(kvadratmeterpris ~ byggeår+afstand_off_transport, data = df)
+model2 <- lm(kvadratmeterpris ~ husets_alder+afstand_off_transport, data = df)
 
 library(texreg)
 (texreg::screenreg(list(model1, model2), include.ci=F))
@@ -218,7 +218,7 @@ K. Estimér følgende model (3):
 $kvadratmeterpris = \alpha+ \beta_1*byggeår+\beta_2*afstand\_off\_transport+\beta_3*rækkehus+\beta_4*villa+\epsilon$
 
 ```{r warning=F, message=F, echo=T}
-model3 <- lm(kvadratmeterpris ~ byggeår + afstand_off_transport + 
+model3 <- lm(kvadratmeterpris ~ husets_alder + afstand_off_transport + 
              rækkehus + villa, data = df)
 
 library(texreg)
