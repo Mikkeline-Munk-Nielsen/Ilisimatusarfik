@@ -1,21 +1,21 @@
 ---
-title: "Aflevering 6"
+title: "Aflevering 6: forslag til besvarelse"
 format: html
 editor: visual
 ---
 
-## 
+*Følgende er et forslag til besvarelse af den femte ud af de seks obligatoriske afleveringer i faget.* *Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.*
 
-Følgende opgavesæt indeholder spørgsmål af både teoretisk og praktisk karakter. Nogle spørgsmål skal kun besvares teoretisk, mens andre skal besvares ved hjælp af det tilhørende datasæt. Indsæt dine svar og kode i dette dokument og aflever i PDF-format.
+## Introduktion
 
-I denne opgave skal I analysere online forbrugeradfærd med udgangspunkt i et nyt datasæt. I skal analysere, hvor mange penge folk bruger på at handle på nettet, og hvilke baggrundskarakteristika der siger noget om, hvor stort et forbrug for har.
+I denne opgave skal I analysere online forbrugeradfærd med udgangspunkt i et nyt datasæt. I skal analysere, hvor mange penge folk bruger på at handle på nettet, og hvilke baggrundskarakteristika der siger noget om, hvor stort et forbrug de har.
 
 ## Data
 
 Download datasættet ***online_shopping.rds*** fra lectio og gem det på din computer i samme mappe som den r-fil, som du bruger til at besvare spørgsmålene. Datasættet er simuleret og indeholder data på 2000 respondenters onlineforbrug og baggrundsinformation. Datasættet indeholder følgende variable:
 
 | Variabel | Måler |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | forbrug | Forbrug i DKK på online indkøb (afhængig variabel) |
 | alder | Respondentens alder (i år) |
 | køn | Køn (mand eller kvinde) |
@@ -24,6 +24,8 @@ Download datasættet ***online_shopping.rds*** fra lectio og gem det på din com
 | levering_1_2_uger | Dummy-variabel for leveringstid 1-2 uger (1 = ja, 0 = nej) |
 | levering_2_4_uger | Dummy-variabel for leveringstid 2-4 uger (1 = ja, 0 = nej) |
 | levering_4_uger_plus | Dummy-variabel for leveringstid 4+ uger (1 = ja, 0 = nej) |
+
+<br>
 
 Indlæs datasættet til et objekt kalder ”df” med følgende kode:
 
@@ -42,41 +44,57 @@ df <- readRDS("online_shopping.rds")
 
 Definér måleniveauet for følgende variable:
 
-A. Årlige forbrug i DKK på online indkøb.
+**A. Årlige forbrug i DKK på online indkøb.**
 
-B. Leveringstid (1-2, 2-4 eller 4+ uger).
+*Årligt forbrug i DKK er intervalskaleret, da det giver mening at rangordne variablens værdier og afstandenn mellem værdierne er konstant og meningsfuld.*
 
-C. Respondentens alder
+**B. Leveringstid (1-2, 2-4 eller 4+ uger).**
 
-D. En (tænkt) variabel der angiver, om en respondent har brugt mere end 5000 DKK på online indkøb.
+*Leveringstid målt i kategorier er ordinal skaleret, da det giver mening at rangordne variablens værdier, men afstanden mellem værdierne er ikke konstant og dermed meningsfuld.*
+
+**C. Respondentens alder**
+
+*Alder i år er intervalskaleret, da det giver mening at rangordne variablens værdier, og afstandenn mellem værdierne er konstant og meningsfuld.*
+
+**D. En (tænkt) variabel der angiver, om en respondent har brugt mere end 5000 DKK på online indkøb.**
+
+*Denne variabel kan beskrives som dikotom/binær, da den kun har to kategorier (brugt mere end 5000 DKK på online indkøb eller ej). Derudover kan man argumentere for at behandle den som ordinal, da værdierne i princippet kan rangordnes.*
 
 ## **2 Univariat analyse**
 
 *I følgende opgaver [skal]{.underline} du bruge datasættet til at beregne nogle af dine svar.*
 
-Variablen *forbrug* er intervalskaleret og måler respondenternes forbrug online det seneste år i DKK.
+<br>
 
-A. Beregn middelværdi og median for variablen forbrug. Sammenlign og kommentér på, hvad det siger om fordelingen.
+Variablen ***forbrug*** er intervalskaleret og måler respondenternes forbrug online det seneste år i DKK.
+
+**A. Beregn middelværdi og median for variablen forbrug. Sammenlign og kommentér på, hvad det siger om fordelingen.**
 
 ```{r echo=T, message=F, warning=F}
 library(DescTools)
-Mean(df$alder, na.rm = T) 
-Median(df$alder, na.rm = T) 
+Mean(df$forbrug, na.rm = T) 
+Median(df$forbrug, na.rm = T) 
 ```
 
-B. Beregn standardafvigelsen for forbrug og forklar, hvad standardafvigelsen måler.
+*Medianen ligger ca. 300 DKK under middelværdien, hvilket tyder på, at der er nogle enkelte observationer med meget højt forbrug, der trækker gennemsnittet op.*
+
+**B. Beregn standardafvigelsen for forbrug og forklar, hvad standardafvigelsen måler.**
 
 ```{r echo=T, message=F, warning=F}
 sd(df$forbrug, na.rm = TRUE)
 ```
 
-C. Beregn et 95% konfidensinterval for middelværdien af forbrug og forklar fortolkningen.
+S*tandardafvigelsen på 1341.862 fortæller os, at observationerne i datasættet ligger spredt omkring middelværdien med en gennemsnitlig afstand på ca. 1342 DKK ift. forbrug.*
+
+**C. Beregn et 95% konfidensinterval for middelværdien af forbrug og forklar fortolkningen.**
 
 ```{r}
 t.test(df$forbrug)
 ```
 
-D. Lav et univariat barplot for variablen leveringstid. Hvilken leveringstid er mest almindelig?
+*Konfidensintervallet fortæller os, at vi på baggrund af stikprøven forventer (med 95 % sikkerhed), at den sande middelværdi i populationen for forbrug på online shopping ligger et sted mellem* 1771.914-1889.602 DKK
+
+**D. Lav et univariat barplot for variablen leveringstid. Hvilken leveringstid er mest almindelig?**
 
 ```{r echo=T, message=F, warning=F}
 library(ggplot2)
@@ -91,15 +109,23 @@ ggplot(df) +
   theme_minimal()
 ```
 
+*Barplottet viser, at flest bor et sted med en gennemsnitlig leveringstid på 2-4 uger.*
+
 ## **3 Bivariat analyse**
 
 *I følgende opgaver [skal]{.underline} du bruge datasættet til at beregne nogle af dine svar.*
 
 Du skal nu bruge en t-test til at teste, om der er forskel på, hvor mange penge mænd og kvinder gennemsnitligt handler for på nettet. Du skal bruge variablene ***forbrug*** og ***køn***. Variablen *forbrug* er intervalskaleret og måler respondenternes forbrug online det seneste år i DKK. Variablen køn er en nominal/og eller dikotom variabel, der måler respondenternes køn som enten mand eller kvinde.
 
-A. Opstil hypoteser for en bivariat t-test for forskellen i gennemsnitligt forbrug mellem mænd og kvinder
+<br>
 
-B. Gennemfør og konkludér på t-testen. Er der en signifikant forskel på det gennemsnitlige forbrug for mænd og kvinder?
+**A. Opstil hypoteser for en bivariat t-test for forskellen i gennemsnitligt forbrug mellem mænd og kvinder**
+
+***H0**: der er ikke nogen signifikant forskel på det gennemsnitligt forbrug for mænd og kvinder*
+
+***H1**: der er en signifikant forskel på det gennemsnitligt forbrug for mænd og kvinder*
+
+**B. Gennemfør og konkludér på t-testen. Er der en signifikant forskel på det gennemsnitlige forbrug for mænd og kvinder?**
 
 ```{r echo=T, message=F, warning=F}
 
@@ -127,6 +153,8 @@ ttest_resultat_bivariat <- t.test(forbrug ~ køn, data = df)
 ))
 ```
 
+*T-testen returnerer en p-værdi på 0.59. Vi kan altså ikke afvise nulhypotesen om, at der ikke er nogen signifikant forskel på det gennemsnitligt forbrug for mænd og kvinder med udgangspunkt i denne stikprøve.*
+
 ## Lineær regressionsanalyse
 
 *I følgende opgaver [skal]{.underline} du bruge datasættet til at beregne dine svar.*
@@ -137,7 +165,7 @@ I denne opgave skal du undersøge sammenhængen mellem forbrug og alder ved hjæ
 
 Du skal først estimere en simpel model med sammenhængen mellem forbrug og alder. Variablen *forbrug* er intervalskaleret og måler respondenternes forbrug online det seneste år i DKK. Variablen *alder* betragtes også som intervalskaleret og måler respondenternes alder i år.
 
-A. Estimér følgende model 1: $forbrug=\alpha+\beta_1*alder+\epsilon$
+**A. Estimér følgende model 1:** $forbrug=\alpha+\beta_1*alder+\epsilon$
 
 ```{r echo=T, message=F, warning=F}
 model1 <- lm(forbrug ~ alder, data = df)
@@ -146,13 +174,27 @@ library(texreg)
 (texreg::screenreg(list(model1), include.ci=F))
 ```
 
-B. Hvilken variabel er den afhængige, og hvilken er den uafhængige?
+**B. Hvilken variabel er den afhængige, og hvilken er den uafhængige?**
 
-C. Hvad er fortolkningen af parameterestimatet for konstantleddet $\alpha$ (intercept)?
+*Forbrug er den afhængige variabel, alder er den uafhængige.*
 
-D. Hvad er fortolkningen af parameterestimatet for $\beta_1$ ? Kommenter på om sammenhængen er statistisk signifikant.
+**C. Hvad er fortolkningen af parameterestimatet for konstantleddet** $\alpha$ **(intercept)?**
 
-E. Beregn den forventede forbrug for en person på 30 år.
+*Konstantleddet* $\alpha$ */ intercept er den forventede værdi på den afhængige variabel forbrug, når alle uafhængige variable er lig 0. Parameterestimatet for* $\alpha$ *beskriver her det forventede gennemsnitlige forbrug for en person på 0 år (3520.70 DKK).*
+
+**D. Hvad er fortolkningen af parameterestimatet for** $\beta_1$ **? Kommenter på om sammenhængen er statistisk signifikant.**
+
+$\beta_1$ *beskriver ændringen i den afhængige variabel “forbrug” for én enhedsændring i den uafhængige variabel “alder”. Parameterestimatet for* $\beta_1$ *beskriver altså det forventede fald (parameterestimatet er negativt) i forbrug, for hvert år man bliver ældre (hver stigning i alder på 1). De tre stjerner ud fra parameterestimatet for* $\beta_1$ *indikerer, at p-værdien er under 0,001. Den er derfor under vores statistiske grænseværdi på 0,05, hvilket betyder, at der ser ud til at være en statistisk signifikant negativ sammenhæng mellem alder og forbrug. Hver gang alder stiger med én falder det forventede forbrug gennemsnitligt med 37 DKK.*
+
+**E. Beregn den forventede forbrug for en person på 30 år.**
+
+Ligningen er givet ved: $forbrug=\alpha+\beta_1*alder+\epsilon$
+
+```{r echo=T, message=F, warning=F}
+3520.7-(37.02*30)
+```
+
+<br>
 
 ### **Multipel model: Indkomst som kontrolvariabel**
 
@@ -168,25 +210,28 @@ library(texreg)
 
 ```
 
-**G. Hvad er fortolkningen af parameterestimatet for konstantleddet  (Intercept) nu?\
-** *dit svar\
-\
+**G. Hvad er fortolkningen af parameterestimatet for konstantleddet** $\alpha$ (Inter**cept) nu?\
+***Konstantleddet* $\alpha$ */ intercept er stadig den forventede værdi på den afhængige variabel forbrug, når alle uafhængige variable er lig 0. Parameterestimatet for* $\alpha$ *beskriver her det forventede gennemsnitlige forbrug for en person på 0 år med en indkomst på 0 (*3302.44 *DKK).\
 *
 
-**H. Kommentér igen på fortolkningen af parameterestimatet for . Er der en statistisk signifikant \
-sammenhæng mellem forbrug og alder, når der kontrolleres for indkomst?\
-** *dit svar\
+**H. Kommentér igen på fortolkningen af parameterestimatet for** $\beta_1$**. Er der en statistisk signifikant\
+sammenhæng mellem forbrug og alder, når der kontrolleres for indkomst?***\
 \
+*$\beta_1$ *beskriver nu ændringen i den afhængige variabel “forbrug” for én enhedsændring i den uafhængige variabel “alder”, når der kontrolleres for indkomst. Parameterestimatet for* $\beta_1$ *beskriver altså det forventede fald (parameterestimatet er negativt) i forbrug, for hvert år man bliver ældre (hver stigning i alder på 1), når indkomst holdes konstant. De tre stjerner ud fra parameterestimatet for* $\beta_1$ *indikerer, at p-værdien er under 0,001. Den er derfor under vores statistiske grænseværdi på 0,05, hvilket betyder, at der ser ud til stadig at være en statistisk signifikant negativ sammenhæng mellem alder og forbrug, også når der kontrolleres for indkomst. Hver gang alder stiger med en falder det forventede forbrug gennemsnitligt med 37.08 DKK.*
+
+**I. Hvad er fortolkningen af parameterestimatet for** $\beta_2$**? Kommenter på om sammenhængen er statistisk signifikant.\
+**$\beta_2$ *beskriverændringen i den afhængige variabel “forbrug” for én enhedsændring i den uafhængige variabel “indkomst”, når der kontrolleres for alder. Parameterestimatet for* $\beta_2$ *beskriver altså den forventede stigning i forbrug, for hver 1000 DKK man tjener ekstra (hver stigning i indkomst på 1), når alder holdes konstant. Den ene stjerne ud fra parameterestimatet for* $\beta_2$ *indikerer, at p-værdien er under 0,05. Den er derfor under vores statistiske grænseværdi, hvilket betyder, at der ser ud til at være en statistisk signifikant sammenhæng mellem indkomst og forbrug, også når der kontrolleres for alder. Hver gang indkomst stiger med én (1000 DKK) falder det forventede forbrug gennemsnitligt med 5.28 DKK.\
 *
 
-**I. Hvad er fortolkningen af parameterestimatet for ? Kommenter på om sammenhængen er statistisk signifikant.\
-** *dit svar\
-\
-*
+**J.** **Beregn det forventede forbrug for en person på 30 år med en månedlig indkomst på 30.000 DKK**.
 
-J. **Beregn det forventede forbrug for en person på 30 år med en månedlig indkomst på 30.000 DKK**.
+$forbrug=\alpha+\beta_1*alder+\beta_2*indkomst+\epsilon$
 
-*dit svar*
+$forbrug=3302.44-37,08*30+5,28*30$
+
+```{r}
+3302.44-(37.08*30)+(5.28*30)
+```
 
 ### **Multipel model: Indkomst og leveringstid**
 
@@ -206,20 +251,27 @@ library(texreg)
 
 ```
 
-**L. Kommentér igen på fortolkningen af parameterestimatet for . Er der en statistisk signifikant sammenhæng mellem forbrug og alder, når der kontrolleres for indkomst og leveringstid?\
-** *dit svar\
-\
+**L. Kommentér igen på fortolkningen af parameterestimatet for** $\beta_1$**. Er der en statistisk signifikant sammenhæng mellem forbrug og alder, når der kontrolleres for indkomst og leveringstid?\
+**
+
+$\beta_1$ *beskriver nu ændringen i den afhængige variabel “forbrug” for én enhedsændring i den uafhængige variabel “alder”, når der kontrolleres for indkomst og leveringstid. Parameterestimatet for* $\beta_1$ *beskriver altså det forventede fald (parameterestimatet er negativt) i forbrug, for hvert år man bliver ældre (hver stigning i alder på 1), når indkomst og leveringstid holdes konstant. De tre stjerner ud fra parameterestimatet for* $\beta_1$ *indikerer, at p-værdien er under 0,001. Den er derfor under vores statistiske grænseværdi på 0,05, hvilket betyder, at der ser ud til stadig at være en statistisk signifikant negativ sammenhæng mellem alder og forbrug, også når der kontrolleres for indkomst og leveringstid. Hver gang alder stiger med en falder det forventede forbrug gennemsnitligt med 37 DKK.\
 *
 
-**M. Kommentér på fortolkningen af parameterestimaterne for  og . Er der en statistisk signifikant forskel på forbruget mellem dem der har hhv. 2-4 ugers og 1-2 ugers leveringstid, og dem der har 4+ uger og 1-2 ugers leveringstid, når der kontrolleres for alder og indkomst?\
-** *dit svar*
+**M. Kommentér på fortolkningen af parameterestimaterne for** $\beta_3$ **og** $\beta_4$**. Er der en statistisk signifikant forskel på forbruget mellem dem der har hhv. 2-4 ugers og 1-2 ugers leveringstid, og dem der har 4+ uger og 1-2 ugers leveringstid, når der kontrolleres for alder og indkomst?**
+
+**\
+**$\beta_3$ *er den gennemsnitlige forskel i forbrug mellem dem, der har 2-4 ugers leveringstid og referencekategorien 1-2 ugers leveringstid, når der kontrolleres for alder og indkomst. Parameterestimatet er insignifikant (ingen stjerner), altså er der gennemsnitligt set ikke nogen signifikant forskel på forbruget hos dem, der har 1-2 ugers leveringstid og dem, der har 2-4 ugers leveringstid.*
+
+$\beta_4$ *er den gennemsnitlige forskel i forbrug mellem dem, der har 4+ ugers leveringstid og referencekategorien 1-2 ugers leveringstid, når der kontrolleres for alder og indkomst. De tre stjerner ud for parameterestimatet indikerer, at der er en signifikant forskel på det gennemsnitlige forbrug hos dem, der har 1-2 ugers leveringstid og dem, der har 4+ ugers leveringstid. Dem med 4+ ugers leveringstid forbruger gennemsnitligt for ca. 500 DKK mindre online årligt.*
 
 ## **5 Forklaringskraft og modelvalg**
 
 *I følgende opgaver [skal]{.underline} du bruge datasættet til at beregne nogle af dine svar.*
 
 **A. Sammenlign** $R^2$ **værdien for model 1, 2 og 3. Kommentér på, hvilken model der har den højeste forklaringskraft, og hvad dette betyder.\
-** *dit svar*
+**
+
+*Forklaringskraften i model 3 er højest, da model 3 forklarer 24 % af variationen i den afhængige variabel forbrug.*
 
 ```{r echo=T, message=F, warning=F}
 (texreg::screenreg(list(model1, model2, model3), include.ci=F))
@@ -227,15 +279,14 @@ library(texreg)
 ```
 
 For at afgøre om forklaringskraften i model 3 er signifikant højere end i model 2 er det nødvendigt med en F-test mellem de to modeller.\
-\
 
 **B.Opstil hypoteser for en F-test mellem to modeller**
 
-*dit svar*
+***H0**: model 3 forklarer ikke singifikant mere end model 2*
 
-**C. Gennemfør og konkludér på testen. Er forklaringskraften i model 3 signifikant højere end i model 2?\
-\
-**
+***H1**: model 3 forklarer signifikant mere end model 2*
+
+**C. Gennemfør og konkludér på testen. Er forklaringskraften i model 3 signifikant højere end i model 2?**
 
 ```{r echo=T, message=F, warning=F}
 f_test <- anova(model2, model3)
@@ -246,3 +297,5 @@ f_test <- anova(model2, model3)
   "P-værdi" = sprintf("%.4f", f_test$`Pr(>F)`[2]), # P-værdi med 4 decimaler
   check.names = FALSE))
 ```
+
+*F-testen returnerer en p-værdi på mindre end 0,0000, hvilket er under vores grænseværdi på 0,05. Vi kan altså forkaste nulhypotesen og konkludere, at model 3 har en signifikant højere forklaringskraft end model 2.*

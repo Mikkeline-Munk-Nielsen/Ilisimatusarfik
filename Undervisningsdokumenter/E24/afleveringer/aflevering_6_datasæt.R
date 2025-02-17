@@ -29,7 +29,7 @@ colnames(leveringstid_dummies) <- c("levering_1_2_uger", "levering_2_4_uger", "l
 temp_data <- data.frame(leveringstid_dummies)
 forbrug <- round(
   3000 +  # Justeret basisværdi
-    3.0 * indkomst +  # Forstærket sammenhæng med indkomst
+    5.0 * indkomst +  # Forstærket sammenhæng med indkomst
     -50 * alder +  # Stærk negativ effekt af alder
     temp_data$levering_1_2_uger * 800 +  # Større forskel mellem 1-2 uger og 4+ uger
     temp_data$levering_2_4_uger * 700 + 

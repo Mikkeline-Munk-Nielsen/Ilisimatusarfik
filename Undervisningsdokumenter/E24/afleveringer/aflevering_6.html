@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Aflevering 6: forslag til besvarelse</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="aflevering_6_files/libs/clipboard/clipboard.min.js"></script>
+<script src="aflevering_6_files/libs/quarto-html/quarto.js"></script>
+<script src="aflevering_6_files/libs/quarto-html/popper.min.js"></script>
+<script src="aflevering_6_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="aflevering_6_files/libs/quarto-html/anchor.min.js"></script>
+<link href="aflevering_6_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="aflevering_6_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="aflevering_6_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="aflevering_6_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="aflevering_6_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Aflevering 6: forslag til besvarelse</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Følgende er et forslag til besvarelse af den femte ud af de seks obligatoriske afleveringer i faget.</em> <em>Brug det til at sammenligne med dine egne svar og diskutér med dine medstuderende.</em></p>
+<section id="introduktion" class="level2">
+<h2 class="anchored" data-anchor-id="introduktion">Introduktion</h2>
+<p>I denne opgave skal I analysere online forbrugeradfærd med udgangspunkt i et nyt datasæt. I skal analysere, hvor mange penge folk bruger på at handle på nettet, og hvilke baggrundskarakteristika der siger noget om, hvor stort et forbrug de har.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>Download datasættet <strong><em>online_shopping.rds</em></strong> fra lectio og gem det på din computer i samme mappe som den r-fil, som du bruger til at besvare spørgsmålene. Datasættet er simuleret og indeholder data på 2000 respondenters onlineforbrug og baggrundsinformation. Datasættet indeholder følgende variable:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variabel</th>
+<th>Måler</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>forbrug</td>
+<td>Forbrug i DKK på online indkøb (afhængig variabel)</td>
+</tr>
+<tr class="even">
+<td>alder</td>
+<td>Respondentens alder (i år)</td>
+</tr>
+<tr class="odd">
+<td>køn</td>
+<td>Køn (mand eller kvinde)</td>
+</tr>
+<tr class="even">
+<td>indkomst</td>
+<td>Respondentens indkomstniveau (i DKK)</td>
+</tr>
+<tr class="odd">
+<td>leveringstid</td>
+<td>Gennemsnitlig leveringstid på forbrugerens adresse (1-2 uger, 2-4 uger, 4+ uger)</td>
+</tr>
+<tr class="even">
+<td>levering_1_2_uger</td>
+<td>Dummy-variabel for leveringstid 1-2 uger (1 = ja, 0 = nej)</td>
+</tr>
+<tr class="odd">
+<td>levering_2_4_uger</td>
+<td>Dummy-variabel for leveringstid 2-4 uger (1 = ja, 0 = nej)</td>
+</tr>
+<tr class="even">
+<td>levering_4_uger_plus</td>
+<td>Dummy-variabel for leveringstid 4+ uger (1 = ja, 0 = nej)</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Indlæs datasættet til et objekt kalder ”df” med følgende kode:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"online_shopping.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="variable-og-måleniveauer" class="level2">
+<h2 class="anchored" data-anchor-id="variable-og-måleniveauer">1 Variable og måleniveauer</h2>
+<p><em>Følgende opgave er teoretisk, dvs. du skal <u>ikke</u> bruge datasættet til at besvare spørgsmålet.</em></p>
+<p>Definér måleniveauet for følgende variable:</p>
+<p><strong>A. Årlige forbrug i DKK på online indkøb.</strong></p>
+<p><em>Årligt forbrug i DKK er intervalskaleret, da det giver mening at rangordne variablens værdier og afstandenn mellem værdierne er konstant og meningsfuld.</em></p>
+<p><strong>B. Leveringstid (1-2, 2-4 eller 4+ uger).</strong></p>
+<p><em>Leveringstid målt i kategorier er ordinal skaleret, da det giver mening at rangordne variablens værdier, men afstanden mellem værdierne er ikke konstant og dermed meningsfuld.</em></p>
+<p><strong>C. Respondentens alder</strong></p>
+<p><em>Alder i år er intervalskaleret, da det giver mening at rangordne variablens værdier, og afstandenn mellem værdierne er konstant og meningsfuld.</em></p>
+<p><strong>D. En (tænkt) variabel der angiver, om en respondent har brugt mere end 5000 DKK på online indkøb.</strong></p>
+<p><em>Denne variabel kan beskrives som dikotom/binær, da den kun har to kategorier (brugt mere end 5000 DKK på online indkøb eller ej). Derudover kan man argumentere for at behandle den som ordinal, da værdierne i princippet kan rangordnes.</em></p>
+</section>
+<section id="univariat-analyse" class="level2">
+<h2 class="anchored" data-anchor-id="univariat-analyse"><strong>2 Univariat analyse</strong></h2>
+<p><em>I følgende opgaver <u>skal</u> du bruge datasættet til at beregne nogle af dine svar.</em></p>
+<p><br></p>
+<p>Variablen <strong><em>forbrug</em></strong> er intervalskaleret og måler respondenternes forbrug online det seneste år i DKK.</p>
+<p><strong>A. Beregn middelværdi og median for variablen forbrug. Sammenlign og kommentér på, hvad det siger om fordelingen.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DescTools)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Mean</span>(df<span class="sc">$</span>forbrug, <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1830.758</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Median</span>(df<span class="sc">$</span>forbrug, <span class="at">na.rm =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1550</code></pre>
+</div>
+</div>
+<p><em>Medianen ligger ca. 300 DKK under middelværdien, hvilket tyder på, at der er nogle enkelte observationer med meget højt forbrug, der trækker gennemsnittet op.</em></p>
+<p><strong>B. Beregn standardafvigelsen for forbrug og forklar, hvad standardafvigelsen måler.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(df<span class="sc">$</span>forbrug, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1341.862</code></pre>
+</div>
+</div>
+<p>S<em>tandardafvigelsen på 1341.862 fortæller os, at observationerne i datasættet ligger spredt omkring middelværdien med en gennemsnitlig afstand på ca. 1342 DKK ift. forbrug.</em></p>
+<p><strong>C. Beregn et 95% konfidensinterval for middelværdien af forbrug og forklar fortolkningen.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(df<span class="sc">$</span>forbrug)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  df$forbrug
+t = 61.015, df = 1999, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 1771.914 1889.602
+sample estimates:
+mean of x 
+ 1830.758 </code></pre>
+</div>
+</div>
+<p><em>Konfidensintervallet fortæller os, at vi på baggrund af stikprøven forventer (med 95 % sikkerhed), at den sande middelværdi i populationen for forbrug på online shopping ligger et sted mellem</em> 1771.914-1889.602 DKK</p>
+<p><strong>D. Lav et univariat barplot for variablen leveringstid. Hvilken leveringstid er mest almindelig?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(leveringstid)) <span class="sc">+</span>  </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#003366"</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Leveringstid"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Antal"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="aflevering_6_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Barplottet viser, at flest bor et sted med en gennemsnitlig leveringstid på 2-4 uger.</em></p>
+</section>
+<section id="bivariat-analyse" class="level2">
+<h2 class="anchored" data-anchor-id="bivariat-analyse"><strong>3 Bivariat analyse</strong></h2>
+<p><em>I følgende opgaver <u>skal</u> du bruge datasættet til at beregne nogle af dine svar.</em></p>
+<p>Du skal nu bruge en t-test til at teste, om der er forskel på, hvor mange penge mænd og kvinder gennemsnitligt handler for på nettet. Du skal bruge variablene <strong><em>forbrug</em></strong> og <strong><em>køn</em></strong>. Variablen <em>forbrug</em> er intervalskaleret og måler respondenternes forbrug online det seneste år i DKK. Variablen køn er en nominal/og eller dikotom variabel, der måler respondenternes køn som enten mand eller kvinde.</p>
+<p><br></p>
+<p><strong>A. Opstil hypoteser for en bivariat t-test for forskellen i gennemsnitligt forbrug mellem mænd og kvinder</strong></p>
+<p><em><strong>H0</strong>: der er ikke nogen signifikant forskel på det gennemsnitligt forbrug for mænd og kvinder</em></p>
+<p><em><strong>H1</strong>: der er en signifikant forskel på det gennemsnitligt forbrug for mænd og kvinder</em></p>
+<p><strong>B. Gennemfør og konkludér på t-testen. Er der en signifikant forskel på det gennemsnitlige forbrug for mænd og kvinder?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Udfør t-test</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ttest_resultat_bivariat <span class="ot">&lt;-</span> <span class="fu">t.test</span>(forbrug <span class="sc">~</span> køn, <span class="at">data =</span> df)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Opret en tabel med resultaterne</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>(ttest_tabel_bivariat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Parameter =</span> <span class="fu">c</span>(<span class="st">"Gennemsnit Gruppe 1"</span>,        <span class="co"># Gennemsnit for første gruppe</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Gennemsnit Gruppe 2"</span>,        <span class="co"># Gennemsnit for anden gruppe</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Test-statistik"</span>,             <span class="co"># Teststatistikken (t-værdien)</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">"P-værdi"</span>,                    <span class="co"># P-værdien</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Nedre konfidensinterval"</span>,    <span class="co"># Nedre konfidensinterval</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Øvre konfidensinterval"</span>,     <span class="co"># Øvre konfidensinterval</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Frihedsgrader"</span>),             <span class="co"># Frihedsgrader (df)</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  Værdi <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat_bivariat<span class="sc">$</span>estimate[<span class="dv">1</span>], <span class="dv">2</span>),     <span class="co"># Gennemsnittet for første gruppe afrundet til 3 decimaler</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat_bivariat<span class="sc">$</span>estimate[<span class="dv">2</span>], <span class="dv">2</span>),     <span class="co"># Gennemsnittet for anden gruppe afrundet til 3 decimaler</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat_bivariat<span class="sc">$</span>statistic, <span class="dv">3</span>),       <span class="co"># Teststatistikken afrundet til 3 decimaler</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"%.4f"</span>, ttest_resultat_bivariat<span class="sc">$</span>p.value),  <span class="co"># P-værdien med 4 decimaler</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat_bivariat<span class="sc">$</span>conf.int[<span class="dv">1</span>], <span class="dv">3</span>),     <span class="co"># Nedre konfidensinterval afrundet til 3 decimaler</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat_bivariat<span class="sc">$</span>conf.int[<span class="dv">2</span>], <span class="dv">3</span>),     <span class="co"># Øvre konfidensinterval afrundet til 3 decimaler</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(ttest_resultat_bivariat<span class="sc">$</span>parameter, <span class="dv">1</span>)        <span class="co"># Frihedsgrader afrundet til 1 decimal</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Parameter   Værdi
+1     Gennemsnit Gruppe 1 1814.87
+2     Gennemsnit Gruppe 2 1846.83
+3          Test-statistik  -0.532
+4                 P-værdi  0.5944
+5 Nedre konfidensinterval -149.67
+6  Øvre konfidensinterval   85.75
+7           Frihedsgrader  1997.8</code></pre>
+</div>
+</div>
+<p><em>T-testen returnerer en p-værdi på 0.59. Vi kan altså ikke afvise nulhypotesen om, at der ikke er nogen signifikant forskel på det gennemsnitligt forbrug for mænd og kvinder med udgangspunkt i denne stikprøve.</em></p>
+</section>
+<section id="lineær-regressionsanalyse" class="level2">
+<h2 class="anchored" data-anchor-id="lineær-regressionsanalyse">Lineær regressionsanalyse</h2>
+<p><em>I følgende opgaver <u>skal</u> du bruge datasættet til at beregne dine svar.</em></p>
+<p>I denne opgave skal du undersøge sammenhængen mellem forbrug og alder ved hjælp af forlæns modelsøgning. Du har en hypotese om, at yngre mennesker handler mere online end ældre. Altså forventer du en negativ korrelation mellem forbrug og alder. Du skal nu estimere denne sammenhæng og efterprøve, hvor stærk den er, når der tages højde for andre relevante faktorer, som spiller ind ift. online forbrug.</p>
+<section id="simpel-model" class="level3">
+<h3 class="anchored" data-anchor-id="simpel-model">Simpel model</h3>
+<p>Du skal først estimere en simpel model med sammenhængen mellem forbrug og alder. Variablen <em>forbrug</em> er intervalskaleret og måler respondenternes forbrug online det seneste år i DKK. Variablen <em>alder</em> betragtes også som intervalskaleret og måler respondenternes alder i år.</p>
+<p><strong>A. Estimér følgende model 1:</strong> <span class="math inline">\(forbrug=\alpha+\beta_1*alder+\epsilon\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(forbrug <span class="sc">~</span> alder, <span class="at">data =</span> df)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model1), <span class="at">include.ci=</span>F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+========================
+             Model 1    
+------------------------
+(Intercept)  3520.70 ***
+              (77.38)   
+alder         -37.02 ***
+               (1.59)   
+------------------------
+R^2             0.21    
+Adj. R^2        0.21    
+Num. obs.    2000       
+========================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p><strong>B. Hvilken variabel er den afhængige, og hvilken er den uafhængige?</strong></p>
+<p><em>Forbrug er den afhængige variabel, alder er den uafhængige.</em></p>
+<p><strong>C. Hvad er fortolkningen af parameterestimatet for konstantleddet</strong> <span class="math inline">\(\alpha\)</span> <strong>(intercept)?</strong></p>
+<p><em>Konstantleddet</em> <span class="math inline">\(\alpha\)</span> <em>/ intercept er den forventede værdi på den afhængige variabel forbrug, når alle uafhængige variable er lig 0. Parameterestimatet for</em> <span class="math inline">\(\alpha\)</span> <em>beskriver her det forventede gennemsnitlige forbrug for en person på 0 år (3520.70 DKK).</em></p>
+<p><strong>D. Hvad er fortolkningen af parameterestimatet for</strong> <span class="math inline">\(\beta_1\)</span> <strong>? Kommenter på om sammenhængen er statistisk signifikant.</strong></p>
+<p><span class="math inline">\(\beta_1\)</span> <em>beskriver ændringen i den afhængige variabel “forbrug” for én enhedsændring i den uafhængige variabel “alder”. Parameterestimatet for</em> <span class="math inline">\(\beta_1\)</span> <em>beskriver altså det forventede fald (parameterestimatet er negativt) i forbrug, for hvert år man bliver ældre (hver stigning i alder på 1). De tre stjerner ud fra parameterestimatet for</em> <span class="math inline">\(\beta_1\)</span> <em>indikerer, at p-værdien er under 0,001. Den er derfor under vores statistiske grænseværdi på 0,05, hvilket betyder, at der ser ud til at være en statistisk signifikant negativ sammenhæng mellem alder og forbrug. Hver gang alder stiger med én falder det forventede forbrug gennemsnitligt med 37 DKK.</em></p>
+<p><strong>E. Beregn den forventede forbrug for en person på 30 år.</strong></p>
+<p>Ligningen er givet ved: <span class="math inline">\(forbrug=\alpha+\beta_1*alder+\epsilon\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fl">3520.7</span><span class="sc">-</span>(<span class="fl">37.02</span><span class="sc">*</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2410.1</code></pre>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="multipel-model-indkomst-som-kontrolvariabel" class="level3">
+<h3 class="anchored" data-anchor-id="multipel-model-indkomst-som-kontrolvariabel"><strong>Multipel model: Indkomst som kontrolvariabel</strong></h3>
+<p>Sammenhængen mellem forbrug og alder kan tænkes at være påvirket af andre bagvedliggende faktorer, der korrelerer med begge variable. Det kunne for eksempel tænkes, at indkomst er en “confounding variable” i denne sammenhæng. Du skal derfor indføre <em>indkomst</em> som kontrolvariabel i modellen. Læg mærke til at variablen indkomst måler indkomst i 1000 DKK.</p>
+<p><strong>F. Estimér følgende model 2:</strong> <span class="math inline">\(forbrug=\alpha+\beta_1*alder+\beta_2*indkomst+\epsilon\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(forbrug <span class="sc">~</span> alder<span class="sc">+</span>indkomst, <span class="at">data =</span> df)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model1, model2), <span class="at">include.ci=</span>F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+=====================================
+             Model 1      Model 2    
+-------------------------------------
+(Intercept)  3520.70 ***  3302.44 ***
+              (77.38)     (119.30)   
+alder         -37.02 ***   -37.08 ***
+               (1.59)       (1.59)   
+indkomst                     5.28 *  
+                            (2.20)   
+-------------------------------------
+R^2             0.21         0.22    
+Adj. R^2        0.21         0.21    
+Num. obs.    2000         2000       
+=====================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p><strong>G. Hvad er fortolkningen af parameterestimatet for konstantleddet</strong> <span class="math inline">\(\alpha\)</span> (Inter<strong>cept) nu?<br>
+</strong><em>Konstantleddet</em> <span class="math inline">\(\alpha\)</span> <em>/ intercept er stadig den forventede værdi på den afhængige variabel forbrug, når alle uafhængige variable er lig 0. Parameterestimatet for</em> <span class="math inline">\(\alpha\)</span> <em>beskriver her det forventede gennemsnitlige forbrug for en person på 0 år med en indkomst på 0 (</em>3302.44 <em>DKK).<br>
+</em></p>
+<p><strong>H. Kommentér igen på fortolkningen af parameterestimatet for</strong> <span class="math inline">\(\beta_1\)</span><strong>. Er der en statistisk signifikant<br>
+sammenhæng mellem forbrug og alder, når der kontrolleres for indkomst?</strong><em><br>
+<br>
+</em><span class="math inline">\(\beta_1\)</span> <em>beskriver nu ændringen i den afhængige variabel “forbrug” for én enhedsændring i den uafhængige variabel “alder”, når der kontrolleres for indkomst. Parameterestimatet for</em> <span class="math inline">\(\beta_1\)</span> <em>beskriver altså det forventede fald (parameterestimatet er negativt) i forbrug, for hvert år man bliver ældre (hver stigning i alder på 1), når indkomst holdes konstant. De tre stjerner ud fra parameterestimatet for</em> <span class="math inline">\(\beta_1\)</span> <em>indikerer, at p-værdien er under 0,001. Den er derfor under vores statistiske grænseværdi på 0,05, hvilket betyder, at der ser ud til stadig at være en statistisk signifikant negativ sammenhæng mellem alder og forbrug, også når der kontrolleres for indkomst. Hver gang alder stiger med en falder det forventede forbrug gennemsnitligt med 37.08 DKK.</em></p>
+<p><strong>I. Hvad er fortolkningen af parameterestimatet for</strong> <span class="math inline">\(\beta_2\)</span><strong>? Kommenter på om sammenhængen er statistisk signifikant.<br>
+</strong><span class="math inline">\(\beta_2\)</span> <em>beskriverændringen i den afhængige variabel “forbrug” for én enhedsændring i den uafhængige variabel “indkomst”, når der kontrolleres for alder. Parameterestimatet for</em> <span class="math inline">\(\beta_2\)</span> <em>beskriver altså den forventede stigning i forbrug, for hver 1000 DKK man tjener ekstra (hver stigning i indkomst på 1), når alder holdes konstant. Den ene stjerne ud fra parameterestimatet for</em> <span class="math inline">\(\beta_2\)</span> <em>indikerer, at p-værdien er under 0,05. Den er derfor under vores statistiske grænseværdi, hvilket betyder, at der ser ud til at være en statistisk signifikant sammenhæng mellem indkomst og forbrug, også når der kontrolleres for alder. Hver gang indkomst stiger med én (1000 DKK) falder det forventede forbrug gennemsnitligt med 5.28 DKK.<br>
+</em></p>
+<p><strong>J.</strong> <strong>Beregn det forventede forbrug for en person på 30 år med en månedlig indkomst på 30.000 DKK</strong>.</p>
+<p><span class="math inline">\(forbrug=\alpha+\beta_1*alder+\beta_2*indkomst+\epsilon\)</span></p>
+<p><span class="math inline">\(forbrug=3302.44-37,08*30+5,28*30\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fl">3302.44</span><span class="sc">-</span>(<span class="fl">37.08</span><span class="sc">*</span><span class="dv">30</span>)<span class="sc">+</span>(<span class="fl">5.28</span><span class="sc">*</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2348.44</code></pre>
+</div>
+</div>
+</section>
+<section id="multipel-model-indkomst-og-leveringstid" class="level3">
+<h3 class="anchored" data-anchor-id="multipel-model-indkomst-og-leveringstid"><strong>Multipel model: Indkomst og leveringstid</strong></h3>
+<p>Leveringstiden på varer, der hvor man bor, kan også tænkes at påvirke ens forbrug online. Du skal derfor også indføre leveringstid som kontrolvariabel i regressionsmodellen. Variablen <em>leveringstid</em> har tre kategorier: <em>1-2 uger, 2-4 uger og 4+ uger</em>. Disse tre kategorier er allerede blevet omkodet til tre dummyvariable i datasættet.</p>
+<p>I den nedenstående model skal du udelade dummy-variablen <strong><em>levering_1_2_uger</em></strong> som referencekategori.</p>
+<p><strong>K. Estimér følgende model 3:</strong> <span class="math inline">\(forbrug=\alpha+\beta_1*alder+\beta_2*indkomst+\beta_3*levering\_2\_4\_uger+\beta_4*levering\_4\_uger\_plus+\epsilon\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(forbrug <span class="sc">~</span> alder<span class="sc">+</span>indkomst<span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>               levering_2_4_uger<span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>               levering_4_uger_plus, <span class="at">data =</span> df)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(texreg)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model1, model2, model3), <span class="at">include.ci=</span>F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+===========================================================
+                      Model 1      Model 2      Model 3    
+-----------------------------------------------------------
+(Intercept)           3520.70 ***  3302.44 ***  3463.79 ***
+                       (77.38)     (119.30)     (123.16)   
+alder                  -37.02 ***   -37.08 ***   -36.97 ***
+                        (1.59)       (1.59)       (1.57)   
+indkomst                              5.28 *       5.31 *  
+                                     (2.20)       (2.17)   
+levering_2_4_uger                                -64.94    
+                                                 (62.43)   
+levering_4_uger_plus                            -501.48 ***
+                                                 (68.34)   
+-----------------------------------------------------------
+R^2                      0.21         0.22         0.24    
+Adj. R^2                 0.21         0.21         0.24    
+Num. obs.             2000         2000         2000       
+===========================================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p><strong>L. Kommentér igen på fortolkningen af parameterestimatet for</strong> <span class="math inline">\(\beta_1\)</span><strong>. Er der en statistisk signifikant sammenhæng mellem forbrug og alder, når der kontrolleres for indkomst og leveringstid?<br>
+</strong></p>
+<p><span class="math inline">\(\beta_1\)</span> <em>beskriver nu ændringen i den afhængige variabel “forbrug” for én enhedsændring i den uafhængige variabel “alder”, når der kontrolleres for indkomst og leveringstid. Parameterestimatet for</em> <span class="math inline">\(\beta_1\)</span> <em>beskriver altså det forventede fald (parameterestimatet er negativt) i forbrug, for hvert år man bliver ældre (hver stigning i alder på 1), når indkomst og leveringstid holdes konstant. De tre stjerner ud fra parameterestimatet for</em> <span class="math inline">\(\beta_1\)</span> <em>indikerer, at p-værdien er under 0,001. Den er derfor under vores statistiske grænseværdi på 0,05, hvilket betyder, at der ser ud til stadig at være en statistisk signifikant negativ sammenhæng mellem alder og forbrug, også når der kontrolleres for indkomst og leveringstid. Hver gang alder stiger med en falder det forventede forbrug gennemsnitligt med 37 DKK.<br>
+</em></p>
+<p><strong>M. Kommentér på fortolkningen af parameterestimaterne for</strong> <span class="math inline">\(\beta_3\)</span> <strong>og</strong> <span class="math inline">\(\beta_4\)</span><strong>. Er der en statistisk signifikant forskel på forbruget mellem dem der har hhv. 2-4 ugers og 1-2 ugers leveringstid, og dem der har 4+ uger og 1-2 ugers leveringstid, når der kontrolleres for alder og indkomst?</strong></p>
+<p><strong><br>
+</strong><span class="math inline">\(\beta_3\)</span> <em>er den gennemsnitlige forskel i forbrug mellem dem, der har 2-4 ugers leveringstid og referencekategorien 1-2 ugers leveringstid, når der kontrolleres for alder og indkomst. Parameterestimatet er insignifikant (ingen stjerner), altså er der gennemsnitligt set ikke nogen signifikant forskel på forbruget hos dem, der har 1-2 ugers leveringstid og dem, der har 2-4 ugers leveringstid.</em></p>
+<p><span class="math inline">\(\beta_4\)</span> <em>er den gennemsnitlige forskel i forbrug mellem dem, der har 4+ ugers leveringstid og referencekategorien 1-2 ugers leveringstid, når der kontrolleres for alder og indkomst. De tre stjerner ud for parameterestimatet indikerer, at der er en signifikant forskel på det gennemsnitlige forbrug hos dem, der har 1-2 ugers leveringstid og dem, der har 4+ ugers leveringstid. Dem med 4+ ugers leveringstid forbruger gennemsnitligt for ca. 500 DKK mindre online årligt.</em></p>
+</section>
+</section>
+<section id="forklaringskraft-og-modelvalg" class="level2">
+<h2 class="anchored" data-anchor-id="forklaringskraft-og-modelvalg"><strong>5 Forklaringskraft og modelvalg</strong></h2>
+<p><em>I følgende opgaver <u>skal</u> du bruge datasættet til at beregne nogle af dine svar.</em></p>
+<p><strong>A. Sammenlign</strong> <span class="math inline">\(R^2\)</span> <strong>værdien for model 1, 2 og 3. Kommentér på, hvilken model der har den højeste forklaringskraft, og hvad dette betyder.<br>
+</strong></p>
+<p><em>Forklaringskraften i model 3 er højest, da model 3 forklarer 24 % af variationen i den afhængige variabel forbrug.</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(model1, model2, model3), <span class="at">include.ci=</span>F))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+===========================================================
+                      Model 1      Model 2      Model 3    
+-----------------------------------------------------------
+(Intercept)           3520.70 ***  3302.44 ***  3463.79 ***
+                       (77.38)     (119.30)     (123.16)   
+alder                  -37.02 ***   -37.08 ***   -36.97 ***
+                        (1.59)       (1.59)       (1.57)   
+indkomst                              5.28 *       5.31 *  
+                                     (2.20)       (2.17)   
+levering_2_4_uger                                -64.94    
+                                                 (62.43)   
+levering_4_uger_plus                            -501.48 ***
+                                                 (68.34)   
+-----------------------------------------------------------
+R^2                      0.21         0.22         0.24    
+Adj. R^2                 0.21         0.21         0.24    
+Num. obs.             2000         2000         2000       
+===========================================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p>For at afgøre om forklaringskraften i model 3 er signifikant højere end i model 2 er det nødvendigt med en F-test mellem de to modeller.<br>
+</p>
+<p><strong>B.Opstil hypoteser for en F-test mellem to modeller</strong></p>
+<p><em><strong>H0</strong>: model 3 forklarer ikke singifikant mere end model 2</em></p>
+<p><em><strong>H1</strong>: model 3 forklarer signifikant mere end model 2</em></p>
+<p><strong>C. Gennemfør og konkludér på testen. Er forklaringskraften i model 3 signifikant højere end i model 2?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>f_test <span class="ot">&lt;-</span> <span class="fu">anova</span>(model2, model3)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>(f_test_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Forskel i Frihedsgrader"</span> <span class="ot">=</span> f_test<span class="sc">$</span>Df[<span class="dv">2</span>],        <span class="co"># Forskel i frihedsgrader</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"F-statistik"</span> <span class="ot">=</span> f_test<span class="sc">$</span>F[<span class="dv">2</span>],                     <span class="co"># F-statistik</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"P-værdi"</span> <span class="ot">=</span> <span class="fu">sprintf</span>(<span class="st">"%.4f"</span>, f_test<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">2</span>]), <span class="co"># P-værdi med 4 decimaler</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Forskel i Frihedsgrader F-statistik P-værdi
+1                       2    32.30198  0.0000</code></pre>
+</div>
+</div>
+<p><em>F-testen returnerer en p-værdi på mindre end 0,0000, hvilket er under vores grænseværdi på 0,05. Vi kan altså forkaste nulhypotesen og konkludere, at model 3 har en signifikant højere forklaringskraft end model 2.</em></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
