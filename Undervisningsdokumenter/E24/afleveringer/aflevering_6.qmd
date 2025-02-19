@@ -15,7 +15,7 @@ I denne opgave skal I analysere online forbrugeradfærd med udgangspunkt i et ny
 Download datasættet ***online_shopping.rds*** fra lectio og gem det på din computer i samme mappe som den r-fil, som du bruger til at besvare spørgsmålene. Datasættet er simuleret og indeholder data på 2000 respondenters onlineforbrug og baggrundsinformation. Datasættet indeholder følgende variable:
 
 | Variabel | Måler |
-|-------------------|-----------------------------------------------------|
+|----|----|
 | forbrug | Forbrug i DKK på online indkøb (afhængig variabel) |
 | alder | Respondentens alder (i år) |
 | køn | Køn (mand eller kvinde) |
