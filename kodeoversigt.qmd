@@ -208,10 +208,6 @@ Nedenfor indlæses et udsnit af et datasæt fra European Social Survey med køn,
 df <- readRDS("Undervisningsdokumenter/E24/slides/data/ESS.rds") 
 ```
 
-```{r echo=T, eval=F}
-df <- readRDS("ESS.rds") 
-```
-
 ```{r echo=F, eval=T}
 library(tidyverse)
 df <- df %>% select(koen, alder, udd, net_indkomst)
@@ -369,7 +365,7 @@ Der findes mange typer af plots eller ***geoms***, som er gode til forskellige t
 Nedenfor illustreres hver plottype med udgangspunkt i datasættet ***mtcars*** (built in datasæt på biler).
 
 ```{r echo=TRUE}
-mtcars
+df <- mtcars
 ```
 
 #### Barplot (univariat)
@@ -379,8 +375,8 @@ Variablen **cyl** (antal cylindre), som er en kategorisk variabel, kan visualise
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
-  aes(x = factor(cyl)) +  # Omform cyl til en kategorisk variabel. Erstat cyl med din variabel
+ggplot(df) + 
+  aes(x = factor(cyl)) +  # Erstat cyl med din variabel
   geom_bar(fill = "#003366") +
   labs(
     title = "Antal biler pr. antal cylindere",
@@ -397,7 +393,7 @@ Variablen **mpg** (miles per gallon), som er en numerisk, kan visualiseres via. 
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(df) +
   aes(x = mpg) + # Erstat mpq med din variabel
   geom_histogram(fill = "#003366") +
   labs(
@@ -413,7 +409,7 @@ ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
 Variablen **mpg** (miles per gallon), som er en numerisk, kan også visualiseres via. et boksplot:
 
 ```{r echo=TRUE}
-ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(df) +
   aes(x = "", y = mpg) +  # Erstat mpq med navnet på din variabel. 
   geom_boxplot(fill = "#003366", color = "black") +  # Ændring af farver
   labs(
@@ -431,7 +427,7 @@ Vi kan visualisere sammenhængen mellem variablene **cyl** (antal cylindre) og *
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(df) + 
   aes(x = factor(cyl), fill = factor(gear)) + # Erstat cyl og gear med dine variable
   geom_bar(position = "dodge") +
   labs(
@@ -450,7 +446,7 @@ Vi kan også visualisere sammenhængen mellem **cyl** (antal cylindre) og **gear
 ```{r echo=T}
 library(ggplot2)
 
-ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(df) + 
   aes(x = factor(cyl), y = factor(gear)) + # Erstat cyl og gear med dine variable
   geom_jitter(width = 0.2, height = 0.2) +
   labs(
@@ -467,7 +463,7 @@ Vi kan bruge et boksplot til at se fordelingen af variablene **mpg** (nummerisk)
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(df) + 
   aes(x = factor(cyl), y = mpg) + # Erstat cyl og mpg med dine variable
   geom_boxplot() +
   labs(
@@ -485,7 +481,7 @@ Og vi kan bruge et scatterplot til at se sammenhængen mellem variablene **wt** 
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(df) + 
   aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point() +
   labs(
@@ -503,7 +499,7 @@ Det er også muligt at lægge flere plots ovenpå hinanden med ggplot. F.eks. ka
 ```{r echo=TRUE, message=F}
 library(ggplot2)
 
-ggplot(mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(df) + 
   aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point() +
   geom_smooth(method = "lm", color = "blue", se = FALSE) +  # Tilføjer en lineær regressionslinje
@@ -522,7 +518,7 @@ ggplots kan nemt ændres ved at tilføje elementer til graferne (ligesom LEGO-kl
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(data = df) + 
   aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point()
 ```
@@ -532,7 +528,7 @@ Man kan bruge funktionen `labs()` til at tilføje titel og asketitler:
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(data = df) + 
   aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point() +
   labs(
@@ -547,7 +543,7 @@ Man kan ændre dine plots visuelle udseende med `themes()`. Man kan f.eks. ændr
 ```{r echo=T}
 library(ggplot2)
 
-ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(data = df) + 
   aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point() +
   labs(
@@ -570,7 +566,7 @@ Det er ofte nødvendigt at skrue på værdierne på akserne. Afhængigt af hvilk
 ```{r echo=T}
 library(ggplot2)
 
-ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(data = df) + 
   aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point() +
   labs(
@@ -587,7 +583,7 @@ Man kan også ændre farver på sine ggplots. Afhængigt af hvilken type geometr
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(data = df) + 
   aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point(color="purple") +
   labs(
@@ -604,7 +600,7 @@ Man kan ændre tekst-størrelsen på plottets elementer med `theme()`:
 ```{r echo=TRUE}
 library(ggplot2)
 
-ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(data = df) +
   aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point(color="purple") +
   labs(
@@ -627,7 +623,7 @@ Nogle gange kan det også være nyttigt at rotere sit plot med `coord_flip()`:
 
 ```{r echo=TRUE}
 library(ggplot2)
-ggplot(data = mtcars) + # Erstat mtcars med navnet på objektet med dit datasæt
+ggplot(data = df) + 
   aes(x = wt, y = mpg) + # Erstat wt og mpg med dine variable
   geom_point(color="purple") +
   labs(
@@ -669,6 +665,12 @@ Medmindre du specificerer en anden lokation på computeren gemmes plottet i den 
 
 # Tabeller
 
+```{r include=F, eval=T}
+df <- readRDS("Undervisningsdokumenter/E24/slides/data/ESS.rds") 
+library(tidyverse)
+df <- df %>% select(koen, alder, udd, net_indkomst)
+```
+
 ## Envejstabeller
 
 Brug funktionen `tabyl()` fra pakken `janitor` til at lave tabeller. Du kan f.eks. lave en envejstabel med frekvenser og andele på variablen **udd** fra ESS datasættet således:
@@ -688,25 +690,25 @@ Brug funktionen `tabyl()` fra pakken `janitor` til at lave tabeller. Du kan f.ek
 data("Titanic")
 
 # Indlæs Titanic-datasættet og konverter til en data frame
-titanic_df <- as.data.frame(Titanic)
+df <- as.data.frame(Titanic)
 
 # Udvid datasættet, så hver passager bliver en individuel række
-titanic <- titanic_df[rep(seq_len(nrow(titanic_df)), titanic_df$Freq), 1:4]
+titanic <- df[rep(seq_len(nrow(df)), df$Freq), 1:4]
 ```
 
 ```{r echo=TRUE}
 library(janitor)
 
-tabyl(titanic, Class, Survived) 
-# Erstat titanic med navnet på dit datasæt, og class og survived med navnene på dine variable
+tabyl(df, Class, Survived) 
+# Erstat variablene class og survived med navnene på dine variable
 ```
 
 Tilføj totaler (både rækker og kolonner) med `adorn_totals()`:
 
 ```{r echo=TRUE}
 library(janitor)
-tabyl(titanic, Class, Survived) %>% adorn_totals(where = c("row", "col"))
-# Erstat titanic med navnet på dit datasæt, og class og survived med navnene på dine variable
+tabyl(df, Class, Survived) %>% adorn_totals(where = c("row", "col"))
+# Erstat variablene class og survived med navnene på dine variable
 ```
 
 Tilføj procenter med `adorn_percentages()` og bestem antal decimaler med `adorn_pct_formatting()`:
@@ -714,12 +716,12 @@ Tilføj procenter med `adorn_percentages()` og bestem antal decimaler med `adorn
 ```{r echo=TRUE}
 library(janitor)
 
-tabyl(titanic, Class, Survived) %>% 
+tabyl(df, Class, Survived) %>% 
   adorn_totals(where = c("row", "col")) %>% 
   adorn_percentages() %>% 
   adorn_pct_formatting(digits = 1)
 
-# Erstat titanic med navnet på dit datasæt, og class og survived med navnene på dine variable
+# Erstat variablene class og survived med navnene på dine variable
 ```
 
 ## Gem din tabel som excel-fil
@@ -734,6 +736,12 @@ write_xlsx(list("Min tabel" = min_tabel), "min_tabel.xlsx")
 ```
 
 # Univariat analyse
+
+```{r include=F, eval=T}
+df <- readRDS("Undervisningsdokumenter/E24/slides/data/ESS.rds") 
+library(tidyverse)
+df <- df %>% select(koen, alder, udd, net_indkomst)
+```
 
 ## Centrummål
 
@@ -930,7 +938,7 @@ write.csv(chi_tabel_univariat, "chi_test_univariat.csv", row.names = FALSE)
 library(dplyr)
  ESS <- readRDS("C:/Users/mmn/Dropbox/Ilisimatusarfik/R/Ilisimatusarfik_Statistik_EO_F24/Data/ESS.rds")
  
- ESS <- filter(ESS, land=="DK") 
+ df <- filter(ESS, land=="DK") 
 ```
 
 ### Cramers v
@@ -940,9 +948,9 @@ Når der indgår en nominalskala variabel anbefales det at bruge korrelationsmå
 *Eksempel med køn og ansættelsestype fra European Social Survey:*
 
 ```{r echo=TRUE, message=F, warning=FALSE}
-krydstabel <- table(as.character(ESS$koen), 
-                    as.character(ESS$ansaettelse_type)) 
-# Erstat ESS med navnet på dit datasæt og koen og ansaettelse_type med dine variable
+krydstabel <- table(as.character(df$koen), 
+                    as.character(df$ansaettelse_type)) 
+# Erstat koen og ansaettelse_type med dine variable
 
 library(DescTools) 
 CramerV(krydstabel)
@@ -958,11 +966,11 @@ Til to ordinale variable bruges korrelationskoefficienten *Spearman’s Rho* og 
 Eks: Eget uddannelsesniveau og partners uddannelsesniveau:
 
 ```{r echo=TRUE, message=F, warning=FALSE}
-cor.test(as.numeric(ESS$udd),
-         as.numeric(ESS$udd_partner),
+cor.test(as.numeric(df$udd),
+         as.numeric(df$udd_partner),
          method = "spearman")
 
-# Erstat ESS med navnet på dit datasæt og udd og udd_partner med dine variable
+# Erstat udd og udd_partner med dine variable
 ```
 
 -   $rho=0.5$
@@ -976,8 +984,8 @@ Til to intervalskalerede variable bruges korrelationskoefficienten Pearson’s $
 Eks. Indkomst og antal års uddannelse.
 
 ```{r echo=TRUE, message=F, warning=FALSE}
-cor.test(ESS$udd_aar, ESS$net_indkomst)
-# Erstat ESS med navnet på dit datasæt og udd_aar og net_indkomst med dine variable
+cor.test(df$udd_aar, df$net_indkomst)
+# Erstat udd_aar og net_indkomst med dine variable
 ```
 
 -   $Pearsons=0.26$
@@ -997,7 +1005,7 @@ Brug funktionen `t.test()` og specificér de to variable:
 
 ```{r echo=TRUE, message=F, warning=FALSE}
 # Udfør t-test
-ttest_resultat_bivariat <- t.test(net_indkomst ~ koen, data = ESS)
+ttest_resultat_bivariat <- t.test(net_indkomst ~ koen, data = df)
 
 # Opret en tabel med resultaterne
 (ttest_tabel_bivariat <- data.frame(
@@ -1049,7 +1057,7 @@ library(dplyr)
 library(janitor)
 
 # Udfør chi²-test
-chi_resultat_bivariat <- ESS %>%
+chi_resultat_bivariat <- df %>%
   select(udd, ansaettelse_type) %>%
   na.omit() %>%
   tabyl(udd, ansaettelse_type) %>%
