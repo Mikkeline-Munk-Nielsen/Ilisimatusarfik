@@ -1,0 +1,923 @@
+---
+format: 
+  revealjs:
+    theme: css_etc/custom-theme-ilisimatusarfik.css
+    slide-level: 0  # Disable automatic slide creation from headings
+    incremental: false 
+    logo: css_etc/ilisimatusarfik.png
+editor: visual
+---
+
+::: center
+# Populationer og stikprøver
+
+### Statistik E24 (15 ECTS)
+
+### ved Mikkeline Munk Nielsen
+:::
+
+------------------------------------------------------------------------
+
+# Program
+
+-   Hvad er populationer og stikprøver?
+-   Hvordan udtrækker man stikprøver?
+-   Hvorfor stikprøver introducerer statistisk usikkerhed
+-   Hvordan regner vi på statistisk usikkerhed?
+
+------------------------------------------------------------------------
+
+# Populationer
+
+I statistik betegnes en population som den mængde af enheder, som vi gerne vil udtale os om. Hvis vi gerne vil udtale os om aldersfordelingen blandt borgere i Grønland er populationen altså samtlige borgere i Grønland. Man skelner dog mellem:
+
+<br>
+
+-   **Universet/populationen (target population):** den målgruppe, hvori en stikprøve trækkes
+
+-   **Den mulige population (frame population):** den del af universet, som faktisk *kan* udtrækkes og dermed har mulighed for at indgå i stikprøven
+
+------------------------------------------------------------------------
+
+# Populationer
+
+-   Hvis vi har information på ALLE de enheder, som vi gerne vil udtale os om har vi mulighed for at lave populationsundersøgelser/totalundersøgelser
+
+-   Registerundersøgelser er det, der kommer tættest på: <https://stat.gl/default.asp?lang=da>
+
+-   Oftest har vi dog hverken tid eller råd til at gennemføre populationsundersøgelser...
+
+------------------------------------------------------------------------
+
+# Stikprøver
+
+En stikprøve er en lille del af universet, der udvælges til at repræsentere/beskrive hele universet ![](images/udtraek.png)
+
+------------------------------------------------------------------------
+
+# Udtræk af stikprøver
+
+Selvom mange observationer umiddelbart er godt, så er måden, hvorpå en stikprøve udtrækkes faktisk meget vigtigere for repræsentativiteten end størrelsen på stikprøven. I skal kende følgende tre strategier:
+
+<br>
+
+-   Simpel tilfældig (Gold standard)
+
+-   Stratificeret: reduceret variation inden for strata
+
+-   Klynge: Udtræk af klynger (ikke enkelte enheder)
+
+------------------------------------------------------------------------
+
+# Simpel tilfældigt udtræk
+
+::::: two-column-layout
+::: left-column
+-   Hver observation i populationen har lige sandsynlighed for at blive udtrukket
+-   Anses som "gold standard" for stikprøveudtagning
+-   Bruges til at minimere bias og sikre, at stikprøven repræsenterer hele populationen
+:::
+
+::: right-column
+![](images/numbers_from_hat.jpg)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+# Stratificeret udtræk
+
+::::: two-column-layout
+::: left-column
+-   Populationen opdeles i strata (grupper) baseret på en relevant variabel (fx kommune, køn)
+-   Tilfældig udtrækning sker inden for hver stratum
+-   Reduceret variation inden for hvert stratum (enheder er ens inden for strata, i princippet)
+-   Formålet er at sikre, at alle vigtige undergrupper er repræsenterede
+:::
+
+::: right-column
+![](images/kommuner.png){width="75%"}
+:::
+:::::
+
+------------------------------------------------------------------------
+
+# Klyngeudtræk
+
+::::: two-column-layout
+::: left-column
+-   Populationen opdeles i klynger (fx skoler, husstande), og udtrækning sker på klyngeniveau (ikke inden for klynger, ligesom med stata)
+
+-   Udvælger hele klynger fremfor enkeltindivider inden for populationen
+
+-   Effektiv, når det er praktisk at udtrække data fra grupper fremfor hele populationen
+
+-   Velegnet til store geografiske eller administrative enheder, hvor stikprøver er svære at indsamle
+:::
+
+::: right-column
+![](images/huse.jpg)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+# Udtagning
+
+I praksis kan man udtrække stikprøver fra populationer med udgangspunkt i forskellige typer af information. Traditionelle samplingmetoder inkluderer:
+
+-   Registerbaseret sampling (fulde populationslister)
+
+-   Telefonnummerbaseret sampling (hustands eller individ niveau? Tidspunkt for kontakt?)
+
+-   Internetpanelsampling (mange besvarelser, svært at sikre repræsentativitet, adgang til svært tilgængelige målgrupper)
+
+-   Bekvemmelighedssampling (f.eks. Facebook, som udgangspunkt ikke repræsentativt da det ikke er tilfældig udvælgelse)
+
+---
+
+## Case 1: Kundetilfredshed i butikskæde 
+
+**Case**: En grønlandsk butikskæde med butikker i Nuuk, Sisimiut og Ilulissat ønsker at undersøge kundetilfredshed. Kæden har samlet set 5.000 faste kunder, men det er for dyrt og tidskrævende at spørge dem alle. De beslutter at lave en stikprøve.
+
+**Opgaver:**
+
+1.  Definer target population og frame population
+
+2.  Hvordan vil I sammensætte stikprøven, så kunder fra alle tre byer er repræsenteret? Diskuter brugen af stratificeret stikprøve versus simpel tilfældig stikprøve.
+
+3.  Hvordan kunne man i praksis udtrække stikprøven? Hvilke bias ville I være særligt bekymrede for?
+
+---
+
+## Case 2: Social integration i bygder og byer
+
+**Case**: En undersøgelse skal vurdere graden af social integration i Grønland, både i større byer og bygder. Man vil gerne undersøge forskelle mellem unge (18-29 år) og ældre (30+ år) i deres deltagelse i sociale aktiviteter.
+
+**Opgaver:**
+
+1.  Hvordan vil I sikre, at både bygder og byer er repræsenteret i stikprøven? Diskuter brugen af simpel tilfældig, stratificeret og klyngebaseret stikprøve.
+
+2.  Hvordan kan man indsamle data på tværs af bygder med sproglig og teknologisk variation?
+
+3.  Hvad betyder det for stikprøven, hvis bygderne bliver underrepræsenterede? Hvilke bias bør man være opmærksom på?
+
+---
+
+## Case 3: Oplysningskampagner om sundhed
+
+**Case**: Sundhedsmyndighederne i Grønland har gennemført en oplysningskampagne om fordelene ved sund kost. De ønsker at undersøge kampagnens effekt blandt borgere i Grønland. Der er ca. 57.000 indbyggere, og man planlægger at spørge 1.200 personer i hele landet.
+
+**Opgaver:**
+
+1.  Hvordan kan man vælge en repræsentativ stikprøve, der inkluderer både by- og bygdebefolkningen? Diskuter styrker og svagheder ved forskellige stikprøveudtræk.
+
+2.  Hvordan påvirker det analysen, hvis de personer, der deltager i undersøgelsen, har større interesse i sund kost end dem, der ikke gør?
+
+3.  Hvordan kan vægtning af stikprøvens data hjælpe med at korrigere for skævheder i repræsentationen?
+
+4.  Hvordan kan vi måle, om stikprøven reelt afspejler hele Grønlands befolkning?
+
+---
+
+# Stikprøveudtræk og statistisk usikkerhed
+
+-   På baggrund af en stikprøve drages konklusioner om en population (inferens). Slutningen er baseret på stikprøvens **repræsentativitet**
+
+-   Den bedste måde at opnå repræsentativitet på er at anvende en udvælgelsesmekanisme baseret på **tilfældighed!**
+
+**Hvorfor virker tilfældigt udtræk ift. at sikre en repræsentativ stikprøve?**
+
+-   Hver enhed i populationen har samme sandsynlighed for at blive udvalgt (undgår systematisk bias/skævvridning)
+-   Sikrer, at stikprøven i *gennemsnit* er repræsentativ for populationen.
+-   Tilfældighed i stikprøveudtræk bygger på principper om lige sandsynlighed, store tals lov og den centrale grænseværdisætning.
+
+------------------------------------------------------------------------
+
+# Stikprøveudtræk og statistisk usikkerhed
+
+-   Fordi en stikprøve ikke svarer præcist den population, som den er trukket fra, vil der altid være en ***statistisk usikkerhed*** forbundet med en generalisering fra stikprøve til population (også kaldt margin of error).
+
+-   Statistik handler bl.a. om at sige noget under usikkerhed og om at vurdere, hvor stor usikkerheden på ens udsagn er.
+
+------------------------------------------------------------------------
+
+# Stikprøveudtræk og statistisk usikkerhed
+
+-   Usikkerhed opstår pga. ***udvælgelsesmekanismen***, når vi trækker en stikprøve.
+
+-   Hvis vi f.eks. har en hat med sedler med alle navne på folk i Grønland (populationen), ryster hatten og lukker øjnene for at trække et navn, er der usikkerhed, hver gang vi trækker, fordi vi ikke kender udfaldet. Hvis vi gentager dette 1000 gange, har vi en stikprøve på 1000 personer.
+
+-   Man kalder denne proces for et ***eksperiment*** inden for statistik.
+
+-   For at håndtere usikkerhed opstiller man en matematisk sandsynlighedsmodel, som gør os i stand til at regne på usikkerheden
+
+------------------------------------------------------------------------
+
+# Stikprøveudtræk og statistisk usikkerhed
+
+Sandsynlighedsmodellen bygger på tre ting:
+
+1)  **Udfaldsrum** $\Omega$: alle mulige udfald/værdier af eksperimentet. I terningekast er $\Omega = \{1, 2, 3, 4, 5, 6\}$
+
+2)  **Hændelser**: samlinger af udfald. En hændelse $A$ kunne f.eks. være at terningen viser et ulige antal øjne. Så vil hændelse $A = \{1, 3, 5\}$
+
+3)  **Sandsynlighedsmål**: hvis alle elementer i en population har lige stor chance for udvælgelse, så er sandsynligheden for et udfald $z$ lig med værdien af andelsfunktionen evalueret i $z$:
+
+    $$ P(z) = g(z) = \frac{\text{antal elementer med værdien } z \text{ i populationen}}{N_{\text{pop}}} $$
+
+------------------------------------------------------------------------
+
+# Stikprøveudtræk og statistisk usikkerhed
+
+-   I ”eksperimenter” kender vi ikke udfaldet/værdien på den variabel, som vi er ved at trække. En variabel som endnu ikke har haft et udfald, og som derfor har tilknyttet usikkerhed, kaldes en ***stokastisk variabel***.
+
+-   En stokastisk variabel $X$ er en funktion, som til ethvert udfald af et eksperiment forbinder en talværdi fra udfaldsrummet: $𝑋(𝑢𝑑𝑓𝑎𝑙𝑑)=𝑡𝑎𝑙 (\text{𝑓𝑟𝑎 𝑢𝑑𝑓𝑎𝑙𝑑𝑠𝑟𝑢𝑚𝑚𝑒𝑡})$
+
+-   Stokastiske variable repræsenterer udfald af et eksperiment.
+
+------------------------------------------------------------------------
+
+# Stikprøveudtræk og statistisk usikkerhed
+
+Stokastiske variable kan være enten diskrete eller kontinuerte. Dette har betydning for, hvordan vi tilskriver sandsynlighed til deres værdier.
+
+-   **Diskrete variable:** ting som man kan tælle. F.eks. Antal øjne på en terning eller antal varer solgt i en butik
+
+-   **Kontinuerte variable:** variabler med uendeligt mange udfald inden for en given range. F.eks. Vandmængden i en vandflaske eller produktionstid for en vare. Begge tilfælde kan have uendeligt mange decimaler.
+
+------------------------------------------------------------------------
+
+# Stikprøveudtræk og statistisk usikkerhed
+
+Stokastiske variable har også fordelinger. Der er to særligt vigtige fordelinger, som I skal kende til:
+
+-   **Binomial-fordelingen**: for diskrete stokastiske variable
+
+-   **Normalfordelingen**: for kontinuerte stokastiske variable
+
+------------------------------------------------------------------------
+
+# Binomial-fordeling
+
+-   Man bruger binomialfordelingen, når man gentager et forsøg, der kun har to udfald (Bernoulli-forsøg). I statistik kaldes disse som regel succes og fiasko. Succes kan både defineres som f.eks. at slå ”krone” i plat og krone, men også bare som at observere en særlig værdi, f.eks. ”kvinde” i en population.
+
+-   Forestil dig, at du 1000 gange trækker en tilfældig person fra den grønlandske population, og ønsker at vide sandsynligheden for at trække en kvinde. Binomialfordelingen kan hjælpe med at beregne dette.
+
+![](images/platkrone.png){width="50%"}
+
+------------------------------------------------------------------------
+
+# Binomial-fordeling
+
+-   Vi bruger binomialfordelingen, når vi arbejder med andele. Hvis alle enheder i populationen har lige stor chance for udvælgelse, så er sandsynligheden for udfaldet $z$ nemlig lig andelen af enheder i populationen med værdi $z$:
+
+$$
+P(z) = \frac{\text{antal enheder i population med værdien } z \text{ i populationen}}{N_{\text{pop}}}
+$$
+
+-   Når vi skal udregne statistisk usikkerhed forbundet med andele af f.eks. kvinder i vores stikprøve, gør vi det altså på baggrund af sandsynligheden for at trække en kvinde, når vi trækker vores stikprøve fra populationen!
+
+------------------------------------------------------------------------
+
+# Binomial-fordeling
+
+Middelværdi og varians for binomialfordelte variable udregnes som følgende:
+
+<br>
+
+$$
+\text{Middelværdi: } E(Y) = n \cdot p \\
+\text{Varians: } V(Y) = n \cdot p \cdot (1 - p)
+$$
+
+<br>
+
+$Y$ angiver antal succeser blandt $n$ uafhængige udtrækninger fra en population, hvor udfaldsrummet $\Omega=\text{{success, fiasko}}$ og der er konstant sandsynlighed, $𝑝$, for succes i hver udtrækning.
+
+------------------------------------------------------------------------
+
+# Binomial-fordeling
+
+-   Vi ved, at *middelværdi* $E(Y) = n*p$ også kan fortolkes som *andelen* af observationerne i stikprøven med den værdi, som vi har angivet som "success".
+
+-   Hvis alle elementer i populationen har lige stor chance for udvælgelse, så er sandsynligheden for udfaldet $z$ nemlig lig andelen af elementer i populationen med værdi $z$:
+
+    $P(z) = \frac{\text{antal enheder i population med værdien } z \text{ i populationen}}{N_{\text{pop}}}$
+
+-   Men vi ved også, at et stikprøvegennemsnit er behæftet med en hvis usikkerhed ift. populationsgennemsnittet, fordi udvælgelsesmekanismen har introduceret en vis tilfældighed. Derfor vil vi gerne kunne sige noget om, hvor stor usikkerheden er!
+
+------------------------------------------------------------------------
+
+# Store Tals Lov
+
+-   Store Tals Lov siger, at når stikprøvestørrelsen ($n$ ) bliver stor, vil gennemsnittet i stikprøven nærme sig populationens sande gennemsnit, ($\mu$):\
+    $$
+    \frac{1}{n} \sum_{i=1}^{n} X_i \rightarrow \mu \quad \text{når } n \to \infty
+    $$ hvor ( $X_i$ ) er en tilfældig variabel i stikprøven, og ($\mu$) er populationsgennemsnittet.
+
+-   **Implikation:** Store Tals Lov giver os en garanti for, at stikprøvegennemsnittet bliver tættere på populationsgennemsnittet, efterhånden som stikprøven bliver større!
+
+-   Vi kan altså mindre usikkerheden på vores resultater ved at øge stikprøvestørrelsen... men hvordan ved vi, hvor stor usikkerhed vores resultater faktisk er behæftet med?
+
+------------------------------------------------------------------------
+
+# Den centrale grænseværdisætning
+
+<br>
+
+Den centrale grænseværdisætning fortæller os, at uanset hvilken fordeling hver observation fra en simpel tilfældig stikprøve følger, så er stikprøvegennemsnittet approksimativt (”så godt som”) normalfordelt, når bare stikprøven er tilstrækkelig stor.
+
+*(Malchow-Møller & Würst 2014:242)*
+
+<br>
+
+... så hvad er en normalfordeling?
+
+------------------------------------------------------------------------
+
+# Normalfordeling
+
+-   Normalfordelingen er kendetegnet ved at være symmetrisk fordelt omkring middelværdi $\mu$, og dens bredde afhænger af varians $\sigma^2$.
+
+-   Kurven (tæthedsfunktionen) angiver sandsynligheden for at observere en given værdi.
+
+```{r include=T, echo=F, message=F, warning=F}
+library(ggplot2)
+
+# Definer parametre for normalfordelingen
+mean <- 0       # Gennemsnit
+sd <- 1         # Standardafvigelse
+
+# Opret et data frame med x-værdier og deres sandsynlighedstæthed
+x <- seq(-4, 4, length.out = 100)  # Interval for x
+y <- dnorm(x, mean, sd)            # Beregn sandsynlighedstæthed for normalfordelingen
+
+# Kombiner x og y til et data frame
+df <- data.frame(x, y)
+
+# Plot normalfordelingen
+(normalfordeling <- ggplot(df, aes(x = x, y = y)) +
+  geom_line(color = "#003366", size = 1) +
+  labs(y = "Sandsynlighedstæthed", x="Data") +
+  theme_minimal() +
+  theme(
+    text = element_text(size = 16),            # General text size
+    axis.title = element_text(size = 18),      # Axis title size
+    axis.text = element_text(size = 14),       # Axis labels size
+  ))
+```
+
+------------------------------------------------------------------------
+
+# Normalfordeling
+
+Højde i en befolkning er typisk naturligt normaltfordelt. Her er et eksempel på højdefordelingen blandt en population med $\mu=170$ cm og $\sigma=10$ cm
+
+```{r}
+# Indlæs nødvendige pakker
+library(ggplot2)
+
+# Simuler data for højde
+set.seed(42)  # For reproducerbarhed
+population_size <- 10000
+mean_height <- 170  # Gennemsnitlig højde i cm
+sd_height <- 10  # Standardafvigelse i cm
+
+heights <- rnorm(population_size, mean = mean_height, sd = sd_height)
+
+# Lav et datasæt
+height_data <- data.frame(Height = heights)
+
+# Plot den simulerede normalfordeling
+ggplot(height_data, aes(x = Height)) +
+  geom_histogram(aes(y = ..density..), bins = 30, color = "black", fill = "#003366", alpha = 0.7) +
+  stat_function(fun = dnorm, args = list(mean = mean_height, sd = sd_height), color = "red", size = 1.2) +
+  labs(
+    title = "Normalfordeling af Højde i Population",
+    x = "Højde (cm)",
+    y = "Densitet"
+  ) +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+# Normalfordeling
+
+Hvis vi plotter højdefordelingen blandt babyer vil den også være normalfordelt, men med et lavere gennemsnit, og en mindre standardafvigelse! Her er et eksempel på højdefordelingen blandt en baby-population med $\mu=50$ cm og $\sigma=5$ cm
+
+```{r}
+# Indlæs nødvendige pakker
+library(ggplot2)
+
+# Simuler data for babyer
+set.seed(1234)  # For reproducerbarhed
+population_size <- 10000
+mean_baby_height <- 50  # Gennemsnitlig højde for babyer i cm
+sd_baby_height <- 5  # Standardafvigelse for babyer i cm
+
+baby_heights <- rnorm(population_size, mean = mean_baby_height, sd = sd_baby_height)
+
+# Lav et datasæt
+height_data_babies <- data.frame(Height = baby_heights)
+
+# Definer x-akse ticks og interval
+x_limits <- c(20, 200)  # Antag intervallet for voksne og babyer
+x_ticks <- seq(25, 200, by = 25)  # Ticks for hver 10 cm
+
+# Plot den simulerede normalfordeling for babyer
+ggplot(height_data_babies, aes(x = Height)) +
+  geom_histogram(aes(y = ..density..), bins = 30, color = "black", fill = "#003366", alpha = 0.7) +
+  stat_function(fun = dnorm, args = list(mean = mean_baby_height, sd = sd_baby_height), color = "red", size = 1.2) +
+  scale_x_continuous(breaks = x_ticks, limits = x_limits) +  # Ticks for hver 10 cm og x-akse interval
+  labs(
+    title = "Normalfordeling af højde for babyer",
+    x = "Højde (cm)",
+    y = "Densitet"
+  ) +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+# Normalfordeling
+
+<br>
+
+### **Øvelse**
+
+Lad os prøve at simulere en normalfordeling med simpelt tilfældigt udtræk!
+
+------------------------------------------------------------------------
+
+# Normalfordeling
+
+-   Mange naturlige størrelser i virkelige populationer har en fordeling, som ligner normalfordelingen, f.eks. højde i en befolkning. Mange estimatorer og test-statistikker er normalfordelte; f.eks. stikprøvegennemsnit jf. den centrale grænseværdisætning
+
+-   Hvis en stokastisk variabel $Y$ er normalfordelt $Y \sim \mathcal{N}(\mu, \sigma^2)$ så er det altså mest sandsynligt at observere værdier, der ligger tæt på gennemsnittet.
+
+-   Faktisk er normalfordelte variable skruet sådan sammen, at vi ud fra standardafvigelsen på en variabel kan sige, hvor stor en andel af observationerne der ligger inden for et given afstand til gennemsnittet.
+
+-   Derfor kan man bruge standardafvigelsen fra en normalfordeling til at fastlægge et acceptabelt niveau af usikkerhed, og estimere usikkerheden på sine stikprøveberegninger!
+
+------------------------------------------------------------------------
+
+# Normalfordeling
+
+-   Hele arealet under en normalfordelingskurve svarer til 100 % sandsynlighed (eller 1 i decimaltal). Dette betyder, at alle observationer i populationen er inkluderet i kurven.
+-   Arealet mellem to værdier på x-aksen (f.eks. mellem -1 og +1 standardafvigelser fra gennemsnittet) angiver sandsynligheden for, at en observation falder inden for dette interval.
+
+```{r}
+# Indlæs nødvendige pakker
+library(ggplot2)
+
+# Simuler data for højde
+set.seed(42)  # For reproducerbarhed
+population_size <- 10000
+mean_height <- 170  # Gennemsnitlig højde i cm
+sd_height <- 10  # Standardafvigelse i cm
+
+heights <- rnorm(population_size, mean = mean_height, sd = sd_height)
+
+# Lav et datasæt
+height_data <- data.frame(Height = heights)
+
+# Plot den simulerede normalfordeling
+ggplot(height_data, aes(x = Height)) +
+  geom_histogram(aes(y = ..density..), bins = 30, color = "black", fill = "#003366", alpha = 0.7) +
+  stat_function(fun = dnorm, args = list(mean = mean_height, sd = sd_height), color = "red", size = 1.2) +
+  labs(
+    title = "Normalfordeling af højde i en population",
+    x = "Højde (cm)",
+    y = "Densitet"
+  ) +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+# Normalfordelingen og statistisk usikkerhed
+
+Hvis en variabel er normalfordelt så ligger omkring…
+
+-   68 % af observationerne i intervallet +/- 1 standardafvigelse fra middelværdien
+
+-   95 % af observationerne i intervallet +/- 2 standardafvigelse fra middelværdien
+
+-   99,7 % af observationerne i intervallet +/- 3 standardafvigelse fra middelværdien
+
+------------------------------------------------------------------------
+
+# Standardnormalfordeling
+
+I praksis bruger man en særlig normalfordeling, nemlig ***standardnormalfordelingen***.
+
+Hvorfor? Det er nemmest at tage udgangspunkt i en standardiseret udgave af normalfordelingen. Standardnormalfordelingen er en normalfordeling med et gennemsnit $\mu=0$ og en standardafvigelse $\sigma=1$
+
+```{r}
+
+# Load ggplot2 and grid (for arrows)
+library(ggplot2)
+library(grid)
+
+# Parameters for the standard normal distribution
+mean <- 0       # Mean (mu)
+sd <- 1         # Standard deviation (sigma)
+
+# Create a data frame with x values and their density for the normal distribution
+x <- seq(-4, 4, length.out = 100)  # x-range
+y <- dnorm(x, mean, sd)            # Density of the normal distribution
+df <- data.frame(x, y)
+
+# Plot the standard normal distribution
+ggplot(df, aes(x = x, y = y)) +
+  geom_line(color = "#003366", size = 1) +
+  labs(y = "Sandsynlighedstæthed", x="Data") +
+  theme_minimal() +
+  
+  # Add text for the mean and standard deviations, slightly shifted to the sides
+  annotate("text", x = mean, y = max(y) + 0.02, label = expression(mu), size = 5, color = "black") +
+  annotate("text", x = -1.3, y = dnorm(-1, mean, sd) + 0.02, label = expression(-sigma), size = 4, color = "black") +
+  annotate("text", x = 1.3, y = dnorm(1, mean, sd) + 0.02, label = expression(sigma), size = 4, color = "black") +
+  
+  # Add a horizontal arrow between -sigma and +sigma, placed near the sd markers
+  geom_segment(aes(x = -0.9, xend = .9, y = dnorm(1, mean, sd) + 0.01, yend = dnorm(1, mean, sd) + 0.01), 
+               arrow = arrow(ends = "both", type = "closed", length = unit(0.2, "cm")), color = "black") +
+annotate("text", x = 0, y = dnorm(1, mean, sd) + 0.03, label = "± σ", size = 4, color = "black")+
+    theme(
+    text = element_text(size = 16),            # General text size
+    axis.title = element_text(size = 18),      # Axis title size
+    axis.text = element_text(size = 14)      # Axis labels size
+  )
+```
+
+------------------------------------------------------------------------
+
+# Standardnormalfordeling
+
+I standardnormalfordelingen ligger...
+
+-   90 % af observationerne i intervallet ±1,645 standardafvigelser fra middelværdien
+
+-   95 % af observationerne i intervallet ±1,96 standardafvigelser fra middelværdien
+
+-   99 % af observationerne i intervallet ±2,576 standardafvigelser fra middelværdien
+
+------------------------------------------------------------------------
+
+# Estimation i stikprøver
+
+Når vi ikke har adgang til fuld population kan vi altså bruge stikprøver til at estimere, hvordan fordelinger ser ud i populationen:
+
+-   $\mu$: populationsgennemsnittet (det sande gennemsnit for hele populationen).
+
+-   $\bar{X}$: stikprøvegennemsnittet (gennemsnittet beregnet ud fra en stikprøve, som bruges som et skøn for populationsgennemsnittet $\mu$).
+
+-   $s$: stikprøvens standardafvigelse (bruges som estimat for $\sigma$, populationens standardafvigelse)
+
+-   Når stikprøven er stor og repræsentativ, kan vi antage at: $\bar{X} \approx \mu$
+
+Dog må vi leve med, at der altid er en hvis usikkerhed forbundet med stikprøvegennemsnittet... til gengæld kan vi bruge vores viden om normalfordelingen til at regne på den!
+
+------------------------------------------------------------------------
+
+# Konfidensintervaller
+
+-   For at give et bud på den usikkerhed, der er forbundet med de beregninger vi laver på stikprøver, kan vi udregne konfidensintervaller
+
+-   Konfidensintervallet estimerer med en vis (u)sikkerhed indenfor hvilket interval populationens værdi ligger. I stedet for kun at angive et punkt-estimat (en andel eller et gennemsnittet), angiver man altså et interval inden for hvilket, man forventer at andelen/ gennemsnittet i populationen ligger.
+
+------------------------------------------------------------------------
+
+# Konfidensintervaller
+
+-   Ved hjælp af den standardnormalfordelingen kan vi beregne, hvor sandsynligt det er, at populationsgennemsnittet ligger i et bestemt interval omkring stikprøvegennemsnittet. Det er meget almindeligt at konstruere 95% konfidensintervaller.
+
+-   Princippet er, at man så udregner et interval, hvor vi populationens værdi med 95 % sikkerhed ligger indenfor. For en normalfordeling svarer dette til $\pm 1,96$ standardafvigelser omkring stikprøvegennemsnittet.
+
+------------------------------------------------------------------------
+
+# Konfidensintervaller
+
+![](images/standardnormalfordeling.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+# Stikprøveusikkerhed: intervalskala
+
+$$
+u = 1,96 \cdot \frac{s}{\sqrt{n}}
+$$
+
+-   $u$ = den statistiske usikkerhed
+
+-   $s$ = standardafvigelsen
+
+-   $n$ = antal individer i stikprøven
+
+-   $\frac{s}{\sqrt{n}}$ = standardfejlen (standard error – beregnes på baggrund af standardafvigelsen)
+
+------------------------------------------------------------------------
+
+# Stikprøveusikkerhed: nominal og ordinal skala
+
+$$
+u = 1,96 \cdot \frac{p \cdot q}{n}
+$$
+
+-   $u$ = den statistiske usikkerhed\
+-   $p$ = andel i den kategori vi gerne vil sige noget om\
+-   $q$ = andel i variablens resterende kategorier\
+-   $n$ = antal individer i stikprøven
+-   $\frac{p \cdot q}{n}$ = standardfejlen (standard error – beregnes på baggrund af fordelingerne)
+
+------------------------------------------------------------------------
+
+# Konfidensintervaller: intervalskala
+
+Formlen for beregningen af konfidensinterval ved gennemsnit:
+
+$$
+\text{Intervallets nedre grænse} = \bar{X} - z \cdot \frac{s}{\sqrt{n}}
+$$
+
+$$
+\text{Intervallets øvre grænse} = \bar{X} + z \cdot \frac{s}{\sqrt{n}}
+$$
+
+-   Hvor $\frac{\sigma}{\sqrt{n}}$ standardfejlen (Standard error).
+
+-   $\bar{X} =$ gennemsnit i stikprøven
+
+-   $z =$ antallet af valgte standardafvigelser, ofte $z = 1,96$ (svarende til $95%$ %)
+
+-   $s =$ standardafvigelse i stikprøven
+
+-   $n =$ antallet af observationer i stikprøven (stikprøvestørrelsen)
+
+------------------------------------------------------------------------
+
+# Konfidensintervaller: nominal- og ordinalskala
+
+Formlen for beregningen af konfidensinterval ved andele:
+
+$$
+\text{Intervallets nedre grænse} = p - z \cdot \sqrt{\frac{p(1-p)}{n}}
+$$
+
+$$
+\text{Intervallets øvre grænse} = p + z \cdot \sqrt{\frac{p(1-p)}{n}}
+$$
+
+-   Hvor: $\sqrt{\frac{p(1-p)}{n}}$ er standardfejlen (Standard error).
+
+-   $p =$ andelen i stikprøven (fx $0,3$ eller $0,25$)
+
+-   $z=$ antallet af valgte standardafvigelser, ofte $z=1,96$ (svarende til $95%$ %)
+
+-   $n =$ antallet af observationer i stikprøven (stikprøvestørrelsen)
+
+---
+
+# Eks. Konfidensintervaller: nominal- og ordinalskala
+
+$$
+stikprøvegennemsnit/andel = \bar{x}=0,3
+$$
+$$
+n = 10
+$$
+
+$$
+\text{Intervallets nedre grænse} = 0,3 - 1,96 \cdot \sqrt{\frac{0,3(1-0,3)}{10}}=0,3-0,284=0.016
+$$
+
+$$
+\text{Intervallets øvre grænse} = 0,3 + 1,96 \cdot \sqrt{\frac{0,3(1-0,3)}{10}}=0,3+0,284=0.584
+$$
+
+------------------------------------------------------------------------
+
+# Standardfejl
+
+Standardfejl måler, hvor meget en stikprøveestimator (f.eks. gennemsnit) typisk vil variere fra stikprøve til stikprøve, hvis vi gentager målingen flere gange:
+
+$SE = \frac{s}{\sqrt{n}}$\
+
+-   $s$ er stikprøvens standardafvigelse (bruges som estimat for $\sigma$, populationens standardafvigelse).
+
+-   $n$ er stikprøvestørrelsen.
+
+Standardfejlen angiver usikkerheden på stikprøvegennemsnittet og viser, hvor tæt stikprøvegennemsnittet forventes at være på populationsgennemsnittet ($\mu$).
+
+En større stikprøve ($n$) giver en mindre standardfejl, fordi større stikprøver er mere præcise.
+
+------------------------------------------------------------------------
+
+# Statistisk usikkerhed og stikprøvestørrelse
+
+Hvor statistisk sikker er en stikprøve?
+
+-   Stikprøven absolutte størrelse: jo flere observationer desto bedre
+
+-   Stikprøvens størrelse ift. universets størrelse (udtræk med tilbagelægning?)
+
+-   Variationen i universet
+
+------------------------------------------------------------------------
+
+# Statistisk usikkerhed og stikprøvestørrelse
+
+Stikprøvens usikkerhed som funktion af stikprøvens størrelse:
+
+::: table-slide
+| n | 1/99% | 2/98% | 5/95% | 10/90% | 15/85% | 20/80% | 25/75% | 30/70% | 35/65% | 40/60% | 45/55% | 50/50% |
+|------|------|------|------|------|------|------|------|------|------|------|------|------|
+| 50 | 2,8% | 3,9% | 6,0% | 8,3% | 9,9% | 11,1% | 12,0% | 12,7% | 13,2% | 13,6% | 13,8% | 13,9% |
+| 100 | 2,0% | 2,7% | 4,3% | 5,9% | 7,0% | 7,8% | 8,5% | 9,0% | 9,3% | 9,6% | 9,8% | 9,8% |
+| 250 | 1,2% | 1,7% | 2,7% | 3,7% | 4,4% | 5,0% | 5,4% | 5,7% | 5,9% | 6,1% | 6,2% | 6,2% |
+| 500 | 0,9% | 1,2% | 1,9% | 2,6% | 3,1% | 3,5% | 3,8% | 4,0% | 4,2% | 4,3% | 4,4% | 4,4% |
+| 750 | 0,7% | 1,0% | 1,6% | 2,1% | 2,6% | 2,9% | 3,1% | 3,3% | 3,4% | 3,5% | 3,6% | 3,6% |
+| 1.000 | 0,6% | 0,9% | 1,4% | 1,9% | 2,2% | 2,5% | 2,7% | 2,8% | 3,0% | 3,0% | 3,1% | 3,1% |
+| 1.500 | 0,5% | 0,7% | 1,1% | 1,5% | 1,8% | 2,0% | 2,2% | 2,3% | 2,4% | 2,5% | 2,5% | 2,5% |
+| 2.000 | 0,4% | 0,6% | 1,0% | 1,3% | 1,6% | 1,8% | 1,9% | 2,0% | 2,1% | 2,1% | 2,2% | 2,2% |
+| 5.000 | 0,3% | 0,4% | 0,6% | 0,8% | 1,0% | 1,1% | 1,2% | 1,3% | 1,3% | 1,3% | 1,4% | 1,4% |
+| 10.000 | 0,2% | 0,3% | 0,4% | 0,6% | 0,7% | 0,8% | 0,8% | 0,9% | 0,9% | 1,0% | 1,0% | 1,0% |
+:::
+
+------------------------------------------------------------------------
+
+# Statistisk usikkerhed og stikprøvestørrelse
+
+Eksempel med 50/50 fordeling (høj variation)
+
+```{r}
+# Load ggplot2 for plotting
+library(ggplot2)
+
+# Data from the table (sample sizes and uncertainty for 50/50 distribution)
+data <- data.frame(
+  N = c(50, 100, 250, 500, 750, 1000, 1500, 2000, 5000, 10000),
+  Uncertainty = c(13.9, 9.8, 6.2, 4.4, 3.6, 3.1, 2.5, 2.2, 1.4, 1.0)
+)
+
+# Create line graph
+ggplot(data, aes(x = N, y = Uncertainty)) +
+  geom_line(color = "#003366", size = 1) +
+  scale_x_continuous(breaks = seq(0, 10000, by = 1000)) +  # Adds ticks every 500 units
+  scale_y_continuous(breaks = seq(0, 15, by = 1)) +  # Adds ticks every 500 units
+  labs(
+    x = "Stikprøvestørrelse (N)",
+    y = "Usikkerhed (%)"
+  ) +
+  theme_minimal() +
+   theme(
+    axis.title = element_text(size = 14),  # Increase axis titles font size
+    axis.text = element_text(size = 12)    # Increase axis labels font size
+  )
+```
+
+------------------------------------------------------------------------
+
+# Statistisk usikkerhed og stikprøvestørrelse
+
+Eksempel med 1/99 fordeling (lav variation)
+
+```{r}
+# Data from the table (sample sizes and uncertainty for 1/99 distribution)
+data <- data.frame(
+  N = c(50, 100, 250, 500, 750, 1000, 1500, 2000, 5000, 10000),
+  Uncertainty = c(2.8, 2.0, 1.2, 0.9, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2)
+)
+
+# Create line graph for 1/99 distribution
+ggplot(data, aes(x = N, y = Uncertainty)) +
+  geom_line(color = "#003366", size = 1) +
+  scale_x_continuous(breaks = seq(0, 10000, by = 1000)) +
+  scale_y_continuous(breaks = seq(0, 3, by = 0.5)) +
+  labs(
+    x = "Stikprøvestørrelse (N)",
+    y = "Usikkerhed (%)") +
+  theme_minimal() +
+  theme(
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12)
+  )
+```
+
+------------------------------------------------------------------------
+
+# Repræsentativitet og bortfald
+
+En repræsentativ stikprøve er en stikprøve, som *repræsenterer* den population, som den er trukket fra på væsentlige karakteristka. Repræsentativitet afhænger dels af:
+
+<br>
+
+-   Udvælgelsesmekanismen (hvordan man trækker sin stikprøve)
+
+-   Skævhed i stikprøven (sampling bias)
+
+    -   Tilfældig skævhed (som udgangspunkt uproblematisk)
+
+    -   Systematisk skævhed: der er systematik i, hvem der svarer, og hvem der ikke gør (problematisk!)
+
+------------------------------------------------------------------------
+
+# Repræsentativitet og bortfald
+
+## ![](images/studiepopulation.png)
+
+------------------------------------------------------------------------
+
+# Repræsentativitet og bortfald
+
+**Eks.**
+
+*Hvilken form for skævhed ville vi forvente, hvis vi udsendte en survey blandt en stikprøve af borgere i Grønland (simpelt tilfældigt udtrukket), men kun gjorde vores survey tilgængelig på dansk?*
+
+------------------------------------------------------------------------
+
+# Repræsentativitet og bortfald
+
+Bortfald er vigtigt, fordi det er påvirker vores undersøgelses eksterne validitet:
+
+-   **Ekstern validitet:** Refererer til *generaliserbarheden* af resultaterne.
+
+<br>
+
+Spørg dig selv: Kan du generalisere på dine resultater fra stikprøven til den population, som stikprøven kommer fra? Er populationen repræsenteret i tilstrækkelig grad i stikprøven? Det var jo hele pointen bag stikprøven i første omgang!
+
+------------------------------------------------------------------------
+
+# Repræsentativitet og bortfald
+
+Man kan finde ud af, om ens stikprøve er repræsentativ for populationen ved at sammenligne fordelinger på vigtige variable fra hhv. population og stikprøve og evt. vægte underrepræsenterede grupper op:
+
+::: table-slide
+| Køn | Alder (år) | Univers (antal) | Univers (pct.) | Stikprøve (antal) | Stikprøve (pct.) | Vægt |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| Mænd | 15-40 | 874.044 | 19,8 | 165 | 13,3 | 19,8/13,3=**1,49** |
+| Mænd | 40-69 | 1.057.619 | 24,0 | 368 | 29,6 | 24/29,6=**0,81** |
+| Mænd | 70+ | 233.798 | 5,3 | 77 | 6,2 | 5,3/6,2=**0,86** |
+| Kvinder | 15-40 | 851.737 | 19,3 | 179 | 14,4 | 19,3/14,4=**1,34** |
+| Kvinder | 40-69 | 1.053.420 | 23,9 | 359 | 28,9 | 23,9/28,9=**0,83** |
+| Kvinder | 70+ | 340.962 | 7,7 | 96 | 7,7 | 7,7/7,7=**1** |
+| **Total** |  | **4.411.580** | **100** | **1.244** | **100** |  |
+:::
+
+*Obs: her antages det, at der er tilfældigt bortfald! Ellers vægter man bare skævheden yderligere op.*
+
+------------------------------------------------------------------------
+
+# Niveauer
+
+::: table-slide
+| Begreb | Definition |
+|---------------------------------------------|---------------------------|
+| **Universet/populationen** | Målgruppe, hvori en stikprøve udtrækkes (fx alle statsborgere i Danmark). |
+| **Den mulige population** | Del af universet, som kan udtrækkes til stikprøven. |
+| **Stikprøve/sample** | Lille del af universet, udvalgt til at repræsentere hele universet. |
+| **Respondenter/besvarelser** | Del af stikprøven, der deltager i surveyen (svarprocent). |
+:::
+
+------------------------------------------------------------------------
+
+## Opsamling: populationer og stikprøver
+
+-   **Population og stikprøve**:
+    -   En population er den gruppe, vi ønsker at undersøge.
+    -   En stikprøve er en repræsentativ del af populationen, som bruges til at drage konklusioner om populationen.
+
+<br>
+
+-   **Repræsentativitet og bortfald**:
+    -   En stikprøve skal være repræsentativ for populationen for at give gyldige resultater.
+    -   Tilfældig skævhed kan tolereres, men systematisk skævhed påvirker resultaterne negativt.
+
+------------------------------------------------------------------------
+
+## Opsamling: populationer og stikprøver
+
+-   **Statistisk usikkerhed og sandsynlighed**:
+    -   Usikkerhed er altid til stede, når vi bruger stikprøver.
+    -   Store tals lov og den centrale grænseværdisætning sikrer, at stikprøvegennemsnit er pålidelige estimater af populationsgennemsnit for store stikprøver.
+
+<br>
+
+-   **Binomial- og normalfordeling**:
+    -   Binomialfordelingen bruges til diskrete sandsynligheder (to udfald).
+    -   Normalfordelingen bruges til kontinuerte variabler og er grundlaget for beregning af konfidensintervaller.
+
+------------------------------------------------------------------------
+
+## Opsamling: populationer og stikprøver
+
+-   **Konfidensintervaller**:
+    -   Bruges til at give et interval omkring stikprøvegennemsnittet, hvor vi med høj sandsynlighed forventer, at populationsgennemsnittet ligger.
+
+<br>
+
+-   **Stikprøvestørrelse og variation**:
+    -   Jo større stikprøven er, jo lavere usikkerhed.
+    -   Variation i populationen påvirker, hvor præcis vores stikprøve kan være med en given størrelse.

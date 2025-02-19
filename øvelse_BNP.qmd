@@ -1,0 +1,211 @@
+---
+title: "Øvelse i BNP"
+format: html
+editor: visual
+---
+
+I denne øvelse arbejder du med et udsnit af datasættet `gapminder`, indeholder information om socioøkonomiske og demografiske indikatorer for forskellige lande over tid. Indlæs datasættet i et objekt kaldet df som nedenfor:
+
+```{r echo=T, message=F}
+library(gapminder)
+df <- gapminder
+```
+
+<br>
+
+## Udforsk data
+
+Datasættet indeholder følgende variable:
+
+| Variabel | Måler |
+|------------------------------------|------------------------------------|
+| country | Land |
+| continent | Kontinent |
+| year | År for dataindsamling |
+| lifeExp | Forventet gennemsnitlig levealder (i år) for personer i landet. |
+| pop | Landets samlede befolkning i det givne år. |
+| gdpPercap | Bruttonationalprodukt (BNP) pr. indbygger i USD, inflationsjusteret. |
+
+<br>
+
+1.  Bestem **måleniveauerne** for `country`, `year`, `lifeExp`, `pop` og `gdpPercap`.
+2.  Identificer **storage types med** `glimpse()`(f.eks. character, factor, numeric)
+
+<br>
+
+## Data Wrangling
+
+1.  Filtrer datasættet, så det kun inkluderer fem valgfrie lande
+
+2.  Filtrer datasættet, så det kun inkluderer variablene: `country`, `year`, `lifeExp`, `pop` og `gdpPercap`
+
+3.  Omdøb variablen `pop` til `befolkning` og variablen `gdpPercap` til `BNP_pr_indbygger`.
+
+4.  Opret en ny kolonne kaldet `BNP`, der beregner det samlede BNP (`BNP = BNP_pr_indbygger * befolkning`).
+
+5.  Brug `ifelse()` til at oprette en ny kolonne kaldet `høj_indkomst`:
+
+    1.  Tildel `"Ja"`, hvis `BNP_pr_indbygger` er større end 30.000.
+
+    2.  Ellers tildel `"Nej"`.
+
+6.  Brug `case_when()` til at oprette en ny kolonne kaldet `forventet_levetid`:
+
+    -   `"Lav"`, hvis `lifeExp` er under 60.
+    -   `"Mellem"`, hvis `lifeExp` er mellem 60 og 75.
+    -   `"Høj"`, hvis `lifeExp` er over 75.
+
+## Deskriptiv statistik
+
+8.  Find den **gennemsnitlige** levealder for hvert land (brug `groupby()` )
+
+9.  Opsummer den **gennemsnitlige** BNP pr. indbygger for hver `livsforventningskategori`.
+
+<br>
+
+## T-test
+
+Brug en t-test til at undersøge, om der er en signifikant forskel i forventet levealder mellem to valgfrie lande
+
+1.  Filtrér datasættet til kun at indeholde observationer for de to valgfrie lande
+
+2.  Formuler hypoteserne:
+
+    -   **H₀ (nulhypotesen):**
+
+    -   **H₁ (alternativ hypotesen):**
+
+3.  Brug en **t-test** til at teste, om der er en signifikant forskel i forventet levealder (`lifeExp`) mellem de to lande.
+
+4.  Konkludér resultaterne af t-testen baseret på p-værdien.
+
+<br>
+
+## $\chi^2$ test
+
+Brug en $\chi^2$ test til at teste, om der er en statistisk signifikant sammenhæng mellemden kategoriske variabel `forventet_levetid` og variablen `høj_indkomst`:
+
+1.  Formuler hypoteserne:
+
+    -   **H₀ (nulhypotesen):**
+
+    -   **H₁ (alternativ hypotesen):**
+
+2.  Brug $\chi^2$-testen til at teste, om der er en signifikant forskel i forventet levealder (`lifeExp`) mellem de to lande.
+
+3.  Konkludér resultaterne af t-testen baseret på p-værdien.
+
+```{r include=F, eval=F}
+# Filtrér for de specifikke lande
+df_filtered <- df %>%
+  filter(country %in% c("Iceland", "Canada", "Columbia", "Ghana", "Australia")) %>%
+  select(country, year, lifeExp, pop, gdpPercap) %>% # Vælg relevante variabler
+  rename(
+    befolkning = pop, # Omdøb pop til befolkning
+    BNP_pr_indbygger = gdpPercap # Omdøb gdpPercap til BNP_pr_indbygger
+  ) %>%
+  mutate(
+    BNP = BNP_pr_indbygger * befolkning, # Opret ny kolonne BNP
+    høj_indkomst = ifelse(BNP_pr_indbygger > 30000, "Ja", "Nej"), # Opret høj_indkomst
+    forventet_levetid = case_when( # Opret forventet_levetid
+      lifeExp < 60 ~ "Lav",
+      lifeExp >= 60 & lifeExp < 75 ~ "Mellem",
+      lifeExp >= 75 ~ "Høj"
+    )
+  )
+
+
+
+# Gennemsnitlig levealder for hvert land
+gennemsnit_livsforventning <- df_filtered %>%
+  group_by(country) %>%
+  summarise(gennemsnit_livsforventning = mean(lifeExp, na.rm = TRUE))
+
+# Gennemsnitligt BNP pr. indbygger for hver livsforventningskategori
+opsummering_BNP <- df_filtered %>%
+  group_by(forventet_levetid) %>%
+  summarise(
+    gennemsnit_BNP_pr_indbygger = mean(BNP_pr_indbygger, na.rm = TRUE)
+  )
+
+
+# Filtrér for Danmark og USA i 2007
+df_ttest <- df_filtered %>%
+  filter(country %in% c("Ghana", "Iceland"))
+
+# Udfør t-test
+t_test_result <- t.test(lifeExp ~ country, data = df_ttest)
+
+# Print resultat
+t_test_result
+
+
+# Lav en krydstabel
+chi_table <- table(df_filtered$forventet_levetid, df_filtered$høj_indkomst)
+
+# Udfør chi²-test
+chi_test_result <- chisq.test(chi_table)
+
+# Print krydstabel og testresultat
+chi_table
+chi_test_result
+
+```
+
+```{r include=F, eval=F}
+
+library(tidyverse)
+library(gapminder)
+
+# Del 1: Udforskning af data
+glimpse(gapminder) # Undersøg datasættets struktur
+
+# Del 2: Data Wrangling
+# Opgave 2: Filtrér for relevante lande
+gapminder_subset <- gapminder %>%
+  filter(country %in% c("Denmark", "Iceland", "Canada", "United States"))
+
+# Opgave 3: Vælg relevante kolonner
+gapminder_subset <- gapminder_subset %>%
+  select(country, year, lifeExp, pop, gdpPercap)
+
+# Opgave 4: Omdøb kolonner
+gapminder_subset <- gapminder_subset %>%
+  rename(
+    befolkning = pop,
+    BNP_pr_indbygger = gdpPercap
+  )
+
+# Opgave 5: Opret kolonnen BNP
+gapminder_subset <- gapminder_subset %>%
+  mutate(BNP = BNP_pr_indbygger * befolkning)
+
+# Opgave 6: Opret kolonnen `høj_indkomst`
+gapminder_subset <- gapminder_subset %>%
+  mutate(høj_indkomst = ifelse(BNP_pr_indbygger > 30000, "Ja", "Nej"))
+
+# Opgave 7: Opret kolonnen `livsforventningskategori`
+gapminder_subset <- gapminder_subset %>%
+  mutate(livsforventningskategori = case_when(
+    lifeExp < 60 ~ "Lav",
+    lifeExp >= 60 & lifeExp < 75 ~ "Mellem",
+    lifeExp >= 75 ~ "Høj"
+  ))
+
+# Del 3: Opsummering af data
+# Opgave 8: Gennemsnit og median livsforventning pr. land
+opsummering_livsforventning <- gapminder_subset %>%
+  group_by(country) %>%
+  summarise(
+    gennemsnit_livsforventning = mean(lifeExp),
+    median_livsforventning = median(lifeExp)
+  )
+
+# Opgave 9: Total befolkning og gennemsnitligt BNP pr. indbygger pr. livsforventningskategori
+opsummering_BNP <- gapminder_subset %>%
+  group_by(livsforventningskategori) %>%
+  summarise(
+    samlet_befolkning = sum(befolkning),
+    gennemsnit_BNP_pr_indbygger = mean(BNP_pr_indbygger)
+  )
+```

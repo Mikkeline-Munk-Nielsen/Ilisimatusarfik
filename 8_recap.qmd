@@ -1,0 +1,404 @@
+---
+format: 
+  revealjs:
+    theme: css_etc/custom-theme-ilisimatusarfik.css
+    slide-level: 0  # Disable automatic slide creation from headings
+    incremental: false 
+    logo: css_etc/ilisimatusarfik.png
+    highlight-style: github-dark
+editor: visual
+---
+
+::: center
+# Recap
+
+### Statistik E24 (15 ECTS)
+
+### ved Mikkeline Munk Nielsen
+:::
+
+------------------------------------------------------------------------
+
+## Hvad skal vi bruge statistik til?
+
+-   Skabe overblik over tendenser
+
+-   Finde mønstre
+
+-   Undersøge sammenhænge og forskellighed
+
+-   Teste teorier
+
+-   Udvikle forklaringer og forudsigelser ![](images/business_economy.png){.right-align-image width="600px"}
+
+------------------------------------------------------------------------
+
+## Fokusområder
+
+[Sidste semester:]{.underline}
+
+-   Stikprøve teori
+
+-   Grundlæggende statistik (måleniveauer, centrum- og spredningsmål)
+
+-   Hypotesetest
+
+-   Beskrivende statistik (uni- og bivariat)
+
+[Dette semester]{.underline}
+
+-   Fokus på inferens
+
+-   Forklarende statistik
+
+-   Lineær regression
+
+------------------------------------------------------------------------
+
+# Stikprøver
+
+En stikprøve er en lille del af universet, der udvælges til at repræsentere/beskrive hele universet ![](images/udtraek.png)
+
+------------------------------------------------------------------------
+
+# Stikprøveudtræk og statistisk usikkerhed
+
+-   På baggrund af en stikprøve drages konklusioner om en population (inferens). Slutningen er baseret på stikprøvens **repræsentativitet**
+
+-   Den bedste måde at opnå repræsentativitet på er at anvende en udvælgelsesmekanisme baseret på **tilfældighed!**
+
+**Diskutér i 5 minutter**: hvad betyder repræsentativitet? Hvad er en repræsentativ stikprøve?
+
+---
+
+# Stikprøveudtræk og statistisk usikkerhed
+
+-   På baggrund af en stikprøve drages konklusioner om en population (inferens). Slutningen er baseret på stikprøvens **repræsentativitet**
+
+-   Den bedste måde at opnå repræsentativitet på er at anvende en udvælgelsesmekanisme baseret på **tilfældighed!**
+
+**Hvorfor virker tilfældigt udtræk ift. at sikre en repræsentativ stikprøve?**
+
+-   Hver enhed i populationen har samme sandsynlighed for at blive udvalgt (undgår systematisk bias/skævvridning)
+-   Sikrer, at stikprøven i *gennemsnit* er repræsentativ for populationen.
+-   Tilfældighed i stikprøveudtræk bygger på principper om lige sandsynlighed, store tals lov og den centrale grænseværdisætning.
+
+------------------------------------------------------------------------
+
+# Stikprøveudtræk og statistisk usikkerhed
+
+-   Vi bruger stikprøver som udgangspunkt for at udtale os om en population!
+
+-   Vi kan måske ikke udregne gennemsnitsindkomsten for HELE populationen $(\mu)$ men vi kan udregne et stikprøvegennemsnit $(\bar{x})$
+
+-   Fordi en stikprøve ikke svarer præcist den population, som den er trukket fra, vil der altid være en ***statistisk usikkerhed*** forbundet med en generalisering fra stikprøve til population (også kaldet margin of error).
+
+------------------------------------------------------------------------
+
+# Inferens
+
+<br>
+
+-   Statistik handler bl.a. om at sige noget under usikkerhed og om at vurdere, hvor stor usikkerheden på ens udsagn er.
+
+-   Den del af statistikken, hvor vi bruger stikprøver til at udtale os om populationer, kaldes **inferentiel statistik!**
+
+-   Her bruges **inferenceskriterier** som regler til at afgøre, om resultaterne fra en stikprøve er overbevisende nok til at kunne overføres til hele populationen. De hjælper med at vurdere, om de mønstre, man ser, er reelle eller bare skyldes tilfældigheder
+
+*I kender dem i praksis som p-værdier...*
+
+---
+
+# Hvorfor hypotese-tests er vigtige...
+
+-   Vi bruger hypotesetest til at evaluere hypoteser/påstande om en population **baseret på stikprøvedata**
+
+-   **Eksempel på hypotese**: der er forskel på gennemsnitslønnen for mænd og kvinder i Grønland
+
+-   **Formål**: At træffe beslutninger om, hvorvidt der er tilstrækkeligt bevis for at afvise hypotesen med udgangspunkt i stikprøven
+
+-   Konkret bruger vi dem til at vurdere, om forskelle og observationer vi ser i vores stikprøve er tilfælde pga. stikprøveusikkerhed, eller om det er sandsynligt, at de er udtryk for rigtige forskelle i populationen
+
+------------------------------------------------------------------------
+
+# Fremgangsmåde
+
+I hypotesetests stiller man to hypoteser op og tester dem mod hinanden:
+
+-   ***Nulhypotese (H0)***: En påstand om, at der ikke er nogen signifikant forskel eller virkning.
+
+-   ***Alternativ hypotese (H1)***: En påstand om, at der er en signifikant forskel eller virkning.
+
+[Eksempel]{.underline}:
+
+**H0**: Der er [ikke]{.underline} nogen forskel i gennemsnitslønnen for mænd og kvinder
+
+**H1**: Der [er]{.underline} forskel i gennemsnitslønnen for mænd og kvinder
+
+------------------------------------------------------------------------
+
+# Fremgangsmåde
+
+1.  **Formulering af hypoteser:** Formulering af nulhypotese og alternativ hypotese
+2.  **Valg af signifikansniveau:** Fastlæggelse af den sandsynlighed I har defineret i konfidensintervallet som den acceptable usikkerhed (standard $0,05 = 5\%$)
+3.  **Beregning af teststatistik**: Anvendelse af passende statistisk test til at beregne teststatistikken baseret på stikprøvedataene (I vælger test, R udregner den for jer)
+4.  **Afgørelse**: Brug p-værdien til at afgøre, om I skal afvise nulhypotesen.
+
+------------------------------------------------------------------------
+
+# Fejltyper i hypotesetest
+
+Når man tester statistiske hypoteser, kan man begå to typer af fejl:
+
+-   **Type I**: Fejlagtigt forkaste $H_0$, når $H_0$ faktisk er sand.
+-   **Type II**: Fejlagtigt acceptere $H_0$, når $H_1$ faktisk er sand.
+
+[**Definitioner**:]{.underline}
+
+-   $P(\text{fejl af Type I}) = \alpha$: Sandsynligheden for at begå en type I-fejl (signifikansniveauet).
+-   $P(\text{fejl af Type II}) = \beta$: Sandsynligheden for at begå en type II-fejl.
+
+*Bemærk: Lav* $\alpha$ reducerer risikoen for Type I-fejl, men kan øge risikoen for Type II-fejl
+
+------------------------------------------------------------------------
+
+# Nulhypotese og alternativ hypotese:
+
+En mand stilles for en dommer, anklaget for noget kriminelt.
+
+-   $H_0$: Manden er **ikke skyldig**.
+-   $H_1$: Manden **er skyldig**.
+
+[Mulige fejltyper:]{.underline}
+
+-   **Type I**: Manden er uskyldig, men dømmes skyldig *(Sandsynlighed:* $p = \alpha$)
+
+-   **Type II**: Manden er skyldig, men frikendes*(Sandsynlighed:* $p = \beta$)
+
+**Bemærk**:\
+$\alpha$ er signifikansniveauet – altså den sandsynlighed, vi har defineret som den acceptable risiko for fejlagtigt at forkaste $H_0$.
+
+------------------------------------------------------------------------
+
+# P-værdier og signifikans
+
+I praksis bruges p-værdier til at konkludere på hypotesetests:
+
+-   En $p$-værdi er sandsynligheden for at få en teststatistik, der er *lige så ekstrem eller mere ekstrem* end den observerede, givet at nulhypotesen H0 er sand.
+
+-   Man sammenligner $p$ -værdien med signifikansniveauet $\alpha$ (fx $0,05$):
+
+    -   Hvis $p < \alpha$, afvises H0 (statistisk signifikant).
+
+    -   Hvis $p \geq \alpha$, kan H0 ikke afvises (ikke statistisk signifikant)
+
+Hvis vores signifikansniveau er sat til $5%$% afviser vi nulhypotesen, hvis vores $p<0,05$. Hvis $p≥0,05$ kan vi ikke afvise nulhypotesen.
+
+------------------------------------------------------------------------
+
+# Fortolkning af statistisk signifikans
+
+**Øvelse 10 min:**
+
+I t-testen for bivariat analyse har I lært at teste, om der er forskel på et gennemsnit for to grupper (f.eks. om gennemsnitsindkomsten er forskellig blandt mænd og kvinder).
+
+-   Hvis t-testen returnerer en p-værdi på under 0,05 afvises nulhypotesen om, at der ingen forskel er på gennemsnitsindkomsten.
+
+-   I dette tilfælde konkluderer man, at der er en ***statistisk signifikan**t forskel* på gennemsnitsindkomsten for mænd og kvinder. Men hvad betyder det, egentlig?
+
+------------------------------------------------------------------------
+
+# Fortolkning af statistisk signifikans
+
+<br>
+
+Statistisk signifikant betyder, at vi - *med det acceptable niveau af usikkerhed, som vi har fastlagt før testen (typisk 0,05 = 5 %)* - kan konkludere, at den forskel vi har estimeret med udgangspunkt i stikprøven også er tilstede i populationen.
+
+<br>
+
+**Hvordan?** Vi udregner med udgangspunkt i stikprøven, at det er tilstrækkeligt usandsynligt at trække en stikprøve med denne forskel, hvis den ikke faktisk findes i populationen.
+
+------------------------------------------------------------------------
+
+# P-værdier og signifikans i praksis...
+
+-   I praksis sammenlignes $p$ -værdien med signifikansniveauet $\alpha$ (fx $0,05$):
+
+    -   Hvis $p < \alpha$, afvises H0 (statistisk signifikant).
+
+    -   Hvis $p \geq \alpha$, kan H0 ikke afvises (ikke statistisk signifikant)
+
+<br>
+
+-   Hvis vores signifikansniveau er sat til $5%$% afviser vi nulhypotesen, hvis vores $p<0,05$.
+
+-   Hvis $p≥0,05$ kan vi ikke afvise nulhypotesen. Dette er ikke det samme som, at nulhypotesen er sand! Vi kan bare ikke afvise den med udgangspunkt i den pågældende stikprøve.
+
+------------------------------------------------------------------------
+
+# P-værdier og signifikans i praksis...
+
+<br>
+
+**Øvelse 2 min**
+
+Det er standard af fastlægge et signifikansniveau på 5 % ($\alpha=0,05$), men det er sådan set arbitrært. I nogle discpliner arbejder man med $\alpha=0,1$. Diskutér, hvad dette betyder for fortolkningen af resultatet af en hypotesetest.
+
+------------------------------------------------------------------------
+
+# Hypotese-tests i sidste semester
+
+Sidste semester arbejdede vi med fire hypotesetests:
+
+-   t-test for et gennemsnit mod en forventet værdi (univariat)
+
+-   t-test for et gennemsnit mellem to grupper (bivariat)
+
+-   $\chi^2$ test mod en forventet fordeling
+
+-   $\chi^2$ test for uafhængighed
+
+<br>
+
+**Øvelse 15 min**: Diskutér hvad hver test bruges til i praksis. Hvad kan de hjælpe os med at svare på?
+
+------------------------------------------------------------------------
+
+# Variable og skalaer
+
+<br>
+
+Variable inddeles først i to typer baseret på deres skala:
+
+-   **Diskrete variable**: kan antage et endeligt antal værdier
+
+-   **Kontinuerte variable**: kan antage uendeligt mange værdier inden for en given range
+
+<br>
+
+**4 min. øvelse**: kom med eksempler på hhv. diskrete og kontinuerte variable
+
+------------------------------------------------------------------------
+
+# Variable og skalaer
+
+<br>
+
+Variable inddeles først i to typer baseret på deres skala:
+
+-   **Diskrete variable**: kan antage et endeligt antal værdier, f.eks. antal varer solgt i en butik. (tællevariable)
+
+-   **Kontinuerte variable**: kan antage uendeligt mange værdier inden for en given range, f.eks. pris
+
+------------------------------------------------------------------------
+
+# Variable og skalaer
+
+::::: two-column-layout
+::: left-column
+Dernæst kategoriseres variable i ***måleniveauer***, afhængigt af hvilken skala vi måler variablen på. Måleniveauer beskriver, hvordan data kan klassificeres og behandles i statistiske analyser. De angiver:
+:::
+
+::: right-column
+![](images/måleniveauer.png)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+# Variable og skalaer
+
+::::: columns
+::: {.column width="50%"}
+-   Vi får mere information og flere muligheder, når vi går op i måleniveau.
+-   Man kan altid gå ned, ved at omkode sine variable (f.eks. alder til alderskategorier eller indkomst til indkomstkvartiler), men man kan ikke gå op.
+-   Binære/dikotome variable, der enten kan tage værdien 0 eller 1 er særlige og kan behandles som alle måleniveauer.
+:::
+
+::: {.column width="50%"}
+![](images/måleniveauer.png)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+# Variable og skalaer
+
+::::: columns
+::: {.column width="50%"}
+**Øvelse 5 minutter**: diskutér hvad der karakteriserer hvert måleniveau og giv eksempler på variable for hvert måleniveau
+:::
+
+::: {.column width="50%"}
+![](images/måleniveauer.png)
+:::
+:::::
+
+------------------------------------------------------------------------
+
+```{r include=F}
+library(tidyverse)
+df_ESS <- readRDS("Data/ESS.rds") 
+```
+
+# Variable i R
+
+Variablene i R har en *type*, vist i skrå parenteser `<>` efter variabelnavnet. Typerne påvirker hvad funktionerne gør med variablen - og det hænger faktisk sammen med variablens måleniveau!
+
+```{r echo=T}
+glimpse(df_ESS)
+```
+
+------------------------------------------------------------------------
+
+# Variable i R
+
+| Type | Forklaring | Eks. | Måleniveau |
+|------------------|------------------|------------------|------------------|
+| **Numeric** | Numeriske værdier, både heltal og decimaltal. | `3`, `42.5`, `-7`, `0.001` | Interval |
+| **Integer** | Heltal (underkategori af numeric) | `1L`, `100L`, `-50L` | Interval |
+| **Character** | Tekst eller strenge | `"Hello world"`, | Nominal |
+| **Factor** | Kategoriske data med faste niveauer | `"Mand", "Kvinde"` | Nominal eller Ordinal (\<ord\>) |
+| **Boolean** | Boolean values (sand/falsk). | `TRUE`, `FALSE` | Nominal |
+
+------------------------------------------------------------------------
+
+# Mød `groupby()` og `summarise()`
+
+-   `group_by()` bruges til at gruppere data efter én eller flere variabler.
+
+-   Det skaber **grupper** i datasættet, som derefter kan opsummeres eller manipuleres separat.
+
+-   Når dine data er grupperet, kan du bruge `summarise()` til at beregne opsummeringer for hver gruppe.
+
+-   Eksempler på opsummeringer: gennemsnit, median, sum eller brugerdefinerede beregninger.
+
+------------------------------------------------------------------------
+
+# Mød `groupby()` og `summarise()`
+
+Datasæt før `groupby()`:
+
+```{r echo=T, warning=F, message=F}
+head(df_ESS)
+```
+
+------------------------------------------------------------------------
+
+# Mød `groupby()` og `summarise()`
+
+Vi kan nu bruge `groupby()` til at gruppere uddannelsesniveau og derefter `summarise()` til at beregne antal respondenter i og gennemsnitsindkomsten for hver gruppe:
+
+```{r echo=T, warning=F, message=F}
+df_ESS %>% group_by(udd) %>% 
+  summarise(Gennemsnitsindkomst = mean(net_indkomst, na.rm = TRUE),
+            N = n())
+```
+
+------------------------------------------------------------------------
+
+# Øvelse i data wrangling
+
+<br>
+
+"Øvelse i BNP" ligger på hjemmesiden.

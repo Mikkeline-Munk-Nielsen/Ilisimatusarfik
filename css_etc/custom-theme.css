@@ -1,0 +1,53 @@
+/*-- scss:defaults --*/
+$primary-color: #003366;
+$background-image-url: url('https://www.wayf.dk/sites/default/files/uploads/ilisimatusarfik.gif');
+
+:root {
+  --primary-color: #003366;
+  --font-size: 20px;
+  --font-family: "Times New Roman", Times, serif;
+}
+
+/*-- scss:rules --*/
+/* Add your custom styles here */
+
+.reveal {
+  background-color: white;
+}
+
+.reveal .slides {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+/* Header styles */
+.reveal h1, .reveal h2, .reveal h3 {
+  color: var(--primary-color);
+}
+
+/* Paragraph styles */
+.reveal p {
+  color: black;
+}
+
+.reveal footer {
+  font-size: 14px;
+  font-family: "Helvetica", sans-serif;
+  color: #333;
+}
+
+/*-- scss:mixins --*/
+/* This section includes the image at the top right corner */
+.reveal .slide-background::before {
+  content: "";
+  background-image: url('https://www.wayf.dk/sites/default/files/uploads/ilisimatusarfik.gif');
+  background-position: top right;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 100px; /* Adjust the size of the image */
+  height: 100px; /* Adjust the size of the image */
+  opacity: 0.8;  /* Adjust opacity if needed */
+  z-index: 100;
+}
