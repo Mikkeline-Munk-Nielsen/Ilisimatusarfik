@@ -1266,9 +1266,9 @@ ggplot(df, aes(x = forudsagte_værdier, y = net_indkomst)) +
 
 F-testen bruges til at teste forklaringskraften mellem to modeller op mod hinanden, hvis der er mere end én variabel til forskel mellem dem. F-testen kan teste, om den forklaringskraft, som flere variable tilsammen tilføjer, er signifikant forskellig fra 0. Hypoteserne i en F-test for to modeller således:
 
-**H0**: model 3 forklarer ikke singifikant mere end model 2
+**H0**: forklaringskraften i model 3 er ikke singifikant højere end i model 2
 
-**H1**: model 3 forklarer signifikant mere end model 2
+**H1**: forklaringskraften i model 3 er singifikant højere end i model 2
 
 Testen gennemføres i R således:
 

@@ -1650,8 +1650,8 @@ Num. obs.             9331         9331         9331
 <section id="f-test-mellem-to-modeller" class="level2">
 <h2 class="anchored" data-anchor-id="f-test-mellem-to-modeller">F-test mellem to modeller</h2>
 <p>F-testen bruges til at teste forklaringskraften mellem to modeller op mod hinanden, hvis der er mere end én variabel til forskel mellem dem. F-testen kan teste, om den forklaringskraft, som flere variable tilsammen tilføjer, er signifikant forskellig fra 0. Hypoteserne i en F-test for to modeller således:</p>
-<p><strong>H0</strong>: model 3 forklarer ikke singifikant mere end model 2</p>
-<p><strong>H1</strong>: model 3 forklarer signifikant mere end model 2</p>
+<p><strong>H0</strong>: forklaringskraften i model 3 er ikke singifikant højere end i model 2</p>
+<p><strong>H1</strong>: forklaringskraften i model 3 er singifikant højere end i model 2</p>
 <p>Testen gennemføres i R således:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>f_test <span class="ot">&lt;-</span> <span class="fu">anova</span>(model2, model3)</span>
